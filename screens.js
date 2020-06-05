@@ -1,4 +1,4 @@
-class Screens {
+export default class Screen {
     constructor(x,y,characterId){
         this.x=x;
         this.y=y;
@@ -8,7 +8,7 @@ class Screens {
     
 
     display(){
-        if(charakterId[index]){
+        if(charakterId["Name"]){
 
         }
     }

@@ -1,52 +1,69 @@
-export default class interactiveObject{
-    constructor(x,y,charakterX){
-        this.x=x;
-        this.y=y;
+import Screen from "./screens";
 
-        this.btnAx=btnAx;
-        this.btnAy=btnAy;
-        this.btnBx=btnBx;
-        this.btnBy=btnBy;
-        this.btnWidht=btnWidth;
-        this.btnHeight=btnHeight;
+export default class InteractiveObject extends Screen {
+  constructor(x, y, charakterX) {
+    this.x = x;
+    this.y = y;
 
-        this.zone=zone;
-         
-        this.charakterX=charakterX;
-    }
+    this.btnAx = btnAx;
+    this.btnAy = btnAy;
+    this.btnBx = btnBx;
+    this.btnBy = btnBy;
+    this.btnWidht = btnWidth;
+    this.btnHeight = btnHeight;
 
-    hitTest(x, y, btnX, btnY) {
-        if (x > btnX&& x < btnX + this.btnWidth && y > btnY && y < btnY + this.btnHeight) {
-          return true;
-        } else {
-          return false;
-        }
-    }
+    this.messageA = messageA;
+    this.messageB = messageB;
 
-    hoverTest(x) {
-        if (x > this.x - this.zone&& x < this.x + this.zone) {
-          return true;
-        } else {
-          return false;
-        }
-    }
+    this.zone = zone;
 
-    display(){
-        if(this.hoverTest(this.charakterX)){
-            showButtons();
-        }
-    }
-    
-    mouseClicked() {
-        if (this.hitTest(mouseX, mouseY,this.btnAx,this.btnAy)) {
-          this.clickedA();
-        }
-        if (this.hitTest(mouseX, mouseY,this.btnBx,this.btnBy)) {
-            this.clickedB();
-        }
-    }
+    this.charakterX = charakterX;
+  }
 
-    update(){
-        this.charakterX;
+  hitTest(x, y, btnX, btnY) {
+    if (
+      x > btnX &&
+      x < btnX + this.btnWidth &&
+      y > btnY &&
+      y < btnY + this.btnHeight
+    ) {
+      return true;
+    } else {
+      return false;
     }
+  }
+
+  hoverTest(x) {
+    if (x > this.x - this.zone && x < this.x + this.zone) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  showButtons() {
+    rect(this.btnAx, this.btnAy, this.btnWidht, this.btnHeight, 10);
+    text(this.messageA, this.btnAx, this.btnAy, this.btnWidht);
+    rect(this.btnBx, this.btnBy, this.btnWidht, this.btnHeight, 10);
+    text(this.messageB, this.btnBx, this.btnBy, this.btnWidht);
+  }
+
+  display() {
+    if (this.hoverTest(this.charakterX)) {
+      this.showButtons();
+    }
+  }
+
+  mouseClicked() {
+    if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy)) {
+      this.clickedA();
+    }
+    if (this.hitTest(mouseX, mouseY, this.btnBx, this.btnBy)) {
+      this.clickedB();
+    }
+  }
+
+  update() {
+    this.charakterX;
+  }
 }

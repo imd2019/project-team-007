@@ -20,7 +20,7 @@ class Charakter{
     }
 
     voice(){
-        if(charakterId[index]){
+        if(charakterId["Name"]){
 
         }
     }
