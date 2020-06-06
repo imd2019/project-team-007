@@ -1,13 +1,24 @@
 class Satisfaction{
-    constructor(x,y){
+    constructor(){
     }
 }
 
 
 class Money{
-    constructor()
+    constructor(){
+
+    }
 }
 
-class exhaustion{
+class Exhaustion{
+    constructor(){
+
+    }
     
+}
+
+class Time{
+    constructor(){
+        
+    }
 }
