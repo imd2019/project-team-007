@@ -1,3 +1,5 @@
+// Frage ist ob das Sinn macht
+
 class Satisfaction{
     constructor(){
     }
@@ -19,6 +21,6 @@ class Exhaustion{
 
 class Time{
     constructor(){
-        
+
     }
 }

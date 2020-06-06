@@ -1,0 +1,3 @@
+// Ergebnisse vordefiniert,if schleifen für Ausgänge, Auswertungsprozess
+// Restartbutton im Fazit,FazitScreens,...
+// könnte vo Screens erben

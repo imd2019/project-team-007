@@ -8,6 +8,7 @@ export default class Screen {
     
 
     display(){
+        // abhängig von globalTime, aber kp wie Informationsweitergabe
         if(charakterId["Name"]){
 
         }

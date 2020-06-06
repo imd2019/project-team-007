@@ -37,16 +37,18 @@ export default class Kühlschrank extends InteractiveObject{
     clickedA(){
         this.ration--;
         this.use++;
-        if (this.use >= 5){
+        if (this.use >= 4){
             this.satisfaction = "-Wert";
             this.exhaustion = "Wert";
         }
+        //global Werte noch zur Diskussion
         globalSatisfaction += this.satisfaction;
         globalExhaustion +=this.exhaustion;  
         globalTime +=this.timeA;
         globalActivityArray.push(this.satisfaction[0],this.exhaustion[1]); 
     }
-
+    
+    // Clicked umschreiben, moneyflow ist anpassbar
     clickedB(){
         this.ration=3;
         if(this.day>=4){

@@ -4,16 +4,18 @@ export default class InteractiveObject extends Screen {
   constructor(x, y, charakterX) {
     this.x = x;
     this.y = y;
-
+    
     this.btnAx = btnAx;
     this.btnAy = btnAy;
     this.btnBx = btnBx;
     this.btnBy = btnBy;
-    this.btnWidht = btnWidth;
-    this.btnHeight = btnHeight;
+    
+    // wird ersetzt durch loadImg
+    // this.btnWidth = btnWidth;
+    // this.btnHeight = btnHeight;
 
-    this.messageA = messageA;
-    this.messageB = messageB;
+    // this.messageA = messageA;
+    // this.messageB = messageB;
 
     this.zone = zone;
 
@@ -23,9 +25,9 @@ export default class InteractiveObject extends Screen {
   hitTest(x, y, btnX, btnY) {
     if (
       x > btnX &&
-      x < btnX + this.btnWidth &&
+      x < btnX + this.btnWidthIMG &&
       y > btnY &&
-      y < btnY + this.btnHeight
+      y < btnY + this.btnHeightIMG
     ) {
       return true;
     } else {
@@ -42,10 +44,11 @@ export default class InteractiveObject extends Screen {
   }
 
   showButtons() {
-    rect(this.btnAx, this.btnAy, this.btnWidht, this.btnHeight, 10);
-    text(this.messageA, this.btnAx, this.btnAy, this.btnWidht);
-    rect(this.btnBx, this.btnBy, this.btnWidht, this.btnHeight, 10);
-    text(this.messageB, this.btnBx, this.btnBy, this.btnWidht);
+    //IMG von Buttons
+    // rect(this.btnAx, this.btnAy, this.btnWidht, this.btnHeight, 10);
+    // text(this.messageA, this.btnAx, this.btnAy, this.btnWidht);
+    // rect(this.btnBx, this.btnBy, this.btnWidht, this.btnHeight, 10);
+    // text(this.messageB, this.btnBx, this.btnBy, this.btnWidht);
   }
 
   display() {
