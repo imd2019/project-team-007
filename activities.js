@@ -1,7 +1,7 @@
 import InteractiveObject from "./interactiveObject";
 
 export default class Kühlschrank extends InteractiveObject{
-    constructor(x,y,charakterId,charakterX,day,activity){
+    constructor(x,y,charakterId,charakterX,day){
         super(x,y);
         this.charakterId=charakterId;
         this.charakterX=charakterX;
@@ -9,7 +9,6 @@ export default class Kühlschrank extends InteractiveObject{
         this.ration=3;
         this.use=0;
 
-        this.activity=activity;
 
         if (this.charakterId["Name"]){
             this.btnAx = this.x + "Wert";
@@ -19,7 +18,7 @@ export default class Kühlschrank extends InteractiveObject{
             this.satisfaction="Wert";
             this.money="-Wert";
             this.exhaustion="-Wert";
-            
+            this.timeA=timeA;
         }
         
         this.messageA="Essen";
@@ -44,7 +43,8 @@ export default class Kühlschrank extends InteractiveObject{
         }
         globalSatisfaction += this.satisfaction;
         globalExhaustion +=this.exhaustion;  
-        this.activity.push(this.satisfaction[0],this.exhaustion[1]); 
+        globalTime +=this.timeA;
+        globalActivityArray.push(this.satisfaction[0],this.exhaustion[1]); 
     }
 
     clickedB(){
@@ -53,7 +53,7 @@ export default class Kühlschrank extends InteractiveObject{
             this.money="Wert";
         }
         globalMoney += this.money;
-        this.activity.push(this.money);
+        globalActivityArray.push(this.money);
     }
 }
 
