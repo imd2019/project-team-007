@@ -1,25 +1,32 @@
 export default class Screen {
-    constructor(x,y,characterId){
+    constructor(x,y,rooms){
         this.x=x;
-        this.y=y;
-
-        this.characterId=characterId;
+        this.y=y; 
+        this.rooms=rooms;
+        
+        // this.img=img;
+        
+        // this.characterId=characterId;
     }
     
 
     display(){
-        // abhängig von globalTime, aber kp wie Informationsweitergabe
-        if(charakterId["Name"]){
+        image(this.rooms[0],this.x,this.y);
 
-        }
+        // // abhängig von globalTime, aber kp wie Informationsweitergabe
+        // if(charakterId["Name"]){
+
+        // }
     }
 
     move(){
-        if(keyCode==39){
+        if(this.x>=0){
+        if(charakter.moveRight==true){
+            this.x--;
+        }
+        if(chrakter.moveLeft==true){
             this.x++;
         }
-        if(keyCode==37){
-            this.x--;
         }
     }
 
