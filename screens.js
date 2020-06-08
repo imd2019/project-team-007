@@ -35,7 +35,7 @@ export default class Screen {
                 } 
                
             }
-            if (this.x <= -1055  || charakter.x < (windowWidth*0.6)/2){
+            if (this.x <= -this.rooms[0].width - this.x  || charakter.x < (windowWidth*0.6)/2){
                 this.endScreen.Right = true;
             } else {
                 this.endScreen.Right = false;

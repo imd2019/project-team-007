@@ -39,7 +39,7 @@ let rect=new Charakter((windowWidth*0.6)/2,300,Room.endScreen);
 
 function draw(){
     Room.display();
-    fridge.display();
+    // fridge.display();
     
     rect.display();
     rect.move();
