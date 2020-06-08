@@ -15,15 +15,25 @@ export default class Screen {
         this.rooms[0].width=4104*0.4;
         this.rooms[0].height=1080*0.4;
         image(this.rooms[0],this.x,this.y);
-        console.log(this.x);
-        // console.log(this.endScreen.Left,this.endScreen.Right);
+        console.log("rooms: "+this.x);
+        
         // // abhängig von globalTime, aber kp wie Informationsweitergabe
         // if(charakterId["Name"]){
 
         // }
     }
 
-    move(charakter){
+    move(charakter){   
+            if (this.x <= -4104*0.4 - this.x  || charakter.x < 1920*0.4/2){
+                this.endScreen.Right = true;
+            } else {
+                this.endScreen.Right = false;
+            }
+            if (this.x >= 0 || charakter.x > 1920*0.4/2){
+                this.endScreen.Left = true;
+            } else {
+                this.endScreen.Left = false;
+            }
             if(keyIsDown(RIGHT_ARROW)){
                 if (this.endScreen.Right == false){
                   this.x-=5;
@@ -32,20 +42,10 @@ export default class Screen {
             if(keyIsDown(LEFT_ARROW)){
                 if(this.endScreen.Left == false ){
                 this.x+=5;
-                } 
-               
+                }   
             }
-            if (this.x <= -this.rooms[0].width - this.x  || charakter.x < (windowWidth*0.6)/2){
-                this.endScreen.Right = true;
-            } else {
-                this.endScreen.Right = false;
-            }
-            if (this.x >= 0 || charakter.x > (windowWidth*0.6)/2){
-                this.endScreen.Left = true;
-            } else {
-                this.endScreen.Left = false;
-            }
-            console.log(charakter);
+         
+            // console.log(charakter);
         
     }
 

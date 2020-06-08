@@ -22,6 +22,32 @@ export default class InteractiveObject extends Screen {
     // this.charakterX = charakterX;
   }
 
+  move(charakter){   
+    if (this.x <= -4104*0.4 - this.x  || charakter.x < 1920*0.4/2){
+        this.endScreen.Right = true;
+    } else {
+        this.endScreen.Right = false;
+    }
+    if (this.x >= 0 || charakter.x > 1920*0.4/2){
+        this.endScreen.Left = true;
+    } else {
+        this.endScreen.Left = false;
+    }
+    if(keyIsDown(RIGHT_ARROW)){
+        if (this.endScreen.Right == false){
+          this.x-=5;
+        }   
+    }
+    if(keyIsDown(LEFT_ARROW)){
+        if(this.endScreen.Left == false ){
+        this.x+=5;
+        }   
+    }
+ 
+    // console.log(charakter);
+
+}
+
   // hitTest(x, y, btnX, btnY) {
   //   if (
   //     x > btnX &&

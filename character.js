@@ -22,7 +22,7 @@ export default class Charakter{
         // clothes.colour(h,s,intensity);
         // let intensity=satisfaction;
         // console.log(this.endScreen);
-        console.log(this.charakter.x);
+        console.log("charakter: "+this.charakter.x);
 
     }
 
@@ -52,7 +52,7 @@ export default class Charakter{
     // }
     
     // animation(){
-    // //  charakter pngs als array und wird durchlaufen % array.length  
+    // //  charakter pngs als array und wird durchlaufen % array.length im Zusammnehang von screen movement
     // //  einzelne Funktionen für Bewegung
     // }
 

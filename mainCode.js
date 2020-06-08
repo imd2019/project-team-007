@@ -31,20 +31,21 @@ function preload(){
 window.preload=preload;
 
 
-let fridge=new Kühlschrank(910,260,fridges);
+
 
 let Room=new Screen(0,0,screens);
-let rect=new Charakter((windowWidth*0.6)/2,300,Room.endScreen);
+let fridge=new Kühlschrank(874,150,fridges);
+let rect=new Charakter(1920*0.4/2,300,Room.endScreen);
 
 
 function draw(){
     Room.display();
-    // fridge.display();
+    fridge.display();
     
     rect.display();
     rect.move();
     Room.move(rect.charakter);
-    // fridge.move(rect.charakter);
+    fridge.move(rect.charakter);
 }
 window.draw=draw;
 
