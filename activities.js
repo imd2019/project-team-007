@@ -27,7 +27,7 @@ export default class Kühlschrank extends InteractiveObject{
     }
 
     display(){
-        image(this.fridges[0],this.x,this.y,this.fridges[0].width*1.2,this.fridges[0].height*1.2);
+        image(this.fridges[0],this.x,this.y,this.fridges[0].width*0.2,this.fridges[0].height*0.2);
         // if(this.charakterId["Name"]){
         //     img(fridge["Name"]);
         //     if(this.hoverTest(this.charakterX)){

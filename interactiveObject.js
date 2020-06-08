@@ -1,7 +1,8 @@
-// import Screen from "./screens.js";
+import Screen from "./screens.js";
 
-export default class InteractiveObject {
+export default class InteractiveObject extends Screen {
   constructor(x, y) {
+    super(x,y);
     this.x=x;
     this.y=y;
     // this.btnAx = btnAx;

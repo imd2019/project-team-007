@@ -8,6 +8,7 @@
 
 import Screen from "./screens.js";
 import Kühlschrank from "./activities.js";
+import Charakter from "./character.js";
 
 // globalSatisfaction
 // globalExhaustion
@@ -15,27 +16,35 @@ import Kühlschrank from "./activities.js";
 // globalTime
 // globalActivityArray=[]
 
+
+
 let screens=[];
 let fridges=[];
 
 function preload(){
   let chantisRoomImg=loadImage("Chantal_emptyRoom1.png");
   screens.push(chantisRoomImg);
-  let chantisFridgeSvg=loadImage("img/Chantal/pngs/Kühlschrank.png");
-  fridges.push(chantisFridgeSvg);
+  let chantisFridgePng=loadImage("img/Chantal/pngs/Kühlschrank.png");
+  fridges.push(chantisFridgePng);
 
 }
 window.preload=preload;
 
-let Room=new Screen(0,0,screens);
-let fridge=new Kühlschrank(2025,260,fridges);
 
-// var chantisRoom=loadImage("Chantal_emptyRoom2.png");
+let fridge=new Kühlschrank(910,260,fridges);
+
+let Room=new Screen(0,0,screens);
+let rect=new Charakter((windowWidth*0.6)/2,300,Room.endScreen);
+
 
 function draw(){
     Room.display();
     fridge.display();
-    // Room.move();
+    
+    rect.display();
+    rect.move();
+    Room.move(rect.charakter);
+    // fridge.move(rect.charakter);
 }
 window.draw=draw;
 
