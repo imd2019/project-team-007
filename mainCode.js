@@ -34,7 +34,7 @@ window.preload=preload;
 
 
 let Room=new Screen(0,0,screens);
-let fridge=new Kühlschrank(874,150,fridges);
+let fridge=new Kühlschrank(790,150,fridges);
 let rect=new Charakter(1920*0.4/2,300,Room.endScreen);
 
 
@@ -45,7 +45,7 @@ function draw(){
     rect.display();
     rect.move();
     Room.move(rect.charakter);
-    fridge.move(rect.charakter);
+    fridge.move(Room.screenMoving);
 }
 window.draw=draw;
 
