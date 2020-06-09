@@ -1,14 +1,17 @@
 import InteractiveObject from "./interactiveObject.js";
 
-export default class Kühlschrank extends InteractiveObject{
+export default class Kühlschrank extends InteractiveObject {
     constructor(x,y,fridges){
         super(x,y);
+        this.x=x;
+        this.y=y;
         // this.charakterId=charakterId;
         // this.charakterX=charakterX;
         // this.day=day;
         // this.ration=3;
         // this.use=0;
         this.fridges=fridges;
+        
 
 
         // if (this.charakterId["Name"]){
@@ -36,7 +39,20 @@ export default class Kühlschrank extends InteractiveObject{
         //     }
         // }
     }
-
+    
+    // move(){ 
+    //     if(this.screenMoving){  
+    //     if(keyIsDown(RIGHT_ARROW)){
+          
+    //         this.x-=5;
+          
+    //     }
+    //     if(keyIsDown(LEFT_ARROW)){
+          
+    //         this.x+=5;
+    //     }
+    //     }
+    //   }
     // clickedA(){
     //     this.ration--;
     //     this.use++;
