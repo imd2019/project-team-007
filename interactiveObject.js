@@ -1,6 +1,6 @@
-import Screen from "./screens.js";
+import MainScreen from "./MainScreen.js";
 
-export default class InteractiveObject extends Screen {
+export default class InteractiveObject extends MainScreen {
   constructor(x, y) {
     super(x,y);
     
@@ -22,16 +22,13 @@ export default class InteractiveObject extends Screen {
   }
 
   move(screenMoving){   
-    if(keyIsDown(RIGHT_ARROW)){
       if(screenMoving.Right==true){
         this.x-=5;
       }
-    }
-    if(keyIsDown(LEFT_ARROW)){
       if(screenMoving.Left==true){
         this.x+=5;
       }
-    }
+    
   }
 
   // hitTest(x, y, btnX, btnY) {
@@ -63,11 +60,11 @@ export default class InteractiveObject extends Screen {
   //   // text(this.messageB, this.btnBx, this.btnBy, this.btnWidht);
   // }
 
-  display() {
-    if (this.hoverTest(this.charakterX)) {
-      this.showButtons();
-    }
-  }
+  // display() {
+  //   if (this.hoverTest(this.charakterX)) {
+  //     this.showButtons();
+  //   }
+  // }
 
   // mouseClicked() {
   //   if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy)) {
