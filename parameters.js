@@ -17,12 +17,12 @@ export default class Time{
         
         setInterval(() => {
           this.minute = (this.minute + 30) % 60;
-        }, 500);
+        }, 5000);
 
         
         setInterval(() => {
           this.hour++;
-        }, 1000);
+        }, 10000);
         
         
         
