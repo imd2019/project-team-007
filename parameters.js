@@ -5,17 +5,45 @@ class Satisfaction{
     }
 }
 
+export default class Time{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+        
+        this.hour=8;
+        this.minute=0;
+       
+        
+        
+        setInterval(() => {
+          this.minute = (this.minute + 30) % 60;
+        }, 5000);
 
-class Money{
-    constructor(){
+        
+        setInterval(() => {
+          this.hour++;
+        }, 10000);
+        
+        
+        
 
+        
+
+       
+        // if(this.hour=2){
+        //     clearInterval(minutes);
+        //     clearInterval(hours);
+        // }
+      
     }
-}
-
-class Exhaustion{
-    constructor(){
-
-    }
+ 
+    display(){
+        console.log(this.hour);
+        fill("lightgrey");
+        rect(this.x,this.y,100,36,10);
+        fill("black");
+        textSize(25);
+        if (this.minute==0 && this.hour>=10){
     
 }
 
