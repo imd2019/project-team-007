@@ -5,7 +5,7 @@
 // globale Werte hier definiert
 // Auswertung findet entweder hier oder in einer anderen Datei/Klasse statt
 
-import Screen from "./screens.js";
+import MainScreen from "./MainScreen.js";
 import Kühlschrank from "./activities.js";
 import Charakter from "./character.js";
 import FrontScreen from "./frontScreen.js";
@@ -39,7 +39,6 @@ function preload() {
 window.preload = preload;
 
 let Room = new MainScreen(0, 0, MainScreens);
-
 let fridge = new Kühlschrank(790, 150, fridges);
 let Sofa = new FrontScreen(438, 320, frontElements);
 let rect = new Charakter((1920 * 0.4) / 2, 300, Room.endScreen);

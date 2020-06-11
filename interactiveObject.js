@@ -1,10 +1,9 @@
-import Screen from "./screens.js";
+import MainScreen from "./MainScreen.js";
 
-export default class InteractiveObject extends Screen {
+export default class InteractiveObject extends MainScreen {
   constructor(x, y) {
     super(x,y);
-    this.x=x;
-    this.y=y;
+    
     // this.btnAx = btnAx;
     // this.btnAy = btnAy;
     // this.btnBx = btnBx;
@@ -22,31 +21,15 @@ export default class InteractiveObject extends Screen {
     // this.charakterX = charakterX;
   }
 
-  move(charakter){   
-    if (this.x <= -4104*0.4 - this.x  || charakter.x < 1920*0.4/2){
-        this.endScreen.Right = true;
-    } else {
-        this.endScreen.Right = false;
-    }
-    if (this.x >= 0 || charakter.x > 1920*0.4/2){
-        this.endScreen.Left = true;
-    } else {
-        this.endScreen.Left = false;
-    }
-    if(keyIsDown(RIGHT_ARROW)){
-        if (this.endScreen.Right == false){
-          this.x-=5;
-        }   
-    }
-    if(keyIsDown(LEFT_ARROW)){
-        if(this.endScreen.Left == false ){
+  move(screenMoving){   
+      if(screenMoving.Right==true){
+        this.x-=5;
+      }
+      if(screenMoving.Left==true){
         this.x+=5;
-        }   
-    }
- 
-    // console.log(charakter);
-
-}
+      }
+    
+  }
 
   // hitTest(x, y, btnX, btnY) {
   //   if (
@@ -77,11 +60,11 @@ export default class InteractiveObject extends Screen {
   //   // text(this.messageB, this.btnBx, this.btnBy, this.btnWidht);
   // }
 
-  display() {
-    if (this.hoverTest(this.charakterX)) {
-      this.showButtons();
-    }
-  }
+  // display() {
+  //   if (this.hoverTest(this.charakterX)) {
+  //     this.showButtons();
+  //   }
+  // }
 
   // mouseClicked() {
   //   if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy)) {
