@@ -12,7 +12,6 @@ import FrontScreen from "./frontScreen.js";
 import Time from "./parameters.js";
 import Startscreens from "./startscreen.js";
 
-
 // globalSatisfaction
 // globalExhaustion
 // globalMoney
@@ -24,38 +23,12 @@ let start = false;
 let MainScreens = [];
 let fridges = [];
 let frontElements = [];
-let screens=[];
-let fridges=[];
+let screens = [];
+let fridges = [];
 let startscreenpic = loadImage("img/Startscreen/startscreen.png");
 let infoscreenpic = loadImage("img/Startscreen/infoscreen.png");
 let chosescreenpic = loadImage("img/Startscreen/chosescreen.png");
 let newsscreenpic = loadImage("img/Startscreen/newsscreen.png");
-
-function preload(){
-  let chantisRoomImg=loadImage("Chantal_emptyRoom1.png");
-  screens.push(chantisRoomImg);
-  let chantisFridgePng=loadImage("img/Chantal/pngs/Kühlschrank.png");
-  fridges.push(chantisFridgePng);
-
-}
-window.preload=preload;
-
-
-
-
-let Room=new Screen(0,0,screens);
-let fridge=new Kühlschrank(874,150,fridges);
-let rect=new Charakter(1920*0.4/2,300,Room.endScreen);
-
-
-function draw(){
-    Room.display();
-    fridge.display();
-    
-    rect.display();
-    rect.move();
-    Room.move(rect.charakter);
-    fridge.move(rect.charakter);
 
 function preload() {
   let chantisRoomImg = loadImage("Chantal_emptyRoom1.png");
@@ -68,7 +41,6 @@ function preload() {
 window.preload = preload;
 
 let Room = new MainScreen(0, 0, MainScreens);
-
 let fridge = new Kühlschrank(790, 150, fridges);
 let Sofa = new FrontScreen(438, 320, frontElements);
 let rect = new Charakter((1920 * 0.4) / 2, 300, Room.endScreen);
@@ -108,4 +80,4 @@ function draw() {
     fridge.move(Room.screenMoving);
   }
 }
-window.draw = draw; 
+window.draw = draw;
