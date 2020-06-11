@@ -27,8 +27,6 @@ let startscreenpic = loadImage("img/Startscreen/startscreen.png");
 let infoscreenpic = loadImage("img/Startscreen/infoscreen.png");
 let chosescreenpic = loadImage("img/Startscreen/chosescreen.png");
 let newsscreenpic = loadImage("img/Startscreen/newsscreen.png");
-let screens = [];
-let fridges = [];
 
 function preload() {
   let chantisRoomImg = loadImage("Chantal_emptyRoom1.png");
@@ -41,6 +39,7 @@ function preload() {
 window.preload = preload;
 
 let Room = new MainScreen(0, 0, MainScreens);
+
 let fridge = new Kühlschrank(790, 150, fridges);
 let Sofa = new FrontScreen(438, 320, frontElements);
 let rect = new Charakter((1920 * 0.4) / 2, 300, Room.endScreen);
