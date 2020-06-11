@@ -1,4 +1,4 @@
-export default class Screen {
+export default class MainScreen {
     constructor(x,y,rooms){
         this.x=x;
         this.y=y; 
@@ -26,7 +26,26 @@ export default class Screen {
         // }
     }
 
+    checkMoving(charakter){
+        if (this.x <= -4104*0.4 - this.x  || charakter.x < 1920*0.4/2){
+            this.endScreen.Right = true;
+            this.screenMoving.Right=false;
+        } 
+        else {
+            this.endScreen.Right = false;
+            
+        }
+        if (this.x >=0  || charakter.x > 1920*0.4/2){
+            this.endScreen.Left = true;
+            this.screenMoving.Left=false;
+        } else {
+            this.endScreen.Left = false;
+            
+        }
+    }
+
     move(charakter){ 
+        this.checkMoving(charakter);
             if(keyIsDown(LEFT_ARROW)){
                 if(this.endScreen.Left == false){
                 this.screenMoving.Left=true;    
@@ -34,7 +53,6 @@ export default class Screen {
                 }   
             }   
             else{
-                // this.screenMovingRight=false;
                 this.screenMoving.Left=false;
             }  
             if(keyIsDown(RIGHT_ARROW)){
@@ -45,26 +63,13 @@ export default class Screen {
             }
             else{
                 this.screenMoving.Right=false;
-                // this.screenMovingLeft=false;
             }  
-            if (this.x <= -4104*0.4 - this.x  || charakter.x < 1920*0.4/2){
-                this.endScreen.Right = true;
-                this.screenMoving.Right=false;
-            } 
-            else {
-                this.endScreen.Right = false;
-                
-            }
-            if (this.x >=0  || charakter.x > 1920*0.4/2){
-                this.endScreen.Left = true;
-                this.screenMoving.Left=false;
-            } else {
-                this.endScreen.Left = false;
-                
-            }
+            
+           
          
             // console.log(charakter);
         
     }
 
 }
+
