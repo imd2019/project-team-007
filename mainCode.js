@@ -8,12 +8,10 @@
 import Screen from "./screens.js";
 import Kühlschrank from "./activities.js";
 import Charakter from "./character.js";
-<<<<<<< Updated upstream
-=======
 import FrontScreen from "./frontScreen.js";
 import Time from "./parameters.js";
 import Startscreens from "./startscreen.js";
->>>>>>> Stashed changes
+
 
 // globalSatisfaction
 // globalExhaustion
@@ -26,14 +24,12 @@ let start = false;
 let MainScreens = [];
 let fridges = [];
 let frontElements = [];
+let screens=[];
+let fridges=[];
 let startscreenpic = loadImage("img/Startscreen/startscreen.png");
 let infoscreenpic = loadImage("img/Startscreen/infoscreen.png");
 let chosescreenpic = loadImage("img/Startscreen/chosescreen.png");
 let newsscreenpic = loadImage("img/Startscreen/newsscreen.png");
-
-<<<<<<< Updated upstream
-let screens=[];
-let fridges=[];
 
 function preload(){
   let chantisRoomImg=loadImage("Chantal_emptyRoom1.png");
@@ -60,7 +56,7 @@ function draw(){
     rect.move();
     Room.move(rect.charakter);
     fridge.move(rect.charakter);
-=======
+
 function preload() {
   let chantisRoomImg = loadImage("Chantal_emptyRoom1.png");
   MainScreens.push(chantisRoomImg);
@@ -88,7 +84,6 @@ let startscreen = new Startscreens(
 
 function mouseClicked() {
   startscreen.mouseClicked();
->>>>>>> Stashed changes
 }
 window.mouseClicked = mouseClicked;
 
@@ -113,4 +108,4 @@ function draw() {
     fridge.move(Room.screenMoving);
   }
 }
-window.draw = draw;
+window.draw = draw; 
