@@ -3,7 +3,7 @@ import MainScreen from "./MainScreen.js";
 export default class InteractiveObject extends MainScreen {
   constructor(x, y) {
     super(x,y);
-    
+    this.speed=5;
     // this.btnAx = btnAx;
     // this.btnAy = btnAy;
     // this.btnBx = btnBx;
@@ -23,10 +23,10 @@ export default class InteractiveObject extends MainScreen {
 
   move(screenMoving){   
       if(screenMoving.Right==true){
-        this.x-=5;
+        this.x-=this.speed;
       }
       if(screenMoving.Left==true){
-        this.x+=5;
+        this.x+=this.speed;
       }
     
   }

@@ -1,6 +1,6 @@
 import InteractiveObject from "./interactiveObject.js";
 
-export default class Kühlschrank extends InteractiveObject {
+export class Kühlschrank extends InteractiveObject {
     constructor(x,y,fridges){
         super(x,y);
         this.x=x;
@@ -40,19 +40,7 @@ export default class Kühlschrank extends InteractiveObject {
         // }
     }
     
-    // move(){ 
-    //     if(this.screenMoving){  
-    //     if(keyIsDown(RIGHT_ARROW)){
-          
-    //         this.x-=5;
-          
-    //     }
-    //     if(keyIsDown(LEFT_ARROW)){
-          
-    //         this.x+=5;
-    //     }
-    //     }
-    //   }
+   
     // clickedA(){
     //     this.ration--;
     //     this.use++;
@@ -78,3 +66,72 @@ export default class Kühlschrank extends InteractiveObject {
     // }
 }
 
+export class TV extends InteractiveObject{
+    constructor(x,y,tvs){
+        super(x,y);
+        this.x=x;
+        this.y=y;
+
+        this.tvs=tvs;
+    }
+
+    display(){
+        image(this.tvs[0],this.x,this.y,this.tvs[0].width*0.4,this.tvs[0].height*0.4);
+    }
+}
+
+export class Door extends InteractiveObject{
+    constructor(x,y,doors){
+        super(x,y);
+        this.x=x;
+        this.y=y;
+
+        this.doors=doors;
+    }
+
+    display(){
+        image(this.doors[0],this.x,this.y,this.doors[0].width*0.4,this.doors[0].height*0.4);
+    }
+}
+
+export class Fenster extends InteractiveObject{
+    constructor(x,y,windows){
+        super(x,y);
+        this.x=x;
+        this.y=y;
+
+        this.windows=windows;
+    }
+
+    display(){
+        image(this.windows[0],this.x,this.y,this.windows[0].width*0.4,this.windows[0].height*0.4);
+    }
+}
+
+export class PC extends InteractiveObject{
+    constructor(x,y,pcs){
+        super(x,y);
+        this.x=x;
+        this.y=y;
+
+        this.pcs=pcs;
+    }
+
+    display(){
+        image(this.pcs[0],this.x,this.y,this.pcs[0].width*0.42,this.pcs[0].height*0.42);
+    }
+}
+
+export class Bett extends InteractiveObject{
+    constructor(x,y,beds){
+        super(x,y);
+        this.x=x;
+        this.y=y;
+
+        this.beds=beds;
+    }
+
+    display(){
+        image(this.beds[0],this.x,this.y,this.beds[0].width*0.4,this.beds[0].height*0.4);
+    }
+}

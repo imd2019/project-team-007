@@ -4,11 +4,10 @@ export default class MainScreen {
         this.y=y; 
         this.rooms=rooms;
         this.screenMoving={Right:false,Left:false};
-    
-    
         this.endScreen={Right:false,Left:false};
+
+        this.speed=5;  
         // this.img=img;
-        
         // this.characterId=characterId;
     }
     
@@ -49,7 +48,7 @@ export default class MainScreen {
             if(keyIsDown(LEFT_ARROW)){
                 if(this.endScreen.Left == false){
                 this.screenMoving.Left=true;    
-                this.x+=5;
+                this.x+=this.speed;
                 }   
             }   
             else{
@@ -58,7 +57,7 @@ export default class MainScreen {
             if(keyIsDown(RIGHT_ARROW)){
                 if (this.endScreen.Right == false){
                   this.screenMoving.Right=true;  
-                  this.x-=5;
+                  this.x-=this.speed;
                 }   
             }
             else{

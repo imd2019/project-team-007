@@ -9,32 +9,17 @@ export default class Time{
     constructor(x,y){
         this.x=x;
         this.y=y;
-        
         this.hour=8;
         this.minute=0;
        
-        
-        
         setInterval(() => {
           this.minute = (this.minute + 30) % 60;
         }, 5000);
 
-        
         setInterval(() => {
           this.hour++;
         }, 10000);
         
-        
-        
-
-        
-
-       
-        // if(this.hour=2){
-        //     clearInterval(minutes);
-        //     clearInterval(hours);
-        // }
-      
     }
  
     display(){
