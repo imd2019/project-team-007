@@ -23,7 +23,6 @@ export default class Time{
     }
  
     display(){
-        console.log(this.hour);
         fill("lightgrey");
         rect(this.x,this.y,100,36,10);
         fill("black");

@@ -11,7 +11,7 @@ export default class FrontScreen extends MainScreen{
 
     display(){
         image(this.frontRoom[0],this.x,this.y,this.frontRoom[0].width*0.45,this.frontRoom[0].height*0.45);
-        console.log("frontElement:",this.screenMoving);
+        // console.log("frontElement:",this.screenMoving);
     }
 
     move(screenMoving){   
@@ -19,7 +19,6 @@ export default class FrontScreen extends MainScreen{
           if(screenMoving.Right==true){
             this.x-=this.speed;
           }
-        
         
           if(screenMoving.Left==true){
             this.x+=this.speed;

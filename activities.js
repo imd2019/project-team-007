@@ -5,20 +5,21 @@ export class Kühlschrank extends InteractiveObject {
         super(x,y);
         this.x=x;
         this.y=y;
+        
         // this.charakterId=charakterId;
         // this.charakterX=charakterX;
         // this.day=day;
         // this.ration=3;
         // this.use=0;
         this.fridges=fridges;
-        
-
+        this.objectScale = 0.4;
+       
 
         // if (this.charakterId["Name"]){
-        //     this.btnAx = this.x + "Wert";
-        //     this.btnAy = this.y + "Wert";
-        //     this.btnBx = this.x + "Wert";
-        //     this.btnBy = this.y + "Wert";
+            // this.btnAx = this.x + "Wert";
+            // this.btnAy = this.y + "Wert";
+            // this.btnBx = this.x + "Wert";
+            // this.btnBy = this.y + "Wert";
         //     this.satisfaction="Wert";
         //     this.money="-Wert";
         //     this.exhaustion="-Wert";
@@ -29,9 +30,19 @@ export class Kühlschrank extends InteractiveObject {
         // this.messageB="Nachfüllen";// i know it doesnt exist, Kühlschrank war ein madiges Beispiel für eine activity
     }
 
-    display(){
-        image(this.fridges[0],this.x,this.y,this.fridges[0].width*0.4,this.fridges[0].height*0.4);
-        console.log("fridge: " + this.x);
+    display(x){
+        let fridge = this.fridges.find(x => x.id === "chantisFridge");
+        this.updateZone(fridge);
+        image(fridge,this.x,this.y,this.imgWidth,this.imgHeight); 
+        if(this.hoverTest(x)){
+            console.log("lolololo");
+            fill("white");
+            rect(this.x,this.y,100,40,10);
+            fill("black");
+            textSize(15);
+            text("what about fries u fatty?",this.x,this.y,100);
+        }
+        
         // if(this.charakterId["Name"]){
         //     img(fridge["Name"]);
         //     if(this.hoverTest(this.charakterX)){
@@ -67,18 +78,67 @@ export class Kühlschrank extends InteractiveObject {
 }
 
 export class TV extends InteractiveObject{
-    constructor(x,y,tvs){
+    constructor(x,y,tvs,tvBtn){
         super(x,y);
         this.x=x;
         this.y=y;
 
         this.tvs=tvs;
+        this.objectScale=0.4;
+
+        this.tvBtn=tvBtn;
+        this.btnScale=0.4;
+    }
+    
+    showButtons(btnAId,btnBId){
+        this.btnA = this.tvBtn.find(x => x.id === btnAId);
+         if (this.hitTest(mouseX,mouseY,this.btnAx,this.btnAy,this.btnA)){
+            push();
+            angleMode(DEGREES);
+            imageMode(CENTER);
+            translate(this.btnAx+(this.btnA.width*this.btnScale)/2,this.btnAy+(this.btnA.height*this.btnScale)/2);
+            rotate(18);
+            image(this.btnA,0,0,this.btnA.width*this.btnScale,this.btnA.height*this.btnScale);
+            pop();   
+        }
+        else{
+            image(this.btnA,this.btnAx,this.btnAy,this.btnA.width*this.btnScale,this.btnA.height*this.btnScale);
+        } 
+        
+        this.btnB =this.tvBtn.find(x => x.id === btnBId);
+        if (this.hitTest(mouseX,mouseY,this.btnBx,this.btnBy,this.btnB)){
+            push();
+            angleMode(DEGREES);
+            imageMode(CENTER);
+            translate(this.btnBx+(this.btnB.width*this.btnScale)/2,this.btnBy+(this.btnB.height*this.btnScale)/2);
+            rotate(-18);
+            image(this.btnB,0,0,this.btnB.width*this.btnScale,this.btnB.height*this.btnScale);
+            pop();   
+        }
+        else{ 
+            image(this.btnB,this.btnBx,this.btnBy,this.btnB.width*this.btnScale,this.btnB.height*this.btnScale);
+        }
+
+        
     }
 
-    display(){
-        image(this.tvs[0],this.x,this.y,this.tvs[0].width*0.4,this.tvs[0].height*0.4);
+    // hoverButtons(){  
+    // }
+
+    display(x,y){
+        let tv = this.tvs.find(x => x.id === "chantisTV");
+        this.updateZone(tv);
+        this.updateBtnPosition(-20,115, y);
+        image(tv,this.x,this.y,this.imgWidth,this.imgHeight);
+        if(this.hoverTest(x)){
+            this.showButtons("Rtl2","Filme");
+        }
     }
+
+    
 }
+
+
 
 export class Door extends InteractiveObject{
     constructor(x,y,doors){
@@ -89,8 +149,18 @@ export class Door extends InteractiveObject{
         this.doors=doors;
     }
 
-    display(){
+    display(x){
+        this.imgWidth=this.doors[0].width*0.4;
+        this.zone=this.x+this.imgWidth;
         image(this.doors[0],this.x,this.y,this.doors[0].width*0.4,this.doors[0].height*0.4);
+        if(this.hoverTest(x)){
+            console.log("lolololo");
+            fill("white");
+            rect(this.x,this.y,100,40,10);
+            fill("black");
+            textSize(15);
+            text("u want a burger?",this.x,this.y,100);
+        }
     }
 }
 
@@ -105,6 +175,8 @@ export class Fenster extends InteractiveObject{
 
     display(){
         image(this.windows[0],this.x,this.y,this.windows[0].width*0.4,this.windows[0].height*0.4);
+        
+        
     }
 }
 

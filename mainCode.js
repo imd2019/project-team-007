@@ -37,16 +37,19 @@ let beds=[];
 let chantiStand=[];
 let chantiWalk=[];
 
+let tvBtn=[];
 
 function preload(){
   // <----Chantis Room ---->
   let chantisRoomImg=loadImage("Chantal_emptyRoom1.png");
   MainScreens.push(chantisRoomImg);
   let chantisFridgePng=loadImage("img/1x/Kuehlschrank.png");
+  chantisFridgePng.id = "chantisFridge";
   fridges.push(chantisFridgePng);
   let chantisFrontElements=loadImage("img/1x/Element 2Sofa.png");
   frontElements.push(chantisFrontElements);
   let chantisTV=loadImage("img/1x/Fernseher.png");
+  chantisTV.id="chantisTV";
   tvs.push(chantisTV);
   let chantisTür=loadImage("img/1x/Tuer.png");
   doors.push(chantisTür);
@@ -67,16 +70,23 @@ function preload(){
   let chantiWalkNormal=[];
   chantiWalkNormal.push(chantiWalkNormal4,chantiWalkNormal3,chantiWalkNormal2,chantiWalkNormal1);
   chantiWalk.push(chantiWalkNormal);
+
+  //<-----Chanti Buttons----->
+  let Rtl2=loadImage("img/1x/Rtl2.png");
+  Rtl2.id="Rtl2";
+  let Filme=loadImage("img/1x/Filme.png");
+  Filme.id="Filme";
+  tvBtn.push(Rtl2,Filme);
 }
 window.preload=preload;
 
-
+console.log(fridges);
 
 
 let Room=new MainScreen(0,0,MainScreens);
 
 let fridge=new Kühlschrank(820,90,fridges);
-let tv=new TV(560,200,tvs);
+let tv=new TV(560,200,tvs,tvBtn);
 let door=new Door(55,97,doors);
 let fenster= new Fenster(310,90,windows);
 let pc= new PC(1055,198,pcs);
@@ -89,11 +99,10 @@ let clock=new Time((1920*0.4)-120,5);
 
 
 function draw(){
-  
   Room.display();
-  fridge.display();
-  tv.display();
-  door.display();
+  fridge.display(Chanti.charakter.x);
+  tv.display(Chanti.charakter.x,Chanti.charakter.y);
+  door.display(Chanti.charakter.x);
   fenster.display();
   pc.display();
   bed.display();

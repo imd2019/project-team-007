@@ -35,7 +35,7 @@ export default class Charakter{
         // clothes.colour(h,s,intensity);
         // let intensity=satisfaction;
         }
-        console.log("charakter: "+this.charakter.x);
+        // console.log("charakter: "+this.charakter.x);
 
     }
 
@@ -46,7 +46,6 @@ export default class Charakter{
             this.charakter.x+=this.speed;
             }
            
-
         }
         if(keyIsDown(LEFT_ARROW)){
             if(this.endScreen.Left && this.charakter.x>=0+45){

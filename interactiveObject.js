@@ -1,56 +1,84 @@
 import MainScreen from "./MainScreen.js";
 
 export default class InteractiveObject extends MainScreen {
-  constructor(x, y) {
-    super(x,y);
-    this.speed=5;
-    // this.btnAx = btnAx;
-    // this.btnAy = btnAy;
-    // this.btnBx = btnBx;
-    // this.btnBy = btnBy;
-    
-    // wird ersetzt durch loadImg
-    // this.btnWidth = btnWidth;
-    // this.btnHeight = btnHeight;
+  constructor(
+    x,
+    y,
+    zone,
+    imgWidth,
+    btnAx,
+    btnAy,
+    btnBx,
+    btnBy,
+    imgHeight,
+    objectScale,
+    btnA,
+    btnB,
+    btnScale
+  ) {
+    super(x, y);
+    this.speed = 5;
 
-    // this.messageA = messageA;
-    // this.messageB = messageB;
+    this.btnA = btnA;
+    this.btnB = btnB;
 
-    // this.zone = zone;
+    this.btnAx = btnAx;
+    this.btnAy = btnAy;
+    this.btnBx = btnBx;
+    this.btnBy = btnBy;
 
-    // this.charakterX = charakterX;
+    this.btnPosition=0.55;
+
+    this.btnScale=btnScale;
+    this.objectScale = objectScale;
+
+    this.zone = zone;
+    this.imgWidth = imgWidth;
+    this.imgHeight = imgHeight;
   }
 
-  move(screenMoving){   
-      if(screenMoving.Right==true){
-        this.x-=this.speed;
-      }
-      if(screenMoving.Left==true){
-        this.x+=this.speed;
-      }
-    
+  move(screenMoving) {
+    if (screenMoving.Right == true) {
+      this.x -= this.speed;
+    }
+    if (screenMoving.Left == true) {
+      this.x += this.speed;
+    }
   }
 
-  // hitTest(x, y, btnX, btnY) {
-  //   if (
-  //     x > btnX &&
-  //     x < btnX + this.btnWidthIMG &&
-  //     y > btnY &&
-  //     y < btnY + this.btnHeightIMG
-  //   ) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  updateZone(object) {
+    this.imgWidth = object.width * this.objectScale;
+    this.imgHeight = object.height * this.objectScale;
+    this.zone = this.x + this.imgWidth;
+  }
 
-  // hoverTest(x) {
-  //   if (x > this.x - this.zone && x < this.x + this.zone) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  updateBtnPosition(offsetAx, offsetBx, characterY) {
+    this.btnAx = this.x + offsetAx;
+    this.btnAy = characterY - characterY * this.btnPosition;
+    this.btnBx = this.x + offsetBx;
+    this.btnBy = characterY - characterY * this.btnPosition;
+  }
+
+  hitTest(x, y, btnX,btnY,btn) {
+    if (
+      x > btnX &&
+      x < btnX + btn.width*this.btnScale &&
+      y > btnY &&
+      y < btnY + btn.height*this.btnScale
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  hoverTest(x) {
+    if (x > this.x && x < this.zone) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   // showButtons() {
   //   //IMG von Buttons
@@ -67,10 +95,10 @@ export default class InteractiveObject extends MainScreen {
   // }
 
   // mouseClicked() {
-  //   if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy)) {
+  //   if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy,this.btnA)) {
   //     this.clickedA();
   //   }
-  //   if (this.hitTest(mouseX, mouseY, this.btnBx, this.btnBy)) {
+  //   if (this.hitTest(mouseX, mouseY, this.btnBx, this.btnBy,this.btnB)) {
   //     this.clickedB();
   //   }
   // }
