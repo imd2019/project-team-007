@@ -1,7 +1,7 @@
 import InteractiveObject from "./interactiveObject.js";
 
 export class Kühlschrank extends InteractiveObject {
-    constructor(x,y,fridges){
+    constructor(x,y,fridges,fridgeBtn){
         super(x,y);
         this.x=x;
         this.y=y;
@@ -13,7 +13,10 @@ export class Kühlschrank extends InteractiveObject {
         // this.use=0;
         this.fridges=fridges;
         this.objectScale = 0.4;
-       
+
+        this.fridgeBtn=fridgeBtn;
+        this.btnScale=0.4;
+
 
         // if (this.charakterId["Name"]){
             // this.btnAx = this.x + "Wert";
@@ -30,25 +33,30 @@ export class Kühlschrank extends InteractiveObject {
         // this.messageB="Nachfüllen";// i know it doesnt exist, Kühlschrank war ein madiges Beispiel für eine activity
     }
 
-    display(x){
+    showButtons(btnAId){
+        this.btnA = this.fridgeBtn.find(x => x.id === btnAId);
+         if (this.hitTest(mouseX,mouseY,this.btnAx,this.btnAy,this.btnA)){
+            push();
+            angleMode(DEGREES);
+            imageMode(CENTER);
+            translate(this.btnAx+(this.btnA.width*this.btnScale)/2,this.btnAy+(this.btnA.height*this.btnScale)/2);
+            rotate(18);
+            image(this.btnA,0,0,this.btnA.width*this.btnScale,this.btnA.height*this.btnScale);
+            pop();   
+        }
+        else{
+            image(this.btnA,this.btnAx,this.btnAy,this.btnA.width*this.btnScale,this.btnA.height*this.btnScale);
+        } 
+    }
+
+    display(x,y){
         let fridge = this.fridges.find(x => x.id === "chantisFridge");
         this.updateZone(fridge);
+        this.updateBtnPosition(0,0, y);
         image(fridge,this.x,this.y,this.imgWidth,this.imgHeight); 
         if(this.hoverTest(x)){
-            console.log("lolololo");
-            fill("white");
-            rect(this.x,this.y,100,40,10);
-            fill("black");
-            textSize(15);
-            text("what about fries u fatty?",this.x,this.y,100);
-        }
-        
-        // if(this.charakterId["Name"]){
-        //     img(fridge["Name"]);
-        //     if(this.hoverTest(this.charakterX)){
-        //         this.showButtons();
-        //     }
-        // }
+            this.showButtons("Essen");
+        }  
     }
     
    

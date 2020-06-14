@@ -38,6 +38,7 @@ let chantiStand=[];
 let chantiWalk=[];
 
 let tvBtn=[];
+let fridgeBtn=[];
 
 function preload(){
   // <----Chantis Room ---->
@@ -77,6 +78,9 @@ function preload(){
   let Filme=loadImage("img/1x/Filme.png");
   Filme.id="Filme";
   tvBtn.push(Rtl2,Filme);
+  let Essen=loadImage("img/1x/Essen.png");
+  Essen.id="Essen";
+  fridgeBtn.push(Essen);
 }
 window.preload=preload;
 
@@ -85,7 +89,7 @@ console.log(fridges);
 
 let Room=new MainScreen(0,0,MainScreens);
 
-let fridge=new Kühlschrank(820,90,fridges);
+let fridge=new Kühlschrank(820,90,fridges,fridgeBtn);
 let tv=new TV(560,200,tvs,tvBtn);
 let door=new Door(55,97,doors);
 let fenster= new Fenster(310,90,windows);
@@ -100,7 +104,7 @@ let clock=new Time((1920*0.4)-120,5);
 
 function draw(){
   Room.display();
-  fridge.display(Chanti.charakter.x);
+  fridge.display(Chanti.charakter.x,Chanti.charakter.y);
   tv.display(Chanti.charakter.x,Chanti.charakter.y);
   door.display(Chanti.charakter.x);
   fenster.display();
