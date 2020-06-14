@@ -49,10 +49,10 @@ export class Kühlschrank extends InteractiveObject {
         } 
     }
 
-    display(x,y){
+    display(x){
         let fridge = this.fridges.find(x => x.id === "chantisFridge");
         this.updateZone(fridge);
-        this.updateBtnPosition(0,0, y);
+        this.updateBtnPosition(20,0,45);
         image(fridge,this.x,this.y,this.imgWidth,this.imgHeight); 
         if(this.hoverTest(x)){
             this.showButtons("Essen");
@@ -133,10 +133,10 @@ export class TV extends InteractiveObject{
     // hoverButtons(){  
     // }
 
-    display(x,y){
+    display(x){
         let tv = this.tvs.find(x => x.id === "chantisTV");
         this.updateZone(tv);
-        this.updateBtnPosition(-20,115, y);
+        this.updateBtnPosition(-20,115,70);
         image(tv,this.x,this.y,this.imgWidth,this.imgHeight);
         if(this.hoverTest(x)){
             this.showButtons("Rtl2","Filme");

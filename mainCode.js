@@ -104,8 +104,8 @@ let clock=new Time((1920*0.4)-120,5);
 
 function draw(){
   Room.display();
-  fridge.display(Chanti.charakter.x,Chanti.charakter.y);
-  tv.display(Chanti.charakter.x,Chanti.charakter.y);
+  fridge.display(Chanti.charakter.x);
+  tv.display(Chanti.charakter.x);
   door.display(Chanti.charakter.x);
   fenster.display();
   pc.display();

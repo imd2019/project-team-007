@@ -27,7 +27,7 @@ export default class InteractiveObject extends MainScreen {
     this.btnBx = btnBx;
     this.btnBy = btnBy;
 
-    this.btnPosition=0.55;
+    
 
     this.btnScale=btnScale;
     this.objectScale = objectScale;
@@ -52,11 +52,11 @@ export default class InteractiveObject extends MainScreen {
     this.zone = this.x + this.imgWidth;
   }
 
-  updateBtnPosition(offsetAx, offsetBx, characterY) {
+  updateBtnPosition(offsetAx, offsetBx,btnOffset) {
     this.btnAx = this.x + offsetAx;
-    this.btnAy = characterY - characterY * this.btnPosition;
+    this.btnAy = this.y - btnOffset;
     this.btnBx = this.x + offsetBx;
-    this.btnBy = characterY - characterY * this.btnPosition;
+    this.btnBy = this.y - btnOffset;
   }
 
   hitTest(x, y, btnX,btnY,btn) {
