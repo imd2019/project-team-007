@@ -135,7 +135,13 @@ export class TV extends InteractiveObject{
         }
     }
 
-    
+    clickedA(){
+        console.log("Rtl2");
+    }
+
+    clickedB(){
+        console.log("Filme");
+    }  
 }
 
 

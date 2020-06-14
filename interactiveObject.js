@@ -94,14 +94,14 @@ export default class InteractiveObject extends MainScreen {
   //   }
   // }
 
-  // mouseClicked() {
-  //   if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy,this.btnA)) {
-  //     this.clickedA();
-  //   }
-  //   if (this.hitTest(mouseX, mouseY, this.btnBx, this.btnBy,this.btnB)) {
-  //     this.clickedB();
-  //   }
-  // }
+  mouseClicked() {
+    if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy,this.btnA)) {
+      this.clickedA();
+    }
+    if (this.hitTest(mouseX, mouseY, this.btnBx, this.btnBy,this.btnB)) {
+      this.clickedB();
+    }
+  }
 
   // update() {
   //   this.charakterX;

@@ -124,3 +124,8 @@ function draw(){
 }
 window.draw=draw;
 
+function mouseClicked(){
+  tv.mouseClicked();
+}
+window.mouseClicked=mouseClicked;
+

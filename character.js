@@ -10,6 +10,8 @@ export default class Charakter{
         this.animationSpeed=0.2;
 
         this.speed=5;
+
+        this.charakterScale=0.55;
        
         // this.charakterId=charakterId;
         // this.satisfaction=satisfaction;
@@ -23,13 +25,13 @@ export default class Charakter{
         imageMode(CENTER);
         this.index+=this.animationSpeed;
         let animation=floor(this.index) %this.chantiWalk[0].length;
-        image(this.chantiWalk[0][animation],this.charakter.x,this.charakter.y,this.chantiWalk[0][animation].width*0.55,this.chantiWalk[0][animation].height*0.55);
+        image(this.chantiWalk[0][animation],this.charakter.x,this.charakter.y,this.chantiWalk[0][animation].width*this.charakterScale,this.chantiWalk[0][animation].height*this.charakterScale);
         pop();
         }
         else{
         push();
         imageMode(CENTER);
-        image(this.chantiStand[0],this.charakter.x,this.charakter.y,this.chantiStand[0].width*0.55,this.chantiStand[0].height*0.55);
+        image(this.chantiStand[0],this.charakter.x,this.charakter.y,this.chantiStand[0].width*this.charakterScale,this.chantiStand[0].height*this.charakterScale);
         pop();
         // clour abhängig von globalSatisfaction
         // clothes.colour(h,s,intensity);
