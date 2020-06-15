@@ -36,8 +36,10 @@ export default class Charakter{
         // clour abhängig von globalSatisfaction
         // clothes.colour(h,s,intensity);
         // let intensity=satisfaction;
+
         }
         // console.log("charakter: "+this.charakter.x);
+
 
     }
 
@@ -47,7 +49,8 @@ export default class Charakter{
             if(this.endScreen.Right && this.charakter.x<=(1920*0.4)-45){
             this.charakter.x+=this.speed;
             }
-           
+
+
         }
         if(keyIsDown(LEFT_ARROW)){
             if(this.endScreen.Left && this.charakter.x>=0+45){

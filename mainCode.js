@@ -7,6 +7,7 @@
 // Auswertung findet entweder hier oder in einer anderen Datei/Klasse statt
 
 import MainScreen from "./MainScreen.js";
+
 import {Kühlschrank} from "./activities.js";
 import Charakter from "./character.js";
 import FrontScreen from "./frontScreen.js";
@@ -16,6 +17,7 @@ import {Door} from "./activities.js";
 import {Fenster} from "./activities.js";
 import {PC} from "./activities.js";
 import {Bett} from "./activities.js";
+
 
 // globalSatisfaction
 // globalExhaustion
@@ -28,6 +30,7 @@ import {Bett} from "./activities.js";
 let MainScreens=[];
 let fridges=[];
 let frontElements=[];
+
 let tvs=[];
 let doors=[];
 let windows=[];
@@ -40,10 +43,12 @@ let chantiWalk=[];
 let tvBtn=[];
 let fridgeBtn=[];
 
+
 function preload(){
   // <----Chantis Room ---->
   let chantisRoomImg=loadImage("Chantal_emptyRoom1.png");
   MainScreens.push(chantisRoomImg);
+
   let chantisFridgePng=loadImage("img/1x/Kuehlschrank.png");
   chantisFridgePng.id = "chantisFridge";
   fridges.push(chantisFridgePng);
@@ -81,6 +86,7 @@ function preload(){
   let Essen=loadImage("img/1x/Essen.png");
   Essen.id="Essen";
   fridgeBtn.push(Essen);
+
 }
 window.preload=preload;
 
@@ -99,7 +105,6 @@ let bed= new Bett(1320,255,beds);
 let Sofa= new FrontScreen(425,315,frontElements);
 let Chanti=new Charakter(1920*0.4/2,290,chantiStand,chantiWalk,Room.endScreen);
 let clock=new Time((1920*0.4)-120,5);
-
 
 
 function draw(){

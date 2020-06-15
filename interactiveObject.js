@@ -1,6 +1,7 @@
 import MainScreen from "./MainScreen.js";
 
 export default class InteractiveObject extends MainScreen {
+
   constructor(
     x,
     y,
@@ -18,6 +19,7 @@ export default class InteractiveObject extends MainScreen {
   ) {
     super(x, y);
     this.speed = 5;
+
 
     this.btnA = btnA;
     this.btnB = btnB;
@@ -91,6 +93,7 @@ export default class InteractiveObject extends MainScreen {
   // display() {
   //   if (this.hoverTest(this.charakterX)) {
   //     this.showButtons();
+
   //   }
   // }
 

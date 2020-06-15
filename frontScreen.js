@@ -6,6 +6,7 @@ export default class FrontScreen extends MainScreen{
         this.x=x;
         this.y=y; 
         this.frontRoom=frontRoom;
+
         this.speed=5;
     }
 
