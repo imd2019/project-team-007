@@ -17,7 +17,7 @@ export default class Time {
     if (this.dayStart == true) {
       var minutes = setInterval(() => {
         this.minute = (this.minute + 30) % 60;
-      }, 500);
+      }, 5000);
 
       var hours = setInterval(() => {
         this.hour++;
@@ -29,7 +29,7 @@ export default class Time {
           clearInterval(hours);
           this.dayStart = false;
         }
-      }, 1000);
+      }, 10000);
     }
   }
 

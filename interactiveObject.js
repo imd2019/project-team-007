@@ -1,7 +1,6 @@
 import MainScreen from "./MainScreen.js";
 
 export default class InteractiveObject extends MainScreen {
-
   constructor(
     x,
     y,
@@ -20,7 +19,6 @@ export default class InteractiveObject extends MainScreen {
     super(x, y);
     this.speed = 5;
 
-
     this.btnA = btnA;
     this.btnB = btnB;
 
@@ -29,14 +27,20 @@ export default class InteractiveObject extends MainScreen {
     this.btnBx = btnBx;
     this.btnBy = btnBy;
 
-    
-
     this.btnScale=btnScale;
     this.objectScale = objectScale;
 
     this.zone = zone;
     this.imgWidth = imgWidth;
     this.imgHeight = imgHeight;
+
+    this.satisfaction;
+    this.exhaustion;
+    this.money;
+
+    this.satisfactionRate = 1;
+    this.exhaustionRate = 1;
+    this.moneyRate = 1;
   }
 
   move(screenMoving) {
@@ -61,7 +65,7 @@ export default class InteractiveObject extends MainScreen {
     this.btnBy = this.y - btnOffset;
   }
 
-  hitTest(x, y, btnX,btnY,btn) {
+  hitTest(x, y, btnX,btnY,btn) { //type error
     if (
       x > btnX &&
       x < btnX + btn.width*this.btnScale &&
@@ -81,21 +85,21 @@ export default class InteractiveObject extends MainScreen {
       return false;
     }
   }
+  
+  updateParameter() {
+    this.satisfaction = window.globalSatisfaction;
+    this.exhaustion = window.globalExhaustion;
+    this.money = window.globalMoney;
 
-  // showButtons() {
-  //   //IMG von Buttons
-  //   // rect(this.btnAx, this.btnAy, this.btnWidht, this.btnHeight, 10);
-  //   // text(this.messageA, this.btnAx, this.btnAy, this.btnWidht);
-  //   // rect(this.btnBx, this.btnBy, this.btnWidht, this.btnHeight, 10);
-  //   // text(this.messageB, this.btnBx, this.btnBy, this.btnWidht);
-  // }
+    this.satisfaction = ceil(this.satisfaction * this.satisfactionRate);
+    window.globalSatisfaction = this.satisfaction;
 
-  // display() {
-  //   if (this.hoverTest(this.charakterX)) {
-  //     this.showButtons();
+    this.exhaustion = ceil(this.exhaustion * this.exhaustionRate);
+    window.globalExhaustion = this.exhaustion;
 
-  //   }
-  // }
+    this.money = ceil(this.money * this.moneyRate);
+    window.globalMoney = this.money;
+  }
 
   mouseClicked() {
     if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy,this.btnA)) {
@@ -106,7 +110,4 @@ export default class InteractiveObject extends MainScreen {
     }
   }
 
-  // update() {
-  //   this.charakterX;
-  // }
 }
