@@ -13,50 +13,28 @@ export default class Startscreens {
     this.back = false;
     this.back2 = false;
     this.mainstart = false;
+    this.width = 1920 * 0.4;
+    this.height = 1080 * 0.4;
   }
 
   display() {
     //image
     if (this.startscreen === true) {
-      image(
-        this.pic1,
-        this.x,
-        this.y,
-        this.pic1.width / 10,
-        this.pic1.height / 10
-      );
+      image(this.pic1, this.x, this.y, this.width, this.height);
     }
     if (this.infoscreen === true) {
       this.startscreen = false;
-      image(
-        this.pic2,
-        this.x,
-        this.y,
-        this.pic2.width / 6,
-        this.pic2.height / 6
-      );
+      image(this.pic2, this.x, this.y, this.width, this.height);
     }
     if (this.chosescreen === true) {
       this.startscreen = false;
-      image(
-        this.pic3,
-        this.x,
-        this.y,
-        this.pic3.width / 10,
-        this.pic3.height / 10
-      );
+      image(this.pic3, this.x, this.y, this.width, this.height);
       textSize(15);
       text("back", 0, 10);
     }
     if (this.newsscreen === true) {
       this.chosescreen = false;
-      image(
-        this.pic4,
-        this.x,
-        this.y,
-        this.pic4.width / 10,
-        this.pic4.height / 10
-      );
+      image(this.pic4, this.x, this.y, this.width, this.height);
       text("back", 0, 10);
     }
     if (this.back === true) {

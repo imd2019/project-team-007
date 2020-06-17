@@ -25,8 +25,8 @@ let fridges = [];
 let frontElements = [];
 let startscreenpic = loadImage("img/Startscreen/startscreen.png");
 let infoscreenpic = loadImage("img/Startscreen/infoscreen.png");
-let chosescreenpic = loadImage("img/Startscreen/chosescreen.png");
-let newsscreenpic = loadImage("img/Startscreen/newsscreen.png");
+let chosescreenpic = loadImage("img/Startscreen/chosescreen-off.png");
+let newsscreenpic = loadImage("img/Startscreen/newsscreen-day1-1.png");
 
 function preload() {
   let chantisRoomImg = loadImage("Chantal_emptyRoom1.png");
