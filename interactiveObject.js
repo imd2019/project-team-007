@@ -65,7 +65,7 @@ export default class InteractiveObject extends MainScreen {
     this.btnBy = this.y - btnOffset;
   }
 
-  hitTest(x, y, btnX,btnY,btn) {
+  hitTest(x, y, btnX,btnY,btn) { //type error
     if (
       x > btnX &&
       x < btnX + btn.width*this.btnScale &&
