@@ -19,9 +19,13 @@ import {PC} from "./activities.js";
 import {Bett} from "./activities.js";
 
 
-// globalSatisfaction
-// globalExhaustion
-// globalMoney
+let globalSatisfaction = 26;
+let globalExhaustion = 30;
+let globalMoney = 100;
+
+window.globalSatisfaction = globalSatisfaction;
+window.globalExhaustion = globalExhaustion;
+window.globalMoney = globalMoney;
 // globalTime
 // globalActivityArray=[]
 
@@ -40,31 +44,42 @@ let beds=[];
 let chantiStand=[];
 let chantiWalk=[];
 
-let tvBtn=[];
-let fridgeBtn=[];
+let Buttons=[];
+// let fridgeBtn=[];
 
 
 function preload(){
   // <----Chantis Room ---->
-  let chantisRoomImg=loadImage("Chantal_emptyRoom1.png");
-  MainScreens.push(chantisRoomImg);
+  let Room=loadImage("Chantal_emptyRoom1.png");
+  MainScreens.push(Room);
 
-  let chantisFridgePng=loadImage("img/1x/Kuehlschrank.png");
-  chantisFridgePng.id = "chantisFridge";
-  fridges.push(chantisFridgePng);
-  let chantisFrontElements=loadImage("img/1x/Element 2Sofa.png");
-  frontElements.push(chantisFrontElements);
-  let chantisTV=loadImage("img/1x/Fernseher.png");
-  chantisTV.id="chantisTV";
-  tvs.push(chantisTV);
-  let chantisTür=loadImage("img/1x/Tuer.png");
-  doors.push(chantisTür);
-  let chantisAloeFenster=loadImage("img/1x/FensterAloe.png");
-  windows.push(chantisAloeFenster);
-  let chantisPC=loadImage("img/1x/PC.png");
-  pcs.push(chantisPC);
-  let chantisBett=loadImage("img/1x/Bett.png");
-  beds.push(chantisBett);
+  let Fridge=loadImage("img/1x/Kuehlschrank.png");
+  Fridge.id = "chantisFridge";
+  fridges.push(Fridge);
+
+  let FrontElement=loadImage("img/1x/Element 2Sofa.png");
+  FrontElement.id="chantisSofa";
+  frontElements.push(FrontElement);
+
+  let TV=loadImage("img/1x/Fernseher.png");
+  TV.id="chantisTV";
+  tvs.push(TV);
+
+  let Door=loadImage("img/1x/Tuer.png");
+  Door.id="chantisTür";
+  doors.push(Door);
+
+  let Fenster=loadImage("img/1x/FensterAloe.png");
+  Fenster.id="chantisFenster";
+  windows.push(Fenster);
+
+  let PC=loadImage("img/1x/PC.png");
+  PC.id="chantisPC";
+  pcs.push(PC);
+
+  let Bett=loadImage("img/1x/Bett.png");
+  Bett.id="chantisBett";
+  beds.push(Bett);
 
   // <----Chantis Walk----->
   let chantiStandNormal=loadImage("img/ChantalPoses/2_stehen.png");
@@ -78,29 +93,44 @@ function preload(){
   chantiWalk.push(chantiWalkNormal);
 
   //<-----Chanti Buttons----->
-  let Rtl2=loadImage("img/1x/Rtl2.png");
-  Rtl2.id="Rtl2";
-  let Filme=loadImage("img/1x/Filme.png");
-  Filme.id="Filme";
-  tvBtn.push(Rtl2,Filme);
-  let Essen=loadImage("img/1x/Essen.png");
+  let tvBtnA=loadImage("img/ChantiButtons/ChantiTV_one.png");
+  tvBtnA.id="Rtl2";
+  let tvBtnB=loadImage("img/ChantiButtons/ChantiTV_two.png");
+  tvBtnB.id="Filme";
+  let Essen=loadImage("img/ChantiButtons/Chanti_Kuhlschrank.png");
   Essen.id="Essen";
-  fridgeBtn.push(Essen);
-
+  let Window=loadImage("img/ChantiButtons/Chanti_Fenster.png");
+  Window.id="Fenster";
+  let Schlafen=loadImage("img/ChantiButtons/ChantiBett_one.png");
+  Schlafen.id="Schlafen";
+  let PowerNap=loadImage("img/ChantiButtons/ChantiBett_two.png");
+  PowerNap.id="PowerNap";
+  let pcBtnA=loadImage("img/ChantiButtons/ChantiPC_one.png");
+  pcBtnA.id="Bewerben";
+  let pcBtnB=loadImage("img/ChantiButtons/ChantiPC_two.png");
+  pcBtnB.id="SocialMedia";
+  let doorBtnA=loadImage("img/ChantiButtons/ChantiTür_one.png");
+  doorBtnA.id="Freunde";
+  let doorBtnB=loadImage("img/ChantiButtons/ChantiTür_two.png");
+  doorBtnB.id="Arbeitsamt";
+  Buttons.push(tvBtnA,tvBtnB,Essen,Window,Schlafen,PowerNap,pcBtnA,pcBtnB,doorBtnA,doorBtnB);
 }
 window.preload=preload;
 
-console.log(fridges);
+
+
+
+
 
 
 let Room=new MainScreen(0,0,MainScreens);
 
-let fridge=new Kühlschrank(820,90,fridges,fridgeBtn);
-let tv=new TV(560,200,tvs,tvBtn);
-let door=new Door(55,97,doors);
-let fenster= new Fenster(310,90,windows);
-let pc= new PC(1055,198,pcs);
-let bed= new Bett(1320,255,beds);
+let fridge=new Kühlschrank(820,90,fridges,Buttons);
+let tv=new TV(560,200,tvs,Buttons);
+let door=new Door(55,97,doors,Buttons);
+let fenster= new Fenster(310,90,windows,Buttons);
+let pc= new PC(1055,198,pcs,Buttons);
+let bed= new Bett(1320,255,beds,Buttons);
 
 let Sofa= new FrontScreen(425,315,frontElements);
 let Chanti=new Charakter(1920*0.4/2,290,chantiStand,chantiWalk,Room.endScreen);
@@ -112,9 +142,9 @@ function draw(){
   fridge.display(Chanti.charakter.x);
   tv.display(Chanti.charakter.x);
   door.display(Chanti.charakter.x);
-  fenster.display();
-  pc.display();
-  bed.display();
+  fenster.display(Chanti.charakter.x);
+  pc.display(Chanti.charakter.x);
+  bed.display(Chanti.charakter.x);
   
   Chanti.display();
   Sofa.display();
@@ -129,12 +159,16 @@ function draw(){
   fenster.move(Room.screenMoving);
   pc.move(Room.screenMoving);
   bed.move(Room.screenMoving);
-    
+  
 }
 window.draw=draw;
 
 function mouseClicked(){
   tv.mouseClicked();
+  fridge.mouseClicked(); 
+  console.log("Satisfaction: " + window.globalSatisfaction);
+  console.log("Exhaustion:" + window.globalExhaustion);
+  console.log("Money: " + window.globalMoney);
 }
 window.mouseClicked=mouseClicked;
 
