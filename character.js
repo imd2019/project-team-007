@@ -5,6 +5,7 @@ export default class Charakter {
     this.chantiStand = chantiStand;
     this.chantiWalk = chantiWalk;
     this.endScreen = endScreen;
+    
     this.index = 0;
     this.animationSpeed = 0.2;
 

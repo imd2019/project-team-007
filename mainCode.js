@@ -45,7 +45,7 @@ let chantiStand=[];
 let chantiWalk=[];
 
 let Buttons=[];
-// let fridgeBtn=[];
+
 
 
 function preload(){
@@ -118,11 +118,6 @@ function preload(){
 window.preload=preload;
 
 
-
-
-
-
-
 let Room=new MainScreen(0,0,MainScreens);
 
 let fridge=new Kühlschrank(820,90,fridges,Buttons);
@@ -133,7 +128,7 @@ let pc= new PC(1055,198,pcs,Buttons);
 let bed= new Bett(1320,255,beds,Buttons);
 
 let Sofa= new FrontScreen(425,315,frontElements);
-let Chanti=new Charakter(1920*0.4/2,290,chantiStand,chantiWalk,Room.endScreen);
+let Chanti=new Charakter((1920*0.4/2)-110,290,chantiStand,chantiWalk,Room.endScreen);
 let clock=new Time((1920*0.4)-120,5);
 
 

@@ -10,27 +10,29 @@ export default class Time {
   constructor(x, y) {
     this.x = x;
     this.y = y;
+
     this.hour = 8;
     this.minute = 0;
     this.dayStart = true;
 
-    if (this.dayStart == true) {
-      var minutes = setInterval(() => {
-        this.minute = (this.minute + 30) % 60;
-      }, 5000);
+    // frameCount?
+    // if (this.dayStart == true) {
+    //   var minutes = setInterval(() => {
+    //     this.minute = (this.minute + 30) % 60;
+    //   }, 5000);
 
-      var hours = setInterval(() => {
-        this.hour++;
-        if (this.hour == 24) {
-          this.hour = 0;
-        }
-        if (this.hour == 2) {
-          clearInterval(minutes);
-          clearInterval(hours);
-          this.dayStart = false;
-        }
-      }, 10000);
-    }
+    //   var hours = setInterval(() => {
+    //     this.hour++;
+    //     if (this.hour == 24) {
+    //       this.hour = 0;
+    //     }
+    //     if (this.hour == 2) {
+    //       clearInterval(minutes);
+    //       clearInterval(hours);
+    //       this.dayStart = false;
+    //     }
+    //   }, 10000);
+    // }
   }
 
   display() {
