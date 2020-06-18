@@ -14,8 +14,9 @@ export default class Time {
     this.hour = 8;
     this.minute = 0;
     this.dayStart = true;
+    this.day=1;
 
-    // frameCount?
+
     // if (this.dayStart == true) {
     //   var minutes = setInterval(() => {
     //     this.minute = (this.minute + 30) % 60;
@@ -36,10 +37,27 @@ export default class Time {
   }
 
   display() {
+    console.log("clock: ",this.dayStart);
     fill("lightgrey");
     rect(this.x, this.y, 100, 36, 10);
     fill("black");
     textSize(25);
+    if (this.dayStart==true){
+      if(frameCount%(3*5)==0){
+        this.minute = (this.minute + 30) % 60;
+      }
+      if(frameCount%(3*10)==0){
+        this.hour++;
+        if(this.hour==24){
+          this.hour=0;
+        }
+      }
+      else if(this.hour==2){
+        this.dayStart=false;
+        this.day++;
+        console.log(this.day);
+      }
+    }
     text(
       nf(this.hour, 2) + " : " + nf(this.minute, 2),
       this.x + 12,
