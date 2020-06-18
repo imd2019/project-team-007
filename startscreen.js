@@ -10,7 +10,9 @@ export default class Startscreens {
     infobutton,
     startbutton,
     backbutton,
-    letsgobutton
+    letsgobutton,
+    backbutton2,
+    skipbutton
   ) {
     this.x = x;
     this.y = y;
@@ -32,6 +34,8 @@ export default class Startscreens {
     this.startbutton = startbutton;
     this.backbutton = backbutton;
     this.letsgobutton = letsgobutton;
+    this.backbutton2 = backbutton2;
+    this.skipbutton = skipbutton;
   }
 
   display() {
@@ -69,30 +73,24 @@ export default class Startscreens {
 
   clicked() {
     // hier kann man buttons einfügen, dann hat man hitTest mit dabei :)
-    if (this.infobutton.mouseClicked && this.startscreen === true) {
+    if (this.infobutton.mouseClicked() && this.startscreen === true) {
       this.infoscreen = true;
     }
-    // if (this.backbutton.mouseClicked && this.infoscreen === true) {
-    //   this.back = true;
-    // }
-    if (this.startbutton.mouseClicked && this.startscreen === true) {
+    if (this.backbutton.mouseClicked() && this.infoscreen === true) {
+      this.back = true;
+    }
+    if (this.startbutton.mouseClicked() && this.startscreen === true) {
       this.chosescreen = true;
     }
-    // if (this.backbutton.mouseClicked && this.chosescreen === true) {
-    //   this.back = true;
-    // }
-    // if (this.letsgobutton.mouseClicked && this.chosescreen === true) {
-    //   this.newsscreen = true;
-    // }
-    // if (
-    //   mouseX >= 0 &&
-    //   mouseX <= 30 &&
-    //   mouseY >= 0 &&
-    //   mouseY <= 10 &&
-    //   this.newsscreen === true
-    // ) {
-    //   this.back2 = true;
-    // }
+    if (this.backbutton.mouseClicked() && this.chosescreen === true) {
+      this.back = true;
+    }
+    if (this.letsgobutton.mouseClicked() && this.chosescreen === true) {
+      this.newsscreen = true;
+    }
+    if (this.backbutton2.mouseClicked() && this.newsscreen === true) {
+      this.back2 = true;
+    }
     if (
       mouseX >= 579 &&
       mouseX <= 638 &&

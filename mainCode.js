@@ -157,6 +157,8 @@ let infobutton = new Button(322, 292, 123, 35);
 let startbutton = new Button(308, 335, 151, 43);
 let backbutton = new Button(14, 13, 48, 20);
 let letsgobutton = new Button(286, 355, 187, 50);
+let backbutton2 = new Button(14, 13, 48, 20);
+let skipbutton = new Button(500, 200, 30, 20);
 let startscreen = new Startscreens(
   0,
   0,
@@ -168,7 +170,9 @@ let startscreen = new Startscreens(
   infobutton,
   startbutton,
   backbutton,
-  letsgobutton
+  letsgobutton,
+  backbutton2,
+  skipbutton
 );
 
 function draw() {
@@ -177,7 +181,9 @@ function draw() {
     infobutton.display();
     startbutton.display();
     backbutton.display();
+    backbutton2.display();
     letsgobutton.display();
+    skipbutton.display();
     if (startscreen.mainstart === true) {
       start = true;
     }
@@ -213,7 +219,9 @@ function mouseClicked() {
   infobutton.mouseClicked();
   startbutton.mouseClicked();
   backbutton.mouseClicked();
+  backbutton2.mouseClicked();
   letsgobutton.mouseClicked();
+  skipbutton.mouseClicked();
   tv.mouseClicked();
   fridge.mouseClicked();
   // console.log("Satisfaction: " + window.globalSatisfaction);
