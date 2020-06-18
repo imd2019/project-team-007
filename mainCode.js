@@ -6,7 +6,6 @@
 // Auswertung findet entweder hier oder in einer anderen Datei/Klasse statt
 
 import MainScreen from "./MainScreen.js";
-
 import { Kühlschrank } from "./activities.js";
 import Charakter from "./character.js";
 import FrontScreen from "./frontScreen.js";
@@ -16,6 +15,8 @@ import { Door } from "./activities.js";
 import { Fenster } from "./activities.js";
 import { PC } from "./activities.js";
 import { Bett } from "./activities.js";
+import Startscreens from "./startscreen.js";
+import Button from "./button.js";
 
 let globalSatisfaction = 26;
 let globalExhaustion = 30;
@@ -29,7 +30,6 @@ window.globalMoney = globalMoney;
 
 let start = false;
 
-let startscreenpics = [];
 let MainScreens = [];
 let fridges = [];
 let frontElements = [];
@@ -46,20 +46,13 @@ let chantiWalk = [];
 let Buttons = [];
 // let fridgeBtn=[];
 
-function preload() {
-  let startscreenpic = loadImage("img/Startscreen/startscreen.png");
-  let infoscreenpic = loadImage("img/Startscreen/infoscreen.png");
-  let chosescreenpicoff = loadImage("img/Startscreen/chosescreen-off.png");
-  let chosescreenpicon = loadImage("img/Startscreen/chosescreen-on.png");
-  let newsscreenpic = loadImage("img/Startscreen/newsscreen-day1-1.png");
-  startscreenpics.push(
-    startscreenpic,
-    infoscreenpic,
-    chosescreenpicoff,
-    chosescreenpicon,
-    newsscreenpic
-  );
+let startscreenpic = loadImage("img/Startscreen/startscreen.png");
+let infoscreenpic = loadImage("img/Startscreen/infoscreen.png");
+let chosescreenpicoff = loadImage("img/Startscreen/chosescreen-off.png");
+let chosescreenpicon = loadImage("img/Startscreen/chosescreen-on.png");
+let newsscreenpic = loadImage("img/Startscreen/newsscreen-day1-1.png");
 
+function preload() {
   // <----Chantis Room ---->
   let Room = loadImage("Chantal_emptyRoom1.png");
   MainScreens.push(Room);
@@ -160,18 +153,31 @@ let Chanti = new Charakter(
   Room.endScreen
 );
 let clock = new Time(1920 * 0.4 - 120, 5);
+let infobutton = new Button(322, 292, 123, 35);
+let startbutton = new Button(308, 335, 151, 43);
+let backbutton = new Button(14, 13, 48, 20);
+let letsgobutton = new Button(286, 355, 187, 50);
 let startscreen = new Startscreens(
   0,
   0,
-  startscreenpics[0],
-  startscreenpics[1],
-  startscreenpics[2],
-  startscreenpics[4]
+  startscreenpic,
+  infoscreenpic,
+  chosescreenpicoff,
+  newsscreenpic,
+  chosescreenpicon,
+  infobutton,
+  startbutton,
+  backbutton,
+  letsgobutton
 );
 
 function draw() {
   if (start === false) {
     startscreen.display();
+    infobutton.display();
+    startbutton.display();
+    backbutton.display();
+    letsgobutton.display();
     if (startscreen.mainstart === true) {
       start = true;
     }
@@ -203,11 +209,15 @@ function draw() {
 window.draw = draw;
 
 function mouseClicked() {
-  startscreen.mouseClicked();
+  startscreen.clicked();
+  infobutton.mouseClicked();
+  startbutton.mouseClicked();
+  backbutton.mouseClicked();
+  letsgobutton.mouseClicked();
   tv.mouseClicked();
   fridge.mouseClicked();
-  console.log("Satisfaction: " + window.globalSatisfaction);
-  console.log("Exhaustion:" + window.globalExhaustion);
-  console.log("Money: " + window.globalMoney);
+  // console.log("Satisfaction: " + window.globalSatisfaction);
+  // console.log("Exhaustion:" + window.globalExhaustion);
+  // console.log("Money: " + window.globalMoney);
 }
 window.mouseClicked = mouseClicked;

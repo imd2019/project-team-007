@@ -4,7 +4,7 @@ let height = windowHeight;
 
 //canvas doesnt like us, pls help!!! we need him responsive
 function setup() {
-  sketch.createCanvas(1920*0.4,1080*0.4);
+  sketch.createCanvas(1920 * 0.4, 1080 * 0.4);
   sketch.frameRate(30);
 }
 window.setup = setup;
@@ -13,5 +13,3 @@ window.setup = setup;
 //   sketch.resizeCanvas(windowWidth, windowHeight);
 // }
 // window.addEventListener("resize", windowResized);
-
-

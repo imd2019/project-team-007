@@ -11,8 +11,9 @@ export default class Button {
     var y = this.y;
     var width = this.width;
     var height = this.height;
-    stroke(0);
-    rect(x, y, width, height);
+    noFill();
+    stroke(255, 0, 0);
+    rect(x, y, width, height, 20);
   }
 
   hitTest(x, y) {

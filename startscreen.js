@@ -1,5 +1,17 @@
 export default class Startscreens {
-  constructor(x, y, pic1, pic2, pic3, pic4) {
+  constructor(
+    x,
+    y,
+    pic1,
+    pic2,
+    pic3,
+    pic4,
+    pic5,
+    infobutton,
+    startbutton,
+    backbutton,
+    letsgobutton
+  ) {
     this.x = x;
     this.y = y;
     this.startscreen = true;
@@ -7,6 +19,7 @@ export default class Startscreens {
     this.pic2 = pic2;
     this.pic3 = pic3;
     this.pic4 = pic4;
+    this.pic5 = pic5;
     this.chosescreen = false;
     this.infoscreen = false;
     this.newsscreen = false;
@@ -15,6 +28,10 @@ export default class Startscreens {
     this.mainstart = false;
     this.width = 1920 * 0.4;
     this.height = 1080 * 0.4;
+    this.infobutton = infobutton;
+    this.startbutton = startbutton;
+    this.backbutton = backbutton;
+    this.letsgobutton = letsgobutton;
   }
 
   display() {
@@ -50,64 +67,32 @@ export default class Startscreens {
     }
   }
 
-  mouseClicked() {
+  clicked() {
     // hier kann man buttons einfügen, dann hat man hitTest mit dabei :)
-    console.log(mouseX);
-    console.log(mouseY);
-    if (
-      mouseX >= 298 &&
-      mouseX <= 470 &&
-      mouseY >= 305 &&
-      mouseY <= 354 &&
-      this.startscreen === true
-    ) {
+    if (this.infobutton.mouseClicked && this.startscreen === true) {
       this.infoscreen = true;
     }
-    if (
-      mouseX >= 5 &&
-      mouseX <= 103 &&
-      mouseY >= 5 &&
-      mouseY <= 42 &&
-      this.infoscreen === true
-    ) {
-      this.back = true;
-    }
-    if (
-      mouseX >= 298 &&
-      mouseX <= 470 &&
-      mouseY >= 233 &&
-      mouseY <= 280 &&
-      this.startscreen === true
-    ) {
+    // if (this.backbutton.mouseClicked && this.infoscreen === true) {
+    //   this.back = true;
+    // }
+    if (this.startbutton.mouseClicked && this.startscreen === true) {
       this.chosescreen = true;
     }
-    if (
-      mouseX >= 0 &&
-      mouseX <= 30 &&
-      mouseY >= 0 &&
-      mouseY <= 10 &&
-      this.chosescreen === true
-    ) {
-      this.back = true;
-    }
-    if (
-      mouseX >= 298 &&
-      mouseX <= 485 &&
-      mouseY >= 370 &&
-      mouseY <= 417 &&
-      this.chosescreen === true
-    ) {
-      this.newsscreen = true;
-    }
-    if (
-      mouseX >= 0 &&
-      mouseX <= 30 &&
-      mouseY >= 0 &&
-      mouseY <= 10 &&
-      this.newsscreen === true
-    ) {
-      this.back2 = true;
-    }
+    // if (this.backbutton.mouseClicked && this.chosescreen === true) {
+    //   this.back = true;
+    // }
+    // if (this.letsgobutton.mouseClicked && this.chosescreen === true) {
+    //   this.newsscreen = true;
+    // }
+    // if (
+    //   mouseX >= 0 &&
+    //   mouseX <= 30 &&
+    //   mouseY >= 0 &&
+    //   mouseY <= 10 &&
+    //   this.newsscreen === true
+    // ) {
+    //   this.back2 = true;
+    // }
     if (
       mouseX >= 579 &&
       mouseX <= 638 &&
