@@ -13,7 +13,9 @@ export default class Nachrichten {
             let news=this.nachrichten.find(x=>x.id==="day"+day+"_"+this.sheet);
             image(news,this.x,this.y,news.width*0.41,news.height*0.41);
             // console.log(news);   
-        }  
+        }
+        
+         
     }
 
     mouseClicked(dayStart){

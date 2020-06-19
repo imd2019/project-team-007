@@ -14,6 +14,8 @@ export default class Charakter {
     this.animationSpeed = 0.2;
 
     this.speed = 5;
+    this.direction={right: true, left: false};
+    
 
     this.charakterScale = 0.55;
 
@@ -24,10 +26,11 @@ export default class Charakter {
   }
 
   display() {
-    if (keyIsDown(RIGHT_ARROW) || keyIsDown(LEFT_ARROW)) {
+    if (keyIsDown(RIGHT_ARROW)) {
+      this.direction.right=true;
+      this.direction.left=false;
       push();
       imageMode(CENTER);
-      
       let walk=this.walks.find(x=>x.id===this.walkId);
       this.index += this.animationSpeed;
       let animation = floor(this.index) % walk.length;
@@ -39,7 +42,8 @@ export default class Charakter {
         walk[animation].height * this.charakterScale
       );
       pop();
-    } else {
+    }
+    else if(this.direction.right==true){
       push();
       imageMode(CENTER);
       let stand=this.stands.find(x=>x.id===this.standId);
@@ -52,7 +56,40 @@ export default class Charakter {
       );
       pop();
     }
-    // console.log("charakter: "+this.charakter.x);
+
+    if (keyIsDown(LEFT_ARROW)) {
+      this.direction.right=false;
+      this.direction.left=true;
+      push();
+      imageMode(CENTER);
+      scale(-1,1);
+      let walk=this.walks.find(x=>x.id===this.walkId);
+      this.index += this.animationSpeed;
+      let animation = floor(this.index) % walk.length;
+      image(
+        walk[animation],
+        -this.charakter.x,
+        this.charakter.y,
+        walk[animation].width * this.charakterScale,
+        walk[animation].height * this.charakterScale
+      );
+      pop();
+    } 
+    else if(this.direction.left==true){
+      push();
+      imageMode(CENTER);
+      scale(-1,1);
+      let stand=this.stands.find(x=>x.id===this.standId);
+      image(
+        stand,
+        -this.charakter.x,
+        this.charakter.y,
+        stand.width * this.charakterScale,
+        stand.height * this.charakterScale
+      );
+      pop();
+    }
+    console.log("charakter: "+this.charakter.x);
   }
 
   move() {

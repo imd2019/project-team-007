@@ -49,10 +49,10 @@ export default class Time {
     fill("black");
     textSize(25);
     if (this.dayStart==true){
-      if(frameCount%(30*5)==0){
+      if(frameCount%(3*5)==0){
         this.minute = (this.minute + 30) % 60;
       }
-      if(frameCount%(30*10)==0){
+      if(frameCount%(3*10)==0){
         this.hour++;
         if(this.hour==24){
           this.hour=0;

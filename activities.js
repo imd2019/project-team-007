@@ -57,11 +57,15 @@ export class Kühlschrank extends InteractiveObject {
     
     clickedA(){
         if(this.use>=3){
+            if(this.ration==0){
             this.ration=3;
-            this.satisfactionRate = 0.8;
             this.moneyRate=0.9;
+            }else{this.moneyRate=1;}
+            
+            this.satisfactionRate = 0.8;
             console.log("u out of food");
         }
+        
         this.use++;
         this.ration--;
         this.updateParameter();
