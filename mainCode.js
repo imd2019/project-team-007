@@ -7,10 +7,12 @@
 // Auswertung findet entweder hier oder in einer anderen Datei/Klasse statt
 
 import MainScreen from "./MainScreen.js";
+import FrontScreen from "./frontScreen.js";
+import Nachrichten from "./nachrichten.js";
+import Charakter from "./character.js";
+
 
 import {Kühlschrank} from "./activities.js";
-import Charakter from "./character.js";
-import FrontScreen from "./frontScreen.js";
 import Time from "./parameters.js";
 import {TV} from "./activities.js";
 import {Door} from "./activities.js";
@@ -45,7 +47,8 @@ let chantiStand=[];
 let chantiWalk=[];
 
 let Buttons=[];
-// let fridgeBtn=[];
+
+let nachrichten=[];
 
 
 function preload(){
@@ -114,13 +117,27 @@ function preload(){
   let doorBtnB=loadImage("img/ChantiButtons/ChantiTür_two.png");
   doorBtnB.id="Arbeitsamt";
   Buttons.push(tvBtnA,tvBtnB,Essen,Window,Schlafen,PowerNap,pcBtnA,pcBtnB,doorBtnA,doorBtnB);
+
+  //<---------Nachrichten(ohne BGE)-------->
+  let day2_1=loadImage("img/Nachrichten/newsscreen-day2-1.png");
+  day2_1.id="day2_1";
+  let day2_2=loadImage("img/Nachrichten/newsscreen-day2-2.png");
+  day2_2.id="day2_2";
+  let day3_1=loadImage("img/Nachrichten/newsscreen-day3-1.png");
+  day3_1.id="day3_1";
+  let day3_2=loadImage("img/Nachrichten/newsscreen-day3-2.png");
+  day3_2.id="day3_2";
+  let day4_1=loadImage("img/Nachrichten/newsscreen-day4-1.png");
+  day4_1.id="day4_1";
+  let day4_2=loadImage("img/Nachrichten/newsscreen-day4-2.png");
+  day4_2.id="day4_2";
+  let day5_1=loadImage("img/Nachrichten/newsscreen-day5-1.png");
+  day5_1.id="day5_1";
+  let day5_2=loadImage("img/Nachrichten/newsscreen-day5-2.png");
+  day5_2.id="day5_2";
+  nachrichten.push(day2_1,day2_2,day3_1,day3_2,day4_1,day4_2,day5_1,day5_2);
 }
 window.preload=preload;
-
-
-
-
-
 
 
 let Room=new MainScreen(0,0,MainScreens);
@@ -136,6 +153,8 @@ let Sofa= new FrontScreen(425,315,frontElements);
 let Chanti=new Charakter((1920*0.4/2)-110,290,chantiStand,chantiWalk,Room.endScreen);
 let clock=new Time((1920*0.4)-120,5);
 
+let news= new Nachrichten(nachrichten);
+
 
 function draw(){
   Room.display();
@@ -149,6 +168,8 @@ function draw(){
   Chanti.display();
   Sofa.display();
   clock.display();  
+
+  news.display(clock.newsTime,clock.day);
 
   Room.move(Chanti.charakter);
   Chanti.move();
@@ -166,6 +187,7 @@ window.draw=draw;
 function mouseClicked(){
   tv.mouseClicked();
   fridge.mouseClicked(); 
+  news.mouseClicked(clock.dayStart);
   console.log("Satisfaction: " + window.globalSatisfaction);
   console.log("Exhaustion:" + window.globalExhaustion);
   console.log("Money: " + window.globalMoney);
