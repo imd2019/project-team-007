@@ -38,41 +38,9 @@ export default class Startscreens {
     this.skipbutton = skipbutton;
   }
 
-  display() {
-    //image
-    if (this.startscreen === true) {
-      image(this.pic1, this.x, this.y, this.width, this.height);
-    }
-    if (this.infoscreen === true) {
-      this.startscreen = false;
-      image(this.pic2, this.x, this.y, this.width, this.height);
-    }
-    if (this.chosescreen === true) {
-      this.startscreen = false;
-      image(this.pic3, this.x, this.y, this.width, this.height);
-      textSize(15);
-      text("back", 0, 10);
-    }
-    if (this.newsscreen === true) {
-      this.chosescreen = false;
-      image(this.pic4, this.x, this.y, this.width, this.height);
-      text("back", 0, 10);
-    }
-    if (this.back === true) {
-      this.infoscreen = false;
-      this.chosescreen = false;
-      this.startscreen = true;
-      this.back = false;
-    }
-    if (this.back2 === true) {
-      this.newsscreen = false;
-      this.chosescreen = true;
-      this.back2 = false;
-    }
-  }
-
   clicked() {
     // hier kann man buttons einfügen, dann hat man hitTest mit dabei :)
+
     if (this.infobutton.mouseClicked() && this.startscreen === true) {
       this.infoscreen = true;
     }
@@ -91,14 +59,38 @@ export default class Startscreens {
     if (this.backbutton2.mouseClicked() && this.newsscreen === true) {
       this.back2 = true;
     }
-    if (
-      mouseX >= 579 &&
-      mouseX <= 638 &&
-      mouseY >= 385 &&
-      mouseY <= 410 &&
-      this.newsscreen === true
-    ) {
+    if (this.skipbutton.mouseClicked() && this.newsscreen === true) {
       this.mainstart = true;
+    }
+  }
+
+  display() {
+    //image
+    if (this.startscreen === true) {
+      image(this.pic1, this.x, this.y, this.width, this.height);
+    }
+    if (this.infoscreen === true) {
+      this.startscreen = false;
+      image(this.pic2, this.x, this.y, this.width, this.height);
+    }
+    if (this.chosescreen === true) {
+      this.startscreen = false;
+      image(this.pic3, this.x, this.y, this.width, this.height);
+    }
+    if (this.newsscreen === true) {
+      this.chosescreen = false;
+      image(this.pic4, this.x, this.y, this.width, this.height);
+    }
+    if (this.back === true) {
+      this.infoscreen = false;
+      this.chosescreen = false;
+      this.startscreen = true;
+      this.back = false;
+    }
+    if (this.back2 === true) {
+      this.newsscreen = false;
+      this.chosescreen = true;
+      this.back2 = false;
     }
   }
 }

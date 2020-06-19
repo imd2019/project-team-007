@@ -1,27 +1,27 @@
 export default class Button {
-  constructor(x, y, width, height) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
+  constructor(btnx, btny, btnwidth, btnheight) {
+    this.btnx = btnx;
+    this.btny = btny;
+    this.btnwidth = btnwidth;
+    this.btnheight = btnheight;
   }
 
   display() {
-    var x = this.x;
-    var y = this.y;
-    var width = this.width;
-    var height = this.height;
+    var btnx = this.btnx;
+    var btny = this.btny;
+    var btnwidth = this.btnwidth;
+    var btnheight = this.btnheight;
     noFill();
     stroke(255, 0, 0);
-    rect(x, y, width, height, 20);
+    rect(btnx, btny, btnwidth, btnheight, 20);
   }
 
   hitTest(x, y) {
     if (
-      x > this.x &&
-      x < this.x + this.width &&
-      y > this.y &&
-      y < this.y + this.height
+      x > this.btnx &&
+      x < this.btnx + this.btnwidth &&
+      y > this.btny &&
+      y < this.btny + this.btnheight
     ) {
       return true;
     } else {
@@ -29,7 +29,7 @@ export default class Button {
     }
   }
   clicked() {
-    console.log("💕🐱‍👤");
+    console.log("was wiesooo");
   }
 
   mouseClicked() {
