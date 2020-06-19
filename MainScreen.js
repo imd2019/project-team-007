@@ -51,7 +51,7 @@ export default class MainScreen {
 
     move(charakter){ 
         this.checkMoving(charakter);
-            if(keyIsDown(LEFT_ARROW)){
+            if(keyIsDown(LEFT_ARROW)&& !window.activityAnimation){
                 if(this.endScreen.Left == false){
                 this.screenMoving.Left=true;    
 
@@ -62,7 +62,7 @@ export default class MainScreen {
             else{
                 this.screenMoving.Left=false;
             }  
-            if(keyIsDown(RIGHT_ARROW)){
+            if(keyIsDown(RIGHT_ARROW)&& !window.activityAnimation){
                 if (this.endScreen.Right == false){
                   this.screenMoving.Right=true;  
 

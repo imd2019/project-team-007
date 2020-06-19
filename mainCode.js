@@ -31,12 +31,15 @@ window.globalMoney = globalMoney;
 // globalTime
 // globalActivityArray=[]
 
+let activityAnimation=false;
+window.activityAnimation=activityAnimation;
 
 
 let mainScreens=[];
 let frontElements=[];
 
 let fridges=[];
+let fridgeInteraction=[];
 let tvs=[];
 let doors=[];
 let windows=[];
@@ -154,13 +157,23 @@ function preload(){
   let day5_2=loadImage("img/globals/news/noBGE/newsscreen-day5-2.png");
   day5_2.id="day5_2";
   nachrichten.push(day2_1,day2_2,day3_1,day3_2,day4_1,day4_2,day5_1,day5_2);
+
+  //<-------Chanti Activity Animation ----->
+  let fridgeInteractionMiddle1=loadImage("img/Chantal/Poses/interact/3_middle/fridge/eat1.png");
+  let fridgeInteractionMiddle2=loadImage("img/Chantal/Poses/interact/3_middle/fridge/eat2.png");
+  let fridgeInteractionMiddle3=loadImage("img/Chantal/Poses/interact/3_middle/fridge/eat3.png");
+  let fridgeInteractionMiddle4=loadImage("img/Chantal/Poses/interact/3_middle/fridge/eat4.png");
+  let fridgeInteractionMiddle=[];
+  fridgeInteractionMiddle.id="chantiFridgeInteractionMiddle";
+  fridgeInteractionMiddle.push(fridgeInteractionMiddle1,fridgeInteractionMiddle2,fridgeInteractionMiddle3,fridgeInteractionMiddle2,fridgeInteractionMiddle4,fridgeInteractionMiddle2);
+  fridgeInteraction.push(fridgeInteractionMiddle);
 }
 window.preload=preload;
 
 
 let Room=new MainScreen(0,0,mainScreens);
 
-let fridge=new Kühlschrank(820,90,fridges,buttons);
+let fridge=new Kühlschrank(820,90,fridges,buttons,fridgeInteraction);
 let tv=new TV(560,200,tvs,buttons);
 let door=new Door(55,97,doors,buttons);
 let fenster= new Fenster(310,90,windows,buttons);
@@ -173,17 +186,19 @@ let clock=new Time((1920*0.4)-120,5);
 
 let news= new Nachrichten(nachrichten);
 
-
 function draw(){
   Room.display();
-  fridge.display(Chanti.charakter.x);
+  fridge.display(Chanti.charakter.x,Chanti.charakter.y);
   tv.display(Chanti.charakter.x);
   door.display(Chanti.charakter.x);
   fenster.display(Chanti.charakter.x);
   pc.display(Chanti.charakter.x);
   bed.display(Chanti.charakter.x);
   
+  if(window.activityAnimation==false){
   Chanti.display();
+  }
+
   Sofa.display();
   clock.display();  
 

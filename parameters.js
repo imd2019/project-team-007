@@ -42,8 +42,6 @@ export default class Time {
   }
 
   display() {  
-   
-    console.log("clock: ",this.dayStart);
     fill("lightgrey");
     rect(this.x, this.y, 100, 36, 10);
     fill("black");
