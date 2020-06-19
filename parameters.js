@@ -42,17 +42,15 @@ export default class Time {
   }
 
   display() {  
-   
-    console.log("clock: ",this.dayStart);
     fill("lightgrey");
     rect(this.x, this.y, 100, 36, 10);
     fill("black");
     textSize(25);
     if (this.dayStart==true){
-      if(frameCount%(3*5)==0){
+      if(frameCount%(30*5)==0){
         this.minute = (this.minute + 30) % 60;
       }
-      if(frameCount%(3*10)==0){
+      if(frameCount%(30*10)==0){
         this.hour++;
         if(this.hour==24){
           this.hour=0;

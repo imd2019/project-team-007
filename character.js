@@ -26,6 +26,7 @@ export default class Charakter {
   }
 
   display() {
+    
     if (keyIsDown(RIGHT_ARROW)) {
       this.direction.right=true;
       this.direction.left=false;
@@ -89,16 +90,16 @@ export default class Charakter {
       );
       pop();
     }
-    console.log("charakter: "+this.charakter.x);
+    
   }
 
   move() {
-    if (keyIsDown(RIGHT_ARROW)) {
+    if (keyIsDown(RIGHT_ARROW) && !window.activityAnimation) {
       if (this.endScreen.Right && this.charakter.x <= 1920 * 0.4 - 45) {
         this.charakter.x += this.speed;
       }
     }
-    if (keyIsDown(LEFT_ARROW)) {
+    if (keyIsDown(LEFT_ARROW) && !window.activityAnimation) {
       if (this.endScreen.Left && this.charakter.x >= 0 + 45) {
         this.charakter.x -= this.speed;
       }
