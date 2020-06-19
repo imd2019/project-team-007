@@ -9,12 +9,10 @@ export default class Nachrichten {
     }
 
     display(newsTime,day){
-        
         if(newsTime==true){
             let news=this.nachrichten.find(x=>x.id==="day"+day+"_"+this.sheet);
             image(news,this.x,this.y,news.width*0.41,news.height*0.41);
-            // console.log(news);
-            
+            // console.log(news);   
         }  
     }
 
