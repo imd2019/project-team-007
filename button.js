@@ -1,39 +1,59 @@
 export default class Button {
-  constructor(btnx, btny, btnwidth, btnheight) {
-    this.btnx = btnx;
-    this.btny = btny;
-    this.btnwidth = btnwidth;
-    this.btnheight = btnheight;
+  constructor(btnX, btnY, width, height) {
+    this.btnX = btnX;
+    this.btnY = btnY;
+    this.width = width;
+    this.height = height;
   }
 
   display() {
-    var btnx = this.btnx;
-    var btny = this.btny;
-    var btnwidth = this.btnwidth;
-    var btnheight = this.btnheight;
+    var btnX = this.btnX;
+    var btnY = this.btnY;
+    var width = this.width;
+    var height = this.height;
     noFill();
     stroke(255, 0, 0);
-    rect(btnx, btny, btnwidth, btnheight, 20);
+    rect(btnX, btnY, width, height, 20);
   }
 
-  hitTest(x, y) {
+  // hitTest(x, y) {
+  //   if (
+  //     x > this.btnx &&
+  //     x < this.btnx + this.btnwidth &&
+  //     y > this.btny &&
+  //     y < this.btny + this.btnheight
+  //   ) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+
+  updateBtnPosition(offsetx, btnOffset) {
+    this.btnX = this.x + offsetx;
+    this.btnY = this.y - btnOffset;
+  }
+
+  hitTest(x, y, btnX, btnY) {
+    //type error
     if (
-      x > this.btnx &&
-      x < this.btnx + this.btnwidth &&
-      y > this.btny &&
-      y < this.btny + this.btnheight
+      x > this.btnX &&
+      x < this.btnX + this.width &&
+      y > this.btnY &&
+      y < this.btnY + this.height
     ) {
       return true;
     } else {
       return false;
     }
   }
+
   clicked() {
     console.log("was wiesooo");
   }
 
   mouseClicked() {
-    if (this.hitTest(mouseX, mouseY)) {
+    if (this.hitTest(mouseX, mouseY, this.btnX, this.btnY)) {
       this.clicked();
     }
   }

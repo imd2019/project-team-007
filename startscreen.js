@@ -1,4 +1,6 @@
-export default class Startscreens {
+import Button from "./button.js";
+
+export default class Startscreens extends Button {
   constructor(
     x,
     y,
@@ -14,6 +16,7 @@ export default class Startscreens {
     backbutton2,
     skipbutton
   ) {
+    super();
     this.x = x;
     this.y = y;
     this.startscreen = true;
@@ -41,25 +44,25 @@ export default class Startscreens {
   clicked() {
     // hier kann man buttons einfügen, dann hat man hitTest mit dabei :)
 
-    if (this.infobutton.mouseClicked() && this.startscreen === true) {
+    if (this.infobutton.clicked() && this.startscreen === true) {
       this.infoscreen = true;
     }
-    if (this.backbutton.mouseClicked() && this.infoscreen === true) {
+    if (this.backbutton.clicked() && this.infoscreen === true) {
       this.back = true;
     }
-    if (this.startbutton.mouseClicked() && this.startscreen === true) {
+    if (this.startbutton.clicked() && this.startscreen === true) {
       this.chosescreen = true;
     }
-    if (this.backbutton.mouseClicked() && this.chosescreen === true) {
+    if (this.backbutton.clicked() && this.chosescreen === true) {
       this.back = true;
     }
-    if (this.letsgobutton.mouseClicked() && this.chosescreen === true) {
+    if (this.letsgobutton.clicked() && this.chosescreen === true) {
       this.newsscreen = true;
     }
-    if (this.backbutton2.mouseClicked() && this.newsscreen === true) {
+    if (this.backbutton2.clicked() && this.newsscreen === true) {
       this.back2 = true;
     }
-    if (this.skipbutton.mouseClicked() && this.newsscreen === true) {
+    if (this.skipbutton.clicked() && this.newsscreen === true) {
       this.mainstart = true;
     }
   }

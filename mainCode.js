@@ -46,6 +46,7 @@ let chantiWalk = [];
 let Buttons = [];
 // let fridgeBtn=[];
 
+// Pics für Startscreen
 let startscreenpic = loadImage("img/Startscreen/startscreen.png");
 let infoscreenpic = loadImage("img/Startscreen/infoscreen.png");
 let chosescreenpicoff = loadImage("img/Startscreen/chosescreen-off.png");
@@ -153,12 +154,21 @@ let Chanti = new Charakter(
   Room.endScreen
 );
 let clock = new Time(1920 * 0.4 - 120, 5);
+// für Startscreen
 let infobutton = new Button(322, 292, 123, 35);
 let startbutton = new Button(308, 335, 151, 43);
 let backbutton = new Button(14, 13, 48, 20);
 let letsgobutton = new Button(286, 355, 187, 50);
 let backbutton2 = new Button(14, 13, 48, 20);
 let skipbutton = new Button(500, 200, 30, 20);
+let allbuttons = [
+  infobutton,
+  startbutton,
+  backbutton,
+  letsgobutton,
+  backbutton2,
+  skipbutton,
+];
 let startscreen = new Startscreens(
   0,
   0,
