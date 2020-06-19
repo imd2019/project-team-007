@@ -11,11 +11,16 @@ export default class Time {
     this.x = x;
     this.y = y;
 
-    this.hour = 8;
+    this.hour = 22;
     this.minute = 0;
     this.dayStart = true;
     this.day=1;
+    this.newsTime=false;
 
+    this.opacity=0;
+    
+    
+   //requestAnimationFrame? 
 
     // if (this.dayStart == true) {
     //   var minutes = setInterval(() => {
@@ -36,7 +41,8 @@ export default class Time {
     // }
   }
 
-  display() {
+  display() {  
+   
     console.log("clock: ",this.dayStart);
     fill("lightgrey");
     rect(this.x, this.y, 100, 36, 10);
@@ -65,6 +71,16 @@ export default class Time {
       100,
       50
     );
+    if(this.dayStart==false){
+      this.opacity+=5;
+      fill(0,0,0,this.opacity);
+      rect(0,0,1920,1080);
+      
+      if(this.opacity==355){
+        this.newsTime=true;
+        this.opacity=0;
+      }
+    }
     // console.log(this.hour);
     // console.log(this.dayStart);
   }

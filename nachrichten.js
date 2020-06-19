@@ -4,16 +4,26 @@ export default class Nachrichten {
         this.y=-1;
 
         this.nachrichten=nachrichten;
-        this.day=3;
         this.sheet=1;
+        this.count=1;
     }
 
-    display(dayStart){
-        console.log("news: ",dayStart);
-        if(dayStart==false){
-            let news=this.nachrichten.find(x=>x.id==="day"+this.day+"_"+this.sheet);
+    display(newsTime,day){
+        
+        if(newsTime==true){
+            let news=this.nachrichten.find(x=>x.id==="day"+day+"_"+this.sheet);
             image(news,this.x,this.y,news.width*0.41,news.height*0.41);
-            console.log(news);
+            // console.log(news);
+            
         }  
+    }
+
+    mouseClicked(dayStart){
+        console.log("news: ",dayStart);
+        if(this.count>=2){
+            dayStart=true;
+        }
+        this.sheet=2;
+        this.count++;
     }
 }

@@ -169,7 +169,7 @@ function draw(){
   Sofa.display();
   clock.display();  
 
-  news.display(clock.dayStart);
+  news.display(clock.newsTime,clock.day);
 
   Room.move(Chanti.charakter);
   Chanti.move();
@@ -187,6 +187,7 @@ window.draw=draw;
 function mouseClicked(){
   tv.mouseClicked();
   fridge.mouseClicked(); 
+  news.mouseClicked(clock.dayStart);
   console.log("Satisfaction: " + window.globalSatisfaction);
   console.log("Exhaustion:" + window.globalExhaustion);
   console.log("Money: " + window.globalMoney);
