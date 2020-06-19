@@ -53,7 +53,7 @@ let nachrichten=[];
 
 function preload(){
   // <----Chantis Room ---->
-  let Room=loadImage("img/Chantal/Objects/emptyRoom.png");
+  let Room=loadImage("img/Chantal/Objects/background.png");
   mainScreens.push(Room);
 
   let Fridge=loadImage("img/Chantal/Objects/Kühlschrank.png");
@@ -94,6 +94,14 @@ function preload(){
   lowestWalk.id="chantiLowestWalk";
   lowestWalk.push(lowestWalk1,lowestWalk2,lowestWalk3,lowestWalk2);
 
+  let lowStand=loadImage("img/Chantal/Poses/stand/4_low/stehen.png");
+  lowStand.id="chantiLowStand";
+  let lowWalk1=loadImage("img/Chantal/Poses/walk/4_low/run1.png");
+  let lowWalk2=loadImage("img/Chantal/Poses/walk/4_low/run2.png");
+  let lowWalk3=loadImage("img/Chantal/Poses/walk/4_low/run3.png");
+  let lowWalk=[];
+  lowWalk.id="chantiLowWalk";
+  lowWalk.push(lowWalk1,lowWalk2,lowWalk3,lowWalk2);
 
   let middleStand=loadImage("img/Chantal/Poses/stand/3_middle/stehen.png");
   middleStand.id="chantiMiddleStand";
@@ -103,10 +111,29 @@ function preload(){
   let middleWalk=[];
   middleWalk.id="chantiMiddleWalk";
   middleWalk.push(middleWalk1,middleWalk2,middleWalk3,middleWalk2);
-  
 
-  stand.push(lowestStand,middleStand);
-  walk.push(lowestWalk,middleWalk);
+  let highStand=loadImage("img/Chantal/Poses/stand/2_high/stehen.png");
+  highStand.id="chantiHighStand";
+  let highWalk1=loadImage("img/Chantal/Poses/walk/2_high/run1.png");
+  let highWalk2=loadImage("img/Chantal/Poses/walk/2_high/run2.png");
+  let highWalk3=loadImage("img/Chantal/Poses/walk/2_high/run3.png");
+  let highWalk=[];
+  highWalk.id="chantiHighWalk";
+  highWalk.push(highWalk1,highWalk2,highWalk3,highWalk2);
+
+  let victoryStand=loadImage("img/Chantal/Poses/stand/1_victory/stehen.png");
+  victoryStand.id="chantiVictoryStand";
+  let victoryWalk1=loadImage("img/Chantal/Poses/walk/1_victory/run1.png");
+  let victoryWalk2=loadImage("img/Chantal/Poses/walk/1_victory/run2.png");
+  let victoryWalk3=loadImage("img/Chantal/Poses/walk/1_victory/run3.png");
+  let victoryWalk=[];
+  victoryWalk.id="chantiVictoryWalk";
+  victoryWalk.push(victoryWalk1,victoryWalk2,victoryWalk3,victoryWalk2);
+  
+  
+  stand.push(lowestStand,lowStand,middleStand,highStand,victoryStand);
+  walk.push(lowestWalk,lowWalk,middleWalk,highWalk,victoryWalk);
+
   //<-----Global Buttons----->
    let Essen=loadImage("img/globals/buttons/fridge.png");
   Essen.id="Essen";
