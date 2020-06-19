@@ -1,10 +1,15 @@
 export default class Charakter {
-  constructor(charakterX, charakterY, chantiStand, chantiWalk, endScreen) {
+  constructor(charakterX, charakterY, stands, walks, endScreen) {
     this.charakter = { x: charakterX, y: charakterY, id: false };
 
-    this.chantiStand = chantiStand;
-    this.chantiWalk = chantiWalk;
+    this.stands = stands;
+    this.walks = walks;
+    
+    this.standId="chantiMiddleStand";
+    this.walkId="chantiMiddleWalk";
+    
     this.endScreen = endScreen;
+    
     this.index = 0;
     this.animationSpeed = 0.2;
 
@@ -22,25 +27,28 @@ export default class Charakter {
     if (keyIsDown(RIGHT_ARROW) || keyIsDown(LEFT_ARROW)) {
       push();
       imageMode(CENTER);
+      
+      let walk=this.walks.find(x=>x.id===this.walkId);
       this.index += this.animationSpeed;
-      let animation = floor(this.index) % this.chantiWalk[0].length;
+      let animation = floor(this.index) % walk.length;
       image(
-        this.chantiWalk[0][animation],
+        walk[animation],
         this.charakter.x,
         this.charakter.y,
-        this.chantiWalk[0][animation].width * this.charakterScale,
-        this.chantiWalk[0][animation].height * this.charakterScale
+        walk[animation].width * this.charakterScale,
+        walk[animation].height * this.charakterScale
       );
       pop();
     } else {
       push();
       imageMode(CENTER);
+      let stand=this.stands.find(x=>x.id===this.standId);
       image(
-        this.chantiStand[0],
+        stand,
         this.charakter.x,
         this.charakter.y,
-        this.chantiStand[0].width * this.charakterScale,
-        this.chantiStand[0].height * this.charakterScale
+        stand.width * this.charakterScale,
+        stand.height * this.charakterScale
       );
       pop();
     }

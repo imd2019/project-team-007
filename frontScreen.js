@@ -16,7 +16,6 @@ export default class FrontScreen extends MainScreen{
     }
 
     move(screenMoving){   
-        
           if(screenMoving.Right==true){
             this.x-=this.speed;
           }
