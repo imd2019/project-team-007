@@ -4,10 +4,10 @@ export default class Charakter {
 
     this.stands = stands;
     this.walks = walks;
-    
-    this.standId="chantiMiddleStand";
-    this.walkId="chantiMiddleWalk";
-    
+
+    this.standId;
+    this.walkId;
+        
     this.endScreen = endScreen;
     
     this.index = 0;
@@ -16,17 +16,16 @@ export default class Charakter {
     this.speed = 5;
     this.direction={right: true, left: false};
     
-
     this.charakterScale = 0.55;
 
     // this.charakterId=charakterId;
-    // this.satisfaction=satisfaction;
+    
 
     // this.day=day;
   }
 
   display() {
-    
+    this.update();
     if (keyIsDown(RIGHT_ARROW)) {
       this.direction.right=true;
       this.direction.left=false;
@@ -92,6 +91,31 @@ export default class Charakter {
     }
     
   }
+  
+  update(){
+    if (window.globalSatisfaction <= 25) {
+      this.standId = "chantiLowestStand";
+      this.walkId = "chantiLowestWalk";
+    }
+    else if (window.globalSatisfaction >= 26 && window.globalSatisfaction <= 50) {
+      this.standId = "chantiLowStand";
+      this.walkId = "chantiLowWalk";
+    }
+    else if (window.globalSatisfaction >= 51 && window.globalSatisfaction <= 75) {
+      this.standId = "chantiMiddleStand";
+      this.walkId = "chantiMiddleWalk";
+    }
+    else if (window.globalSatisfaction>=76 && window.globalSatisfaction <= 90) {
+      
+      this.standId = "chantiHighStand";
+      this.walkId = "chantiHighWalk";
+    }
+    else if (window.globalSatisfaction >= 91) {
+      this.standId = "chantiVictoryStand";
+      this.walkId = "chantiVictoryWalk";
+    }
+
+  }
 
   move() {
     if (keyIsDown(RIGHT_ARROW) && !window.activityAnimation) {
@@ -115,10 +139,7 @@ export default class Charakter {
   //     }
   // }
 
-  // animation(){
-  // //  charakter pngs als array und wird durchlaufen % array.length im Zusammnehang von screen movement
-  // //  einzelne Funktionen für Bewegung
-  // }
+ 
 
   // voice(){
   //     if(charakterId["Name"]){

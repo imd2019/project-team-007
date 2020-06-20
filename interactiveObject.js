@@ -47,6 +47,8 @@ export default class InteractiveObject extends MainScreen {
     
     this.interactX=interactX;
     this.interactY=interactY;
+
+    this.interaction={A:false,B:false};
     
     this.animationScale=0.55;
     this.index=0;
@@ -77,7 +79,7 @@ export default class InteractiveObject extends MainScreen {
     this.btnBy = this.y - btnOffset;
   }
 
-  hitTest(x, y, btnX,btnY,btn) { //type error
+  hitTest(x, y, btnX,btnY,btn) { 
     if (
       x > btnX &&
       x < btnX + btn.width*this.btnScale &&
@@ -111,9 +113,16 @@ export default class InteractiveObject extends MainScreen {
 
     this.money = ceil(this.money * this.moneyRate);
     window.globalMoney = this.money;
+  }
 
+  updateAnimationA(){
     window.activityAnimation=true;
-    
+    this.interaction.A=true;
+  }
+
+  updateAnimationB(){
+    window.activityAnimation=true;
+    this.interaction.B=true;
   }
   
   updateAnimationPosition(offsetX,offsetY){
@@ -136,10 +145,16 @@ export default class InteractiveObject extends MainScreen {
     );
     pop();
     this.counter++;
-    if(this.counter==delay){
+    if(this.counter==delay && this.interaction.A){
+      this.interaction.A=false;
       window.activityAnimation=false;
       this.counter=0;
-  }
+    }
+    if(this.counter==delay && this.interaction.B){
+      this.interaction.B=false;
+      window.activityAnimation=false;
+      this.counter=0;
+    }
   }
 
   mouseClicked() {

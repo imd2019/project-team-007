@@ -47,7 +47,7 @@ export class Kühlschrank extends InteractiveObject {
     }
 
     display(x,y){
-        console.log(this.counter);
+        // console.log(this.counter);
         let fridge = this.fridges.find(x => x.id === "chantisFridge");
         this.updateZone(fridge);
         this.updateBtnPosition(20,0,45);
@@ -55,7 +55,7 @@ export class Kühlschrank extends InteractiveObject {
         if(this.hoverTest(x)){
             this.showButtons("Essen");
         } 
-        if(window.activityAnimation){
+        if(this.interaction.A){
             this.updateAnimationPosition(70,y-this.y-10);
             this.activityAnimation(this.fridgeInteraction,"chantiFridgeInteractionMiddle",90);
             
@@ -75,6 +75,7 @@ export class Kühlschrank extends InteractiveObject {
         this.use++;
         this.ration--;
         this.updateParameter();
+        this.updateAnimationA();
         console.log("ration & use: ",this.ration,this.use);
         
         // globalTime +=this.timeA;
@@ -85,7 +86,7 @@ export class Kühlschrank extends InteractiveObject {
 }
 
 export class TV extends InteractiveObject{
-    constructor(tvs,Buttons){
+    constructor(tvs,Buttons,tvBtnAInteraction,tvBtnBInteraction){
         super();
         this.x=520;
         this.y=190;
@@ -96,6 +97,10 @@ export class TV extends InteractiveObject{
         this.Buttons=Buttons;
         this.btnScale=0.4;
 
+        this.tvBtnAInteraction=tvBtnAInteraction;
+        this.tvBtnBInteraction=tvBtnBInteraction;
+
+        this.animationSpeed=0.15;
     }
     
     showButtons(btnAId,btnBId){
@@ -137,16 +142,27 @@ export class TV extends InteractiveObject{
         if(this.hoverTest(x)){
             this.showButtons("Rtl2","Filme");
         }
+        if(this.interaction.A){
+            this.updateAnimationPosition(50,170);
+            this.activityAnimation(this.tvBtnAInteraction,"chantiTvBtnAInteractionMiddle",90);
+        } 
+        if(this.interaction.B){
+            this.updateAnimationPosition(50,170);
+            this.activityAnimation(this.tvBtnBInteraction,"chantiTvBtnBInteractionMiddle",90);
+        } 
     }
 
     clickedA(){
         this.satisfactionRate = 1.6;
         this.exhaustionRate = 0.8;
         this.updateParameter();
+        this.updateAnimationA();
     }
 
     clickedB(){
-        console.log("Filme");
+        this.satisfactionRate=1.2;
+        this.updateParameter();
+        this.updateAnimationB();
     }  
 }
 

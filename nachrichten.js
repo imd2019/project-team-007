@@ -19,7 +19,7 @@ export default class Nachrichten {
     }
 
     mouseClicked(dayStart){
-        console.log("news: ",dayStart);
+        // console.log("news: ",dayStart);
         if(this.count>=2){
             dayStart=true;
         }

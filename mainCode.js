@@ -21,7 +21,7 @@ import {PC} from "./activities.js";
 import {Bett} from "./activities.js";
 
 
-let globalSatisfaction = 26;
+let globalSatisfaction = 80;
 let globalExhaustion = 30;
 let globalMoney = 100;
 
@@ -40,10 +40,19 @@ let frontElements=[];
 
 let fridges=[];
 let fridgeInteraction=[];
+
 let tvs=[];
+let tvBtnAInteraction=[];
+let tvBtnBInteraction=[];
+
 let doors=[];
+
 let windows=[];
+
 let pcs=[];
+let pcInteractions=[];
+
+
 let beds=[];
 
 let stand=[];
@@ -55,6 +64,9 @@ let nachrichten=[];
 
 
 function preload(){
+  // in den ids wird chanti rausgeschmissen damit man für lena nur image-Pfade ändern muss und nicht nochmal alle ids
+  // charakter.id wird ne variable
+
   // <----Chantis Room ---->
   let Room=loadImage("img/Chantal/Objects/background.png");
   Room.id="chantisRoom";
@@ -197,6 +209,21 @@ function preload(){
   fridgeInteractionMiddle.id="chantiFridgeInteractionMiddle";
   fridgeInteractionMiddle.push(fridgeInteractionMiddle1,fridgeInteractionMiddle2,fridgeInteractionMiddle3,fridgeInteractionMiddle2,fridgeInteractionMiddle4,fridgeInteractionMiddle2);
   fridgeInteraction.push(fridgeInteractionMiddle);
+
+  let tvBtnAInteractionMiddle1=loadImage("img/Chantal/Poses/interact/3_middle/tv/rtl1.png");
+  let tvBtnAInteractionMiddle2=loadImage("img/Chantal/Poses/interact/3_middle/tv/rtl2.png");
+  let tvBtnAInteractionMiddle=[];
+  tvBtnAInteractionMiddle.id="chantiTvBtnAInteractionMiddle";
+  tvBtnAInteractionMiddle.push(tvBtnAInteractionMiddle1,tvBtnAInteractionMiddle2);
+  tvBtnAInteraction.push(tvBtnAInteractionMiddle);
+  let tvBtnBInteractionMiddle1=loadImage("img/Chantal/Poses/interact/3_middle/tv/film1.png");
+  let tvBtnBInteractionMiddle2=loadImage("img/Chantal/Poses/interact/3_middle/tv/film2.png");
+  let tvBtnBInteractionMiddle3=loadImage("img/Chantal/Poses/interact/3_middle/tv/film3.png");
+  let tvBtnBInteractionMiddle4=loadImage("img/Chantal/Poses/interact/3_middle/tv/film4.png");
+  let tvBtnBInteractionMiddle=[];
+  tvBtnBInteractionMiddle.id="chantiTvBtnBInteractionMiddle";
+  tvBtnBInteractionMiddle.push(tvBtnBInteractionMiddle1,tvBtnBInteractionMiddle2,tvBtnBInteractionMiddle1,tvBtnBInteractionMiddle2,tvBtnBInteractionMiddle3,tvBtnBInteractionMiddle4);
+  tvBtnBInteraction.push(tvBtnBInteractionMiddle);
 }
 window.preload=preload;
 
@@ -204,7 +231,7 @@ window.preload=preload;
 let Room=new MainScreen(mainScreens);
 
 let fridge=new Kühlschrank(fridges,buttons,fridgeInteraction);
-let tv=new TV(tvs,buttons);
+let tv=new TV(tvs,buttons,tvBtnAInteraction,tvBtnBInteraction);
 let door=new Door(doors,buttons);
 let fenster= new Fenster(windows,buttons);
 let pc= new PC(pcs,buttons);
@@ -217,6 +244,7 @@ let clock=new Time((1920*0.4)-120,5);
 let news= new Nachrichten(nachrichten);
 
 function draw(){
+
   Room.display();
   fridge.display(Chanti.charakter.x,Chanti.charakter.y);
   tv.display(Chanti.charakter.x);
@@ -225,7 +253,7 @@ function draw(){
   pc.display(Chanti.charakter.x);
   bed.display(Chanti.charakter.x);
   
-  if(window.activityAnimation==false){
+  if(!window.activityAnimation){
   Chanti.display();
   }
 
@@ -248,9 +276,12 @@ function draw(){
 window.draw=draw;
 
 function mouseClicked(){
+  if(!window.activityAnimation){
   tv.mouseClicked();
   fridge.mouseClicked(); 
   news.mouseClicked(clock.dayStart);
+  }
+
   console.log("Satisfaction: " + window.globalSatisfaction);
   console.log("Exhaustion:" + window.globalExhaustion);
   console.log("Money: " + window.globalMoney);
