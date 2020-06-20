@@ -1,14 +1,16 @@
 export default class MainScreen {
-    constructor(x,y,rooms){
-        this.x=x;
-        this.y=y; 
+    constructor(rooms){
+        this.x=0;
+        this.y=0; 
         this.rooms=rooms;
-        this.screenMoving={Right:false,Left:false};
+        this.roomId="chantisRoom";
 
+
+        this.screenMoving={Right:false,Left:false};
         this.endScreen={Right:false,Left:false};
 
-        this.speed=5;  
-        // this.img=img;
+        this.speed=5; 
+
 
 
         // this.characterId=characterId;
@@ -16,14 +18,8 @@ export default class MainScreen {
     
 
     display(){
-        this.rooms[0].width=4104*0.4;
-        this.rooms[0].height=1080*0.4;
-        image(this.rooms[0],this.x,this.y);
-
-        // console.log("rooms: "+this.x);
-        // console.log("screenMoving: " ,this.screenMoving);
-        // console.log("endScreen: ",this.endScreen);
-
+        let room = this.rooms.find(x => x.id === this.roomId);
+        image(room,this.x,this.y,room.width*0.4,room.height*0.4);
 
         // // abhängig von globalTime, aber kp wie Informationsweitergabe
         // if(charakterId["Name"]){

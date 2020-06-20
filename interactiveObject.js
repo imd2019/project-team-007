@@ -18,7 +18,8 @@ export default class InteractiveObject extends MainScreen {
     interactX,
     interactY
   ) {
-    super(x, y);
+    super(x,y);
+    
     this.speed = 5;
 
     this.btnA = btnA;

@@ -57,6 +57,7 @@ let nachrichten=[];
 function preload(){
   // <----Chantis Room ---->
   let Room=loadImage("img/Chantal/Objects/background.png");
+  Room.id="chantisRoom";
   mainScreens.push(Room);
 
   let Fridge=loadImage("img/Chantal/Objects/Kühlschrank.png");
@@ -79,9 +80,11 @@ function preload(){
   Fenster.id="chantisFenster";
   windows.push(Fenster);
 
-  let PC=loadImage("img/Chantal/Objects/Tisch.png");
-  PC.id="chantisPC";
-  pcs.push(PC);
+  let PC=loadImage("img/Chantal/Objects/TischNoChair.png");
+  PC.id="chantisTisch";
+  let Chair=loadImage("img/Chantal/Objects/Stuhl.png");
+  Chair.id="chantisStuhl";
+  pcs.push(PC,Chair);
 
   let Bett=loadImage("img/Chantal/Objects/Bett.png");
   Bett.id="chantisBett";
@@ -198,17 +201,17 @@ function preload(){
 window.preload=preload;
 
 
-let Room=new MainScreen(0,0,mainScreens);
+let Room=new MainScreen(mainScreens);
 
-let fridge=new Kühlschrank(820,90,fridges,buttons,fridgeInteraction);
-let tv=new TV(560,200,tvs,buttons);
-let door=new Door(55,97,doors,buttons);
-let fenster= new Fenster(310,90,windows,buttons);
-let pc= new PC(1055,198,pcs,buttons);
-let bed= new Bett(1320,255,beds,buttons);
+let fridge=new Kühlschrank(fridges,buttons,fridgeInteraction);
+let tv=new TV(tvs,buttons);
+let door=new Door(doors,buttons);
+let fenster= new Fenster(windows,buttons);
+let pc= new PC(pcs,buttons);
+let bed= new Bett(beds,buttons);
 
-let Sofa= new FrontScreen(425,315,frontElements);
-let Chanti=new Charakter((1920*0.4/2)-110,290,stand,walk,Room.endScreen);
+let Sofa= new FrontScreen(frontElements);
+let Chanti=new Charakter(stand,walk,Room.endScreen);
 let clock=new Time((1920*0.4)-120,5);
 
 let news= new Nachrichten(nachrichten);

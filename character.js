@@ -1,6 +1,6 @@
 export default class Charakter {
-  constructor(charakterX, charakterY, stands, walks, endScreen) {
-    this.charakter = { x: charakterX, y: charakterY, id: false };
+  constructor(stands, walks, endScreen) {
+    this.charakter = { x: (1920*0.4/2)-110, y: 290 };
 
     this.stands = stands;
     this.walks = walks;

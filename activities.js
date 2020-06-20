@@ -1,10 +1,10 @@
 import InteractiveObject from "./interactiveObject.js";
 
 export class Kühlschrank extends InteractiveObject {
-    constructor(x,y,fridges,Buttons,fridgeInteraction){
-        super(x,y);
-        this.x=x;
-        this.y=y;
+    constructor(fridges,Buttons,fridgeInteraction){
+        super();
+        this.x=810;
+        this.y=75;
         
         // this.charakterId=charakterId;
         // this.charakterX=charakterX;
@@ -85,10 +85,10 @@ export class Kühlschrank extends InteractiveObject {
 }
 
 export class TV extends InteractiveObject{
-    constructor(x,y,tvs,Buttons){
-        super(x,y);
-        this.x=x;
-        this.y=y;
+    constructor(tvs,Buttons){
+        super();
+        this.x=520;
+        this.y=190;
 
         this.tvs=tvs;
         this.objectScale=0.4;
@@ -132,7 +132,7 @@ export class TV extends InteractiveObject{
     display(x){
         let tv = this.tvs.find(x => x.id === "chantisTV");
         this.updateZone(tv);
-        this.updateBtnPosition(-20,115,75);
+        this.updateBtnPosition(15,160,75);
         image(tv,this.x,this.y,this.imgWidth,this.imgHeight);
         if(this.hoverTest(x)){
             this.showButtons("Rtl2","Filme");
@@ -151,10 +151,10 @@ export class TV extends InteractiveObject{
 }
 
 export class Door extends InteractiveObject{
-    constructor(x,y,doors,Buttons){
-        super(x,y);
-        this.x=x;
-        this.y=y;
+    constructor(doors,Buttons){
+        super();
+        this.x=40;
+        this.y=78;
 
         this.doors=doors;
         this.objectScale=0.4;
@@ -205,13 +205,13 @@ export class Door extends InteractiveObject{
 }
 
 export class Fenster extends InteractiveObject{
-    constructor(x,y,windows,Buttons){
-        super(x,y);
-        this.x=x;
-        this.y=y;
+    constructor(windows,Buttons){
+        super();
+        this.x=310;
+        this.y=55;
 
         this.windows=windows;
-        this.objectScale=0.4;
+        this.objectScale=0.42;
 
         this.Buttons=Buttons;
         this.btnScale=0.4;
@@ -236,7 +236,7 @@ export class Fenster extends InteractiveObject{
     display(x){
         let fenster = this.windows.find(x => x.id === "chantisFenster");
         this.updateZone(fenster);
-        this.updateBtnPosition(0,50,60);
+        this.updateBtnPosition(0,50,50);
         image(fenster,this.x,this.y,this.imgWidth,this.imgHeight);
         if(this.hoverTest(x)){
             this.showButtons("Fenster");
@@ -245,13 +245,13 @@ export class Fenster extends InteractiveObject{
 }
 
 export class PC extends InteractiveObject{
-    constructor(x,y,pcs,Buttons){
-        super(x,y);
-        this.x=x;
-        this.y=y;
+    constructor(pcs,Buttons){
+        super();
+        this.x=1055;
+        this.y=185;
 
         this.pcs=pcs;
-        this.objectScale=0.43;
+        this.objectScale=0.42;
 
         this.Buttons=Buttons;
         this.btnScale=0.4;
@@ -288,21 +288,23 @@ export class PC extends InteractiveObject{
     }
 
     display(x){
-        let pc = this.pcs.find(x => x.id === "chantisPC");
+        let pc = this.pcs.find(x => x.id === "chantisTisch");
         this.updateZone(pc);
         this.updateBtnPosition(-5,150,70);
         image(pc,this.x,this.y,this.imgWidth,this.imgHeight);
         if(this.hoverTest(x)){
             this.showButtons("Bewerben","SocialMedia");
-        }       
+        }
+        let chair=this.pcs.find(x=>x.id==="chantisStuhl");
+        image(chair,this.x+60,this.y+53,chair.width*(this.objectScale+0.025),chair.height*(this.objectScale+0.025));       
     }
 }
 
 export class Bett extends InteractiveObject{
-    constructor(x,y,beds,Buttons){
-        super(x,y);
-        this.x=x;
-        this.y=y;
+    constructor(beds,Buttons){
+        super();
+        this.x=1320;
+        this.y=245;
 
         this.beds=beds;
         this.objectScale=0.4;
