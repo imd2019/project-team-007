@@ -56,6 +56,8 @@ export default class InteractiveObject extends MainScreen {
     this.animationSpeed=0.2;
 
     this.counter=0;
+
+    
   }
 
   move(screenMoving) {
@@ -105,7 +107,7 @@ export default class InteractiveObject extends MainScreen {
     this.satisfaction = window.globalSatisfaction;
     this.exhaustion = window.globalExhaustion;
     this.money = window.globalMoney;
-
+    
     this.satisfaction = ceil(this.satisfaction * this.satisfactionRate);
     window.globalSatisfaction = this.satisfaction;
 
@@ -114,6 +116,26 @@ export default class InteractiveObject extends MainScreen {
 
     this.money = ceil(this.money * this.moneyRate);
     window.globalMoney = this.money;
+    
+    let activityBundle=[];
+    activityBundle.push(this.satisfactionRate,this.exhaustionRate,this.moneyRate);
+
+    if(window.globalTime.day==1){
+      window.globalActivityArray.day1.push(activityBundle);
+    }
+    if(window.globalTime.day==2){
+      window.globalActivityArray.day2.push(activityBundle);
+    }
+    if(window.globalTime.day==3){
+      window.globalActivityArray.day3.push(activityBundle);
+    }
+    if(window.globalTime.day==4){
+      window.globalActivityArray.day4.push(activityBundle);
+    }
+    if(window.globalTime.day==5){
+      window.globalActivityArray.day5.push(activityBundle);
+    }
+
   }
 
   updateAnimationA(){
@@ -146,6 +168,8 @@ export default class InteractiveObject extends MainScreen {
     );
     pop();
     this.counter++;
+    
+
     if(this.counter==delay && this.interaction.A){
       this.interaction.A=false;
       window.activityAnimation=false;

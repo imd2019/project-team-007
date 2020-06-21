@@ -77,10 +77,6 @@ export class Kühlschrank extends InteractiveObject {
         this.updateParameter();
         this.updateAnimationA();
         console.log("ration & use: ",this.ration,this.use);
-        
-        // globalTime +=this.timeA;
-        // globalActivityArray.push(this.satisfaction[0],this.exhaustion[1]); 
-
     }
     
 }
@@ -386,11 +382,10 @@ export class Bett extends InteractiveObject{
     }
 
     display(x){
-        console.log("counterDelay",this.counter);
         if(!window.globalTime.start && x>=this.x && !window.globalTime.news){
             this.updateAnimationA();
             this.updateAnimationPosition(-10,-54);
-            this.activityAnimation(this.bedInteraction,"chantiBedInteractionMiddle",71);//counter muss an Zeit zum globalTime.news=true angepasst werden
+            this.activityAnimation(this.bedInteraction,"chantiBedInteractionMiddle",71,10);//counter muss an Zeit zum globalTime.news=true angepasst werden
             window.globalTime.sleepAnimation=true;
            
         } 

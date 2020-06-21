@@ -39,8 +39,8 @@ export default class Time {
     if (window.globalTime.start) {
       window.globalTime.sleepAnimation=false;
       this.counter++;
-      if (this.counter % (30 * 5) == 0) {
-        window.globalTime.minute = (window.globalTime.minute + 30) % 60;
+      if (this.counter % (30 * 2.5) == 0) {
+        window.globalTime.minute = (window.globalTime.minute + 15) % 60;
       }
       if (this.counter % (30 * 10) == 0) {
         window.globalTime.hour++;
@@ -50,7 +50,6 @@ export default class Time {
       } else if (window.globalTime.hour == 2) {
         window.globalTime.start = false;
         this.counter=0;
-        
         console.log(window.globalTime.day);
       }
     }

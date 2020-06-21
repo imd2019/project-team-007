@@ -24,7 +24,7 @@ import {Bett} from "./activities.js";
 
 
 //<------les variablos globalos------>
-let globalSatisfaction = 60;
+let globalSatisfaction = 20;
 let globalExhaustion = 30;
 let globalMoney = 100;
 
@@ -35,14 +35,17 @@ window.globalMoney = globalMoney;
 let globalTime={day:1,start:true,hour:22,minute:0,news:false,sleepAnimation:false};
 window.globalTime=globalTime;
 
-// globalActivityArray=[]
+let globalActivityArray={day1:[],day2:[],day3:[],day4:[],day5:[]};
+
+window.globalActivityArray=globalActivityArray;
 
 let activityAnimation=false;
 window.activityAnimation=activityAnimation;
 
+let charakterId="Lena";
+window.charakterId=charakterId;
+
 //<--------------->
-
-
 
 
 let mainScreens=[];
@@ -79,42 +82,42 @@ function preload(){
   // charakter.id wird ne variable in den img-Pfaden
 
   // <----Chantis Room ---->
-  let Room=loadImage("img/Chantal/Objects/background.png");
+  let Room=loadImage("img/"+charakterId+"/Objects/background.png");
   Room.id="chantisRoom";
   mainScreens.push(Room);
 
-  let Fridge=loadImage("img/Chantal/Objects/Kühlschrank.png");
+  let Fridge=loadImage("img/"+charakterId+"/Objects/Kühlschrank.png");
   Fridge.id = "chantisFridge";
   fridges.push(Fridge);
 
-  let FrontElement=loadImage("img/Chantal/Objects/Sofa.png");
+  let FrontElement=loadImage("img/"+charakterId+"/Objects/Sofa.png");
   FrontElement.id="chantisSofa";
   frontElements.push(FrontElement);
 
-  let TV=loadImage("img/Chantal/Objects/Fernseher.png");
+  let TV=loadImage("img/"+charakterId+"/Objects/Fernseher.png");
   TV.id="chantisTV";
   tvs.push(TV);
 
-  let Door=loadImage("img/Chantal/Objects/Tür.png");
+  let Door=loadImage("img/"+charakterId+"/Objects/Tür.png");
   Door.id="chantisTür";
   doors.push(Door);
 
-  let Fenster=loadImage("img/Chantal/Objects/FensterA.png");
+  let Fenster=loadImage("img/"+charakterId+"/Objects/FensterA.png");
   Fenster.id="chantisFenster";
   windows.push(Fenster);
 
-  let PC=loadImage("img/Chantal/Objects/TischNoChair.png");
+  let PC=loadImage("img/"+charakterId+"/Objects/TischNoChair.png");
   PC.id="chantisTisch";
-  let Chair=loadImage("img/Chantal/Objects/Stuhl.png");
+  let Chair=loadImage("img/"+charakterId+"Chantal/Objects/Stuhl.png");
   Chair.id="chantisStuhl";
   pcs.push(PC,Chair);
 
-  let Bett=loadImage("img/Chantal/Objects/Bett.png");
+  let Bett=loadImage("img/"+charakterId+"/Objects/Bett.png");
   Bett.id="chantisBett";
   beds.push(Bett);
   
   // <-----Chantis Walk----->
-  let lowestStand=loadImage("img/Chantal/Poses/stand/5_lowest/stehen.png");
+  let lowestStand=loadImage("img/"+charakterId+"/Poses/stand/5_lowest/stehen.png");
   lowestStand.id="chantiLowestStand";
   let lowestWalk1=loadImage("img/Chantal/Poses/walk/5_lowest/run1.png");
   let lowestWalk2=loadImage("img/Chantal/Poses/walk/5_lowest/run2.png");
@@ -269,12 +272,8 @@ let clock=new Time((1920*0.4)-120,5);
 let news= new Nachrichten(nachrichten);
 
 function draw(){
-  console.log("Chanti.x: ",Chanti.charakter.x);
-  console.log("bedX: ", bed.x);
-  console.log("newsStart: ",window.globalTime.news);
-  console.log("dayStart",window.globalTime.start);
-  console.log("sleepAnimation", window.globalTime.sleepAnimation);
-  console.log("activityAnimation", window.activityAnimation);
+  console.log("day1:",window.globalActivityArray.day1);
+  console.log("day2:",window.globalActivityArray.day2);
   if(!window.globalTime.news){
   Room.display();
   fridge.display(Chanti.charakter.x,Chanti.charakter.y);

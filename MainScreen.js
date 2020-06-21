@@ -33,15 +33,13 @@ export default class MainScreen {
             this.screenMoving.Right=false;
         } 
         else {
-            this.endScreen.Right = false;
-            
+            this.endScreen.Right = false;          
         }
         if (this.x >=0  || charakter.x > 1920*0.4/2){
             this.endScreen.Left = true;
             this.screenMoving.Left=false;
         } else {
-            this.endScreen.Left = false;
-            
+            this.endScreen.Left = false;   
         }
     }
 
