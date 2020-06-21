@@ -32,7 +32,7 @@ window.globalSatisfaction = globalSatisfaction;
 window.globalExhaustion = globalExhaustion;
 window.globalMoney = globalMoney;
 
-let globalTime={day:1,start:true,hour:1,minute:0,news:false,sleepAnimation:false};
+let globalTime={day:1,start:true,hour:22,minute:0,news:false,sleepAnimation:false};
 window.globalTime=globalTime;
 
 // globalActivityArray=[]
@@ -269,8 +269,12 @@ let clock=new Time((1920*0.4)-120,5);
 let news= new Nachrichten(nachrichten);
 
 function draw(){
-  console.log(window.globalTime.start);
-  console.log("activityAnimation",window.activityAnimation);
+  console.log("Chanti.x: ",Chanti.charakter.x);
+  console.log("bedX: ", bed.x);
+  console.log("newsStart: ",window.globalTime.news);
+  console.log("dayStart",window.globalTime.start);
+  console.log("sleepAnimation", window.globalTime.sleepAnimation);
+  console.log("activityAnimation", window.activityAnimation);
   if(!window.globalTime.news){
   Room.display();
   fridge.display(Chanti.charakter.x,Chanti.charakter.y);
@@ -288,7 +292,7 @@ function draw(){
   clock.display();  
 
   Room.move(Chanti.charakter);
-  Chanti.move(bed.x);
+  
   Sofa.move(Room.screenMoving);
   fridge.move(Room.screenMoving); 
   tv.move(Room.screenMoving);
@@ -297,21 +301,21 @@ function draw(){
   pc.move(Room.screenMoving);
   bed.move(Room.screenMoving);
   }
+  Chanti.move(bed.x);
   news.display();
   
 }
 window.draw=draw;
 
 function mouseClicked(){
-  if(!window.activityAnimation){
+  if(!window.activityAnimation && window.globalTime.start){
   tv.mouseClicked();
   fridge.mouseClicked(); 
   pc.mouseClicked();
   bed.mouseClicked();
-
-  news.mouseClicked();
   }
-
+  if(window.globalTime.news){
+  news.mouseClicked();}
   console.log("Satisfaction: " + window.globalSatisfaction);
   console.log("Exhaustion:" + window.globalExhaustion);
   console.log("Money: " + window.globalMoney);

@@ -94,7 +94,7 @@ export default class InteractiveObject extends MainScreen {
   }
 
   hoverTest(x) {
-    if (x > this.x && x < this.zone) {
+    if (x > this.x && x < this.zone && window.globalTime.start) {
       return true;
     } else {
       return false;

@@ -392,7 +392,8 @@ export class Bett extends InteractiveObject{
             this.updateAnimationPosition(-10,-54);
             this.activityAnimation(this.bedInteraction,"chantiBedInteractionMiddle",71);//counter muss an Zeit zum globalTime.news=true angepasst werden
             window.globalTime.sleepAnimation=true;
-        }
+           
+        } 
         else if(this.interaction.A){
             this.updateAnimationPosition(-10,-54);
             this.activityAnimation(this.bedInteraction,"chantiBedInteractionMiddle",90);  

@@ -55,7 +55,7 @@ export default class Charakter {
       pop();
     }
 
-    if (keyIsDown(LEFT_ARROW)) {
+    if (keyIsDown(LEFT_ARROW) && window.globalTime.start) {
       this.direction.right = false;
       this.direction.left = true;
       push();
@@ -114,11 +114,12 @@ export default class Charakter {
       this.standId = "chantiVictoryStand";
       this.walkId = "chantiVictoryWalk";
     }
+    
   }
 
   move(bedX) {
     if (this.endScreen.Right && this.charakter.x <= 1920 * 0.4 - 45) {
-      if (keyIsDown(RIGHT_ARROW) && !window.activityAnimation) {
+      if (keyIsDown(RIGHT_ARROW) && !window.activityAnimation && window.globalTime.start) {
         this.charakter.x += this.speed;
       }
       if (!window.globalTime.start) {
@@ -129,7 +130,7 @@ export default class Charakter {
     }
 
     if (this.endScreen.Left && this.charakter.x >= 0 + 45) {
-      if (keyIsDown(LEFT_ARROW) && !window.activityAnimation) {
+      if (keyIsDown(LEFT_ARROW) && !window.activityAnimation && window.globalTime.start) {
         this.charakter.x -= this.speed;
       }
     }

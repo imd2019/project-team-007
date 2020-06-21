@@ -37,6 +37,7 @@ export default class Time {
 
   countTime() {
     if (window.globalTime.start) {
+      window.globalTime.sleepAnimation=false;
       this.counter++;
       if (this.counter % (30 * 5) == 0) {
         window.globalTime.minute = (window.globalTime.minute + 30) % 60;

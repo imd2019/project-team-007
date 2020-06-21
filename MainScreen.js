@@ -47,14 +47,14 @@ export default class MainScreen {
 
     move(charakter){ 
         this.checkMoving(charakter);
-            if(keyIsDown(LEFT_ARROW)&& !window.activityAnimation){
+            if(keyIsDown(LEFT_ARROW)&& !window.activityAnimation && window.globalTime.start){
                 if(this.endScreen.Left == false){
                 this.screenMoving.Left=true;    
 
                 this.x+=this.speed;
 
                 }   
-            }   
+            } 
             else{
                 this.screenMoving.Left=false;
             }  
