@@ -61,19 +61,20 @@ export default class MainScreen {
             if(keyIsDown(RIGHT_ARROW)&& !window.activityAnimation){
                 if (this.endScreen.Right == false){
                   this.screenMoving.Right=true;  
-
                   this.x-=this.speed;
 
                 }   
             }
+            else if(!window.globalTime.start){
+                if (this.endScreen.Right == false){
+                    this.screenMoving.Right=true;  
+                    this.x-=this.speed;
+  
+                }  
+            }
             else{
                 this.screenMoving.Right=false;
-            }  
-            
-           
-         
-            // console.log(charakter);
-        
+            }                    
     }
 
 }

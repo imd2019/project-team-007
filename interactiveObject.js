@@ -51,6 +51,7 @@ export default class InteractiveObject extends MainScreen {
     this.interaction={A:false,B:false};
     
     this.animationScale=0.55;
+    this.imageMode=CENTER;
     this.index=0;
     this.animationSpeed=0.2;
 
@@ -135,7 +136,7 @@ export default class InteractiveObject extends MainScreen {
     this.index += this.animationSpeed;
     let animation = floor(this.index) % activity.length;
     push();
-    imageMode(CENTER);
+    imageMode(this.imageMode);
     image(
       activity[animation],
       this.interactX,

@@ -1,10 +1,10 @@
 //HIER GEHT DIE PARTY AB!!!
 
 
-// Bilder hier preloaden 
+// Hässlon preload-function ist hier
 // der Zwischenkommunikationsort aller Klassen
 // globale Werte hier definiert
-// Auswertung findet entweder hier oder in einer anderen Datei/Klasse statt
+
 
 import MainScreen from "./MainScreen.js";
 import FrontScreen from "./frontScreen.js";
@@ -21,18 +21,28 @@ import {PC} from "./activities.js";
 import {Bett} from "./activities.js";
 
 
-let globalSatisfaction = 80;
+
+
+//<------les variablos globalos------>
+let globalSatisfaction = 60;
 let globalExhaustion = 30;
 let globalMoney = 100;
 
 window.globalSatisfaction = globalSatisfaction;
 window.globalExhaustion = globalExhaustion;
 window.globalMoney = globalMoney;
-// globalTime
+
+let globalTime={day:1,start:true,hour:1,minute:0,news:false,sleepAnimation:false};
+window.globalTime=globalTime;
+
 // globalActivityArray=[]
 
 let activityAnimation=false;
 window.activityAnimation=activityAnimation;
+
+//<--------------->
+
+
 
 
 let mainScreens=[];
@@ -50,10 +60,11 @@ let doors=[];
 let windows=[];
 
 let pcs=[];
-let pcInteractions=[];
+let pcInteraction=[];
 
 
 let beds=[];
+let bedInteraction=[];
 
 let stand=[];
 let walk=[];
@@ -65,7 +76,7 @@ let nachrichten=[];
 
 function preload(){
   // in den ids wird chanti rausgeschmissen damit man für lena nur image-Pfade ändern muss und nicht nochmal alle ids
-  // charakter.id wird ne variable
+  // charakter.id wird ne variable in den img-Pfaden
 
   // <----Chantis Room ---->
   let Room=loadImage("img/Chantal/Objects/background.png");
@@ -224,6 +235,20 @@ function preload(){
   tvBtnBInteractionMiddle.id="chantiTvBtnBInteractionMiddle";
   tvBtnBInteractionMiddle.push(tvBtnBInteractionMiddle1,tvBtnBInteractionMiddle2,tvBtnBInteractionMiddle1,tvBtnBInteractionMiddle2,tvBtnBInteractionMiddle3,tvBtnBInteractionMiddle4);
   tvBtnBInteraction.push(tvBtnBInteractionMiddle);
+
+  let pcInteractionMiddle1=loadImage("img/Chantal/Poses/interact/3_middle/pc/pc1.png");
+  let pcInteractionMiddle2=loadImage("img/Chantal/Poses/interact/3_middle/pc/pc2.png");
+  let pcInteractionMiddle=[];
+  pcInteractionMiddle.id="chantiPcInteractionMiddle";
+  pcInteractionMiddle.push(pcInteractionMiddle1,pcInteractionMiddle2);
+  pcInteraction.push(pcInteractionMiddle);
+  
+  let bedInteractionMiddle1=loadImage("img/Chantal/Poses/interact/3_middle/bed/bed1.png");
+  let bedInteractionMiddle2=loadImage("img/Chantal/Poses/interact/3_middle/bed/bed2.png");
+  let bedInteractionMiddle=[];
+  bedInteractionMiddle.id="chantiBedInteractionMiddle";
+  bedInteractionMiddle.push(bedInteractionMiddle1,bedInteractionMiddle2);
+  bedInteraction.push(bedInteractionMiddle);
 }
 window.preload=preload;
 
@@ -234,8 +259,8 @@ let fridge=new Kühlschrank(fridges,buttons,fridgeInteraction);
 let tv=new TV(tvs,buttons,tvBtnAInteraction,tvBtnBInteraction);
 let door=new Door(doors,buttons);
 let fenster= new Fenster(windows,buttons);
-let pc= new PC(pcs,buttons);
-let bed= new Bett(beds,buttons);
+let pc= new PC(pcs,buttons,pcInteraction);
+let bed= new Bett(beds,buttons,bedInteraction);
 
 let Sofa= new FrontScreen(frontElements);
 let Chanti=new Charakter(stand,walk,Room.endScreen);
@@ -244,7 +269,9 @@ let clock=new Time((1920*0.4)-120,5);
 let news= new Nachrichten(nachrichten);
 
 function draw(){
-
+  console.log(window.globalTime.start);
+  console.log("activityAnimation",window.activityAnimation);
+  if(!window.globalTime.news){
   Room.display();
   fridge.display(Chanti.charakter.x,Chanti.charakter.y);
   tv.display(Chanti.charakter.x);
@@ -260,10 +287,8 @@ function draw(){
   Sofa.display();
   clock.display();  
 
-  news.display(clock.newsTime,clock.day);
-
   Room.move(Chanti.charakter);
-  Chanti.move();
+  Chanti.move(bed.x);
   Sofa.move(Room.screenMoving);
   fridge.move(Room.screenMoving); 
   tv.move(Room.screenMoving);
@@ -271,6 +296,8 @@ function draw(){
   fenster.move(Room.screenMoving);
   pc.move(Room.screenMoving);
   bed.move(Room.screenMoving);
+  }
+  news.display();
   
 }
 window.draw=draw;
@@ -279,7 +306,10 @@ function mouseClicked(){
   if(!window.activityAnimation){
   tv.mouseClicked();
   fridge.mouseClicked(); 
-  news.mouseClicked(clock.dayStart);
+  pc.mouseClicked();
+  bed.mouseClicked();
+
+  news.mouseClicked();
   }
 
   console.log("Satisfaction: " + window.globalSatisfaction);
