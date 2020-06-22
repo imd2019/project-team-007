@@ -14,6 +14,8 @@ export default class Time {
     
     this.counter=0;
 
+    this.timeStart=Date.now();
+
     //requestAnimationFrame?
 
     // if (this.dayStart == true) {
@@ -35,25 +37,44 @@ export default class Time {
     // }
   }
 
-  countTime() {
-    if (window.globalTime.start) {
-      window.globalTime.sleepAnimation=false;
-      this.counter++;
-      if (this.counter % (30 * 2.5) == 0) {
-        window.globalTime.minute = (window.globalTime.minute + 15) % 60;
-      }
-      if (this.counter % (30 * 10) == 0) {
-        window.globalTime.hour++;
-        if (window.globalTime.hour == 24) {
-          window.globalTime.hour = 0;
-        }
-      } else if (window.globalTime.hour == 2) {
-        window.globalTime.start = false;
-        this.counter=0;
-        console.log(window.globalTime.day);
-      }
-    }
+  // countTime() {
+  //   if (window.globalTime.start) {
+  //     window.globalTime.sleepAnimation=false;
+  //     this.counter++;
+  //     if (this.counter % (30 * 2.5) == 0) {
+  //       window.globalTime.minute = (window.globalTime.minute + 15) % 60;
+  //     }
+  //     if (this.counter % (30 * 10) == 0) {
+  //       window.globalTime.hour++;
+  //       if (window.globalTime.hour == 24) {
+  //         window.globalTime.hour = 0;
+  //       }
+  //     } else if (window.globalTime.hour == 2) {
+  //       window.globalTime.start = false;
+  //       this.counter=0;
+  //       console.log(window.globalTime.day);
+  //     }
+  //   }
+  // }
+
+  hour(){
+    window.globalTime.hour++;
   }
+  
+
+  countTime(){
+    let now=Date.now();
+    let delta=now-this.timeStart;
+    if(delta>1000){
+      
+      // this.hour();
+      window.globalTime.hour++;
+      this.timeStart=Date.now();
+    }
+    window.requestAnimationFrame(this.countTime());
+    
+  }
+
 
   dayEnd() {
     this.opacity += 5;
@@ -75,7 +96,7 @@ export default class Time {
     rect(this.x, this.y, 100, 36, 10);
     fill("black");
     textSize(25);
-    this.countTime();
+    // this.countTime();
     text(
       nf(window.globalTime.hour, 2) + " : " + nf(window.globalTime.minute, 2),
       this.x + 12,

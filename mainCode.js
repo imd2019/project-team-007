@@ -42,7 +42,7 @@ window.globalActivityArray=globalActivityArray;
 let activityAnimation=false;
 window.activityAnimation=activityAnimation;
 
-let charakterId="Lena";
+let charakterId="Chantal";
 window.charakterId=charakterId;
 
 //<--------------->
@@ -86,38 +86,38 @@ function preload(){
   Room.id="chantisRoom";
   mainScreens.push(Room);
 
-  let Fridge=loadImage("img/"+charakterId+"/Objects/Kühlschrank.png");
+  let Fridge=loadImage("img/"+charakterId+"/Objects/fridge.png");
   Fridge.id = "chantisFridge";
   fridges.push(Fridge);
 
-  let FrontElement=loadImage("img/"+charakterId+"/Objects/Sofa.png");
+  let FrontElement=loadImage("img/"+charakterId+"/Objects/frontElement.png");
   FrontElement.id="chantisSofa";
   frontElements.push(FrontElement);
 
-  let TV=loadImage("img/"+charakterId+"/Objects/Fernseher.png");
+  let TV=loadImage("img/"+charakterId+"/Objects/tv.png");
   TV.id="chantisTV";
   tvs.push(TV);
 
-  let Door=loadImage("img/"+charakterId+"/Objects/Tür.png");
+  let Door=loadImage("img/"+charakterId+"/Objects/door.png");
   Door.id="chantisTür";
   doors.push(Door);
 
-  let Fenster=loadImage("img/"+charakterId+"/Objects/FensterA.png");
+  let Fenster=loadImage("img/"+charakterId+"/Objects/windowActive.png");
   Fenster.id="chantisFenster";
   windows.push(Fenster);
 
-  let PC=loadImage("img/"+charakterId+"/Objects/TischNoChair.png");
+  let PC=loadImage("img/"+charakterId+"/Objects/table.png");
   PC.id="chantisTisch";
-  let Chair=loadImage("img/"+charakterId+"Chantal/Objects/Stuhl.png");
+  let Chair=loadImage("img/"+charakterId+"/Objects/chair.png");
   Chair.id="chantisStuhl";
   pcs.push(PC,Chair);
 
-  let Bett=loadImage("img/"+charakterId+"/Objects/Bett.png");
+  let Bett=loadImage("img/"+charakterId+"/Objects/bed.png");
   Bett.id="chantisBett";
   beds.push(Bett);
   
   // <-----Chantis Walk----->
-  let lowestStand=loadImage("img/"+charakterId+"/Poses/stand/5_lowest/stehen.png");
+  let lowestStand=loadImage("img/"+charakterId+"/Poses/stand/5_lowest/lowest.png");
   lowestStand.id="chantiLowestStand";
   let lowestWalk1=loadImage("img/Chantal/Poses/walk/5_lowest/run1.png");
   let lowestWalk2=loadImage("img/Chantal/Poses/walk/5_lowest/run2.png");
@@ -126,7 +126,7 @@ function preload(){
   lowestWalk.id="chantiLowestWalk";
   lowestWalk.push(lowestWalk1,lowestWalk2,lowestWalk3,lowestWalk2);
 
-  let lowStand=loadImage("img/Chantal/Poses/stand/4_low/stehen.png");
+  let lowStand=loadImage("img/"+charakterId+"/Poses/stand/4_low/low.png");
   lowStand.id="chantiLowStand";
   let lowWalk1=loadImage("img/Chantal/Poses/walk/4_low/run1.png");
   let lowWalk2=loadImage("img/Chantal/Poses/walk/4_low/run2.png");
@@ -135,7 +135,7 @@ function preload(){
   lowWalk.id="chantiLowWalk";
   lowWalk.push(lowWalk1,lowWalk2,lowWalk3,lowWalk2);
 
-  let middleStand=loadImage("img/Chantal/Poses/stand/3_middle/stehen.png");
+  let middleStand=loadImage("img/"+charakterId+"/Poses/stand/3_middle/middle.png");
   middleStand.id="chantiMiddleStand";
   let middleWalk1=loadImage("img/Chantal/Poses/walk/3_middle/run1.png");
   let middleWalk2=loadImage("img/Chantal/Poses/walk/3_middle/run2.png");
@@ -144,7 +144,7 @@ function preload(){
   middleWalk.id="chantiMiddleWalk";
   middleWalk.push(middleWalk1,middleWalk2,middleWalk3,middleWalk2);
 
-  let highStand=loadImage("img/Chantal/Poses/stand/2_high/stehen.png");
+  let highStand=loadImage("img/"+charakterId+"/Poses/stand/2_high/high.png");
   highStand.id="chantiHighStand";
   let highWalk1=loadImage("img/Chantal/Poses/walk/2_high/run1.png");
   let highWalk2=loadImage("img/Chantal/Poses/walk/2_high/run2.png");
@@ -153,7 +153,7 @@ function preload(){
   highWalk.id="chantiHighWalk";
   highWalk.push(highWalk1,highWalk2,highWalk3,highWalk2);
 
-  let victoryStand=loadImage("img/Chantal/Poses/stand/1_victory/stehen.png");
+  let victoryStand=loadImage("img/"+charakterId+"/Poses/stand/1_victory/victory.png");
   victoryStand.id="chantiVictoryStand";
   let victoryWalk1=loadImage("img/Chantal/Poses/walk/1_victory/run1.png");
   let victoryWalk2=loadImage("img/Chantal/Poses/walk/1_victory/run2.png");
@@ -272,8 +272,7 @@ let clock=new Time((1920*0.4)-120,5);
 let news= new Nachrichten(nachrichten);
 
 function draw(){
-  console.log("day1:",window.globalActivityArray.day1);
-  console.log("day2:",window.globalActivityArray.day2);
+  clock.countTime();
   if(!window.globalTime.news){
   Room.display();
   fridge.display(Chanti.charakter.x,Chanti.charakter.y);
