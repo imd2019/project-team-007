@@ -44,7 +44,7 @@ let chantiStand = [];
 let chantiWalk = [];
 
 let Buttons = [];
-// let fridgeBtn=[];
+
 
 // Pics für Startscreen
 let startscreenpic = loadImage("img/Startscreen/startscreen.png");
@@ -154,22 +154,23 @@ let Chanti = new Charakter(
   Room.endScreen
 );
 let clock = new Time(1920 * 0.4 - 120, 5);
+
 // für Startscreen
 let infobutton = new Button(322, 292, 123, 35);
 let startbutton = new Button(308, 335, 151, 43);
 let backbutton = new Button(14, 13, 48, 20);
-let letsgobutton = new Button(286, 355, 187, 50);
+let letsgobutton = new Button(286, 395, 187, 50); //hab hier das y runtergesetzt
 let backbutton2 = new Button(14, 13, 48, 20);
-let skipbutton = new Button(500, 200, 30, 20);
-let allbuttons = [
-  infobutton,
-  startbutton,
-  backbutton,
-  letsgobutton,
-  backbutton2,
-  skipbutton,
-];
-let startscreen = new Startscreens(
+let skipbutton = new Button(590, 390, 50, 20);
+// let allbuttons = [
+//   infobutton,
+//   startbutton,
+//   backbutton,
+//   letsgobutton,
+//   backbutton2,
+//   skipbutton,
+// ]; ------------> könnte auch funktionieren, dann wäre der constructor sauberer, weiß nur nicht ob das nur mit ids funktionieren würde
+let gameStartScreen = new Startscreens(
   0,
   0,
   startscreenpic,
@@ -177,28 +178,19 @@ let startscreen = new Startscreens(
   chosescreenpicoff,
   newsscreenpic,
   chosescreenpicon,
-  infobutton,
-  startbutton,
-  backbutton,
-  letsgobutton,
-  backbutton2,
-  skipbutton
+  startbutton,infobutton,backbutton,letsgobutton,backbutton2,skipbutton
 );
+// hab startscreen zu gameStartScreen geändert, da in Startscreen-Klasse boolean mit selben Namen existiert
 
 function draw() {
   if (start === false) {
-    startscreen.display();
-    infobutton.display();
-    startbutton.display();
-    backbutton.display();
-    backbutton2.display();
-    letsgobutton.display();
-    skipbutton.display();
-    if (startscreen.mainstart === true) {
+    //  buttons kannst du in der startscreen-klasse displayen
+    gameStartScreen.display();
+    if (gameStartScreen.mainstart) {
       start = true;
     }
   }
-  if (start === true) {
+  if (start) {
     Room.display();
     fridge.display(Chanti.charakter.x);
     tv.display(Chanti.charakter.x);
@@ -225,17 +217,10 @@ function draw() {
 window.draw = draw;
 
 function mouseClicked() {
-  startscreen.clicked();
-  infobutton.mouseClicked();
-  startbutton.mouseClicked();
-  backbutton.mouseClicked();
-  backbutton2.mouseClicked();
-  letsgobutton.mouseClicked();
-  skipbutton.mouseClicked();
+  gameStartScreen.mouseClicked();
+  // same über mouseClicked was buttons angeht
   tv.mouseClicked();
   fridge.mouseClicked();
-  // console.log("Satisfaction: " + window.globalSatisfaction);
-  // console.log("Exhaustion:" + window.globalExhaustion);
-  // console.log("Money: " + window.globalMoney);
+  
 }
 window.mouseClicked = mouseClicked;

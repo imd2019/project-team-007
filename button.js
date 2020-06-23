@@ -1,3 +1,5 @@
+// hier hab ich absolut kp wieso mouseClicked nicht weitergegeben wird, aber mit nur hittest funktioierts
+
 export default class Button {
   constructor(btnX, btnY, width, height) {
     this.btnX = btnX;
@@ -7,13 +9,13 @@ export default class Button {
   }
 
   display() {
-    var btnX = this.btnX;
-    var btnY = this.btnY;
-    var width = this.width;
-    var height = this.height;
+    // var btnX = this.btnX;
+    // var btnY = this.btnY;
+    // var width = this.width;
+    // var height = this.height;
     noFill();
     stroke(255, 0, 0);
-    rect(btnX, btnY, width, height, 20);
+    rect(this.btnX, this.btnY, this.width, this.height, 20);
   }
 
   // hitTest(x, y) {
@@ -29,13 +31,11 @@ export default class Button {
   //   }
   // }
 
-  updateBtnPosition(offsetx, btnOffset) {
-    this.btnX = this.x + offsetx;
-    this.btnY = this.y - btnOffset;
-  }
+  
 
-  hitTest(x, y, btnX, btnY) {
+  hitTest(x, y) {
     //type error
+    
     if (
       x > this.btnX &&
       x < this.btnX + this.width &&
@@ -48,13 +48,13 @@ export default class Button {
     }
   }
 
-  clicked() {
-    console.log("was wiesooo");
-  }
+  // clicked() {
+  //   console.log("was wiesooo");
+  // }
 
-  mouseClicked() {
-    if (this.hitTest(mouseX, mouseY, this.btnX, this.btnY)) {
-      this.clicked();
-    }
-  }
+  // mouseClicked() {
+  //   if (this.hitTest(mouseX, mouseY)) {
+  //     this.clicked();
+  //   }
+  // }
 }
