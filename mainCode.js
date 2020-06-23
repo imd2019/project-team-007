@@ -45,7 +45,6 @@ let chantiWalk = [];
 
 let Buttons = [];
 
-
 // Pics für Startscreen
 let startscreenpic = loadImage("img/Startscreen/startscreen.png");
 let infoscreenpic = loadImage("img/Startscreen/infoscreen.png");
@@ -162,14 +161,6 @@ let backbutton = new Button(14, 13, 48, 20);
 let letsgobutton = new Button(286, 395, 187, 50); //hab hier das y runtergesetzt
 let backbutton2 = new Button(14, 13, 48, 20);
 let skipbutton = new Button(590, 390, 50, 20);
-// let allbuttons = [
-//   infobutton,
-//   startbutton,
-//   backbutton,
-//   letsgobutton,
-//   backbutton2,
-//   skipbutton,
-// ]; ------------> könnte auch funktionieren, dann wäre der constructor sauberer, weiß nur nicht ob das nur mit ids funktionieren würde
 let gameStartScreen = new Startscreens(
   0,
   0,
@@ -178,13 +169,17 @@ let gameStartScreen = new Startscreens(
   chosescreenpicoff,
   newsscreenpic,
   chosescreenpicon,
-  startbutton,infobutton,backbutton,letsgobutton,backbutton2,skipbutton
+  startbutton,
+  infobutton,
+  backbutton,
+  letsgobutton,
+  backbutton2,
+  skipbutton
 );
 // hab startscreen zu gameStartScreen geändert, da in Startscreen-Klasse boolean mit selben Namen existiert
 
 function draw() {
   if (start === false) {
-    //  buttons kannst du in der startscreen-klasse displayen
     gameStartScreen.display();
     if (gameStartScreen.mainstart) {
       start = true;
@@ -218,9 +213,7 @@ window.draw = draw;
 
 function mouseClicked() {
   gameStartScreen.mouseClicked();
-  // same über mouseClicked was buttons angeht
   tv.mouseClicked();
   fridge.mouseClicked();
-  
 }
 window.mouseClicked = mouseClicked;
