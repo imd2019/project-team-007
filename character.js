@@ -113,8 +113,7 @@ export default class Charakter {
     } else if (window.globalSatisfaction >= 91) {
       this.standId = "VictoryStand";
       this.walkId = "VictoryWalk";
-    }
-    
+    }  
   }
 
   move(bedX) {

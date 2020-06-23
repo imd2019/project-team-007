@@ -61,7 +61,8 @@ export default class Time {
 
   // countTime(){
   //   if (this.timeStart === undefined){
-  //   this.timeStart = Date.now();}
+  //   this.timeStart = Date.now();
+  //   }
   //   let now=Date.now();
   //   let delta=now-this.timeStart;
   //   if(delta>2500){
@@ -72,7 +73,7 @@ export default class Time {
   //     window.globalTime.hour++;
   //     this.timeStart=Date.now();
   //   }
-  //    window.requestAnimationFrame(this.countTime());
+  //    window.requestAnimationFrame(this.countTime);
   //   }
 
 

@@ -45,11 +45,12 @@ export default class InteractiveObject extends MainScreen {
     this.exhaustionRate = 1;
     this.moneyRate = 1;
     
+    this.activityId;
     this.interactX=interactX;
     this.interactY=interactY;
 
     this.interaction={A:false,B:false};
-    
+
     this.animationScale=0.55;
     this.imageMode=CENTER;
     this.index=0;
@@ -103,6 +104,29 @@ export default class InteractiveObject extends MainScreen {
     }
   }
   
+  updateInteraction(objectButton) {
+    if (window.globalSatisfaction <= 25) {
+      this.activityId=objectButton+"InteractionLowest";
+    } else if (
+      window.globalSatisfaction >= 26 &&
+      window.globalSatisfaction <= 50
+    ) {
+        this.activityId=objectButton+"InteractionLow";
+    } else if (
+      window.globalSatisfaction >= 51 &&
+      window.globalSatisfaction <= 75
+    ) {
+        this.activityId=objectButton+"InteractionMiddle";
+    } else if (
+      window.globalSatisfaction >= 76 &&
+      window.globalSatisfaction <= 90
+    ) {
+        this.activityId=objectButton+"InteractionHigh";
+    } else if (window.globalSatisfaction >= 91) {
+        this.activityId=objectButton+"InteractionVictory";
+    }
+}
+
   updateParameter() {
     this.satisfaction = window.globalSatisfaction;
     this.exhaustion = window.globalExhaustion;

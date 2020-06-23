@@ -6,9 +6,6 @@ export class Kühlschrank extends InteractiveObject {
         this.x=810;
         this.y=75;
         
-        // this.charakterId=charakterId;
-        // this.charakterX=charakterX;
-        // this.day=day;
         this.ration=3;
         this.use=0;
 
@@ -20,13 +17,7 @@ export class Kühlschrank extends InteractiveObject {
         
         this.fridgeInteraction=fridgeInteraction;
         this.satisfactionRate=1.1;
-    
-        // if (this.charakterId["Name"]){
-        //     this.satisfaction="Wert";
-        //     this.money="-Wert";
-        //     this.exhaustion="-Wert";
-        //     this.timeA=timeA;
-        // }
+        
         
     }
 
@@ -46,6 +37,8 @@ export class Kühlschrank extends InteractiveObject {
         } 
     }
 
+    
+
     display(x,y){
         // console.log(this.counter);
         let fridge = this.fridges.find(x => x.id === "Fridge");
@@ -54,11 +47,11 @@ export class Kühlschrank extends InteractiveObject {
         image(fridge,this.x,this.y,this.imgWidth,this.imgHeight); 
         if(this.hoverTest(x)){
             this.showButtons("Essen");
+            
         } 
         if(this.interaction.A){
             this.updateAnimationPosition(70,y-this.y-10);
-            this.activityAnimation(this.fridgeInteraction,"FridgeInteractionMiddle",90);
-            
+            this.activityAnimation(this.fridgeInteraction,this.activityId,90);    
         } 
     }
     
@@ -74,6 +67,7 @@ export class Kühlschrank extends InteractiveObject {
         }
         this.use++;
         this.ration--;
+        this.updateInteraction("Fridge");
         this.updateParameter();
         this.updateAnimationA();
         console.log("ration & use: ",this.ration,this.use);
