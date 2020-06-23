@@ -29,7 +29,7 @@ export default class InteractiveObject extends MainScreen {
     this.btnBx = btnBx;
     this.btnBy = btnBy;
 
-    this.btnScale=btnScale;
+    this.btnScale = btnScale;
     this.objectScale = objectScale;
 
     this.zone = zone;
@@ -69,19 +69,20 @@ export default class InteractiveObject extends MainScreen {
     this.zone = this.x + this.imgWidth;
   }
 
-  updateBtnPosition(offsetAx, offsetBx,btnOffset) {
+  updateBtnPosition(offsetAx, offsetBx, btnOffset) {
     this.btnAx = this.x + offsetAx;
     this.btnAy = this.y - btnOffset;
     this.btnBx = this.x + offsetBx;
     this.btnBy = this.y - btnOffset;
   }
 
-  hitTest(x, y, btnX,btnY,btn) { //type error
+  hitTest(x, y, btnX, btnY, btn) {
+    //type error
     if (
       x > btnX &&
-      x < btnX + btn.width*this.btnScale &&
+      x < btnX + btn.width * this.btnScale &&
       y > btnY &&
-      y < btnY + btn.height*this.btnScale
+      y < btnY + btn.height * this.btnScale
     ) {
       return true;
     } else {
@@ -96,7 +97,7 @@ export default class InteractiveObject extends MainScreen {
       return false;
     }
   }
-  
+
   updateParameter() {
     this.satisfaction = window.globalSatisfaction;
     this.exhaustion = window.globalExhaustion;
@@ -149,5 +150,4 @@ export default class InteractiveObject extends MainScreen {
       this.clickedB();
     }
   }
-
 }
