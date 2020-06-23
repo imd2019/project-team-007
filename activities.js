@@ -1,7 +1,7 @@
 import InteractiveObject from "./interactiveObject.js";
 
 export class Kühlschrank extends InteractiveObject {
-    constructor(x,y,fridges,Buttons,fridgeInteraction){
+    constructor(x,y,fridges,Buttons){
         super(x,y);
         this.x=x;
         this.y=y;
@@ -17,8 +17,7 @@ export class Kühlschrank extends InteractiveObject {
 
         this.Buttons=Buttons;
         this.btnScale=0.4;
-        
-        this.fridgeInteraction=fridgeInteraction;
+
         this.satisfactionRate=1.1;
     
         // if (this.charakterId["Name"]){
@@ -46,31 +45,22 @@ export class Kühlschrank extends InteractiveObject {
         } 
     }
 
-    display(x,y){
-        console.log(this.counter);
+    display(x){
         let fridge = this.fridges.find(x => x.id === "chantisFridge");
         this.updateZone(fridge);
         this.updateBtnPosition(20,0,45);
         image(fridge,this.x,this.y,this.imgWidth,this.imgHeight); 
         if(this.hoverTest(x)){
             this.showButtons("Essen");
-        } 
-        if(window.activityAnimation){
-            this.updateAnimationPosition(70,y-this.y-10);
-            this.activityAnimation(this.fridgeInteraction,"chantiFridgeInteractionMiddle",90);
-            
-        } 
+        }  
     }
     
     clickedA(){
         if(this.use>=3){
-            if(this.ration==0){
             this.ration=3;
+            this.satisfactionRate = 0.8;
             this.moneyRate=0.9;
             console.log("u out of food");
-            }
-            else{this.moneyRate=1;}
-            this.satisfactionRate = 0.8;      
         }
         this.use++;
         this.ration--;

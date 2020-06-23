@@ -14,9 +14,7 @@ export default class InteractiveObject extends MainScreen {
     objectScale,
     btnA,
     btnB,
-    btnScale,
-    interactX,
-    interactY
+    btnScale
   ) {
     super(x, y);
     this.speed = 5;
@@ -43,15 +41,6 @@ export default class InteractiveObject extends MainScreen {
     this.satisfactionRate = 1;
     this.exhaustionRate = 1;
     this.moneyRate = 1;
-    
-    this.interactX=interactX;
-    this.interactY=interactY;
-    
-    this.animationScale=0.55;
-    this.index=0;
-    this.animationSpeed=0.2;
-
-    this.counter=0;
   }
 
   move(screenMoving) {
@@ -111,42 +100,13 @@ export default class InteractiveObject extends MainScreen {
 
     this.money = ceil(this.money * this.moneyRate);
     window.globalMoney = this.money;
-
-    window.activityAnimation=true;
-    
-  }
-  
-  updateAnimationPosition(offsetX,offsetY){
-    this.interactX = this.x + offsetX;
-    this.interactY = this.y + offsetY;
-  }
-
-  activityAnimation(activityArray,activityId,delay){
-    let activity=activityArray.find(x=>x.id===activityId);
-    this.index += this.animationSpeed;
-    let animation = floor(this.index) % activity.length;
-    push();
-    imageMode(CENTER);
-    image(
-      activity[animation],
-      this.interactX,
-      this.interactY,
-      activity[animation].width * this.animationScale,
-      activity[animation].height * this.animationScale
-    );
-    pop();
-    this.counter++;
-    if(this.counter==delay){
-      window.activityAnimation=false;
-      this.counter=0;
-  }
   }
 
   mouseClicked() {
-    if (this.btnA!=undefined&&this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy,this.btnA)) {
+    if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA)) {
       this.clickedA();
     }
-    if (this.btnB!=undefined && this.hitTest(mouseX, mouseY, this.btnBx, this.btnBy,this.btnB)) {
+    if (this.hitTest(mouseX, mouseY, this.btnBx, this.btnBy, this.btnB)) {
       this.clickedB();
     }
   }
