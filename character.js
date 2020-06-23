@@ -90,29 +90,29 @@ export default class Charakter {
 
   update() {
     if (window.globalSatisfaction <= 25) {
-      this.standId = "chantiLowestStand";
-      this.walkId = "chantiLowestWalk";
+      this.standId = "LowestStand";
+      this.walkId = "LowestWalk";
     } else if (
       window.globalSatisfaction >= 26 &&
       window.globalSatisfaction <= 50
     ) {
-      this.standId = "chantiLowStand";
-      this.walkId = "chantiLowWalk";
+      this.standId = "LowStand";
+      this.walkId = "LowWalk";
     } else if (
       window.globalSatisfaction >= 51 &&
       window.globalSatisfaction <= 75
     ) {
-      this.standId = "chantiMiddleStand";
-      this.walkId = "chantiMiddleWalk";
+      this.standId = "MiddleStand";
+      this.walkId = "MiddleWalk";
     } else if (
       window.globalSatisfaction >= 76 &&
       window.globalSatisfaction <= 90
     ) {
-      this.standId = "chantiHighStand";
-      this.walkId = "chantiHighWalk";
+      this.standId = "HighStand";
+      this.walkId = "HighWalk";
     } else if (window.globalSatisfaction >= 91) {
-      this.standId = "chantiVictoryStand";
-      this.walkId = "chantiVictoryWalk";
+      this.standId = "VictoryStand";
+      this.walkId = "VictoryWalk";
     }
     
   }

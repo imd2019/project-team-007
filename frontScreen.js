@@ -13,7 +13,7 @@ export default class FrontScreen extends MainScreen{
     }
 
     display(){
-      let frontElement=this.frontRoom.find(x=>x.id==="chantisSofa");
+      let frontElement=this.frontRoom.find(x=>x.id==="FrontElement");
       image(frontElement,this.x,this.y,frontElement.width*this.objectScale,frontElement.height*this.objectScale);
         
     }

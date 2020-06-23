@@ -3,7 +3,7 @@ export default class MainScreen {
         this.x=0;
         this.y=0; 
         this.rooms=rooms;
-        this.roomId="chantisRoom";
+        this.roomId="Room";
 
 
         this.screenMoving={Right:false,Left:false};

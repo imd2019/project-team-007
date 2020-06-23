@@ -48,7 +48,7 @@ export class Kühlschrank extends InteractiveObject {
 
     display(x,y){
         // console.log(this.counter);
-        let fridge = this.fridges.find(x => x.id === "chantisFridge");
+        let fridge = this.fridges.find(x => x.id === "Fridge");
         this.updateZone(fridge);
         this.updateBtnPosition(20,0,45);
         image(fridge,this.x,this.y,this.imgWidth,this.imgHeight); 
@@ -57,7 +57,7 @@ export class Kühlschrank extends InteractiveObject {
         } 
         if(this.interaction.A){
             this.updateAnimationPosition(70,y-this.y-10);
-            this.activityAnimation(this.fridgeInteraction,"chantiFridgeInteractionMiddle",90);
+            this.activityAnimation(this.fridgeInteraction,"FridgeInteractionMiddle",90);
             
         } 
     }
@@ -131,7 +131,7 @@ export class TV extends InteractiveObject{
 
    
     display(x){
-        let tv = this.tvs.find(x => x.id === "chantisTV");
+        let tv = this.tvs.find(x => x.id === "TV");
         this.updateZone(tv);
         this.updateBtnPosition(15,160,75);
         image(tv,this.x,this.y,this.imgWidth,this.imgHeight);
@@ -140,11 +140,11 @@ export class TV extends InteractiveObject{
         }
         if(this.interaction.A){
             this.updateAnimationPosition(50,170);
-            this.activityAnimation(this.tvBtnAInteraction,"chantiTvBtnAInteractionMiddle",90);
+            this.activityAnimation(this.tvBtnAInteraction,"TvBtnAInteractionMiddle",90);
         } 
         if(this.interaction.B){
             this.updateAnimationPosition(50,170);
-            this.activityAnimation(this.tvBtnBInteraction,"chantiTvBtnBInteractionMiddle",90);
+            this.activityAnimation(this.tvBtnBInteraction,"TvBtnBInteractionMiddle",90);
         } 
     }
 
@@ -206,7 +206,7 @@ export class Door extends InteractiveObject{
     }
 
     display(x){
-        let door = this.doors.find(x => x.id === "chantisTür");
+        let door = this.doors.find(x => x.id === "Tür");
         this.updateZone(door);
         this.updateBtnPosition(-20,115,55);
         image(door,this.x,this.y,this.imgWidth,this.imgHeight);
@@ -246,7 +246,7 @@ export class Fenster extends InteractiveObject{
     }
 
     display(x){
-        let fenster = this.windows.find(x => x.id === "chantisFenster");
+        let fenster = this.windows.find(x => x.id === "Fenster");
         this.updateZone(fenster);
         this.updateBtnPosition(0,50,50);
         image(fenster,this.x,this.y,this.imgWidth,this.imgHeight);
@@ -303,7 +303,7 @@ export class PC extends InteractiveObject{
     }
 
     display(x){
-        let pc = this.pcs.find(x => x.id === "chantisTisch");
+        let pc = this.pcs.find(x => x.id === "Tisch");
         this.updateZone(pc);
         this.updateBtnPosition(-5,150,70);
         image(pc,this.x,this.y,this.imgWidth,this.imgHeight);
@@ -312,10 +312,10 @@ export class PC extends InteractiveObject{
         }
         if(this.interaction.A){
             this.updateAnimationPosition(100,100);
-            this.activityAnimation(this.pcInteraction,"chantiPcInteractionMiddle",90);
+            this.activityAnimation(this.pcInteraction,"PcInteractionMiddle",90);
         }
         else{
-        let chair=this.pcs.find(x=>x.id==="chantisStuhl");
+        let chair=this.pcs.find(x=>x.id==="Stuhl");
         image(chair,this.x+60,this.y+53,chair.width*(this.objectScale+0.025),chair.height*(this.objectScale+0.025)); 
         }      
     }
@@ -385,16 +385,16 @@ export class Bett extends InteractiveObject{
         if(!window.globalTime.start && x>=this.x && !window.globalTime.news){
             this.updateAnimationA();
             this.updateAnimationPosition(-10,-54);
-            this.activityAnimation(this.bedInteraction,"chantiBedInteractionMiddle",71,10);//counter muss an Zeit zum globalTime.news=true angepasst werden
+            this.activityAnimation(this.bedInteraction,"BedInteractionMiddle",71,10);//counter muss an Zeit zum globalTime.news=true angepasst werden
             window.globalTime.sleepAnimation=true;
            
         } 
         else if(this.interaction.A){
             this.updateAnimationPosition(-10,-54);
-            this.activityAnimation(this.bedInteraction,"chantiBedInteractionMiddle",90);  
+            this.activityAnimation(this.bedInteraction,"BedInteractionMiddle",90);  
         }
         else{
-        let bett = this.beds.find(x => x.id === "chantisBett");
+        let bett = this.beds.find(x => x.id === "Bett");
         this.updateZone(bett);
         this.updateBtnPosition(10,160,130);
         image(bett,this.x,this.y,this.imgWidth,this.imgHeight);
