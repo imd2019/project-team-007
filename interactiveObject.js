@@ -14,7 +14,9 @@ export default class InteractiveObject extends MainScreen {
     objectScale,
     btnA,
     btnB,
-    btnScale
+    btnScale,
+    interactX,
+    interactY
   ) {
     super(x, y);
     this.speed = 5;
@@ -27,7 +29,7 @@ export default class InteractiveObject extends MainScreen {
     this.btnBx = btnBx;
     this.btnBy = btnBy;
 
-    this.btnScale=btnScale;
+    this.btnScale = btnScale;
     this.objectScale = objectScale;
 
     this.zone = zone;
@@ -41,6 +43,15 @@ export default class InteractiveObject extends MainScreen {
     this.satisfactionRate = 1;
     this.exhaustionRate = 1;
     this.moneyRate = 1;
+    
+    this.interactX=interactX;
+    this.interactY=interactY;
+    
+    this.animationScale=0.55;
+    this.index=0;
+    this.animationSpeed=0.2;
+
+    this.counter=0;
   }
 
   move(screenMoving) {
@@ -58,19 +69,20 @@ export default class InteractiveObject extends MainScreen {
     this.zone = this.x + this.imgWidth;
   }
 
-  updateBtnPosition(offsetAx, offsetBx,btnOffset) {
+  updateBtnPosition(offsetAx, offsetBx, btnOffset) {
     this.btnAx = this.x + offsetAx;
     this.btnAy = this.y - btnOffset;
     this.btnBx = this.x + offsetBx;
     this.btnBy = this.y - btnOffset;
   }
 
-  hitTest(x, y, btnX,btnY,btn) { //type error
+  hitTest(x, y, btnX, btnY, btn) {
+    //type error
     if (
       x > btnX &&
-      x < btnX + btn.width*this.btnScale &&
+      x < btnX + btn.width * this.btnScale &&
       y > btnY &&
-      y < btnY + btn.height*this.btnScale
+      y < btnY + btn.height * this.btnScale
     ) {
       return true;
     } else {
@@ -85,7 +97,7 @@ export default class InteractiveObject extends MainScreen {
       return false;
     }
   }
-  
+
   updateParameter() {
     this.satisfaction = window.globalSatisfaction;
     this.exhaustion = window.globalExhaustion;
@@ -99,6 +111,35 @@ export default class InteractiveObject extends MainScreen {
 
     this.money = ceil(this.money * this.moneyRate);
     window.globalMoney = this.money;
+
+    window.activityAnimation=true;
+    
+  }
+  
+  updateAnimationPosition(offsetX,offsetY){
+    this.interactX = this.x + offsetX;
+    this.interactY = this.y + offsetY;
+  }
+
+  activityAnimation(activityArray,activityId,delay){
+    let activity=activityArray.find(x=>x.id===activityId);
+    this.index += this.animationSpeed;
+    let animation = floor(this.index) % activity.length;
+    push();
+    imageMode(CENTER);
+    image(
+      activity[animation],
+      this.interactX,
+      this.interactY,
+      activity[animation].width * this.animationScale,
+      activity[animation].height * this.animationScale
+    );
+    pop();
+    this.counter++;
+    if(this.counter==delay){
+      window.activityAnimation=false;
+      this.counter=0;
+  }
   }
 
   mouseClicked() {
@@ -109,5 +150,4 @@ export default class InteractiveObject extends MainScreen {
       this.clickedB();
     }
   }
-
 }
