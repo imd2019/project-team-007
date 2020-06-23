@@ -35,7 +35,6 @@ let start = false;
 let activityAnimation = false;
 window.activityAnimation = activityAnimation;
 
-let MainScreens = [];
 let fridges = [];
 let frontElements = [];
 
@@ -146,29 +145,6 @@ function preload() {
 
   stand.push(lowestStand, lowStand, middleStand, highStand, victoryStand);
   walk.push(lowestWalk, lowWalk, middleWalk, highWalk, victoryWalk);
-
-  // für Startscreen
-  let infobutton = new Button(322, 292, 123, 35);
-  let startbutton = new Button(308, 335, 151, 43);
-  let backbutton = new Button(14, 13, 48, 20);
-  let letsgobutton = new Button(286, 395, 187, 50); //hab hier das y runtergesetzt
-  let backbutton2 = new Button(14, 13, 48, 20);
-  let skipbutton = new Button(590, 390, 50, 20);
-  let gameStartScreen = new Startscreens(
-    0,
-    0,
-    startscreenpic,
-    infoscreenpic,
-    chosescreenpicoff,
-    newsscreenpic,
-    chosescreenpicon,
-    startbutton,
-    infobutton,
-    backbutton,
-    letsgobutton,
-    backbutton2,
-    skipbutton
-  );
 
   let Essen = loadImage("img/globals/buttons/fridge.png");
   Essen.id = "Essen";
@@ -284,6 +260,29 @@ let Chanti = new Charakter(
 let clock = new Time(1920 * 0.4 - 120, 5);
 
 let news = new Nachrichten(nachrichten);
+
+// für Startscreen
+let infobutton = new Button(322, 292, 123, 35);
+let startbutton = new Button(308, 335, 151, 43);
+let backbutton = new Button(14, 13, 48, 20);
+let letsgobutton = new Button(286, 395, 187, 50); //hab hier das y runtergesetzt
+let backbutton2 = new Button(14, 13, 48, 20);
+let skipbutton = new Button(590, 390, 50, 20);
+let gameStartScreen = new Startscreens(
+  0,
+  0,
+  startscreenpic,
+  infoscreenpic,
+  chosescreenpicoff,
+  newsscreenpic,
+  chosescreenpicon,
+  startbutton,
+  infobutton,
+  backbutton,
+  letsgobutton,
+  backbutton2,
+  skipbutton
+);
 
 function draw() {
   if (start === false) {
