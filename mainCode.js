@@ -8,7 +8,6 @@ import MainScreen from "./MainScreen.js";
 import FrontScreen from "./frontScreen.js";
 import Nachrichten from "./nachrichten.js";
 import Charakter from "./character.js";
-
 import { Kühlschrank } from "./activities.js";
 import Time from "./parameters.js";
 import { TV } from "./activities.js";
@@ -16,6 +15,7 @@ import { Door } from "./activities.js";
 import { Fenster } from "./activities.js";
 import { PC } from "./activities.js";
 import { Bett } from "./activities.js";
+
 
 //<------les variablos globalos------>
 let globalSatisfaction = 20;
@@ -29,10 +29,10 @@ window.globalMoney = globalMoney;
 let globalTime = {
   day: 1,
   start: true,
-  hour: 8,
+  hour: 1,
   minute: 0,
   news: false,
-  sleepAnimation: false,
+  sleepAnimation: false
 };
 window.globalTime = globalTime;
 
@@ -62,11 +62,14 @@ let tvBtnAInteraction = [];
 let tvBtnBInteraction = [];
 
 let doors = [];
+let doorInteraction=[];
 
 let windows = [];
+let windowInteraction=[];
 
 let pcs = [];
-let pcInteraction = [];
+let pcBtnAInteraction = [];
+let pcBtnBInteraction = [];
 
 let beds = [];
 let bedInteraction = [];
@@ -525,9 +528,7 @@ function preload() {
     fridgeInteractionVictory
   );
 
-
-
-
+  //<----------Tv-Animation---------->
 
   let tvBtnAInteractionMiddle1 = loadImage(
     "img/Chantal/Poses/interact/3_middle/tv/rtl1.png"
@@ -566,27 +567,206 @@ function preload() {
   );
   tvBtnBInteraction.push(tvBtnBInteractionMiddle);
 
-  let pcInteractionMiddle1 = loadImage(
-    "img/Chantal/Poses/interact/3_middle/pc/pc1.png"
+  //<-----------PC-interaction--------->
+  //<----------PcBtnA-------------->
+  let pcBtnAInteractionLowest1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/5_lowest/pc/pc1.png"
   );
-  let pcInteractionMiddle2 = loadImage(
-    "img/Chantal/Poses/interact/3_middle/pc/pc2.png"
+  let pcBtnAInteractionLowest2 = loadImage(
+    "img/" + charakterId + "/Poses/interact/5_lowest/pc/pc2.png"
   );
-  let pcInteractionMiddle = [];
-  pcInteractionMiddle.id = "PcInteractionMiddle";
-  pcInteractionMiddle.push(pcInteractionMiddle1, pcInteractionMiddle2);
-  pcInteraction.push(pcInteractionMiddle);
+  let pcBtnAInteractionLowest = [];
+  pcBtnAInteractionLowest.id = "PcBtnAInteractionLowest";
+  pcBtnAInteractionLowest.push(
+    pcBtnAInteractionLowest1,
+    pcBtnAInteractionLowest2
+  );
 
-  let bedInteractionMiddle1 = loadImage(
-    "img/Chantal/Poses/interact/3_middle/bed/bed1.png"
+  let pcBtnAInteractionLow1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/4_low/pc/pc1.png"
   );
-  let bedInteractionMiddle2 = loadImage(
-    "img/Chantal/Poses/interact/3_middle/bed/bed2.png"
+  let pcBtnAInteractionLow2 = loadImage(
+    "img/" + charakterId + "/Poses/interact/4_low/pc/pc2.png"
   );
+  let pcBtnAInteractionLow = [];
+  pcBtnAInteractionLow.id = "PcBtnAInteractionLow";
+  pcBtnAInteractionLow.push(pcBtnAInteractionLow1, pcBtnAInteractionLow2);
+
+  let pcBtnAInteractionMiddle1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/3_middle/pc/pc1.png"
+  );
+  let pcBtnAInteractionMiddle2 = loadImage(
+    "img/" + charakterId + "/Poses/interact/3_middle/pc/pc2.png"
+  );
+  let pcBtnAInteractionMiddle = [];
+  pcBtnAInteractionMiddle.id = "PcBtnAInteractionMiddle";
+  pcBtnAInteractionMiddle.push(
+    pcBtnAInteractionMiddle1,
+    pcBtnAInteractionMiddle2
+  );
+
+  let pcBtnAInteractionHigh1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/2_high/pc/pc1.png"
+  );
+  let pcBtnAInteractionHigh2 = loadImage(
+    "img/" + charakterId + "/Poses/interact/2_high/pc/pc2.png"
+  );
+  let pcBtnAInteractionHigh = [];
+  pcBtnAInteractionHigh.id = "PcBtnAInteractionHigh";
+  pcBtnAInteractionHigh.push(pcBtnAInteractionHigh1, pcBtnAInteractionHigh2);
+
+  let pcBtnAInteractionVictory1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/1_victory/pc/pc1.png"
+  );
+  let pcBtnAInteractionVictory2 = loadImage(
+    "img/" + charakterId + "/Poses/interact/1_victory/pc/pc2.png"
+  );
+  let pcBtnAInteractionVictory = [];
+  pcBtnAInteractionVictory.id = "PcBtnAInteractionVictory";
+  pcBtnAInteractionVictory.push(
+    pcBtnAInteractionVictory1,
+    pcBtnAInteractionVictory2
+  );
+
+  pcBtnAInteraction.push(
+    pcBtnAInteractionLowest,
+    pcBtnAInteractionLow,
+    pcBtnAInteractionMiddle,
+    pcBtnAInteractionHigh,
+    pcBtnAInteractionVictory
+  );
+
+  if (charakterId == "Lena") {
+    let pcBtnBInteractionLowest1 = loadImage(
+      "img/" + charakterId + "/Poses/interact/5_lowest/pc/learn1.png"
+    );
+    let pcBtnBInteractionLowest2 = loadImage(
+      "img/" + charakterId + "/Poses/interact/5_lowest/pc/learn2.png"
+    );
+    let pcBtnBInteractionLowest = [];
+    pcBtnBInteractionLowest.id = "PcBtnBInteractionLowest";
+    pcBtnBInteractionLowest.push(
+      pcBtnBInteractionLowest1,
+      pcBtnBInteractionLowest2
+    );
+
+    let pcBtnBInteractionLow1 = loadImage(
+      "img/" + charakterId + "/Poses/interact/4_low/pc/learn1.png"
+    );
+    let pcBtnBInteractionLow2 = loadImage(
+      "img/" + charakterId + "/Poses/interact/4_low/pc/learn2.png"
+    );
+    let pcBtnBInteractionLow = [];
+    pcBtnBInteractionLow.id = "PcBtnBInteractionLow";
+    pcBtnBInteractionLow.push(pcBtnBInteractionLow1, pcBtnBInteractionLow2);
+
+    let pcBtnBInteractionMiddle1 = loadImage(
+      "img/" + charakterId + "/Poses/interact/3_middle/pc/learn1.png"
+    );
+    let pcBtnBInteractionMiddle2 = loadImage(
+      "img/" + charakterId + "/Poses/interact/3_middle/pc/learn2.png"
+    );
+    let pcBtnBInteractionMiddle = [];
+    pcBtnBInteractionMiddle.id = "PcBtnAInteractionMiddle";
+    pcBtnBInteractionMiddle.push(
+      pcBtnBInteractionMiddle1,
+      pcBtnBInteractionMiddle2
+    );
+
+    let pcBtnBInteractionHigh1 = loadImage(
+      "img/" + charakterId + "/Poses/interact/2_high/pc/learn1.png"
+    );
+    let pcBtnBInteractionHigh2 = loadImage(
+      "img/" + charakterId + "/Poses/interact/2_high/pc/learn2.png"
+    );
+    let pcBtnBInteractionHigh = [];
+    pcBtnBInteractionHigh.id = "PcBtnBInteractionHigh";
+    pcBtnBInteractionHigh.push(pcBtnBInteractionHigh1, pcBtnBInteractionHigh2);
+
+    let pcBtnBInteractionVictory1 = loadImage(
+      "img/" + charakterId + "/Poses/interact/1_victory/pc/learn1.png"
+    );
+    let pcBtnBInteractionVictory2 = loadImage(
+      "img/" + charakterId + "/Poses/interact/1_victory/pc/learn2.png"
+    );
+    let pcBtnBInteractionVictory = [];
+    pcBtnBInteractionVictory.id = "PcBtnBInteractionVictory";
+    pcBtnBInteractionVictory.push(
+      pcBtnBInteractionVictory1,
+      pcBtnBInteractionVictory2
+    );
+
+    pcBtnBInteraction.push(
+      pcBtnBInteractionLowest,
+      pcBtnBInteractionLow,
+      pcBtnBInteractionMiddle,
+      pcBtnBInteractionHigh,
+      pcBtnBInteractionVictory
+    );
+  }
+
+  //<---------Bed Interaction------->
+  let bedInteractionVictory1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/1_victory/bed/sleep1.png"
+  );
+  let bedInteractionVictory2 = loadImage(
+    "img/" + charakterId + "/Poses/interact/1_victory/bed/sleep2.png"
+  );
+  let bedInteractionVictory = [];
+  bedInteractionVictory.id = "BedInteractionVictory";
+  bedInteractionVictory.push(bedInteractionVictory1, bedInteractionVictory2);
+
+  let bedInteractionHigh1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/2_high/bed/sleep1.png"
+  );
+  let bedInteractionHigh2 = loadImage(
+    "img/" + charakterId + "/Poses/interact/2_high/bed/sleep2.png"
+  );
+  let bedInteractionHigh = [];
+  bedInteractionHigh.id = "BedInteractionHigh";
+  bedInteractionHigh.push(bedInteractionHigh1, bedInteractionHigh2);
+
   let bedInteractionMiddle = [];
   bedInteractionMiddle.id = "BedInteractionMiddle";
-  bedInteractionMiddle.push(bedInteractionMiddle1, bedInteractionMiddle2);
-  bedInteraction.push(bedInteractionMiddle);
+  if (charakterId == "Chanti") {
+    bedInteractionMiddle.push(bedInteractionHigh1, bedInteractionHigh2);
+  }
+  if (charakterId == "Lena") {
+    bedInteractionMiddle.push(bedInteractionHigh1, bedInteractionHigh2);
+  }
+
+  let bedInteractionLow1 = loadImage(
+    "img/Lena/Poses/interact/4_low/bed/sleep1.png"
+  );
+  let bedInteractionLow2 = loadImage(
+    "img/Lena/Poses/interact/4_low/bed/sleep2.png"
+  );
+  let bedInteractionLow = [];
+  bedInteractionLow.id = "BedInteractionLow";
+  if (charakterId == "Chanti") {
+    bedInteractionLow.push(bedInteractionHigh1, bedInteractionHigh2);
+  }
+  if (charakterId == "Lena") {
+    bedInteractionLow.push(bedInteractionLow1, bedInteractionLow2);
+  }
+
+  let bedInteractionLowest1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/5_lowest/bed/sleep1.png"
+  );
+  let bedInteractionLowest2 = loadImage(
+    "img/" + charakterId + "/Poses/interact/5_lowest/bed/sleep2.png"
+  );
+  let bedInteractionLowest = [];
+  bedInteractionLowest.id = "BedInteractionLowest";
+  bedInteractionLowest.push(bedInteractionLowest1, bedInteractionLowest2);
+
+  bedInteraction.push(
+    bedInteractionLowest,
+    bedInteractionLow,
+    bedInteractionMiddle,
+    bedInteractionHigh,
+    bedInteractionVictory
+  );
 }
 window.preload = preload;
 
@@ -596,17 +776,20 @@ let fridge = new Kühlschrank(fridges, buttons, fridgeInteraction);
 let tv = new TV(tvs, buttons, tvBtnAInteraction, tvBtnBInteraction);
 let door = new Door(doors, buttons);
 let fenster = new Fenster(windows, buttons);
-let pc = new PC(pcs, buttons, pcInteraction);
+let pc = new PC(pcs, buttons, pcBtnAInteraction, pcBtnBInteraction);
 let bed = new Bett(beds, buttons, bedInteraction);
 
-let Sofa = new FrontScreen(frontElements);
+let frontElement = new FrontScreen(frontElements,tvBtnAInteraction,tvBtnBInteraction);
 let Person = new Charakter(stand, walk, Room.endScreen);
 let clock = new Time(1920 * 0.4 - 120, 5);
 
 let news = new Nachrichten(nachrichten);
 
+
+clock.countTime();
+
 function draw() {
-  // window.requestAnimationFrame(clock.countTime);
+  console.log(window.globalTime.start);
   if (!window.globalTime.news) {
     Room.display();
     fridge.display(Person.charakter.x, Person.charakter.y);
@@ -620,12 +803,12 @@ function draw() {
       Person.display();
     }
 
-    Sofa.display();
+    frontElement.display();
     clock.display();
 
     Room.move(Person.charakter);
 
-    Sofa.move(Room.screenMoving);
+    frontElement.move(Room.screenMoving);
     fridge.move(Room.screenMoving);
     tv.move(Room.screenMoving);
     door.move(Room.screenMoving);
@@ -637,6 +820,8 @@ function draw() {
   news.display();
 }
 window.draw = draw;
+
+ 
 
 function mouseClicked() {
   if (!window.activityAnimation && window.globalTime.start) {

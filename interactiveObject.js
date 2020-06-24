@@ -193,7 +193,6 @@ export default class InteractiveObject extends MainScreen {
     pop();
     this.counter++;
     
-
     if(this.counter==delay && this.interaction.A){
       this.interaction.A=false;
       window.activityAnimation=false;

@@ -38,6 +38,7 @@ export default class Nachrichten {
         }   
     }
 
+
     mouseClicked(){
        if(window.globalTime.news && window.globalTime.day<=5){
         if(this.count>=2){

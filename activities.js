@@ -251,7 +251,7 @@ export class Fenster extends InteractiveObject{
 }
 
 export class PC extends InteractiveObject{
-    constructor(pcs,Buttons,pcInteraction){
+    constructor(pcs,Buttons,pcBtnAInteraction,pcBtnBInteraction){
         super();
         this.x=1055;
         this.y=185;
@@ -262,7 +262,8 @@ export class PC extends InteractiveObject{
         this.Buttons=Buttons;
         this.btnScale=0.4;
 
-        this.pcInteraction=pcInteraction;
+        this.pcBtnAInteraction=pcBtnAInteraction;
+        this.pcBtnBInteraction=pcBtnBInteraction;
         this.animationScale=0.5;
     }
 
@@ -306,7 +307,11 @@ export class PC extends InteractiveObject{
         }
         if(this.interaction.A){
             this.updateAnimationPosition(100,100);
-            this.activityAnimation(this.pcInteraction,"PcInteractionMiddle",90);
+            this.activityAnimation(this.pcBtnAInteraction,this.activityId,90);
+        }
+        else if(this.interaction.B && window.charakterId=="Lena"){
+            this.updateAnimationPosition(100,100);
+            this.activityAnimation(this.pcBtnBInteraction,this.activityId,90);
         }
         else{
         let chair=this.pcs.find(x=>x.id==="Stuhl");
@@ -317,6 +322,7 @@ export class PC extends InteractiveObject{
     clickedA(){
         this.satisfactionRate = 1.6;
         this.exhaustionRate = 0.8;
+        this.updateInteraction("PcBtnA");
         this.updateParameter();
         this.updateAnimationA();
     }
@@ -324,7 +330,14 @@ export class PC extends InteractiveObject{
     clickedB(){
         this.satisfactionRate=1.2;
         this.updateParameter();
+        if(window.charakterId=="Chantal"){
+        this.updateInteraction("PcBtnA");   
         this.updateAnimationA();
+        }
+        if(window.charakterId=="Lena"){
+        this.updateInteraction("PcBtnB");   
+        this.updateAnimationB();
+        }
     } 
 }
 
@@ -377,15 +390,16 @@ export class Bett extends InteractiveObject{
 
     display(x){
         if(!window.globalTime.start && x>=this.x && !window.globalTime.news){
+            this.updateInteraction("Bed");
             this.updateAnimationA();
             this.updateAnimationPosition(-10,-54);
-            this.activityAnimation(this.bedInteraction,"BedInteractionMiddle",71,10);//counter muss an Zeit zum globalTime.news=true angepasst werden
+            this.activityAnimation(this.bedInteraction,this.activityId,71,10);//counter muss an Zeit zum globalTime.news=true angepasst werden
             window.globalTime.sleepAnimation=true;
            
         } 
         else if(this.interaction.A){
             this.updateAnimationPosition(-10,-54);
-            this.activityAnimation(this.bedInteraction,"BedInteractionMiddle",90);  
+            this.activityAnimation(this.bedInteraction,this.activityId,90);  
         }
         else{
         let bett = this.beds.find(x => x.id === "Bett");
@@ -401,12 +415,14 @@ export class Bett extends InteractiveObject{
     clickedA(){
         this.satisfactionRate = 1.6;
         this.exhaustionRate = 1.4;
+        this.updateInteraction("Bed");
         this.updateParameter();
         this.updateAnimationA();
     }
 
     clickedB(){
         this.satisfactionRate=1.2;
+        this.updateInteraction("Bed");
         this.updateParameter();
         this.updateAnimationA();
     } 
