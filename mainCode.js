@@ -728,7 +728,7 @@ function preload() {
 
   let bedInteractionMiddle = [];
   bedInteractionMiddle.id = "BedInteractionMiddle";
-  if (charakterId == "Chanti") {
+  if (charakterId == "Chantal") {
     bedInteractionMiddle.push(bedInteractionHigh1, bedInteractionHigh2);
   }
   if (charakterId == "Lena") {
@@ -743,7 +743,7 @@ function preload() {
   );
   let bedInteractionLow = [];
   bedInteractionLow.id = "BedInteractionLow";
-  if (charakterId == "Chanti") {
+  if (charakterId == "Chantal") {
     bedInteractionLow.push(bedInteractionHigh1, bedInteractionHigh2);
   }
   if (charakterId == "Lena") {
@@ -786,10 +786,12 @@ let clock = new Time(1920 * 0.4 - 120, 5);
 let news = new Nachrichten(nachrichten);
 
 
-clock.countTime();
+// clock.countTime;
+
 
 function draw() {
   console.log(window.globalTime.start);
+ 
   if (!window.globalTime.news) {
     Room.display();
     fridge.display(Person.charakter.x, Person.charakter.y);
