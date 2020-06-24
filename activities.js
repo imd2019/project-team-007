@@ -16,8 +16,7 @@ export class Kühlschrank extends InteractiveObject {
         this.btnScale=0.4;
         
         this.fridgeInteraction=fridgeInteraction;
-        this.satisfactionRate=1.1;
-        
+        this.satisfactionRate=0.7;
         
     }
 
@@ -51,7 +50,7 @@ export class Kühlschrank extends InteractiveObject {
         } 
         if(this.interaction.A){
             this.updateAnimationPosition(70,y-this.y-10);
-            this.activityAnimation(this.fridgeInteraction,this.activityId,90);    
+            this.activityAnimation(this.fridgeInteraction,90);    
         } 
     }
     
@@ -63,7 +62,7 @@ export class Kühlschrank extends InteractiveObject {
             console.log("u out of food");
             }
             else{this.moneyRate=1;}
-            this.satisfactionRate = 0.8;      
+            this.satisfactionRate = 0.6;      
         }
         this.use++;
         this.ration--;
@@ -134,23 +133,25 @@ export class TV extends InteractiveObject{
         }
         if(this.interaction.A){
             this.updateAnimationPosition(50,170);
-            this.activityAnimation(this.tvBtnAInteraction,"TvBtnAInteractionMiddle",90);
+            this.activityAnimation(this.tvBtnAInteraction,90);
         } 
         if(this.interaction.B){
             this.updateAnimationPosition(50,170);
-            this.activityAnimation(this.tvBtnBInteraction,"TvBtnBInteractionMiddle",90);
+            this.activityAnimation(this.tvBtnBInteraction,90);
         } 
     }
 
     clickedA(){
         this.satisfactionRate = 1.6;
         this.exhaustionRate = 0.8;
+        this.updateInteraction("TvBtnA");
         this.updateParameter();
         this.updateAnimationA();
     }
 
     clickedB(){
         this.satisfactionRate=1.2;
+        this.updateInteraction("TvBtnB");
         this.updateParameter();
         this.updateAnimationB();
     }  
@@ -393,13 +394,13 @@ export class Bett extends InteractiveObject{
             this.updateInteraction("Bed");
             this.updateAnimationA();
             this.updateAnimationPosition(-10,-54);
-            this.activityAnimation(this.bedInteraction,this.activityId,71,10);//counter muss an Zeit zum globalTime.news=true angepasst werden
+            this.activityAnimation(this.bedInteraction,71);//counter muss an Zeit zum globalTime.news=true angepasst werden
             window.globalTime.sleepAnimation=true;
            
         } 
         else if(this.interaction.A){
             this.updateAnimationPosition(-10,-54);
-            this.activityAnimation(this.bedInteraction,this.activityId,90);  
+            this.activityAnimation(this.bedInteraction,90);  
         }
         else{
         let bett = this.beds.find(x => x.id === "Bett");

@@ -134,16 +134,17 @@ export default class InteractiveObject extends MainScreen {
     
     this.satisfaction = ceil(this.satisfaction * this.satisfactionRate);
     window.globalSatisfaction = this.satisfaction;
-
+    
     this.exhaustion = ceil(this.exhaustion * this.exhaustionRate);
     window.globalExhaustion = this.exhaustion;
-
+    
     this.money = ceil(this.money * this.moneyRate);
     window.globalMoney = this.money;
     
     let activityBundle=[];
+    activityBundle.id=this.activityId;
     activityBundle.push(this.satisfactionRate,this.exhaustionRate,this.moneyRate);
-
+    
     if(window.globalTime.day==1){
       window.globalActivityArray.day1.push(activityBundle);
     }
@@ -177,8 +178,8 @@ export default class InteractiveObject extends MainScreen {
     this.interactY = this.y + offsetY;
   }
 
-  activityAnimation(activityArray,activityId,delay){
-    let activity=activityArray.find(x=>x.id===activityId);
+  activityAnimation(activityArray,delay){
+    let activity=activityArray.find(x=>x.id===this.activityId);
     this.index += this.animationSpeed;
     let animation = floor(this.index) % activity.length;
     push();

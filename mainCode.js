@@ -15,7 +15,7 @@ import { Door } from "./activities.js";
 import { Fenster } from "./activities.js";
 import { PC } from "./activities.js";
 import { Bett } from "./activities.js";
-
+import Finale from "./auswertung.js";
 
 //<------les variablos globalos------>
 let globalSatisfaction = 20;
@@ -23,20 +23,23 @@ let globalExhaustion = 30;
 let globalMoney = 100;
 
 window.globalSatisfaction = globalSatisfaction;
+
 window.globalExhaustion = globalExhaustion;
 window.globalMoney = globalMoney;
 
 let globalTime = {
   day: 1,
   start: true,
-  hour: 1,
+  hour: 23,
   minute: 0,
   news: false,
   sleepAnimation: false
 };
 window.globalTime = globalTime;
 
-let globalActivityArray = { day1: [], day2: [], day3: [], day4: [], day5: [] };
+window.activateCounter=true;
+
+let globalActivityArray = { day1: [], day2: [], day3: [], day4: [], day5: []};
 
 window.globalActivityArray = globalActivityArray;
 
@@ -528,13 +531,39 @@ function preload() {
     fridgeInteractionVictory
   );
 
-  //<----------Tv-Animation---------->
+  //<----------Tv-Interaction---------->
+//<----------TvBtnA---------->
+let tvBtnAInteractionLowest1 = loadImage(
+  "img/"+charakterId+"/Poses/interact/5_lowest/tv/tvBtnA1.png"
+);
+let tvBtnAInteractionLowest2 = loadImage(
+  "img/"+charakterId+"/Poses/interact/5_lowest/tv/tvBtnA2.png"
+);
+let tvBtnAInteractionLowest = [];
+tvBtnAInteractionLowest.id = "TvBtnAInteractionLowest";
+tvBtnAInteractionLowest.push(
+  tvBtnAInteractionLowest1,
+  tvBtnAInteractionLowest2
+);
+
+let tvBtnAInteractionLow1 = loadImage(
+  "img/"+charakterId+"/Poses/interact/4_low/tv/tvBtnA1.png"
+);
+let tvBtnAInteractionLow2 = loadImage(
+  "img/"+charakterId+"/Poses/interact/4_low/tv/tvBtnA2.png"
+);
+let tvBtnAInteractionLow = [];
+tvBtnAInteractionLow.id = "TvBtnAInteractionLow";
+tvBtnAInteractionLow.push(
+  tvBtnAInteractionLow1,
+  tvBtnAInteractionLow2
+);
 
   let tvBtnAInteractionMiddle1 = loadImage(
-    "img/Chantal/Poses/interact/3_middle/tv/rtl1.png"
+    "img/"+charakterId+"/Poses/interact/3_middle/tv/tvBtnA1.png"
   );
   let tvBtnAInteractionMiddle2 = loadImage(
-    "img/Chantal/Poses/interact/3_middle/tv/rtl2.png"
+    "img/"+charakterId+"/Poses/interact/3_middle/tv/tvBtnA2.png"
   );
   let tvBtnAInteractionMiddle = [];
   tvBtnAInteractionMiddle.id = "TvBtnAInteractionMiddle";
@@ -542,7 +571,31 @@ function preload() {
     tvBtnAInteractionMiddle1,
     tvBtnAInteractionMiddle2
   );
-  tvBtnAInteraction.push(tvBtnAInteractionMiddle);
+  
+  let tvBtnAInteractionHigh = [];
+  tvBtnAInteractionHigh.id = "TvBtnAInteractionHigh";
+  tvBtnAInteractionHigh.push(
+    tvBtnAInteractionMiddle1,
+    tvBtnAInteractionMiddle2
+  );
+ 
+  let tvBtnAInteractionVictory1 = loadImage(
+    "img/"+charakterId+"/Poses/interact/1_victory/tv/tvBtnA1.png"
+  );
+  let tvBtnAInteractionVictory2 = loadImage(
+    "img/"+charakterId+"/Poses/interact/1_victory/tv/tvBtnA2.png"
+  );
+  let tvBtnAInteractionVictory = [];
+  tvBtnAInteractionVictory.id = "TvBtnAInteractionVictory";
+  tvBtnAInteractionVictory.push(
+    tvBtnAInteractionVictory1,
+    tvBtnAInteractionVictory2
+  );
+
+  tvBtnAInteraction.push(tvBtnAInteractionLowest,tvBtnAInteractionLow,tvBtnAInteractionMiddle,tvBtnAInteractionHigh,tvBtnAInteractionVictory);
+
+
+ //<----------TvBtnB----------> 
   let tvBtnBInteractionMiddle1 = loadImage(
     "img/Chantal/Poses/interact/3_middle/tv/film1.png"
   );
@@ -783,6 +836,7 @@ let frontElement = new FrontScreen(frontElements,tvBtnAInteraction,tvBtnBInterac
 let Person = new Charakter(stand, walk, Room.endScreen);
 let clock = new Time(1920 * 0.4 - 120, 5);
 
+let final = new Finale();
 let news = new Nachrichten(nachrichten);
 
 
@@ -790,7 +844,7 @@ let news = new Nachrichten(nachrichten);
 
 
 function draw() {
-  console.log(window.globalTime.start);
+  console.log("globalTimeStart: ",window.globalTime.start);
  
   if (!window.globalTime.news) {
     Room.display();
@@ -835,8 +889,15 @@ function mouseClicked() {
   if (window.globalTime.news) {
     news.mouseClicked();
   }
-  console.log("Satisfaction: " + window.globalSatisfaction);
-  console.log("Exhaustion:" + window.globalExhaustion);
-  console.log("Money: " + window.globalMoney);
+  if(window.globalSatisfaction>100){
+  window.globalSatisfaction=100;
+  }
+  // console.log("Satisfaction: " + window.globalSatisfaction);
+  // console.log("Exhaustion:" + window.globalExhaustion);
+  // console.log("Money: " + window.globalMoney);
+  // console.log("day 1:", globalActivityArray.day1);
+
+  if(globalTime.day==3){
+  final.auswertung();}
 }
 window.mouseClicked = mouseClicked;
