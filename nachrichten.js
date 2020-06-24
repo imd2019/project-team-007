@@ -44,6 +44,7 @@ export default class Nachrichten {
        if(window.globalTime.news && window.globalTime.day<=5){
         if(this.count>=2){
             this.newsTimeEnd=true;
+            window.moveNextToBed=true;
             window.globalTime.hour=0;
             window.globalTime.minute=0;
             window.globalTime.news=false;

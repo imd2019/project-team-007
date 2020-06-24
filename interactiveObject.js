@@ -198,12 +198,14 @@ export default class InteractiveObject extends MainScreen {
       this.interaction.A=false;
       window.activityAnimation=false;
       this.counter=0;
+    
     }
     if(this.counter==delay && this.interaction.B){
       this.interaction.B=false;
       window.activityAnimation=false;
       this.counter=0;
     }
+    
   }
 
   mouseClicked() {

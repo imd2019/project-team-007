@@ -43,7 +43,7 @@ export default class Time {
       let delta = now - this.timeStart;
       // console.log("timestart", this.timeStart);
       if (delta >= 2500) {
-        console.log("delta: ", delta);
+        // console.log("delta: ", delta);
         if (window.globalTime.minute == 45) {
           window.globalTime.hour++;
           if (window.globalTime.hour == 2) {
@@ -83,10 +83,11 @@ export default class Time {
     fill("black");
     textSize(25);
     if (window.activateCounter) {
-      console.log("activateCounter: ", window.activateCounter);
+      // console.log("activateCounter: ", window.activateCounter);
       this.timeStart = Date.now();
-      window.activateCounter = false;
       this.countTime();
+      window.activateCounter = false;
+      
     }
     text(
       nf(window.globalTime.hour, 2) + " : " + nf(window.globalTime.minute, 2),

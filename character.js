@@ -23,8 +23,10 @@ export default class Charakter {
     // this.day=day;
   }
 
-  display() {
+  display(bedX) {
+    
     this.update();
+    
     if (keyIsDown(RIGHT_ARROW) || !window.globalTime.start) {
       this.direction.right = true;
       this.direction.left = false;
@@ -86,6 +88,13 @@ export default class Charakter {
       );
       pop();
     }
+    if(window.moveNextToBed){ 
+      this.direction.right=false;
+      this.direction.left=true;
+      console.log(this.direction);
+      this.charakter.x=bedX-5;
+      window.moveNextToBed=false;
+    }
   }
 
   update() {
@@ -117,6 +126,7 @@ export default class Charakter {
   }
 
   move(bedX) {
+    
     if (this.endScreen.Right && this.charakter.x <= 1920 * 0.4 - 45) {
       if (keyIsDown(RIGHT_ARROW) && !window.activityAnimation && window.globalTime.start) {
         this.charakter.x += this.speed;

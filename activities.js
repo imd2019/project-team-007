@@ -391,11 +391,12 @@ export class Bett extends InteractiveObject{
 
     display(x){
         if(!window.globalTime.start && x>=this.x && !window.globalTime.news){
+            window.globalTime.sleepAnimation=true;
             this.updateInteraction("Bed");
             this.updateAnimationA();
             this.updateAnimationPosition(-10,-54);
             this.activityAnimation(this.bedInteraction,71);//counter muss an Zeit zum globalTime.news=true angepasst werden
-            window.globalTime.sleepAnimation=true;
+            
            
         } 
         else if(this.interaction.A){
