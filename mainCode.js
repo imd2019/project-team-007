@@ -30,29 +30,28 @@ window.globalMoney = globalMoney;
 let globalTime = {
   day: 1,
   start: true,
-  hour: 20,
+  hour: 8,
   minute: 0,
-  Delta:2500,
+  Delta: 2500,
   news: false,
-  sleepAnimation: false
+  sleepAnimation: false,
 };
 window.globalTime = globalTime;
 
-window.darkenScreenRate= 5;//kann noch kein anderer Wert sein, da Probleme mit interaction.A
+window.darkenScreenRate = 5; //kann noch kein anderer Wert sein, da Probleme mit interaction.A
 
+window.activateCounter = true;
 
-window.activateCounter=true;
+window.moveNextToBed = false;
 
-window.moveNextToBed=false;
-
-let globalActivityArray = { day1: [], day2: [], day3: [], day4: [], day5: []};
+let globalActivityArray = { day1: [], day2: [], day3: [], day4: [], day5: [] };
 
 window.globalActivityArray = globalActivityArray;
 
 let activityAnimation = false;
 window.activityAnimation = activityAnimation;
 
-let charakterId = "Chantal"; //Chantal oder Lena
+let charakterId = "Lena"; //Chantal oder Lena
 window.charakterId = charakterId;
 
 let bgeMode = "noBGE"; //noBGE or withBGE
@@ -71,10 +70,10 @@ let tvBtnAInteraction = [];
 let tvBtnBInteraction = [];
 
 let doors = [];
-let doorInteraction=[];
+let doorInteraction = [];
 
 let windows = [];
-let windowInteraction=[];
+let windowInteraction = [];
 
 let pcs = [];
 let pcBtnAInteraction = [];
@@ -89,6 +88,7 @@ let walk = [];
 let buttons = [];
 
 let nachrichten = [];
+let windowAussicht=[];
 
 function preload() {
   // in den ids wird chanti rausgeschmissen damit man für lena nur image-Pfade ändern muss und nicht nochmal alle ids
@@ -254,7 +254,7 @@ function preload() {
     doorBtnB
   );
 
-  //<---------Nachrichten(ohne BGE)-------->
+  //<---------Nachrichten-------->
   let day1_1 = loadImage(
     "img/globals/news/" + bgeMode + "/newsscreen-day1-1.png"
   );
@@ -305,6 +305,43 @@ function preload() {
     day5_1,
     day5_2
   );
+
+  //<---------------Window-Ausblick----------->
+
+  let day1 = loadImage(
+    "img/globals/window/" + bgeMode + "/day1.png"
+  );
+  day1.id = "day1";
+  
+  let day2 = loadImage(
+    "img/globals/window/" + bgeMode + "/day2.png"
+  );
+  day2.id = "day2";
+  
+  let day3 = loadImage(
+    "img/globals/window/" + bgeMode + "/day3.png"
+  );
+  day3.id = "day3";
+  
+  let day4 = loadImage(
+    "img/globals/window/" + bgeMode + "/day4.png"
+  );
+  day4.id = "day4";
+  
+  let day5 = loadImage(
+    "img/globals/window/" + bgeMode + "/day5.png"
+  );
+  day5.id = "day5";
+  
+  windowAussicht.push(
+    day1,
+    day2,
+    day3,
+    day4,
+    day5
+  );
+
+
 
   //<-------Activity Animation ----->
 
@@ -538,38 +575,35 @@ function preload() {
   );
 
   //<----------Tv-Interaction---------->
-//<----------TvBtnA---------->
-let tvBtnAInteractionLowest1 = loadImage(
-  "img/"+charakterId+"/Poses/interact/5_lowest/tv/tvBtnA1.png"
-);
-let tvBtnAInteractionLowest2 = loadImage(
-  "img/"+charakterId+"/Poses/interact/5_lowest/tv/tvBtnA2.png"
-);
-let tvBtnAInteractionLowest = [];
-tvBtnAInteractionLowest.id = "TvBtnAInteractionLowest";
-tvBtnAInteractionLowest.push(
-  tvBtnAInteractionLowest1,
-  tvBtnAInteractionLowest2
-);
+  //<----------TvBtnA---------->
+  let tvBtnAInteractionLowest1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/5_lowest/tv/tvBtnA1.png"
+  );
+  let tvBtnAInteractionLowest2 = loadImage(
+    "img/" + charakterId + "/Poses/interact/5_lowest/tv/tvBtnA2.png"
+  );
+  let tvBtnAInteractionLowest = [];
+  tvBtnAInteractionLowest.id = "TvBtnAInteractionLowest";
+  tvBtnAInteractionLowest.push(
+    tvBtnAInteractionLowest1,
+    tvBtnAInteractionLowest2
+  );
 
-let tvBtnAInteractionLow1 = loadImage(
-  "img/"+charakterId+"/Poses/interact/4_low/tv/tvBtnA1.png"
-);
-let tvBtnAInteractionLow2 = loadImage(
-  "img/"+charakterId+"/Poses/interact/4_low/tv/tvBtnA2.png"
-);
-let tvBtnAInteractionLow = [];
-tvBtnAInteractionLow.id = "TvBtnAInteractionLow";
-tvBtnAInteractionLow.push(
-  tvBtnAInteractionLow1,
-  tvBtnAInteractionLow2
-);
+  let tvBtnAInteractionLow1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/4_low/tv/tvBtnA1.png"
+  );
+  let tvBtnAInteractionLow2 = loadImage(
+    "img/" + charakterId + "/Poses/interact/4_low/tv/tvBtnA2.png"
+  );
+  let tvBtnAInteractionLow = [];
+  tvBtnAInteractionLow.id = "TvBtnAInteractionLow";
+  tvBtnAInteractionLow.push(tvBtnAInteractionLow1, tvBtnAInteractionLow2);
 
   let tvBtnAInteractionMiddle1 = loadImage(
-    "img/"+charakterId+"/Poses/interact/3_middle/tv/tvBtnA1.png"
+    "img/" + charakterId + "/Poses/interact/3_middle/tv/tvBtnA1.png"
   );
   let tvBtnAInteractionMiddle2 = loadImage(
-    "img/"+charakterId+"/Poses/interact/3_middle/tv/tvBtnA2.png"
+    "img/" + charakterId + "/Poses/interact/3_middle/tv/tvBtnA2.png"
   );
   let tvBtnAInteractionMiddle = [];
   tvBtnAInteractionMiddle.id = "TvBtnAInteractionMiddle";
@@ -577,19 +611,19 @@ tvBtnAInteractionLow.push(
     tvBtnAInteractionMiddle1,
     tvBtnAInteractionMiddle2
   );
-  
+
   let tvBtnAInteractionHigh = [];
   tvBtnAInteractionHigh.id = "TvBtnAInteractionHigh";
   tvBtnAInteractionHigh.push(
     tvBtnAInteractionMiddle1,
     tvBtnAInteractionMiddle2
   );
- 
+
   let tvBtnAInteractionVictory1 = loadImage(
-    "img/"+charakterId+"/Poses/interact/1_victory/tv/tvBtnA1.png"
+    "img/" + charakterId + "/Poses/interact/1_victory/tv/tvBtnA1.png"
   );
   let tvBtnAInteractionVictory2 = loadImage(
-    "img/"+charakterId+"/Poses/interact/1_victory/tv/tvBtnA2.png"
+    "img/" + charakterId + "/Poses/interact/1_victory/tv/tvBtnA2.png"
   );
   let tvBtnAInteractionVictory = [];
   tvBtnAInteractionVictory.id = "TvBtnAInteractionVictory";
@@ -598,33 +632,176 @@ tvBtnAInteractionLow.push(
     tvBtnAInteractionVictory2
   );
 
-  tvBtnAInteraction.push(tvBtnAInteractionLowest,tvBtnAInteractionLow,tvBtnAInteractionMiddle,tvBtnAInteractionHigh,tvBtnAInteractionVictory);
+  tvBtnAInteraction.push(
+    tvBtnAInteractionLowest,
+    tvBtnAInteractionLow,
+    tvBtnAInteractionMiddle,
+    tvBtnAInteractionHigh,
+    tvBtnAInteractionVictory
+  );
 
+  //<----------TvBtnB---------->
+  let tvBtnBInteractionLowest1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/5_lowest/tv/tvBtnB1.png"
+  );
+  let tvBtnBInteractionLowest2 = loadImage(
+    "img/" + charakterId + "/Poses/interact/5_lowest/tv/tvBtnB2.png"
+  );
+  let tvBtnBInteractionLowest3 = loadImage(
+    "img/Chantal/Poses/interact/5_lowest/tv/tvBtnB3.png"
+  );
+  let tvBtnBInteractionLowest4 = loadImage(
+    "img/Chantal/Poses/interact/5_lowest/tv/tvBtnB4.png"
+  );
 
- //<----------TvBtnB----------> 
+  let tvBtnBInteractionLowest = [];
+  tvBtnBInteractionLowest.id = "TvBtnBInteractionLowest";
+  if (charakterId == "Chantal") {
+    tvBtnBInteractionLowest.push(
+      tvBtnBInteractionLowest1,
+      tvBtnBInteractionLowest2,
+      tvBtnBInteractionLowest1,
+      tvBtnBInteractionLowest2,
+      tvBtnBInteractionLowest3,
+      tvBtnBInteractionLowest4
+    );
+  }
+  if (charakterId == "Lena") {
+    tvBtnBInteractionLowest.push(
+      tvBtnBInteractionLowest1,
+      tvBtnBInteractionLowest2
+    );
+  }
+
+  let tvBtnBInteractionLow1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/4_low/tv/tvBtnB1.png"
+  );
+  let tvBtnBInteractionLow2 = loadImage(
+    "img/" + charakterId + "/Poses/interact/4_low/tv/tvBtnB2.png"
+  );
+  let tvBtnBInteractionLow3 = loadImage(
+    "img/Chantal/Poses/interact/4_low/tv/tvBtnB3.png"
+  );
+  let tvBtnBInteractionLow4 = loadImage(
+    "img/Chantal/Poses/interact/4_low/tv/tvBtnB4.png"
+  );
+
+  let tvBtnBInteractionLow = [];
+  tvBtnBInteractionLow.id = "TvBtnBInteractionLow";
+  if (charakterId == "Chantal") {
+    tvBtnBInteractionLow.push(
+      tvBtnBInteractionLow1,
+      tvBtnBInteractionLow2,
+      tvBtnBInteractionLow1,
+      tvBtnBInteractionLow2,
+      tvBtnBInteractionLow3,
+      tvBtnBInteractionLow4
+    );
+  }
+  if (charakterId == "Lena") {
+    tvBtnBInteractionLow.push(tvBtnBInteractionLow1, tvBtnBInteractionLow2);
+  }
+
   let tvBtnBInteractionMiddle1 = loadImage(
-    "img/Chantal/Poses/interact/3_middle/tv/film1.png"
+    "img/" + charakterId + "/Poses/interact/3_middle/tv/tvBtnB1.png"
   );
   let tvBtnBInteractionMiddle2 = loadImage(
-    "img/Chantal/Poses/interact/3_middle/tv/film2.png"
+    "img/" + charakterId + "/Poses/interact/3_middle/tv/tvBtnB2.png"
   );
   let tvBtnBInteractionMiddle3 = loadImage(
-    "img/Chantal/Poses/interact/3_middle/tv/film3.png"
+    "img/Chantal/Poses/interact/3_middle/tv/tvBtnB3.png"
   );
   let tvBtnBInteractionMiddle4 = loadImage(
-    "img/Chantal/Poses/interact/3_middle/tv/film4.png"
+    "img/Chantal/Poses/interact/3_middle/tv/tvBtnB4.png"
   );
+
   let tvBtnBInteractionMiddle = [];
   tvBtnBInteractionMiddle.id = "TvBtnBInteractionMiddle";
-  tvBtnBInteractionMiddle.push(
-    tvBtnBInteractionMiddle1,
-    tvBtnBInteractionMiddle2,
-    tvBtnBInteractionMiddle1,
-    tvBtnBInteractionMiddle2,
-    tvBtnBInteractionMiddle3,
-    tvBtnBInteractionMiddle4
+  if (charakterId == "Chantal") {
+    tvBtnBInteractionMiddle.push(
+      tvBtnBInteractionMiddle1,
+      tvBtnBInteractionMiddle2,
+      tvBtnBInteractionMiddle1,
+      tvBtnBInteractionMiddle2,
+      tvBtnBInteractionMiddle3,
+      tvBtnBInteractionMiddle4
+    );
+  }
+  if (charakterId == "Lena") {
+    tvBtnBInteractionMiddle.push(
+      tvBtnBInteractionMiddle1,
+      tvBtnBInteractionMiddle2
+    );
+  }
+
+  let tvBtnBInteractionHigh1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/2_high/tv/tvBtnB1.png"
   );
-  tvBtnBInteraction.push(tvBtnBInteractionMiddle);
+  let tvBtnBInteractionHigh2 = loadImage(
+    "img/" + charakterId + "/Poses/interact/2_high/tv/tvBtnB2.png"
+  );
+  let tvBtnBInteractionHigh3 = loadImage(
+    "img/Chantal/Poses/interact/2_high/tv/tvBtnB3.png"
+  );
+  let tvBtnBInteractionHigh4 = loadImage(
+    "img/Chantal/Poses/interact/2_high/tv/tvBtnB4.png"
+  );
+
+  let tvBtnBInteractionHigh = [];
+  tvBtnBInteractionHigh.id = "TvBtnBInteractionHigh";
+  if (charakterId == "Chantal") {
+    tvBtnBInteractionHigh.push(
+      tvBtnBInteractionHigh1,
+      tvBtnBInteractionHigh2,
+      tvBtnBInteractionHigh1,
+      tvBtnBInteractionHigh2,
+      tvBtnBInteractionHigh3,
+      tvBtnBInteractionHigh4
+    );
+  }
+  if (charakterId == "Lena") {
+    tvBtnBInteractionHigh.push(tvBtnBInteractionHigh, tvBtnBInteractionHigh);
+  }
+
+  let tvBtnBInteractionVictory1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/1_victory/tv/tvBtnB1.png"
+  );
+  let tvBtnBInteractionVictory2 = loadImage(
+    "img/" + charakterId + "/Poses/interact/1_victory/tv/tvBtnB2.png"
+  );
+  let tvBtnBInteractionVictory3 = loadImage(
+    "img/Chantal/Poses/interact/1_victory/tv/tvBtnB3.png"
+  );
+  let tvBtnBInteractionVictory4 = loadImage(
+    "img/Chantal/Poses/interact/1_victory/tv/tvBtnB4.png"
+  );
+
+  let tvBtnBInteractionVictory = [];
+  tvBtnBInteractionVictory.id = "TvBtnBInteractionVictory";
+  if (charakterId == "Chantal") {
+    tvBtnBInteractionVictory.push(
+      tvBtnBInteractionVictory1,
+      tvBtnBInteractionVictory2,
+      tvBtnBInteractionVictory1,
+      tvBtnBInteractionVictory2,
+      tvBtnBInteractionVictory3,
+      tvBtnBInteractionVictory4
+    );
+  }
+  if (charakterId == "Lena") {
+    tvBtnBInteractionVictory.push(
+      tvBtnBInteractionVictory1,
+      tvBtnBInteractionVictory2
+    );
+  }
+
+  tvBtnBInteraction.push(
+    tvBtnBInteractionLowest,
+    tvBtnBInteractionLow,
+    tvBtnBInteractionMiddle,
+    tvBtnBInteractionHigh,
+    tvBtnBInteractionVictory
+  );
 
   //<-----------PC-interaction--------->
   //<----------PcBtnA-------------->
@@ -695,6 +872,7 @@ tvBtnAInteractionLow.push(
     pcBtnAInteractionVictory
   );
 
+  //<----------PcBtnB----------->
   if (charakterId == "Lena") {
     let pcBtnBInteractionLowest1 = loadImage(
       "img/" + charakterId + "/Poses/interact/5_lowest/pc/learn1.png"
@@ -826,6 +1004,50 @@ tvBtnAInteractionLow.push(
     bedInteractionHigh,
     bedInteractionVictory
   );
+
+  //<--------------Window-Interaction----------->
+  let windowInteractionVictory1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/1_victory/window/window.png"
+  );
+  let windowInteractionVictory = [];
+  windowInteractionVictory.id = "WindowInteractionVictory";
+  windowInteractionVictory.push(windowInteractionVictory1);
+
+  let windowInteractionHigh1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/2_high/window/window.png"
+  );
+  let windowInteractionHigh = [];
+  windowInteractionHigh.id = "WindowInteractionHigh";
+  windowInteractionHigh.push(windowInteractionHigh1);
+
+  let windowInteractionMiddle1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/3_middle/window/window.png"
+  );
+  let windowInteractionMiddle = [];
+  windowInteractionMiddle.id = "WindowInteractionMiddle";
+  windowInteractionMiddle.push(windowInteractionMiddle1);
+
+  let windowInteractionLow1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/4_low/window/window.png"
+  );
+  let windowInteractionLow = [];
+  windowInteractionLow.id = "WindowInteractionLow";
+  windowInteractionLow.push(windowInteractionLow1);
+
+  let windowInteractionLowest1 = loadImage(
+    "img/" + charakterId + "/Poses/interact/5_lowest/window/window.png"
+  );
+  let windowInteractionLowest = [];
+  windowInteractionLowest.id = "WindowInteractionLowest";
+  windowInteractionLowest.push(windowInteractionLowest1);
+
+  windowInteraction.push(
+    windowInteractionLowest,
+    windowInteractionLow,
+    windowInteractionMiddle,
+    windowInteractionHigh,
+    windowInteractionVictory
+  );
 }
 window.preload = preload;
 
@@ -834,34 +1056,36 @@ let Room = new MainScreen(mainScreens);
 let fridge = new Kühlschrank(fridges, buttons, fridgeInteraction);
 let tv = new TV(tvs, buttons, tvBtnAInteraction, tvBtnBInteraction);
 let door = new Door(doors, buttons);
-let fenster = new Fenster(windows, buttons);
+let fenster = new Fenster(windows, buttons,windowInteraction,windowAussicht);
 let pc = new PC(pcs, buttons, pcBtnAInteraction, pcBtnBInteraction);
 let bed = new Bett(beds, buttons, bedInteraction);
 
-let frontElement = new FrontScreen(frontElements,tvBtnAInteraction,tvBtnBInteraction);
+let frontElement = new FrontScreen(
+  frontElements,
+  tvBtnAInteraction,
+  tvBtnBInteraction
+);
 let Person = new Charakter(stand, walk, Room.endScreen);
 let clock = new Time(1920 * 0.4 - 120, 5);
 
 let final = new Finale();
 let news = new Nachrichten(nachrichten);
 
-
 // clock.countTime;
 
-
 function draw() {
-  globalSatisfaction=Math.max(0,Math.min(100,globalSatisfaction));
-  globalExhaustion=Math.max(0,Math.min(100,globalExhaustion));
+  globalSatisfaction = Math.max(0, Math.min(100, globalSatisfaction));
+  globalExhaustion = Math.max(0, Math.min(100, globalExhaustion));
 
-  console.log(window.globalTime.sleepAnimation);
+  // console.log(window.globalTime.sleepAnimation);
   // console.log("globalTimeStart: ",window.globalTime.start);
-//  console.log("moveNextToBed: ",window.moveNextToBed);
+  //  console.log("moveNextToBed: ",window.moveNextToBed);
   if (!window.globalTime.news) {
     Room.display();
     fridge.display(Person.charakter.x, Person.charakter.y);
     tv.display(Person.charakter.x);
     door.display(Person.charakter.x);
-    fenster.display(Person.charakter.x);
+    fenster.display(Person.charakter.x,Person.charakter.y);
     pc.display(Person.charakter.x);
     bed.display(Person.charakter.x);
 
@@ -887,27 +1111,27 @@ function draw() {
 }
 window.draw = draw;
 
- 
-
 function mouseClicked() {
   if (!window.activityAnimation && window.globalTime.start) {
     tv.mouseClicked();
     fridge.mouseClicked();
     pc.mouseClicked();
     bed.mouseClicked();
+    fenster.mouseClicked();
   }
   if (window.globalTime.news) {
     news.mouseClicked();
   }
-  if(window.globalSatisfaction>100){
-  window.globalSatisfaction=100;
+  if (window.globalSatisfaction > 100) {
+    window.globalSatisfaction = 100;
   }
   // console.log("Satisfaction: " + window.globalSatisfaction);
   // console.log("Exhaustion:" + window.globalExhaustion);
   // console.log("Money: " + window.globalMoney);
   // console.log("day 1:", globalActivityArray.day1);
 
-  if(globalTime.day==3){
-  final.auswertung();}
+  if (globalTime.day == 3) {
+    final.auswertung();
+  }
 }
 window.mouseClicked = mouseClicked;

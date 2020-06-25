@@ -212,7 +212,7 @@ export class Door extends InteractiveObject{
 }
 
 export class Fenster extends InteractiveObject{
-    constructor(windows,Buttons){
+    constructor(windows,Buttons,windowInteraction,windowAussicht){
         super();
         this.x=310;
         this.y=55;
@@ -222,6 +222,9 @@ export class Fenster extends InteractiveObject{
 
         this.Buttons=Buttons;
         this.btnScale=0.4;
+
+        this.windowInteraction=windowInteraction;
+        this.windowAussicht=windowAussicht;
     }
 
     showButtons(btnBId){
@@ -240,14 +243,24 @@ export class Fenster extends InteractiveObject{
         }  
     }
 
-    display(x){
+    display(x,y){
         let fenster = this.windows.find(x => x.id === "Fenster");
         this.updateZone(fenster);
         this.updateBtnPosition(0,50,50);
         image(fenster,this.x,this.y,this.imgWidth,this.imgHeight);
         if(this.hoverTest(x)){
             this.showButtons("Fenster");
-        }    
+        } 
+        if(this.interaction.B){
+            this.updateAnimationPosition(90,y-this.y-20);
+            this.activityAnimation(this.windowInteraction,60);
+        }   
+    }
+
+    clickedB(){
+        this.updateInteraction("Window");
+        // this.updateParameter();
+        this.updateAnimationB();
     }
 }
 
@@ -308,11 +321,11 @@ export class PC extends InteractiveObject{
         }
         if(this.interaction.A){
             this.updateAnimationPosition(100,100);
-            this.activityAnimation(this.pcBtnAInteraction,90);
+            this.activityAnimation(this.pcBtnAInteraction,90,2);
         }
         else if(this.interaction.B && window.charakterId=="Lena"){
             this.updateAnimationPosition(100,100);
-            this.activityAnimation(this.pcBtnBInteraction,90);
+            this.activityAnimation(this.pcBtnBInteraction,90,2);
         }
         else{
         let chair=this.pcs.find(x=>x.id==="Stuhl");

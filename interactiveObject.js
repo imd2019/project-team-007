@@ -97,7 +97,7 @@ export default class InteractiveObject extends MainScreen {
   }
 
   hoverTest(x) {
-    if (x > this.x && x < this.zone && window.globalTime.start) {
+    if (x > this.x && x < this.zone && window.globalTime.start && !window.activityAnimation) {
       return true;
     } else {
       return false;

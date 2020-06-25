@@ -36,16 +36,14 @@ export default class Time {
 
   countTime() {
     if (window.globalTime.start) {
-      
       let now = Date.now();
       let delta = now - this.timeStart;
       if (delta >= window.globalTime.Delta) {
-        console.log("delta: ", delta);
+        // console.log("delta: ", delta);
         if (window.globalTime.minute == 45) {
           window.globalTime.hour++;
           if (window.globalTime.hour == 2) {
             window.globalTime.start = false;
-            // window.cancelAnimationFrame(this.requestId);
           }
           if (window.globalTime.hour == 24) {
             window.globalTime.hour = 0;
