@@ -195,7 +195,7 @@ export default class InteractiveObject extends MainScreen {
 
     this.counter++;
     let msDelay=(delay/30);
-    console.log(msDelay);
+    // console.log(msDelay);
     if(timeNeeded!=0){
       window.globalTime.Delta=((msDelay*1000)/((timeNeeded*60)/15));
       }

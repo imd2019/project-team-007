@@ -29,13 +29,15 @@ export default class Nachrichten {
     }
     
     dayStart(){
-        this.opacity -= 5;
+        this.opacity -= window.darkenScreenRate;
         fill(0, 0, 0, this.opacity);
         rect(0, 0, 1920, 1080);
-        if (this.opacity == 0) {
+        if (this.opacity <= 0) {
           window.globalTime.start = true;
+          window.globalTime.sleepAnimation = false;
           window.activateCounter=true;
           this.newsTimeEnd=false;
+          this.opacity=0;
         }   
     }
 

@@ -36,7 +36,7 @@ export default class Time {
 
   countTime() {
     if (window.globalTime.start) {
-      window.globalTime.sleepAnimation = false;
+      
       let now = Date.now();
       let delta = now - this.timeStart;
       if (delta >= window.globalTime.Delta) {
@@ -59,11 +59,11 @@ export default class Time {
   }
 
   dayEnd() {
-    this.opacity += 5;
+    this.opacity += window.darkenScreenRate;
     fill(0, 0, 0, this.opacity);
     rect(0, 0, 1920, 1080);
 
-    if (this.opacity == 355) {
+    if (this.opacity >= 355) {
       clear();
       window.globalTime.news = true;
       window.activityAnimation = false;

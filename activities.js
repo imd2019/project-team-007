@@ -393,13 +393,14 @@ export class Bett extends InteractiveObject{
         if(!window.globalTime.start && x>=this.x && !window.globalTime.news){
             window.globalTime.sleepAnimation=true;
             this.updateInteraction("Bed");
-            this.updateAnimationA();
+            this.updateAnimationA();// wenn darkenScreenRate eine Andere ist, spingt es nach Ablauf dieser animation auf interaction.A zurück
             this.updateAnimationPosition(-10,-54);
-            this.activityAnimation(this.bedInteraction,71,0);//counter muss an Zeit zum globalTime.news=true angepasst werden
+            this.activityAnimation(this.bedInteraction,355/window.darkenScreenRate,0);//counter muss an Zeit zum globalTime.news=true angepasst werden
             
            
         } 
         else if(this.interaction.A){
+            
             this.updateAnimationPosition(-10,-54);
             this.activityAnimation(this.bedInteraction,90,3);  
         }

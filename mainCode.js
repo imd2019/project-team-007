@@ -38,6 +38,9 @@ let globalTime = {
 };
 window.globalTime = globalTime;
 
+window.darkenScreenRate= 5;//kann noch kein anderer Wert sein, da Probleme mit interaction.A
+
+
 window.activateCounter=true;
 
 window.moveNextToBed=false;
@@ -847,6 +850,10 @@ let news = new Nachrichten(nachrichten);
 
 
 function draw() {
+  globalSatisfaction=Math.max(0,Math.min(100,globalSatisfaction));
+  globalExhaustion=Math.max(0,Math.min(100,globalExhaustion));
+
+  console.log(window.globalTime.sleepAnimation);
   // console.log("globalTimeStart: ",window.globalTime.start);
 //  console.log("moveNextToBed: ",window.moveNextToBed);
   if (!window.globalTime.news) {

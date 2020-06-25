@@ -13,28 +13,26 @@ this.money;
 
 }
 
-monthCalculate(){
-    this.satisfaction=window.globalSatisfaction;
+monthCalculate(day) {
+    let dayString="day"+day;
+    this.satisfaction = window.globalSatisfaction;
     this.exhaustion = window.globalExhaustion;
     this.money = window.globalMoney;
-        for(let i in window.globalActivityArray.day1){
-            this.satisfaction=ceil(this.satisfaction * window.globalActivityArray.day1[i][0]); 
-            console.log(this.satisfaction);
-            if(i > window.globalActivityArray.day1){
-                for(let j in window.globalActivityArray.day2){
-                    this.satisfaction=ceil(this.satisfaction * window.globalActivityArray.day1[i][0]); 
-                    console.log(this.satisfaction);
-                }
-            }
-        }
-        // window.globalSatisfaction = this.satisfaction;   
-}
-
-auswertung(){
-    for(let j = 0; j < 5; j++){
-        this.monthCalculate();
+    for (let i in window.globalActivityArray[dayString]) {
+      this.satisfaction = ceil(
+        this.satisfaction * window.globalActivityArray[dayString][i][0]
+      );
+      this.satisfaction=Math.max(0,Math.min(100,this.satisfaction));
+      window.globalSatisfaction=this.satisfaction;
     }
-    
-}
+  }
+
+  auswertung() {
+    for (let j =0;j<26;j++) {
+      // console.log("das modulo-etwas: ",1+j%2); 
+      this.monthCalculate(1+j%2);
+      console.log(this.satisfaction);
+    }
+  }
 
 }
