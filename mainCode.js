@@ -30,8 +30,9 @@ window.globalMoney = globalMoney;
 let globalTime = {
   day: 1,
   start: true,
-  hour: 1,
+  hour: 20,
   minute: 0,
+  Delta:2500,
   news: false,
   sleepAnimation: false
 };
@@ -847,7 +848,7 @@ let news = new Nachrichten(nachrichten);
 
 function draw() {
   // console.log("globalTimeStart: ",window.globalTime.start);
- console.log("moveNextToBed: ",window.moveNextToBed);
+//  console.log("moveNextToBed: ",window.moveNextToBed);
   if (!window.globalTime.news) {
     Room.display();
     fridge.display(Person.charakter.x, Person.charakter.y);

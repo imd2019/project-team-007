@@ -50,7 +50,7 @@ export class Kühlschrank extends InteractiveObject {
         } 
         if(this.interaction.A){
             this.updateAnimationPosition(70,y-this.y-10);
-            this.activityAnimation(this.fridgeInteraction,90);    
+            this.activityAnimation(this.fridgeInteraction,90,3);    
         } 
     }
     
@@ -133,11 +133,11 @@ export class TV extends InteractiveObject{
         }
         if(this.interaction.A){
             this.updateAnimationPosition(50,170);
-            this.activityAnimation(this.tvBtnAInteraction,90);
+            this.activityAnimation(this.tvBtnAInteraction,90,2);
         } 
         if(this.interaction.B){
             this.updateAnimationPosition(50,170);
-            this.activityAnimation(this.tvBtnBInteraction,90);
+            this.activityAnimation(this.tvBtnBInteraction,90,3);
         } 
     }
 
@@ -308,11 +308,11 @@ export class PC extends InteractiveObject{
         }
         if(this.interaction.A){
             this.updateAnimationPosition(100,100);
-            this.activityAnimation(this.pcBtnAInteraction,this.activityId,90);
+            this.activityAnimation(this.pcBtnAInteraction,90);
         }
         else if(this.interaction.B && window.charakterId=="Lena"){
             this.updateAnimationPosition(100,100);
-            this.activityAnimation(this.pcBtnBInteraction,this.activityId,90);
+            this.activityAnimation(this.pcBtnBInteraction,90);
         }
         else{
         let chair=this.pcs.find(x=>x.id==="Stuhl");
@@ -395,13 +395,13 @@ export class Bett extends InteractiveObject{
             this.updateInteraction("Bed");
             this.updateAnimationA();
             this.updateAnimationPosition(-10,-54);
-            this.activityAnimation(this.bedInteraction,71);//counter muss an Zeit zum globalTime.news=true angepasst werden
+            this.activityAnimation(this.bedInteraction,71,0);//counter muss an Zeit zum globalTime.news=true angepasst werden
             
            
         } 
         else if(this.interaction.A){
             this.updateAnimationPosition(-10,-54);
-            this.activityAnimation(this.bedInteraction,90);  
+            this.activityAnimation(this.bedInteraction,90,3);  
         }
         else{
         let bett = this.beds.find(x => x.id === "Bett");

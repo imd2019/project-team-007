@@ -35,15 +35,12 @@ export default class Time {
   // }
 
   countTime() {
-    // var self = this
-
     if (window.globalTime.start) {
       window.globalTime.sleepAnimation = false;
       let now = Date.now();
       let delta = now - this.timeStart;
-      // console.log("timestart", this.timeStart);
-      if (delta >= 2500) {
-        // console.log("delta: ", delta);
+      if (delta >= window.globalTime.Delta) {
+        console.log("delta: ", delta);
         if (window.globalTime.minute == 45) {
           window.globalTime.hour++;
           if (window.globalTime.hour == 2) {

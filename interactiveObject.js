@@ -178,7 +178,7 @@ export default class InteractiveObject extends MainScreen {
     this.interactY = this.y + offsetY;
   }
 
-  activityAnimation(activityArray,delay){
+  activityAnimation(activityArray,delay,timeNeeded){
     let activity=activityArray.find(x=>x.id===this.activityId);
     this.index += this.animationSpeed;
     let animation = floor(this.index) % activity.length;
@@ -192,17 +192,24 @@ export default class InteractiveObject extends MainScreen {
       activity[animation].height * this.animationScale
     );
     pop();
+
     this.counter++;
-    
+    let msDelay=(delay/30);
+    console.log(msDelay);
+    if(timeNeeded!=0){
+      window.globalTime.Delta=((msDelay*1000)/((timeNeeded*60)/15));
+      }
     if(this.counter==delay && this.interaction.A){
       this.interaction.A=false;
       window.activityAnimation=false;
+      window.globalTime.Delta=2500;
       this.counter=0;
     
     }
     if(this.counter==delay && this.interaction.B){
       this.interaction.B=false;
       window.activityAnimation=false;
+      window.globalTime.Delta=2500;
       this.counter=0;
     }
     
