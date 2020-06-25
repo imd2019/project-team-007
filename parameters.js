@@ -38,12 +38,12 @@ export default class Time {
     // var self = this
 
     if (window.globalTime.start) {
-      
+      window.globalTime.sleepAnimation = false;
       let now = Date.now();
       let delta = now - this.timeStart;
       // console.log("timestart", this.timeStart);
-      if (delta >= window.globalTime.Delta) {
-        console.log("delta: ", delta);
+      if (delta >= 2500) {
+        // console.log("delta: ", delta);
         if (window.globalTime.minute == 45) {
           window.globalTime.hour++;
           if (window.globalTime.hour == 2) {
@@ -62,16 +62,16 @@ export default class Time {
   }
 
   dayEnd() {
-    this.opacity += window.darkenScreenRate;
+    this.opacity += 5;
     fill(0, 0, 0, this.opacity);
     rect(0, 0, 1920, 1080);
 
     if (this.opacity == 355) {
       clear();
       window.globalTime.news = true;
-    
+      window.activityAnimation = false;
       this.opacity = 0;
-      // window.globalTime.sleepAnimation = false;
+      window.globalTime.sleepAnimation = false;
       window.globalTime.day++;
       console.log(window.globalTime.day);
     }

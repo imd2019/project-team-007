@@ -32,14 +32,10 @@ let globalTime = {
   start: true,
   hour: 1,
   minute: 0,
-  Delta:2500,
   news: false,
   sleepAnimation: false
 };
 window.globalTime = globalTime;
-
-window.darkenScreenRate= 5;
-window.darkenScreenTime=355/window.darkenScreenRate;
 
 window.activateCounter=true;
 
@@ -850,14 +846,8 @@ let news = new Nachrichten(nachrichten);
 
 
 function draw() {
-  console.log(window.darkenScreenTime);
-  console.log("globalTimeStart: ",window.globalTime.start);
-  console.log("sleepAnimation: ",window.globalTime.sleepAnimation);
-  console.log("activityAnimation: ",window.activityAnimation);
-  if(globalTime.news || window.globalTime.start){
-    window.globalTime.sleepAnimation=false;
-  }
-  
+  // console.log("globalTimeStart: ",window.globalTime.start);
+ console.log("moveNextToBed: ",window.moveNextToBed);
   if (!window.globalTime.news) {
     Room.display();
     fridge.display(Person.charakter.x, Person.charakter.y);
@@ -867,7 +857,7 @@ function draw() {
     pc.display(Person.charakter.x);
     bed.display(Person.charakter.x);
 
-    if (!window.activityAnimation && !window.globalTime.sleepAnimation) {
+    if (!window.activityAnimation) {
       Person.display(bed.x);
     }
 
@@ -875,7 +865,7 @@ function draw() {
     clock.display();
 
     Room.move(Person.charakter);
-    Person.move(bed.x);
+
     frontElement.move(Room.screenMoving);
     fridge.move(Room.screenMoving);
     tv.move(Room.screenMoving);
@@ -884,10 +874,8 @@ function draw() {
     pc.move(Room.screenMoving);
     bed.move(Room.screenMoving);
   }
-  
+  Person.move(bed.x);
   news.display();
-
-  globalSatisfaction=Math.max(0,Math.min(100,globalSatisfaction));
 }
 window.draw = draw;
 
@@ -903,12 +891,13 @@ function mouseClicked() {
   if (window.globalTime.news) {
     news.mouseClicked();
   }
-  
+  if(window.globalSatisfaction>100){
+  window.globalSatisfaction=100;
+  }
   // console.log("Satisfaction: " + window.globalSatisfaction);
   // console.log("Exhaustion:" + window.globalExhaustion);
   // console.log("Money: " + window.globalMoney);
   // console.log("day 1:", globalActivityArray.day1);
-  // console.log("day 2: ",window.globalActivityArray.day2);
 
   if(globalTime.day==3){
   final.auswertung();}

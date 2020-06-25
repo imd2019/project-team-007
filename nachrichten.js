@@ -29,14 +29,13 @@ export default class Nachrichten {
     }
     
     dayStart(){
-        this.opacity -= window.darkenScreenRate;
+        this.opacity -= 5;
         fill(0, 0, 0, this.opacity);
         rect(0, 0, 1920, 1080);
         if (this.opacity == 0) {
           window.globalTime.start = true;
           window.activateCounter=true;
           this.newsTimeEnd=false;
-          window.moveNextToBed=true;
         }   
     }
 
@@ -45,13 +44,14 @@ export default class Nachrichten {
        if(window.globalTime.news && window.globalTime.day<=5){
         if(this.count>=2){
             this.newsTimeEnd=true;
-            
-            window.globalTime.hour=8;
+            window.moveNextToBed=true;
+            window.globalTime.hour=0;
             window.globalTime.minute=0;
             window.globalTime.news=false;
             this.count=1;
             this.sheet=1;
             this.opacity = 355;
+
         }
         else{
         this.sheet=2;
