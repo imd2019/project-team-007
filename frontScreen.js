@@ -1,18 +1,27 @@
-import MainScreen from "./MainScreen.js";
+import InteractiveObject from "./interactiveObject.js";
 
-export default class FrontScreen extends MainScreen{
-    constructor(x,y,frontRoom){
-        super(x,y);
-        this.x=x;
-        this.y=y; 
+export default class FrontScreen extends InteractiveObject{
+    constructor(frontRoom,tvBtnAInteraction,tvBtnBInteraction){
+        super();
+        this.x=425;
+        this.y=310; 
         this.frontRoom=frontRoom;
+
+        this.tvBtnAInteraction=tvBtnAInteraction;
+        this.tvBtnBInteraction=tvBtnBInteraction;
+
+        this.objectScale=0.45;
 
         this.speed=5;
     }
 
     display(){
-        image(this.frontRoom[0],this.x,this.y,this.frontRoom[0].width*0.45,this.frontRoom[0].height*0.45);
-        // console.log("frontElement:",this.screenMoving);
+      if(window.charakterId=="Lena"){
+        
+      }
+      let frontElement=this.frontRoom.find(x=>x.id==="FrontElement");
+      image(frontElement,this.x,this.y,frontElement.width*this.objectScale,frontElement.height*this.objectScale); 
+        
     }
 
     move(screenMoving){   
