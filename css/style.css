@@ -1,13 +1,40 @@
-/* body{
-    margin-left: auto;
-    margin-right: auto;
-} */
+*  {
+    margin: 0;
+    padding: 0;
+}
 
 .p5Canvas{
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
+    height: auto !important; /* important überschreibt element style, nur im notfall benutzen ;)  */
+    width: 70% !important;
+    position: absolute;
+    opacity: 1;
+    margin: 200px 15vw 0 15vw;
+}
 
+section {
+    display: block;
+    opacity: 0;
+    display: none;
+}
+
+body.home section.home {
+    opacity: 1;
+}
+
+body.about section.about {
+    opacity: 1;
+}
+
+body.character section.character {
+    opacity: 1;
+}
+
+body.information section.information {
+    opacity: 1;
+}
+
+.navigation {
+    width: 100vw;
+    height: 150px;
+    position: fixed;
 }
