@@ -43,7 +43,7 @@ export default class InteractiveObject extends MainScreen {
 
     this.satisfactionRate = 1;
     this.exhaustionRate = 1;
-    this.moneyRate = 1;
+    this.moneyRate = 0;
     
     this.activityId;
     this.interactX=interactX;
@@ -57,6 +57,8 @@ export default class InteractiveObject extends MainScreen {
     this.animationSpeed=0.2;
 
     this.counter=0;
+
+    this.btnShowActive=false;
 
     
   }
@@ -88,7 +90,7 @@ export default class InteractiveObject extends MainScreen {
       x > btnX &&
       x < btnX + btn.width*this.btnScale &&
       y > btnY &&
-      y < btnY + btn.height*this.btnScale
+      y < btnY + btn.height*this.btnScale && this.btnShowActive
     ) {
       return true;
     } else {
@@ -98,9 +100,13 @@ export default class InteractiveObject extends MainScreen {
 
   hoverTest(x) {
     if (x > this.x && x < this.zone && window.globalTime.start && !window.activityAnimation) {
+      this.btnShowActive=true;
       return true;
+      
     } else {
+      this.btnShowActive=false;
       return false;
+      
     }
   }
   
@@ -130,7 +136,7 @@ export default class InteractiveObject extends MainScreen {
   updateParameter() {
     this.satisfaction = window.globalSatisfaction;
     this.exhaustion = window.globalExhaustion;
-    this.money = window.globalMoney;
+    this.money = window.globalDailyBudget;
     
     this.satisfaction = ceil(this.satisfaction * this.satisfactionRate);
     window.globalSatisfaction = this.satisfaction;
@@ -138,12 +144,19 @@ export default class InteractiveObject extends MainScreen {
     this.exhaustion = ceil(this.exhaustion * this.exhaustionRate);
     window.globalExhaustion = this.exhaustion;
     
-    this.money = ceil(this.money * this.moneyRate);
-    window.globalMoney = this.money;
-    
+    this.money = this.money + this.moneyRate;
+    window.globalDailyBudget = this.money;
+  }
+
+  getActivityBundle(activityName){
     let activityBundle=[];
-    activityBundle.id=this.activityId;
+    activityBundle.id=activityName;
     activityBundle.push(this.satisfactionRate,this.exhaustionRate,this.moneyRate);
+
+    if(this.moneyRate!=0){
+      let billBundle=[activityName,this.moneyRate];
+      window.moneyBill.push(billBundle);
+    }
     
     if(window.globalTime.day==1){
       window.globalActivityArray.day1.push(activityBundle);
@@ -160,7 +173,6 @@ export default class InteractiveObject extends MainScreen {
     if(window.globalTime.day==5){
       window.globalActivityArray.day5.push(activityBundle);
     }
-
   }
 
   updateAnimationA(){
@@ -225,3 +237,4 @@ export default class InteractiveObject extends MainScreen {
   }
 
 }
+ 

@@ -9,7 +9,8 @@ import FrontScreen from "./frontScreen.js";
 import Nachrichten from "./nachrichten.js";
 import Charakter from "./character.js";
 import { Kühlschrank } from "./activities.js";
-import Time from "./parameters.js";
+import Time from "./time.js";
+import Bon from "./bon.js";
 import { TV } from "./activities.js";
 import { Door } from "./activities.js";
 import { Fenster } from "./activities.js";
@@ -20,17 +21,22 @@ import Finale from "./auswertung.js";
 //<------les variablos globalos------>
 let globalSatisfaction = 20;
 let globalExhaustion = 30;
-let globalMoney = 100;
+let globalMoney=0;
+// let globalMoneyDay=globalMoneyMonth/30;
 
 window.globalSatisfaction = globalSatisfaction;
-
 window.globalExhaustion = globalExhaustion;
 window.globalMoney = globalMoney;
+
+window.moneyBill=[["Minijob",450],["Bafög",400],["Miete",-370],["Versicherung",-103],["Essen (3 Rationen)",-15],["Studium",-40],["Abos",-40],["Handyvertrag",-15],["Freizeit",-40]];
+window.globalDailyBudget=0;
+window.globalInitialDailyBudget=0;
+
 
 let globalTime = {
   day: 1,
   start: true,
-  hour: 8,
+  hour: 23,
   minute: 0,
   Delta: 2500,
   news: false,
@@ -1066,7 +1072,9 @@ let frontElement = new FrontScreen(
   tvBtnBInteraction
 );
 let Person = new Charakter(stand, walk, Room.endScreen);
+
 let clock = new Time(1920 * 0.4 - 120, 5);
+let bon = new Bon();
 
 let final = new Finale();
 let news = new Nachrichten(nachrichten);
@@ -1076,6 +1084,9 @@ let news = new Nachrichten(nachrichten);
 function draw() {
   globalSatisfaction = Math.max(0, Math.min(100, globalSatisfaction));
   globalExhaustion = Math.max(0, Math.min(100, globalExhaustion));
+
+  // console.log("day1 :",window.globalActivityArray.day1);
+  // console.log("day2 :",window.globalActivityArray.day2);
 
   // console.log(window.globalTime.sleepAnimation);
   // console.log("globalTimeStart: ",window.globalTime.start);
@@ -1094,7 +1105,9 @@ function draw() {
     }
 
     frontElement.display();
+    bon.display();
     clock.display();
+    
 
     Room.move(Person.charakter);
 
@@ -1112,19 +1125,20 @@ function draw() {
 window.draw = draw;
 
 function mouseClicked() {
-  if (!window.activityAnimation && window.globalTime.start) {
+  if (window.globalTime.start) {
+    if(!window.activityAnimation){
     tv.mouseClicked();
     fridge.mouseClicked();
     pc.mouseClicked();
     bed.mouseClicked();
     fenster.mouseClicked();
   }
+    bon.mouseClicked();
+  }
   if (window.globalTime.news) {
     news.mouseClicked();
   }
-  if (window.globalSatisfaction > 100) {
-    window.globalSatisfaction = 100;
-  }
+  
   // console.log("Satisfaction: " + window.globalSatisfaction);
   // console.log("Exhaustion:" + window.globalExhaustion);
   // console.log("Money: " + window.globalMoney);
