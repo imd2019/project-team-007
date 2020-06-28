@@ -50,7 +50,7 @@ export class Kühlschrank extends InteractiveObject {
         } 
         if(this.interaction.A){
             this.updateAnimationPosition(70,y-this.y-10);
-            this.activityAnimation(this.fridgeInteraction,90,3);    
+            this.activityAnimation(this.fridgeInteraction,90,0.75);    
         } 
     }
     
@@ -159,6 +159,7 @@ export class TV extends InteractiveObject{
 
     clickedB(){
         this.satisfactionRate=1.2;
+        this.moneyRate=-15;//<-------------------------umbedingt beachten, sonst werden Werte von anderer Aktion genommen!!!
         this.updateInteraction("TvBtnB");
         this.updateParameter();
         if(window.charakterId=="Chantal"){

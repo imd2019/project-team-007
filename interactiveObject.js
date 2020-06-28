@@ -155,6 +155,7 @@ export default class InteractiveObject extends MainScreen {
 
     if(this.moneyRate!=0){
       let billBundle=[activityName,this.moneyRate];
+      
       window.moneyBill.push(billBundle);
     }
     

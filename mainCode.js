@@ -28,7 +28,7 @@ window.globalSatisfaction = globalSatisfaction;
 window.globalExhaustion = globalExhaustion;
 window.globalMoney = globalMoney;
 
-window.moneyBill=[["Minijob",450],["Bafög",400],["Miete",-370],["Versicherung",-103],["Essen (3 Rationen)",-15],["Studium",-40],["Abos",-40],["Handyvertrag",-15],["Freizeit",-40]];
+window.moneyBill=[["Minijob",450],["Bafög",400],["Miete",-370],["Versicherung",-103],["Essen",-15],["Studium",-40],["Abos",-40],["Handyvertrag",-15],["Freizeit",-40]];
 window.globalDailyBudget=0;
 window.globalInitialDailyBudget=0;
 
@@ -36,7 +36,7 @@ window.globalInitialDailyBudget=0;
 let globalTime = {
   day: 1,
   start: true,
-  hour: 23,
+  hour: 12,
   minute: 0,
   Delta: 2500,
   news: false,
