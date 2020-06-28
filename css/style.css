@@ -96,6 +96,10 @@ section {
     margin: 200px 5vw 0 5vw;
 }
 
+section.information {
+    margin: 300px 5vw 0 5vw;
+}
+
 body.home section.home {
     opacity: 1;
     display: block;
@@ -109,7 +113,7 @@ body.home .p5Canvas {
 body.about section.about {
     opacity: 1;
     display: block;
-    margin: 300px 5vw 0 5vw;
+    margin: 200px 5vw 0 5vw;
 }
 
 body.character section.character {
@@ -121,7 +125,7 @@ body.thanks section.thanks {
     opacity: 1;
     display: block;
     text-align: center;
-    margin: 350px 5vw 0 5vw;
+    margin: 200px 5vw 0 5vw;
 }
 
 body.info section.information {
@@ -195,6 +199,14 @@ body.info section.information {
     background-color: #ffbc08;
     position:absolute;
     z-index: 0;
+}
+
+.informationNav:hover .square,
+.homeNav:hover .square ,
+.characterNav:hover .square,
+.aboutNav:hover .square,
+.thanksNav:hover .square {
+    background-color: #00b7d9;
 }
 
 .smalls > div:hover {
@@ -281,11 +293,20 @@ body.info section.information {
     -o-transform: rotate(0deg);
 }
 
+.team {
+    position: absolute;
+    top: 57vh;
+    left: 13vw;
+    background-image: url(../img/Website/Team.png);
+    height: 30vh;
+    width: 60vw;
+}
+
 /*********  About **********/
 
 .elli {
     position: absolute;
-    top: 22vh;
+    top: 37vh;
     left: -10vw;
     background-image: url(../img/Website/Elli.png);
     height: 60vh;
@@ -327,7 +348,7 @@ body.info section.information {
 
 .nesrin {
     position: absolute;
-    top: 24vh;
+    top: 36vh;
     right: -12vw;
     background-image: url(../img/Website/Nesrin.png);
     height: 60vh;
@@ -431,4 +452,33 @@ section.character { margin: 300px 5vw 0 5vw;}
     left: -74vw;
     position: absolute;
     top: 40vh;
+}
+
+.moneyMoney {     
+    background-image: url(../img/Website/moneyMoney.svg);
+    height: 58vh;
+    width: 60vw;
+    left: -9vw;
+    position: absolute;
+    top: 0vh;
+}
+
+.gewinner {     
+    background-image: url(../img/Website/Modell.svg);
+    height: 97vh;
+    width: 38vw;
+    left: 3vw;
+    position: absolute;
+    top: -6vh;
+}
+
+section.information .right .imageContent {
+    height: 51vh;
+}
+
+section.information .left .imageContent {
+    width: 46vw;
+    height: 85vh;
+    right: -7vw;
+    top: 17vh;
 }
