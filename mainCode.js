@@ -36,7 +36,7 @@ window.globalInitialDailyBudget=0;
 let globalTime = {
   day: 1,
   start: true,
-  hour: 12,
+  hour: 1,
   minute: 0,
   Delta: 2500,
   news: false,
@@ -60,7 +60,7 @@ window.activityAnimation = activityAnimation;
 let charakterId = "Chantal"; //Chantal oder Lena
 window.charakterId = charakterId;
 
-let bgeMode = "noBGE"; //noBGE or withBGE
+let bgeMode = "withBGE"; //noBGE or withBGE
 window.bgeMode = bgeMode;
 
 //<--------------->
@@ -1103,8 +1103,10 @@ function draw() {
     if (!window.activityAnimation) {
       Person.display(bed.x);
     }
-
+    
+    if(!fenster.interaction.B){
     frontElement.display();
+    }
     bon.display();
     clock.display();
     
@@ -1132,13 +1134,13 @@ function mouseClicked() {
     pc.mouseClicked();
     bed.mouseClicked();
     fenster.mouseClicked();
-  }
+    }
     bon.mouseClicked();
   }
   if (window.globalTime.news) {
     news.mouseClicked();
   }
-  
+  fenster.clickedWindow();
   // console.log("Satisfaction: " + window.globalSatisfaction);
   // console.log("Exhaustion:" + window.globalExhaustion);
   // console.log("Money: " + window.globalMoney);

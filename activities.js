@@ -240,6 +240,11 @@ export class Fenster extends InteractiveObject{
 
         this.windowInteraction=windowInteraction;
         this.windowAussicht=windowAussicht;
+
+        this.opacity=0;
+        this.counterOpacity=0;
+        this.aussichtOn=false;
+        this.ausssichtEnd=300-26;
     }
 
     showButtons(btnBId){
@@ -259,6 +264,9 @@ export class Fenster extends InteractiveObject{
     }
 
     display(x,y){
+        // console.log(this.opacity);
+        console.log("aussichtEnd: ",this.ausssichtEnd);
+        console.log("counterOpacity ",this.counterOpacity);
         let fenster = this.windows.find(x => x.id === "Fenster");
         this.updateZone(fenster);
         this.updateBtnPosition(0,50,50);
@@ -268,14 +276,43 @@ export class Fenster extends InteractiveObject{
         } 
         if(this.interaction.B){
             this.updateAnimationPosition(90,y-this.y-20);
-            this.activityAnimation(this.windowInteraction,60);
+            this.activityAnimation(this.windowInteraction,this.ausssichtEnd+26);
+            let aussicht=this.windowAussicht.find(x=>x.id==="day"+window.globalTime.day);
+            push();
+            tint(255,this.opacity);
+            if(this.counterOpacity<=26){
+              this.opacity+=10;  
+            }
+            this.counterOpacity++;
+            if(this.opacity>=260){
+                this.opacity=260;
+                this.aussichtOn=true;
+
+            }
+            if(this.counterOpacity>=this.ausssichtEnd){
+                this.opacity-=10;
+                this.aussichtOn=false;
+            }
+            if(this.counterOpacity==30*10 || this.counterOpacity==this.ausssichtEnd+26){
+                this.opacity=0;
+                this.counterOpacity=0;
+                this.ausssichtEnd=300-26;
+            }
+            image(aussicht,0,0,aussicht.width*0.4,aussicht.height*0.4);
+            pop();
         }   
     }
-
+    
     clickedB(){
         this.updateInteraction("Window");
-        // this.updateParameter();
         this.updateAnimationB();
+    }
+    
+    clickedWindow(){
+        if(this.aussichtOn){
+            console.log("penis");
+            this.ausssichtEnd=this.counterOpacity;
+        }
     }
 }
 
