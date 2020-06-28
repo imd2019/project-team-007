@@ -1,40 +1,434 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
+
+@font-face { 
+    font-family: "Bakso"; 
+    src: url("../img/Website/fonts/BaksoSapi.otf"); 
+    }
+
+
+    body::-webkit-scrollbar,
+    html::-webkit-scrollbar {
+    display: none;
+  }
+
+  body,html {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+::-moz-selection { 
+    color:#ffbc08; 
+    background:#000; 
+    text-shadow: none; 
+ }
+ 
+ ::selection { 
+    color:#ffbc08; 
+    background:#000; 
+    text-shadow: none; 
+ }
+
+
 *  {
     margin: 0;
     padding: 0;
+    position: relative;
+    
+}
+
+h1 {
+    font-family: Bakso;
+    font-size: 4vw;
+    line-height: 0.6;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+p {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+h1 > span {
+    font-size: 2.5vw;
+}
+
+.headline { display: inline-block;}
+
+.headline .square {
+    height: 3vh;
+    width: 16vw;
+    left: -10px;
+    top: 2.5vh;
+    transform: rotate(-4deg);
+}
+
+.content {
+    width: 40vw;
+    text-align: center;
+    margin: 0 auto;
+}
+
+html, body {
+    position: relative;
+    overflow-x: hidden;
+    font-family: 'Nunito', sans-serif;
+    height: 100%;
+}
+
+body.about {
+    overflow: hidden;
 }
 
 .p5Canvas{
     height: auto !important; /* important überschreibt element style, nur im notfall benutzen ;)  */
     width: 70% !important;
     position: absolute;
-    opacity: 1;
-    margin: 200px 15vw 0 15vw;
+    opacity: 0;
+    margin: 50px 15vw 0 15vw;
+    display: none;
 }
 
 section {
-    display: block;
     opacity: 0;
     display: none;
+    width: 90vw;
+    margin: 200px 5vw 0 5vw;
 }
 
 body.home section.home {
     opacity: 1;
+    display: block;
+}
+
+body.home .p5Canvas {
+    opacity: 1;
+    display: block;
 }
 
 body.about section.about {
     opacity: 1;
+    display: block;
+    margin: 300px 5vw 0 5vw;
 }
 
 body.character section.character {
     opacity: 1;
+    display: block;
 }
 
-body.information section.information {
+body.thanks section.thanks {
     opacity: 1;
+    display: block;
+    text-align: center;
+    margin: 350px 5vw 0 5vw;
 }
+
+body.info section.information {
+    opacity: 1;
+    display: block;
+}
+
+.input {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    position: relative;
+    cursor: pointer;
+}
+
+.image {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    position: relative;
+}
+
+/*********  Nav **********/
 
 .navigation {
     width: 100vw;
     height: 150px;
     position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+}
+
+.homeNav, 
+.thanksNav, 
+.aboutNav, 
+.characterNav, 
+.informationNav {
+    position: relative;
+}
+
+.homeNav .input {
+    background-image: url(../img/Website/home.svg);
+    height: 12vh;
+    width: 12vw;
+    margin: 20px;
+}
+
+.homeNav .square {
+    height: 4vh;
+    width: 17vw;
+    top: 6vh;
+    transform: rotate(-12deg);
+    left: -10px;
+    -webkit-transform: rotate(-12deg);
+    -moz-transform: rotate(-12deg);
+    -ms-transform: rotate(-12deg);
+    -o-transform: rotate(-12deg);
+}
+
+.smalls { display: flex; align-items: center;}
+
+.smalls .input {
+    height: 6vh;
+    width: 7.5vw;
+    margin: 10px;
+}
+
+ .square {
+    background-color: #ffbc08;
+    position:absolute;
+    z-index: 0;
+}
+
+.smalls > div:hover {
+    transform: rotate(20deg);
+    -webkit-transform: rotate(20deg);
+    -moz-transform: rotate(20deg);
+    -ms-transform: rotate(20deg);
+    -o-transform: rotate(20deg);
+}
+
+.smalls .square {
+    top: 3.5vh;
+    left: 2vw;
+    transform: rotate(-13deg);
+    height: 0.8vh;
+    width: 4vw;
+    -webkit-transform: rotate(-13deg);
+    -moz-transform: rotate(-13deg);
+    -ms-transform: rotate(-13deg);
+    -o-transform: rotate(-13deg);
+}
+
+.thanksNav .input {
+    background-image: url(../img/Website/thankyou.svg);
+}
+
+.aboutNav .input {
+    background-image: url(../img/Website/about.svg);
+}
+
+.characterNav .input {
+    background-image: url(../img/Website/character.svg);
+}
+
+.informationNav .input {
+    background-image: url(../img/Website/info.svg);
+    height: 12vh;
+    width: 12vw;
+    margin: 20px;
+}
+
+.informationNav .square {
+    height: 3vh;
+    width: 17vw;
+    top: 8vh;
+    transform: rotate(22deg);
+    right: -25px;
+    -webkit-transform: rotate(22deg);
+    -moz-transform: rotate(22deg);
+    -ms-transform: rotate(22deg);
+    -o-transform: rotate(22deg);
+}
+
+.homeNav:hover .input {
+    transform: rotate(10deg);
+    -webkit-transform: rotate(10deg);
+    -moz-transform: rotate(10deg);
+    -ms-transform: rotate(10deg);
+    -o-transform: rotate(10deg);
+}
+
+.homeNav:hover .square {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+}
+
+.informationNav:hover .input {
+    transform: rotate(-23deg);
+    -webkit-transform: rotate(-23deg);
+    -moz-transform: rotate(-23deg);
+    -ms-transform: rotate(-23deg);
+    -o-transform: rotate(-23deg);
+}
+
+.informationNav:hover .square {
+    transform: rotate(0deg);
+    top: 7vh;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+}
+
+/*********  About **********/
+
+.elli {
+    position: absolute;
+    top: 22vh;
+    left: -10vw;
+    background-image: url(../img/Website/Elli.png);
+    height: 60vh;
+    width: 30vw;
+    transform: rotate(27deg);
+    -webkit-transform: rotate(27deg);
+    -moz-transform: rotate(27deg);
+    -ms-transform: rotate(27deg);
+    -o-transform: rotate(27deg);
+}     
+
+.vero {
+    position: absolute;
+    top: -16vh;
+    left: -12vw;
+    background-image: url(../img/Website/Vero.png);
+    height: 60vh;
+    width: 30vw;
+    transform: rotate(55deg);
+    -webkit-transform: rotate(55deg);
+    -moz-transform: rotate(55deg);
+    -ms-transform: rotate(55deg);
+    -o-transform: rotate(55deg);
+}  
+
+.jules {
+    position: absolute;
+    top: -16vh;
+    right: -12vw;
+    background-image: url(../img/Website/Jules.png);
+    height: 60vh;
+    width: 30vw;
+    transform: rotate(-55deg);
+    -webkit-transform: rotate(-55deg);
+    -moz-transform: rotate(-55deg);
+    -ms-transform: rotate(-55deg);
+    -o-transform: rotate(-55deg);
+}  
+
+.nesrin {
+    position: absolute;
+    top: 24vh;
+    right: -12vw;
+    background-image: url(../img/Website/Nesrin.png);
+    height: 60vh;
+    width: 30vw;
+    transform: rotate(-30deg);
+    -webkit-transform: rotate(-30deg);
+    -moz-transform: rotate(-30deg);
+    -ms-transform: rotate(-30deg);
+    -o-transform: rotate(-30deg);
+}  
+
+/*********  Character **********/
+body.character { overflow-x: hidden;}
+section.character { margin: 300px 5vw 0 5vw;}
+
+.left,
+.right {
+    padding-bottom: 15vh;
+}
+
+.left {
+    padding-bottom: 24vh;
+    display: inline-block;
+    width: 90vw;
+}
+
+.left .content {
+    margin-left: 0;
+}
+
+.left .imageContent {
+    width: 46vw;
+    height: 47vh;
+    display: inline-block;
+    position: absolute;
+    right: -7vw;
+    background-color: #ffbc08;
+    top: -20px;
+    transform: rotate(5deg);
+}
+
+.right {
+    text-align: right;
+}
+
+.right .imageContent {
+    width: 49vw;
+    display: inline-block;
+    height: 86vh;
+    background-color: #ffbc08;
+    left: -141px;
+    top: 10px;
+    transform: rotate(-4deg);
+    vertical-align: top;
+}
+
+.right .content {
+    display: inline-block;
+}
+
+.dragon {     
+    background-image: url(../img/Website/Drache.svg);
+    height: 73vh;
+    width: 71vw;
+    position: absolute;
+    left: -7vw;
+    top: -11vh;
+}
+
+.chanti {     
+    background-image: url(../img/Website/Chanti.png);
+    height: 40vh;
+    width: 14vw;
+    left: -36vw;
+    top: -9vh;
+    position: absolute;
+}
+
+.lena {     
+    background-image: url(../img/Website/Lena.png);
+    height: 48vh;
+    width: 20vw;
+    left: -63vw;
+    position: absolute;
+    top: -9vh;
+}
+
+.peter {     
+    background-image: url(../img/Website/Peter.png);
+    height: 48vh;
+    width: 20vw;
+    left: -50vw;
+    position: absolute;
+    top: 34vh;
+}
+
+.wolfi {     
+    background-image: url(../img/Website/Wolfgang.png);
+    height: 58vh;
+    width: 23vw;
+    left: -74vw;
+    position: absolute;
+    top: 40vh;
 }
