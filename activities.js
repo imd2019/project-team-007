@@ -50,7 +50,7 @@ export class Kühlschrank extends InteractiveObject {
         } 
         if(this.interaction.A){
             this.updateAnimationPosition(70,y-this.y-10);
-            this.activityAnimation(this.fridgeInteraction,90,3);    
+            this.activityAnimation(this.fridgeInteraction,90,0.75);    
         } 
     }
     
@@ -58,16 +58,17 @@ export class Kühlschrank extends InteractiveObject {
         if(this.use>=3){
             if(this.ration==0){
             this.ration=3;
-            this.moneyRate=0.9;
+            this.moneyRate=-15;
             console.log("u out of food");
             }
-            else{this.moneyRate=1;}
+            else{this.moneyRate=0;}
             this.satisfactionRate = 0.6;      
         }
         this.use++;
         this.ration--;
         this.updateInteraction("Fridge");
         this.updateParameter();
+        this.getActivityBundle("Essen");
         this.updateAnimationA();
         console.log("ration & use: ",this.ration,this.use);
     }
@@ -133,26 +134,40 @@ export class TV extends InteractiveObject{
         }
         if(this.interaction.A){
             this.updateAnimationPosition(50,170);
-            this.activityAnimation(this.tvBtnAInteraction,90,2);
+            this.activityAnimation(this.tvBtnAInteraction,90,1);
         } 
         if(this.interaction.B){
             this.updateAnimationPosition(50,170);
-            this.activityAnimation(this.tvBtnBInteraction,90,3);
+            this.activityAnimation(this.tvBtnBInteraction,90,2);
         } 
     }
 
     clickedA(){
         this.satisfactionRate = 1.6;
         this.exhaustionRate = 0.8;
+        this.moneyRate=-20;
         this.updateInteraction("TvBtnA");
         this.updateParameter();
+        if(window.charakterId=="Chantal"){
+        this.getActivityBundle("RTL 2");
+        }
+        if(window.charakterId=="Lena"){
+            this.getActivityBundle("Filme");
+        }
         this.updateAnimationA();
     }
 
     clickedB(){
         this.satisfactionRate=1.2;
+        this.moneyRate=-15;//<-------------------------umbedingt beachten, sonst werden Werte von anderer Aktion genommen!!!
         this.updateInteraction("TvBtnB");
         this.updateParameter();
+        if(window.charakterId=="Chantal"){
+            this.getActivityBundle("Filme");
+            }
+            if(window.charakterId=="Lena"){
+                this.getActivityBundle("Gaming");
+            }
         this.updateAnimationB();
     }  
 }
@@ -338,6 +353,12 @@ export class PC extends InteractiveObject{
         this.exhaustionRate = 0.8;
         this.updateInteraction("PcBtnA");
         this.updateParameter();
+        if(window.charakterId=="Chantal"){
+            this.getActivityBundle("Bewerben");
+            }
+            if(window.charakterId=="Lena"){
+                this.getActivityBundle("Editen");
+            }
         this.updateAnimationA();
     }
 
@@ -345,11 +366,13 @@ export class PC extends InteractiveObject{
         this.satisfactionRate=1.2;
         this.updateParameter();
         if(window.charakterId=="Chantal"){
-        this.updateInteraction("PcBtnA");   
+        this.updateInteraction("PcBtnA");
+        this.getActivityBundle("Social Media");   
         this.updateAnimationA();
         }
         if(window.charakterId=="Lena"){
-        this.updateInteraction("PcBtnB");   
+        this.updateInteraction("PcBtnB"); 
+        this.getActivityBundle("Lernen");  
         this.updateAnimationB();
         }
     } 
@@ -433,6 +456,7 @@ export class Bett extends InteractiveObject{
         this.exhaustionRate = 1.4;
         this.updateInteraction("Bed");
         this.updateParameter();
+        this.getActivityBundle("Schlafen");
         this.updateAnimationA();
     }
 
@@ -440,6 +464,7 @@ export class Bett extends InteractiveObject{
         this.satisfactionRate=1.2;
         this.updateInteraction("Bed");
         this.updateParameter();
+        this.getActivityBundle("Power-Nap");
         this.updateAnimationA();
     } 
 }
