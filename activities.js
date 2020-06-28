@@ -1,14 +1,11 @@
 import InteractiveObject from "./interactiveObject.js";
 
 export class Kühlschrank extends InteractiveObject {
-    constructor(x,y,fridges,Buttons,fridgeInteraction){
-        super(x,y);
-        this.x=x;
-        this.y=y;
+    constructor(fridges,Buttons,fridgeInteraction){
+        super();
+        this.x=810;
+        this.y=75;
         
-        // this.charakterId=charakterId;
-        // this.charakterX=charakterX;
-        // this.day=day;
         this.ration=3;
         this.use=0;
 
@@ -19,14 +16,7 @@ export class Kühlschrank extends InteractiveObject {
         this.btnScale=0.4;
         
         this.fridgeInteraction=fridgeInteraction;
-        this.satisfactionRate=1.1;
-    
-        // if (this.charakterId["Name"]){
-        //     this.satisfaction="Wert";
-        //     this.money="-Wert";
-        //     this.exhaustion="-Wert";
-        //     this.timeA=timeA;
-        // }
+        this.satisfactionRate=0.7;
         
     }
 
@@ -46,19 +36,21 @@ export class Kühlschrank extends InteractiveObject {
         } 
     }
 
+    
+
     display(x,y){
-        console.log(this.counter);
-        let fridge = this.fridges.find(x => x.id === "chantisFridge");
+        // console.log(this.counter);
+        let fridge = this.fridges.find(x => x.id === "Fridge");
         this.updateZone(fridge);
         this.updateBtnPosition(20,0,45);
         image(fridge,this.x,this.y,this.imgWidth,this.imgHeight); 
         if(this.hoverTest(x)){
             this.showButtons("Essen");
-        } 
-        if(window.activityAnimation){
-            this.updateAnimationPosition(70,y-this.y-10);
-            this.activityAnimation(this.fridgeInteraction,"chantiFridgeInteractionMiddle",90);
             
+        } 
+        if(this.interaction.A){
+            this.updateAnimationPosition(70,y-this.y-10);
+            this.activityAnimation(this.fridgeInteraction,90,3);    
         } 
     }
     
@@ -70,25 +62,23 @@ export class Kühlschrank extends InteractiveObject {
             console.log("u out of food");
             }
             else{this.moneyRate=1;}
-            this.satisfactionRate = 0.8;      
+            this.satisfactionRate = 0.6;      
         }
         this.use++;
         this.ration--;
+        this.updateInteraction("Fridge");
         this.updateParameter();
+        this.updateAnimationA();
         console.log("ration & use: ",this.ration,this.use);
-        
-        // globalTime +=this.timeA;
-        // globalActivityArray.push(this.satisfaction[0],this.exhaustion[1]); 
-
     }
     
 }
 
 export class TV extends InteractiveObject{
-    constructor(x,y,tvs,Buttons){
-        super(x,y);
-        this.x=x;
-        this.y=y;
+    constructor(tvs,Buttons,tvBtnAInteraction,tvBtnBInteraction){
+        super();
+        this.x=520;
+        this.y=190;
 
         this.tvs=tvs;
         this.objectScale=0.4;
@@ -96,6 +86,10 @@ export class TV extends InteractiveObject{
         this.Buttons=Buttons;
         this.btnScale=0.4;
 
+        this.tvBtnAInteraction=tvBtnAInteraction;
+        this.tvBtnBInteraction=tvBtnBInteraction;
+
+        this.animationSpeed=0.15;
     }
     
     showButtons(btnAId,btnBId){
@@ -130,31 +124,44 @@ export class TV extends InteractiveObject{
 
    
     display(x){
-        let tv = this.tvs.find(x => x.id === "chantisTV");
+        let tv = this.tvs.find(x => x.id === "TV");
         this.updateZone(tv);
-        this.updateBtnPosition(-20,115,75);
+        this.updateBtnPosition(15,160,75);
         image(tv,this.x,this.y,this.imgWidth,this.imgHeight);
         if(this.hoverTest(x)){
             this.showButtons("Rtl2","Filme");
         }
+        if(this.interaction.A){
+            this.updateAnimationPosition(50,170);
+            this.activityAnimation(this.tvBtnAInteraction,90,2);
+        } 
+        if(this.interaction.B){
+            this.updateAnimationPosition(50,170);
+            this.activityAnimation(this.tvBtnBInteraction,90,3);
+        } 
     }
 
     clickedA(){
         this.satisfactionRate = 1.6;
         this.exhaustionRate = 0.8;
+        this.updateInteraction("TvBtnA");
         this.updateParameter();
+        this.updateAnimationA();
     }
 
     clickedB(){
-        console.log("Filme");
+        this.satisfactionRate=1.2;
+        this.updateInteraction("TvBtnB");
+        this.updateParameter();
+        this.updateAnimationB();
     }  
 }
 
 export class Door extends InteractiveObject{
-    constructor(x,y,doors,Buttons){
-        super(x,y);
-        this.x=x;
-        this.y=y;
+    constructor(doors,Buttons){
+        super();
+        this.x=40;
+        this.y=78;
 
         this.doors=doors;
         this.objectScale=0.4;
@@ -194,7 +201,7 @@ export class Door extends InteractiveObject{
     }
 
     display(x){
-        let door = this.doors.find(x => x.id === "chantisTür");
+        let door = this.doors.find(x => x.id === "Tür");
         this.updateZone(door);
         this.updateBtnPosition(-20,115,55);
         image(door,this.x,this.y,this.imgWidth,this.imgHeight);
@@ -205,16 +212,19 @@ export class Door extends InteractiveObject{
 }
 
 export class Fenster extends InteractiveObject{
-    constructor(x,y,windows,Buttons){
-        super(x,y);
-        this.x=x;
-        this.y=y;
+    constructor(windows,Buttons,windowInteraction,windowAussicht){
+        super();
+        this.x=310;
+        this.y=55;
 
         this.windows=windows;
-        this.objectScale=0.4;
+        this.objectScale=0.42;
 
         this.Buttons=Buttons;
         this.btnScale=0.4;
+
+        this.windowInteraction=windowInteraction;
+        this.windowAussicht=windowAussicht;
     }
 
     showButtons(btnBId){
@@ -233,28 +243,42 @@ export class Fenster extends InteractiveObject{
         }  
     }
 
-    display(x){
-        let fenster = this.windows.find(x => x.id === "chantisFenster");
+    display(x,y){
+        let fenster = this.windows.find(x => x.id === "Fenster");
         this.updateZone(fenster);
-        this.updateBtnPosition(0,50,60);
+        this.updateBtnPosition(0,50,50);
         image(fenster,this.x,this.y,this.imgWidth,this.imgHeight);
         if(this.hoverTest(x)){
             this.showButtons("Fenster");
-        }    
+        } 
+        if(this.interaction.B){
+            this.updateAnimationPosition(90,y-this.y-20);
+            this.activityAnimation(this.windowInteraction,60);
+        }   
+    }
+
+    clickedB(){
+        this.updateInteraction("Window");
+        // this.updateParameter();
+        this.updateAnimationB();
     }
 }
 
 export class PC extends InteractiveObject{
-    constructor(x,y,pcs,Buttons){
-        super(x,y);
-        this.x=x;
-        this.y=y;
+    constructor(pcs,Buttons,pcBtnAInteraction,pcBtnBInteraction){
+        super();
+        this.x=1055;
+        this.y=185;
 
         this.pcs=pcs;
-        this.objectScale=0.43;
+        this.objectScale=0.42;
 
         this.Buttons=Buttons;
         this.btnScale=0.4;
+
+        this.pcBtnAInteraction=pcBtnAInteraction;
+        this.pcBtnBInteraction=pcBtnBInteraction;
+        this.animationScale=0.5;
     }
 
     showButtons(btnAId,btnBId){
@@ -288,27 +312,64 @@ export class PC extends InteractiveObject{
     }
 
     display(x){
-        let pc = this.pcs.find(x => x.id === "chantisPC");
+        let pc = this.pcs.find(x => x.id === "Tisch");
         this.updateZone(pc);
         this.updateBtnPosition(-5,150,70);
         image(pc,this.x,this.y,this.imgWidth,this.imgHeight);
         if(this.hoverTest(x)){
             this.showButtons("Bewerben","SocialMedia");
-        }       
+        }
+        if(this.interaction.A){
+            this.updateAnimationPosition(100,100);
+            this.activityAnimation(this.pcBtnAInteraction,90,2);
+        }
+        else if(this.interaction.B && window.charakterId=="Lena"){
+            this.updateAnimationPosition(100,100);
+            this.activityAnimation(this.pcBtnBInteraction,90,2);
+        }
+        else{
+        let chair=this.pcs.find(x=>x.id==="Stuhl");
+        image(chair,this.x+60,this.y+53,chair.width*(this.objectScale+0.025),chair.height*(this.objectScale+0.025)); 
+        }      
     }
+
+    clickedA(){
+        this.satisfactionRate = 1.6;
+        this.exhaustionRate = 0.8;
+        this.updateInteraction("PcBtnA");
+        this.updateParameter();
+        this.updateAnimationA();
+    }
+
+    clickedB(){
+        this.satisfactionRate=1.2;
+        this.updateParameter();
+        if(window.charakterId=="Chantal"){
+        this.updateInteraction("PcBtnA");   
+        this.updateAnimationA();
+        }
+        if(window.charakterId=="Lena"){
+        this.updateInteraction("PcBtnB");   
+        this.updateAnimationB();
+        }
+    } 
 }
 
 export class Bett extends InteractiveObject{
-    constructor(x,y,beds,Buttons){
-        super(x,y);
-        this.x=x;
-        this.y=y;
+    constructor(beds,Buttons,bedInteraction){
+        super();
+        this.x=1320;
+        this.y=245;
 
         this.beds=beds;
         this.objectScale=0.4;
 
         this.Buttons=Buttons;
         this.btnScale=0.4;
+
+        this.bedInteraction=bedInteraction;
+        this.imageMode=CORNER;
+        this.animationScale=0.4;
     }
 
     showButtons(btnAId,btnBId){
@@ -342,12 +403,43 @@ export class Bett extends InteractiveObject{
     }
 
     display(x){
-        let bett = this.beds.find(x => x.id === "chantisBett");
+        if(!window.globalTime.start && x>=this.x && !window.globalTime.news){
+            window.globalTime.sleepAnimation=true;
+            this.updateInteraction("Bed");
+            this.updateAnimationA();// wenn darkenScreenRate eine Andere ist, spingt es nach Ablauf dieser animation auf interaction.A zurück
+            this.updateAnimationPosition(-10,-54);
+            this.activityAnimation(this.bedInteraction,355/window.darkenScreenRate,0);//counter muss an Zeit zum globalTime.news=true angepasst werden
+            
+           
+        } 
+        else if(this.interaction.A){
+            
+            this.updateAnimationPosition(-10,-54);
+            this.activityAnimation(this.bedInteraction,90,3);  
+        }
+        else{
+        let bett = this.beds.find(x => x.id === "Bett");
         this.updateZone(bett);
         this.updateBtnPosition(10,160,130);
         image(bett,this.x,this.y,this.imgWidth,this.imgHeight);
+        }
         if(this.hoverTest(x)){
             this.showButtons("Schlafen","PowerNap");
         } 
     }
+
+    clickedA(){
+        this.satisfactionRate = 1.6;
+        this.exhaustionRate = 1.4;
+        this.updateInteraction("Bed");
+        this.updateParameter();
+        this.updateAnimationA();
+    }
+
+    clickedB(){
+        this.satisfactionRate=1.2;
+        this.updateInteraction("Bed");
+        this.updateParameter();
+        this.updateAnimationA();
+    } 
 }

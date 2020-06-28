@@ -1,38 +1,38 @@
 export default class Charakter {
-  constructor(charakterX, charakterY, stands, walks, endScreen) {
-    this.charakter = { x: charakterX, y: charakterY, id: false };
+  constructor(stands, walks, endScreen) {
+    this.charakter = { x: (1920 * 0.4) / 2 - 110, y: 290 };
 
     this.stands = stands;
     this.walks = walks;
-    
-    this.standId="chantiMiddleStand";
-    this.walkId="chantiMiddleWalk";
-    
+
+    this.standId;
+    this.walkId;
+
     this.endScreen = endScreen;
-    
+
     this.index = 0;
     this.animationSpeed = 0.2;
 
     this.speed = 5;
-    this.direction={right: true, left: false};
-    
+    this.direction = { right: true, left: false };
 
     this.charakterScale = 0.55;
 
     // this.charakterId=charakterId;
-    // this.satisfaction=satisfaction;
 
     // this.day=day;
   }
 
-  display() {
+  display(bedX) {
     
-    if (keyIsDown(RIGHT_ARROW)) {
-      this.direction.right=true;
-      this.direction.left=false;
+    this.update();
+    
+    if (keyIsDown(RIGHT_ARROW) || !window.globalTime.start) {
+      this.direction.right = true;
+      this.direction.left = false;
       push();
       imageMode(CENTER);
-      let walk=this.walks.find(x=>x.id===this.walkId);
+      let walk = this.walks.find((x) => x.id === this.walkId);
       this.index += this.animationSpeed;
       let animation = floor(this.index) % walk.length;
       image(
@@ -43,11 +43,10 @@ export default class Charakter {
         walk[animation].height * this.charakterScale
       );
       pop();
-    }
-    else if(this.direction.right==true){
+    } else if (this.direction.right == true) {
       push();
       imageMode(CENTER);
-      let stand=this.stands.find(x=>x.id===this.standId);
+      let stand = this.stands.find((x) => x.id === this.standId);
       image(
         stand,
         this.charakter.x,
@@ -58,49 +57,89 @@ export default class Charakter {
       pop();
     }
 
-    if (keyIsDown(LEFT_ARROW)) {
+    if (keyIsDown(LEFT_ARROW) && window.globalTime.start) {
+      this.direction.right = false;
+      this.direction.left = true;
+      push();
+      imageMode(CENTER);
+      scale(-1, 1);
+      let walk = this.walks.find((x) => x.id === this.walkId);
+      this.index += this.animationSpeed;
+      let animation = floor(this.index) % walk.length;
+      image(
+        walk[animation],
+        -this.charakter.x,
+        this.charakter.y,
+        walk[animation].width * this.charakterScale,
+        walk[animation].height * this.charakterScale
+      );
+      pop();
+    } else if (this.direction.left == true) {
+      push();
+      imageMode(CENTER);
+      scale(-1, 1);
+      let stand = this.stands.find((x) => x.id === this.standId);
+      image(
+        stand,
+        -this.charakter.x,
+        this.charakter.y,
+        stand.width * this.charakterScale,
+        stand.height * this.charakterScale
+      );
+      pop();
+    }
+    if(window.moveNextToBed){ 
       this.direction.right=false;
       this.direction.left=true;
-      push();
-      imageMode(CENTER);
-      scale(-1,1);
-      let walk=this.walks.find(x=>x.id===this.walkId);
-      this.index += this.animationSpeed;
-      let animation = floor(this.index) % walk.length;
-      image(
-        walk[animation],
-        -this.charakter.x,
-        this.charakter.y,
-        walk[animation].width * this.charakterScale,
-        walk[animation].height * this.charakterScale
-      );
-      pop();
-    } 
-    else if(this.direction.left==true){
-      push();
-      imageMode(CENTER);
-      scale(-1,1);
-      let stand=this.stands.find(x=>x.id===this.standId);
-      image(
-        stand,
-        -this.charakter.x,
-        this.charakter.y,
-        stand.width * this.charakterScale,
-        stand.height * this.charakterScale
-      );
-      pop();
+      console.log(this.direction);
+      this.charakter.x=bedX-5;
+      window.moveNextToBed=false;
     }
-    
   }
 
-  move() {
-    if (keyIsDown(RIGHT_ARROW) && !window.activityAnimation) {
-      if (this.endScreen.Right && this.charakter.x <= 1920 * 0.4 - 45) {
+  update() {
+    if (window.globalSatisfaction <= 25) {
+      this.standId = "LowestStand";
+      this.walkId = "LowestWalk";
+    } else if (
+      window.globalSatisfaction >= 26 &&
+      window.globalSatisfaction <= 50
+    ) {
+      this.standId = "LowStand";
+      this.walkId = "LowWalk";
+    } else if (
+      window.globalSatisfaction >= 51 &&
+      window.globalSatisfaction <= 75
+    ) {
+      this.standId = "MiddleStand";
+      this.walkId = "MiddleWalk";
+    } else if (
+      window.globalSatisfaction >= 76 &&
+      window.globalSatisfaction <= 90
+    ) {
+      this.standId = "HighStand";
+      this.walkId = "HighWalk";
+    } else if (window.globalSatisfaction >= 91) {
+      this.standId = "VictoryStand";
+      this.walkId = "VictoryWalk";
+    }  
+  }
+
+  move(bedX) {
+    
+    if (this.endScreen.Right && this.charakter.x <= 1920 * 0.4 - 45) {
+      if (keyIsDown(RIGHT_ARROW) && !window.activityAnimation && window.globalTime.start) {
         this.charakter.x += this.speed;
       }
+      if (!window.globalTime.start) {
+        if (this.charakter.x <= bedX) {
+          this.charakter.x += this.speed;
+        }
+      }
     }
-    if (keyIsDown(LEFT_ARROW) && !window.activityAnimation) {
-      if (this.endScreen.Left && this.charakter.x >= 0 + 45) {
+
+    if (this.endScreen.Left && this.charakter.x >= 0 + 45) {
+      if (keyIsDown(LEFT_ARROW) && !window.activityAnimation && window.globalTime.start) {
         this.charakter.x -= this.speed;
       }
     }
@@ -113,11 +152,6 @@ export default class Charakter {
   //         }
 
   //     }
-  // }
-
-  // animation(){
-  // //  charakter pngs als array und wird durchlaufen % array.length im Zusammnehang von screen movement
-  // //  einzelne Funktionen für Bewegung
   // }
 
   // voice(){
