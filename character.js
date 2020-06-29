@@ -24,7 +24,7 @@ export default class Charakter {
   }
 
   display(bedX) {
-    console.log(window.forcedToPc);
+    // console.log(window.forcedToPc);
     this.update();
     if ( !(keyIsDown(RIGHT_ARROW)&&keyIsDown(LEFT_ARROW))&&keyIsDown(RIGHT_ARROW) && !window.forcedToDoor&&!window.forcedToPc.ToRight&&!window.forcedToPc.ToLeft ||!window.globalTime.start||window.forcedToPc.ToRight) {
       this.direction.right = true;

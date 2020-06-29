@@ -105,7 +105,7 @@ export default class InteractiveObject extends MainScreen {
       x > this.x &&
       x < this.zone &&
       window.globalTime.start &&
-      !window.activityAnimation && !window.forcedToDoor && !window.forcedToPc
+      !window.activityAnimation && !window.forcedToDoor && !window.forcedToPc.ToLeft && !window.forcedToPc.ToRight
     ) {
       this.btnShowActive = true;
       return true;

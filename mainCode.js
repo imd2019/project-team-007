@@ -1163,16 +1163,16 @@ function draw() {
     bon.display();
     clock.display();
     
-
+   
     Room.move(Person.charakter,pc.x,pc.imgWidth);
-
     frontElement.move(Room.screenMoving);
     fridge.move(Room.screenMoving);
     tv.move(Room.screenMoving);
     door.move(Room.screenMoving);
     fenster.move(Room.screenMoving);
     pc.move(Room.screenMoving);
-    bed.move(Room.screenMoving);
+    bed.move(Room.screenMoving);  
+    
   }
   Person.move(bed.x,door.x,pc.x,pc.imgWidth);
   news.display();

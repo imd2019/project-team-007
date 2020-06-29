@@ -36,9 +36,9 @@ export default class MainScreen {
 
     move(charakter,pcX,pcWidth){ 
         this.checkMoving(charakter);
-        console.log("screenmoving: ",this.screenMoving);
+        // console.log("screenmoving: ",this.screenMoving);
         console.log("charakter.x ",charakter.x);
-        console.log("pcX+width/2 ",pcX+pcWidth);
+        console.log("pcX+width/2 ",pcX+pcWidth/2);
             if(keyIsDown(LEFT_ARROW)&& !window.activityAnimation && window.globalTime.start &&!window.forcedToPc.ToRight&&!window.forcedToPc.ToLeft){
                 if(this.endScreen.Left == false){
                 this.screenMoving.Left=true;    
@@ -72,7 +72,7 @@ export default class MainScreen {
                     this.x-=this.speed;
                 }  
             }
-            else if(window.forcedToPc.ToRight &&  charakter.x<=pcX+pcWidth/2){
+            else if(window.forcedToPc.ToRight && charakter.x<=pcX+pcWidth/2){
                 if (this.endScreen.Right == false ){
                     this.screenMoving.Right=true;  
                     this.x-=this.speed;

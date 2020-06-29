@@ -350,26 +350,26 @@ export class Door extends InteractiveObject {
     this.updateAnimationA();
   }
 
-//   update(x) {
-//     if (window.charakterId == "Chantal") {
-//       if (window.globalTime.hour == 8 && window.globalTime.minute == 30) {
-//         window.forcedToDoor = true;
-//       }
-//       if (window.globalTime.hour == 12) {
-//         window.forcedToDoor = true;
-//       }
-//     }
-//     if (window.charakterId == "Lena") {
-//       if (window.globalTime.hour == 8 && window.globalTime.minute == 30) {
-//         window.forcedToDoor = true;
-//       }
-//     }
-//     if (window.forcedToDoor && x <= this.x + 70) {
-//       this.updateInteraction("Door");
-//       this.updateAnimationA();
-//       window.forcedToDoor = false;
-//     }
-//   }
+  //   update(x) {
+  //     if (window.charakterId == "Chantal") {
+  //       if (window.globalTime.hour == 8 && window.globalTime.minute == 30) {
+  //         window.forcedToDoor = true;
+  //       }
+  //       if (window.globalTime.hour == 12) {
+  //         window.forcedToDoor = true;
+  //       }
+  //     }
+  //     if (window.charakterId == "Lena") {
+  //       if (window.globalTime.hour == 8 && window.globalTime.minute == 30) {
+  //         window.forcedToDoor = true;
+  //       }
+  //     }
+  //     if (window.forcedToDoor && x <= this.x + 70) {
+  //       this.updateInteraction("Door");
+  //       this.updateAnimationA();
+  //       window.forcedToDoor = false;
+  //     }
+  //   }
 }
 
 export class Fenster extends InteractiveObject {
@@ -565,7 +565,7 @@ export class PC extends InteractiveObject {
   }
 
   display(x) {
-
+    this.update(x);  
     let pc = this.pcs.find((x) => x.id === "Tisch");
     this.updateZone(pc);
     this.updateBtnPosition(-5, 150, 70);
@@ -573,7 +573,7 @@ export class PC extends InteractiveObject {
     if (this.hoverTest(x)) {
       this.showButtons("Bewerben", "SocialMedia");
     }
-    this.update(x);
+    
     if (this.interaction.A) {
       this.updateAnimationPosition(100, 100);
       this.activityAnimation(this.pcBtnAInteraction, 90, 2);
@@ -621,16 +621,52 @@ export class PC extends InteractiveObject {
     }
   }
 
-  update(x){
-      if(window.charakterId=="Chantal"){
-          if(window.globalTime.hour==9){
-              if(x<this.x+this.imgWidth/2&&!window.forcedToPc.ToLeft){
-                  window.forcedToPc.ToRight=true;
-              }
-              if(x>this.x+this.imgWidth/2&&!window.forcedToPc.ToRight){
-                window.forcedToPc.ToLeft=true;
-            }
+  update(x) {
+    if (window.charakterId == "Chantal") {
+      if (window.globalTime.hour == 9) {
+        if (x < floor(this.x + this.imgWidth / 2) && !window.forcedToPc.ToLeft) {
+          window.forcedToPc.ToRight = true;
+        }
+        if (x > ceil(this.x + this.imgWidth / 2) && !window.forcedToPc.ToRight) {
+          window.forcedToPc.ToLeft = true;
+        }
+      }
+      if (window.forcedToPc.ToRight && x >= this.x + this.imgWidth/2) {
+              this.updateInteraction("PcBtnA");
+              this.updateAnimationA();
+              window.forcedToPc.ToRight = false;
+              return;
+      }
+      if (window.forcedToPc.ToLeft && x <= this.x + this.imgWidth/2) {
+        debugger; 
+        this.updateInteraction("PcBtnA");
+        this.updateAnimationA();
+        window.forcedToPc.ToLeft = false;
+        return;
+      }
+    }
+    if (window.charakterId == "Lena") {
+        if (window.globalTime.hour == 8 && window.globalTime.minute==30) {
+          if (x < this.x + this.imgWidth / 2 && !window.forcedToPc.ToLeft) {
+            window.forcedToPc.ToRight = true;
           }
+          if (x > this.x + this.imgWidth / 2 && !window.forcedToPc.ToRight) {
+            window.forcedToPc.ToLeft = true;
+          }
+        }
+        if (window.forcedToPc.ToRight && x >= this.x + this.imgWidth/2) {
+                this.updateInteraction("PcBtnB");
+                this.updateAnimationB();
+                window.forcedToPc.ToRight = false;
+                return;
+        }
+        if (window.forcedToPc.ToLeft && x <= this.x + this.imgWidth/2) {
+          debugger;  
+          this.updateInteraction("PcBtnB");
+          this.updateAnimationB();
+          window.forcedToPc.ToLeft = false;
+          return;
+        }
       }
   }
 }
