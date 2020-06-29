@@ -82,10 +82,10 @@ body.about {
 
 .p5Canvas{
     height: auto !important; /* important überschreibt element style, nur im notfall benutzen ;)  */
-    width: 60% !important;
+    width: 50% !important;
     position: absolute;
     opacity: 0;
-    margin: 50px 20vw 0 20vw;
+    margin: 50px 25vw 0 25vw;
     display: none;
 }
 
