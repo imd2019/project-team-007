@@ -36,7 +36,7 @@ window.globalInitialDailyBudget=0;
 let globalTime = {
   day: 1,
   start: true,
-  hour: 1,
+  hour: 8,
   minute: 0,
   Delta: 2500,
   news: false,
@@ -50,6 +50,10 @@ window.activateCounter = true;
 
 window.moveNextToBed = false;
 
+window.forcedToDoor=false;
+
+window.forcedToPc={ToRight:false,ToLeft:false};
+
 let globalActivityArray = { day1: [], day2: [], day3: [], day4: [], day5: [] };
 
 window.globalActivityArray = globalActivityArray;
@@ -60,7 +64,7 @@ window.activityAnimation = activityAnimation;
 let charakterId = "Chantal"; //Chantal oder Lena
 window.charakterId = charakterId;
 
-let bgeMode = "withBGE"; //noBGE or withBGE
+let bgeMode = "noBGE"; //noBGE or withBGE
 window.bgeMode = bgeMode;
 
 //<--------------->
@@ -1054,6 +1058,55 @@ function preload() {
     windowInteractionHigh,
     windowInteractionVictory
   );
+
+  //<-------------Door Interactions---------------->
+
+  let doorInteractionLowest=[];
+  doorInteractionLowest.id="DoorInteractionLowest";
+  if(charakterId=="Chantal"){
+    doorInteractionLowest.push(fridgeInteractionLowest1);
+  }
+  if(charakterId=="Lena"){
+    doorInteractionLowest.push(windowInteractionLowest1);
+  }
+
+  let doorInteractionLow=[];
+  doorInteractionLow.id="DoorInteractionLow";
+  if(charakterId=="Chantal"){
+    doorInteractionLow.push(fridgeInteractionLow1);
+  }
+  if(charakterId=="Lena"){
+    doorInteractionLow.push(windowInteractionLow1);
+  }
+
+  let doorInteractionMiddle=[];
+  doorInteractionMiddle.id="DoorInteractionMiddle";
+  if(charakterId=="Chantal"){
+    doorInteractionMiddle.push(fridgeInteractionMiddle1);
+  }
+  if(charakterId=="Lena"){
+    doorInteractionMiddle.push(windowInteractionMiddle1);
+  }
+
+  let doorInteractionHigh=[];
+  doorInteractionHigh.id="DoorInteractionHigh";
+  if(charakterId=="Chantal"){
+    doorInteractionHigh.push(fridgeInteractionHigh1);
+  }
+  if(charakterId=="Lena"){
+    doorInteractionHigh.push(windowInteractionHigh1);
+  }
+
+  let doorInteractionVictory=[];
+  doorInteractionVictory.id="DoorInteractionVictory";
+  if(charakterId=="Chantal"){
+    doorInteractionVictory.push(fridgeInteractionVictory1);
+  }
+  if(charakterId=="Lena"){
+    doorInteractionVictory.push(windowInteractionVictory1);
+  }
+
+  doorInteraction.push(doorInteractionLowest,doorInteractionLow,doorInteractionMiddle,doorInteractionHigh,doorInteractionVictory);
 }
 window.preload = preload;
 
@@ -1061,7 +1114,7 @@ let Room = new MainScreen(mainScreens);
 
 let fridge = new Kühlschrank(fridges, buttons, fridgeInteraction);
 let tv = new TV(tvs, buttons, tvBtnAInteraction, tvBtnBInteraction);
-let door = new Door(doors, buttons);
+let door = new Door(doors, buttons,doorInteraction);
 let fenster = new Fenster(windows, buttons,windowInteraction,windowAussicht);
 let pc = new PC(pcs, buttons, pcBtnAInteraction, pcBtnBInteraction);
 let bed = new Bett(beds, buttons, bedInteraction);
@@ -1090,12 +1143,12 @@ function draw() {
 
   // console.log(window.globalTime.sleepAnimation);
   // console.log("globalTimeStart: ",window.globalTime.start);
-  //  console.log("moveNextToBed: ",window.moveNextToBed);
+   
   if (!window.globalTime.news) {
     Room.display();
     fridge.display(Person.charakter.x, Person.charakter.y);
     tv.display(Person.charakter.x);
-    door.display(Person.charakter.x);
+    door.display(Person.charakter.x,Person.charakter.y);
     fenster.display(Person.charakter.x,Person.charakter.y);
     pc.display(Person.charakter.x);
     bed.display(Person.charakter.x);
@@ -1111,7 +1164,7 @@ function draw() {
     clock.display();
     
 
-    Room.move(Person.charakter);
+    Room.move(Person.charakter,pc.x,pc.imgWidth);
 
     frontElement.move(Room.screenMoving);
     fridge.move(Room.screenMoving);
@@ -1121,7 +1174,7 @@ function draw() {
     pc.move(Room.screenMoving);
     bed.move(Room.screenMoving);
   }
-  Person.move(bed.x);
+  Person.move(bed.x,door.x,pc.x,pc.imgWidth);
   news.display();
 }
 window.draw = draw;
@@ -1134,6 +1187,7 @@ function mouseClicked() {
     pc.mouseClicked();
     bed.mouseClicked();
     fenster.mouseClicked();
+    door.mouseClicked();
     }
     bon.mouseClicked();
   }
@@ -1141,13 +1195,13 @@ function mouseClicked() {
     news.mouseClicked();
   }
   fenster.clickedWindow();
+  
+  if (globalTime.day == 3) {
+    final.auswertung();
+  }
   // console.log("Satisfaction: " + window.globalSatisfaction);
   // console.log("Exhaustion:" + window.globalExhaustion);
   // console.log("Money: " + window.globalMoney);
   // console.log("day 1:", globalActivityArray.day1);
-
-  if (globalTime.day == 3) {
-    final.auswertung();
-  }
 }
 window.mouseClicked = mouseClicked;
