@@ -34,13 +34,14 @@ $(document).ready(function(){
     } 
 });
 
-  $(window).scroll(function() {
-    if ($(document).scrollTop() > 50) {
-      $("body").addClass("test");
-    } else {
-      $("body").removeClass("test");
-    }
+$(window).on("scroll", function () {
+  console.log($(document).scrollTop()); 
+  console.log("hello");
+  if ($(document).scrollTop() > 50) {
+    $("body").addClass("test");
+  } 
+});
+
   });
 
 
-  });

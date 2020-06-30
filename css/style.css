@@ -2,7 +2,7 @@
 
 @font-face { 
     font-family: "Bakso"; 
-    src: url("../img/Website/fonts/BaksoSapi.otf"); 
+    src: url("../fonts/BaksoSapi.otf"); 
     }
 
 
@@ -82,10 +82,10 @@ body.about {
 
 .p5Canvas{
     height: auto !important; /* important überschreibt element style, nur im notfall benutzen ;)  */
-    width: 70% !important;
+    width: 50% !important;
     position: absolute;
     opacity: 0;
-    margin: 50px 15vw 0 15vw;
+    margin: 50px 25vw 0 25vw;
     display: none;
 }
 
