@@ -18,16 +18,12 @@ export default class Charakter {
 
     this.charakterScale = 0.55;
 
-    // this.charakterId=charakterId;
-
-    // this.day=day;
   }
 
   display(bedX) {
-    
+    // console.log(window.forcedToPc);
     this.update();
-    
-    if (keyIsDown(RIGHT_ARROW) || !window.globalTime.start) {
+    if ( !(keyIsDown(RIGHT_ARROW)&&keyIsDown(LEFT_ARROW))&&keyIsDown(RIGHT_ARROW) && !window.forcedToDoor&&!window.forcedToPc.ToRight&&!window.forcedToPc.ToLeft ||!window.globalTime.start||window.forcedToPc.ToRight) {
       this.direction.right = true;
       this.direction.left = false;
       push();
@@ -57,7 +53,7 @@ export default class Charakter {
       pop();
     }
 
-    if (keyIsDown(LEFT_ARROW) && window.globalTime.start) {
+    if (!(keyIsDown(RIGHT_ARROW)&&keyIsDown(LEFT_ARROW))&&keyIsDown(LEFT_ARROW) && window.globalTime.start &&!window.forcedToPc.ToRight&&!window.forcedToPc.ToLeft||window.forcedToDoor||window.forcedToPc.ToLeft) {
       this.direction.right = false;
       this.direction.left = true;
       push();
@@ -125,10 +121,10 @@ export default class Charakter {
     }  
   }
 
-  move(bedX) {
-    
+  move(bedX,doorX,pcX,pcWidth) {
+   
     if (this.endScreen.Right && this.charakter.x <= 1920 * 0.4 - 45) {
-      if (keyIsDown(RIGHT_ARROW) && !window.activityAnimation && window.globalTime.start) {
+      if (keyIsDown(RIGHT_ARROW) && !window.activityAnimation && window.globalTime.start && !window.forcedToDoor && !window.forcedToPc.ToLeft && !window.forcedToPc.ToRight) {
         this.charakter.x += this.speed;
       }
       if (!window.globalTime.start) {
@@ -136,15 +132,35 @@ export default class Charakter {
           this.charakter.x += this.speed;
         }
       }
+      if (window.forcedToPc.ToRight) {
+        if (this.charakter.x <= pcX+pcWidth/2) {
+          this.charakter.x += this.speed;
+        }
+      }
     }
 
     if (this.endScreen.Left && this.charakter.x >= 0 + 45) {
-      if (keyIsDown(LEFT_ARROW) && !window.activityAnimation && window.globalTime.start) {
+      if (keyIsDown(LEFT_ARROW) && !window.activityAnimation && window.globalTime.start && !window.forcedToDoor && !window.forcedToPc.ToLeft && !window.forcedToPc.ToRight) {
         this.charakter.x -= this.speed;
       }
+      if(window.forcedToDoor){
+        if(this.charakter.x>=doorX+70){
+        this.charakter.x -= this.speed; 
+        }
+      }
+      if (window.forcedToPc.ToLeft) {
+        if (this.charakter.x >= pcX+pcWidth/2) {
+          this.charakter.x -= this.speed;
+        }
+      }
     }
+
+    
   }
 
+
+
+  //hier kommen dailyArrays & Parameter;
   // thinkbubble(){
   //     if(charakterId["Name"]){
   //         if(this.day==1){

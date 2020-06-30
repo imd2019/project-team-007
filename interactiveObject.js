@@ -18,8 +18,8 @@ export default class InteractiveObject extends MainScreen {
     interactX,
     interactY
   ) {
-    super(x,y);
-    
+    super(x, y);
+
     this.speed = 5;
 
     this.btnA = btnA;
@@ -30,7 +30,7 @@ export default class InteractiveObject extends MainScreen {
     this.btnBx = btnBx;
     this.btnBy = btnBy;
 
-    this.btnScale=btnScale;
+    this.btnScale = btnScale;
     this.objectScale = objectScale;
 
     this.zone = zone;
@@ -44,23 +44,24 @@ export default class InteractiveObject extends MainScreen {
     this.satisfactionRate = 1;
     this.exhaustionRate = 1;
     this.moneyRate = 0;
-    
+
     this.activityId;
-    this.interactX=interactX;
-    this.interactY=interactY;
+    this.interactX = interactX;
+    this.interactY = interactY;
 
-    this.interaction={A:false,B:false};
+    this.interaction = { A: false, B: false };
 
-    this.animationScale=0.55;
-    this.imageMode=CENTER;
-    this.index=0;
-    this.animationSpeed=0.2;
+    this.animationScale = 0.55;
+    this.imageMode = CENTER;
+    this.index = 0;
+    this.animationSpeed = 0.2;
 
-    this.counter=0;
+    this.counter = 0;
 
-    this.btnShowActive=false;
+    this.btnShowActive = false;
 
-    
+    this.charakterFadeOut = false;
+    this.fade=260;
   }
 
   move(screenMoving) {
@@ -78,19 +79,20 @@ export default class InteractiveObject extends MainScreen {
     this.zone = this.x + this.imgWidth;
   }
 
-  updateBtnPosition(offsetAx, offsetBx,btnOffset) {
+  updateBtnPosition(offsetAx, offsetBx, btnOffset) {
     this.btnAx = this.x + offsetAx;
     this.btnAy = this.y - btnOffset;
     this.btnBx = this.x + offsetBx;
     this.btnBy = this.y - btnOffset;
   }
 
-  hitTest(x, y, btnX,btnY,btn) { 
+  hitTest(x, y, btnX, btnY, btn) {
     if (
       x > btnX &&
-      x < btnX + btn.width*this.btnScale &&
+      x < btnX + btn.width * this.btnScale &&
       y > btnY &&
-      y < btnY + btn.height*this.btnScale && this.btnShowActive
+      y < btnY + btn.height * this.btnScale &&
+      this.btnShowActive
     ) {
       return true;
     } else {
@@ -99,143 +101,192 @@ export default class InteractiveObject extends MainScreen {
   }
 
   hoverTest(x) {
-    if (x > this.x && x < this.zone && window.globalTime.start && !window.activityAnimation) {
-      this.btnShowActive=true;
+    if (
+      x > this.x &&
+      x < this.zone &&
+      window.globalTime.start &&
+      !window.activityAnimation && !window.forcedToDoor && !window.forcedToPc.ToLeft && !window.forcedToPc.ToRight
+    ) {
+      this.btnShowActive = true;
       return true;
-      
     } else {
-      this.btnShowActive=false;
+      this.btnShowActive = false;
       return false;
-      
     }
   }
-  
+
   updateInteraction(objectButton) {
     if (window.globalSatisfaction <= 25) {
-      this.activityId=objectButton+"InteractionLowest";
+      this.activityId = objectButton + "InteractionLowest";
     } else if (
       window.globalSatisfaction >= 26 &&
       window.globalSatisfaction <= 50
     ) {
-        this.activityId=objectButton+"InteractionLow";
+      this.activityId = objectButton + "InteractionLow";
     } else if (
       window.globalSatisfaction >= 51 &&
       window.globalSatisfaction <= 75
     ) {
-        this.activityId=objectButton+"InteractionMiddle";
+      this.activityId = objectButton + "InteractionMiddle";
     } else if (
       window.globalSatisfaction >= 76 &&
       window.globalSatisfaction <= 90
     ) {
-        this.activityId=objectButton+"InteractionHigh";
+      this.activityId = objectButton + "InteractionHigh";
     } else if (window.globalSatisfaction >= 91) {
-        this.activityId=objectButton+"InteractionVictory";
+      this.activityId = objectButton + "InteractionVictory";
     }
-}
+  }
 
   updateParameter() {
     this.satisfaction = window.globalSatisfaction;
     this.exhaustion = window.globalExhaustion;
     this.money = window.globalDailyBudget;
-    
-    this.satisfaction = ceil(this.satisfaction * this.satisfactionRate);
-    window.globalSatisfaction = this.satisfaction;
-    
-    this.exhaustion = ceil(this.exhaustion * this.exhaustionRate);
+
+    if (window.bgeMode == "withBGE") {
+      this.satisfaction = ceil(this.satisfaction * this.satisfactionRate); // Auslegungssache von Zufriedenheit
+      window.globalSatisfaction = this.satisfaction;
+    }
+
+    //ohne BGE-MOde REchnung ( Tendenz zur Unzufriedenheit)
+
+    this.exhaustion = ceil(this.exhaustion * this.exhaustionRate); // Auslegungssache von Erschöpfung
     window.globalExhaustion = this.exhaustion;
-    
+
     this.money = this.money + this.moneyRate;
     window.globalDailyBudget = this.money;
   }
 
-  getActivityBundle(activityName){
-    let activityBundle=[];
-    activityBundle.id=activityName;
-    activityBundle.push(this.satisfactionRate,this.exhaustionRate,this.moneyRate);
+  getActivityBundle(activityName) {
+    let activityBundle = [];
+    activityBundle.id = activityName;
+    activityBundle.push(
+      this.satisfactionRate,
+      this.exhaustionRate,
+      this.moneyRate
+    );
 
-    if(this.moneyRate!=0){
-      let billBundle=[activityName,this.moneyRate];
-      
+    if (this.moneyRate != 0) {
+      let billBundle = [activityName, this.moneyRate];
+
       window.moneyBill.push(billBundle);
     }
-    
-    if(window.globalTime.day==1){
+
+    if (window.globalTime.day == 1) {
       window.globalActivityArray.day1.push(activityBundle);
     }
-    if(window.globalTime.day==2){
+    if (window.globalTime.day == 2) {
       window.globalActivityArray.day2.push(activityBundle);
     }
-    if(window.globalTime.day==3){
+    if (window.globalTime.day == 3) {
       window.globalActivityArray.day3.push(activityBundle);
     }
-    if(window.globalTime.day==4){
+    if (window.globalTime.day == 4) {
       window.globalActivityArray.day4.push(activityBundle);
     }
-    if(window.globalTime.day==5){
+    if (window.globalTime.day == 5) {
       window.globalActivityArray.day5.push(activityBundle);
     }
   }
 
-  updateAnimationA(){
-    window.activityAnimation=true;
-    this.interaction.A=true;
+  updateAnimationA() {
+    window.activityAnimation = true;
+    this.interaction.A = true;
   }
 
-  updateAnimationB(){
-    window.activityAnimation=true;
-    this.interaction.B=true;
+  updateAnimationB() {
+    window.activityAnimation = true;
+    this.interaction.B = true;
   }
-  
-  updateAnimationPosition(offsetX,offsetY){
+
+  updateAnimationPosition(offsetX, offsetY) {
     this.interactX = this.x + offsetX;
     this.interactY = this.y + offsetY;
   }
 
-  activityAnimation(activityArray,delay,timeNeeded){
-    let activity=activityArray.find(x=>x.id===this.activityId);
+  activityAnimation(activityArray, delay, timeNeeded) {
+    this.counter++;
+    let activity = activityArray.find((x) => x.id === this.activityId);
     this.index += this.animationSpeed;
     let animation = floor(this.index) % activity.length;
     push();
     imageMode(this.imageMode);
-    image(
-      activity[animation],
-      this.interactX,
-      this.interactY,
-      activity[animation].width * this.animationScale,
-      activity[animation].height * this.animationScale
-    );
+    if (this.charakterFadeOut) {
+      push();
+      tint(255,this.fade);
+      if(this.counter<=13){
+        this.fade-=20;  
+      }
+      if(this.fade<=0){
+        this.fade=0;
+      }
+      if(this.counter>=delay-13){
+        this.fade+=20;
+      }
+      image(
+        activity[animation],
+        this.interactX,
+        this.interactY,
+        activity[animation].width * this.animationScale,
+        activity[animation].height * this.animationScale
+      );
+    pop();
+    } 
+    else {
+      image(
+        activity[animation],
+        this.interactX,
+        this.interactY,
+        activity[animation].width * this.animationScale,
+        activity[animation].height * this.animationScale
+      );
+    }
     pop();
 
-    this.counter++;
-    let msDelay=(delay/30);
+    
+    let msDelay = delay / 30;
     // console.log(msDelay);
-    if(timeNeeded!=0){
-      window.globalTime.Delta=((msDelay*1000)/((timeNeeded*60)/15));
-      }
-    if(this.counter==delay && this.interaction.A){
-      this.interaction.A=false;
-      window.activityAnimation=false;
-      window.globalTime.Delta=2500;
-      this.counter=0;
-    
+
+    if (timeNeeded != 0) {
+      window.globalTime.Delta = (msDelay * 1000) / ((timeNeeded * 60) / 15);
     }
-    if(this.counter==delay && this.interaction.B){
-      this.interaction.B=false;
-      window.activityAnimation=false;
-      window.globalTime.Delta=2500;
-      this.counter=0;
+    if((!window.globalTime.start&&!window.globalTime.sleepAnimation)||window.forcedToPc.ToLeft||window.forcedToDoor||window.forcedToPc.ToRight){
+      this.charakterFadeOut=false;
+      this.fade=260;
+      this.interaction.A = false;
+      this.interaction.B = false;
+      window.activityAnimation = false;
+      window.globalTime.Delta = 2500;
+      this.counter = 0;
     }
-    
+    if (this.counter == delay && this.interaction.A) {
+      this.charakterFadeOut=false;
+      this.fade=260;
+      this.interaction.A = false;
+      window.activityAnimation = false;
+      window.globalTime.Delta = 2500;
+      this.counter = 0;
+    }
+    if (this.counter == delay && this.interaction.B) {
+      this.interaction.B = false;
+      window.activityAnimation = false;
+      window.globalTime.Delta = 2500;
+      this.counter = 0;
+    }
   }
 
   mouseClicked() {
-    if (this.btnA!=undefined&&this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy,this.btnA)) {
+    if (
+      this.btnA != undefined &&
+      this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA)
+    ) {
       this.clickedA();
     }
-    if (this.btnB!=undefined && this.hitTest(mouseX, mouseY, this.btnBx, this.btnBy,this.btnB)) {
+    if (
+      this.btnB != undefined &&
+      this.hitTest(mouseX, mouseY, this.btnBx, this.btnBy, this.btnB)
+    ) {
       this.clickedB();
     }
   }
-
 }
- 
