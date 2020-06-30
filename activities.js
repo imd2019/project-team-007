@@ -798,7 +798,7 @@ export class Bett extends InteractiveObject {
         355 / window.darkenScreenRate,
         0
       ); //counter muss an Zeit zum globalTime.news=true angepasst werden
-    } else if (this.interaction.A) {
+    } else if (this.interaction.A) {//muss noch fest zum Schlafen gebracht werden
       this.updateAnimationPosition(-10, -54);
       this.activityAnimation(this.bedInteraction, 90, 3);
     } else {

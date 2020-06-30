@@ -236,7 +236,7 @@ export default class Bon {
       window.globalDailyBudget =
         Math.round((window.globalMoney / 30) * 100) / 100; //bcs .toFixed(2) gibt nen String heraus -.-
       window.globalInitialDailyBudget = window.globalDailyBudget;
-      window.moneyBill = [];
+      window.moneyBill = [["Restbudget",window.globalMoney]];
       this.doubles=[];
       this.occurences={};
       this.day++;  
