@@ -35,7 +35,7 @@ export default class Time {
   // }
 
   countTime() {
-    if (window.globalTime.start) {
+    if (window.globalTime.start && !window.forcedToDoor && !window.forcedToPc.ToRight &&!window.forcedToPc.ToLeft) {
       let now = Date.now();
       let delta = now - this.timeStart;
       if (delta >= window.globalTime.Delta) {
@@ -82,7 +82,6 @@ export default class Time {
       this.timeStart = Date.now();
       this.countTime();
       window.activateCounter = false;
-      
     }
     text(
       nf(window.globalTime.hour, 2) + " : " + nf(window.globalTime.minute, 2),

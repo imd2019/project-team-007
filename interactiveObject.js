@@ -250,7 +250,15 @@ export default class InteractiveObject extends MainScreen {
     if (timeNeeded != 0) {
       window.globalTime.Delta = (msDelay * 1000) / ((timeNeeded * 60) / 15);
     }
-
+    if((!window.globalTime.start&&!window.globalTime.sleepAnimation)||window.forcedToPc.ToLeft||window.forcedToDoor||window.forcedToPc.ToRight){
+      this.charakterFadeOut=false;
+      this.fade=260;
+      this.interaction.A = false;
+      this.interaction.B = false;
+      window.activityAnimation = false;
+      window.globalTime.Delta = 2500;
+      this.counter = 0;
+    }
     if (this.counter == delay && this.interaction.A) {
       this.charakterFadeOut=false;
       this.fade=260;

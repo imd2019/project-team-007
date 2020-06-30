@@ -18,9 +18,6 @@ export default class Charakter {
 
     this.charakterScale = 0.55;
 
-    // this.charakterId=charakterId;
-
-    // this.day=day;
   }
 
   display(bedX) {

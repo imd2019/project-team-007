@@ -222,6 +222,9 @@ export class Door extends InteractiveObject {
     this.btnScale = 0.4;
 
     this.doorInteraction = doorInteraction;
+
+    this.LenaWork=false;
+    this.LenaUni=false;
   }
 
   showButtons(btnAId, btnBId) {
@@ -283,6 +286,8 @@ export class Door extends InteractiveObject {
   }
 
   display(x, y) {
+    // console.log("LenaUni: ",this.LenaUni);
+    // console.log("LenaWork: ",this.LenaWork);
     let door = this.doors.find((x) => x.id === "Tür");
     this.updateZone(door);
     this.updateBtnPosition(-20, 115, 20);
@@ -313,17 +318,28 @@ export class Door extends InteractiveObject {
     if (this.hoverTest(x)) {
       this.showButtons("Freunde", "Arbeitsamt");
     }
-    // this.update(x);
+    this.update(x);
 
     if (this.interaction.A) {
       this.charakterFadeOut = true;
       this.updateAnimationPosition(100, y - this.y - 20);
       if (window.charakterId == "Chantal") {
         this.activityAnimation(this.doorInteraction, 90, 2);
-      } else if (window.charakterId == "Lena") {
+      } 
+      if (window.charakterId == "Lena") {
+        if(this.LenaWork){
+          this.activityAnimation(this.doorInteraction, 120, 3.5);
+        }
+        else if(this.LenaUni){
         this.activityAnimation(this.doorInteraction, 210, 8.25);
+        }
       }
+      
     }
+    if(this.counter==0){
+          this.LenaUni=false;
+          this.LenaWork=false;
+      }
   }
 
   clickedA() {
@@ -350,26 +366,34 @@ export class Door extends InteractiveObject {
     this.updateAnimationA();
   }
 
-  //   update(x) {
-  //     if (window.charakterId == "Chantal") {
-  //       if (window.globalTime.hour == 8 && window.globalTime.minute == 30) {
-  //         window.forcedToDoor = true;
-  //       }
-  //       if (window.globalTime.hour == 12) {
-  //         window.forcedToDoor = true;
-  //       }
-  //     }
-  //     if (window.charakterId == "Lena") {
-  //       if (window.globalTime.hour == 8 && window.globalTime.minute == 30) {
-  //         window.forcedToDoor = true;
-  //       }
-  //     }
-  //     if (window.forcedToDoor && x <= this.x + 70) {
-  //       this.updateInteraction("Door");
-  //       this.updateAnimationA();
-  //       window.forcedToDoor = false;
-  //     }
-  //   }
+    update(x) {
+      if (window.charakterId == "Chantal"&&window.globalTime.day<4 ) {
+        if (window.globalTime.hour == 8 && window.globalTime.minute == 30 && !this.interaction.A) {
+          window.forcedToDoor = true;
+        }
+        if (window.globalTime.hour == 12 && !this.interaction.A) {
+          window.forcedToDoor = true;
+        }
+      }
+      if (window.charakterId == "Lena" &&window.globalTime.day<4) {
+        if (window.globalTime.hour == 8 && window.globalTime.minute == 30 && !this.interaction.A) {
+          window.forcedToDoor = true;
+          this.LenaUni=true;
+        }
+        if (window.globalTime.hour == 22 && !this.interaction.A) {
+          window.forcedToDoor = true;
+          this.LenaWork=true;
+          
+        }
+      }
+      if (window.forcedToDoor && x <= this.x + 70) {
+        this.updateInteraction("Door");
+        window.activateCounter=true;
+        this.updateAnimationA();
+        window.forcedToDoor = false;
+      }
+      
+    }
 }
 
 export class Fenster extends InteractiveObject {
@@ -504,6 +528,8 @@ export class PC extends InteractiveObject {
     this.pcBtnAInteraction = pcBtnAInteraction;
     this.pcBtnBInteraction = pcBtnBInteraction;
     this.animationScale = 0.5;
+
+    this.LenaUni=false;
   }
 
   showButtons(btnAId, btnBId) {
@@ -565,6 +591,7 @@ export class PC extends InteractiveObject {
   }
 
   display(x) {
+    console.log(this.LenaUni);
     this.update(x);  
     let pc = this.pcs.find((x) => x.id === "Tisch");
     this.updateZone(pc);
@@ -573,14 +600,19 @@ export class PC extends InteractiveObject {
     if (this.hoverTest(x)) {
       this.showButtons("Bewerben", "SocialMedia");
     }
-    
+    this.updateAnimationPosition(100, 100);
     if (this.interaction.A) {
-      this.updateAnimationPosition(100, 100);
       this.activityAnimation(this.pcBtnAInteraction, 90, 2);
-    } else if (this.interaction.B && window.charakterId == "Lena") {
-      this.updateAnimationPosition(100, 100);
-      this.activityAnimation(this.pcBtnBInteraction, 90, 2);
-    } else {
+    } 
+    else if (this.interaction.B && window.charakterId == "Lena") {
+      if(this.LenaUni){
+        this.activityAnimation(this.pcBtnBInteraction, 210, 8.25);
+      }
+      else{
+        this.activityAnimation(this.pcBtnBInteraction, 90, 2);
+      }
+    } 
+    else {
       let chair = this.pcs.find((x) => x.id === "Stuhl");
       image(
         chair,
@@ -590,6 +622,9 @@ export class PC extends InteractiveObject {
         chair.height * (this.objectScale + 0.025)
       );
     }
+    // if(this.counter==0){
+    //   this.LenaUni=false;
+    // }
   }
 
   clickedA() {
@@ -622,17 +657,18 @@ export class PC extends InteractiveObject {
   }
 
   update(x) {
-    if (window.charakterId == "Chantal") {
-      if (window.globalTime.hour == 9) {
-        if (x < floor(this.x + this.imgWidth / 2) && !window.forcedToPc.ToLeft) {
+    if (window.charakterId == "Chantal" && window.globalTime.day>=4) {
+      if (window.globalTime.hour == 8 & window.globalTime.minute==30) {
+        if (x < floor(this.x + this.imgWidth / 2) && !window.forcedToPc.ToLeft && !this.interaction.A) {
           window.forcedToPc.ToRight = true;
         }
-        if (x > ceil(this.x + this.imgWidth / 2) && !window.forcedToPc.ToRight) {
+        if (x > ceil(this.x + this.imgWidth / 2) && !window.forcedToPc.ToRight &&!this.interaction.A) {
           window.forcedToPc.ToLeft = true;
         }
       }
       if (window.forcedToPc.ToRight && x >= this.x + this.imgWidth/2) {
               this.updateInteraction("PcBtnA");
+              window.activateCounter=true;
               this.updateAnimationA();
               window.forcedToPc.ToRight = false;
               return;
@@ -640,32 +676,37 @@ export class PC extends InteractiveObject {
       if (window.forcedToPc.ToLeft && x <= this.x + this.imgWidth/2) {
         debugger; 
         this.updateInteraction("PcBtnA");
+        window.activateCounter=true;
         this.updateAnimationA();
         window.forcedToPc.ToLeft = false;
         return;
       }
     }
-    if (window.charakterId == "Lena") {
+    if (window.charakterId == "Lena" && window.globalTime.day>=4) {
         if (window.globalTime.hour == 8 && window.globalTime.minute==30) {
-          if (x < this.x + this.imgWidth / 2 && !window.forcedToPc.ToLeft) {
+          if (x < this.x + this.imgWidth / 2 && !window.forcedToPc.ToLeft && !this.interaction.B) {
             window.forcedToPc.ToRight = true;
+            this.LenaUni=true;
           }
-          if (x > this.x + this.imgWidth / 2 && !window.forcedToPc.ToRight) {
+          if (x > this.x + this.imgWidth / 2 && !window.forcedToPc.ToRight && !this.interaction.B) {
             window.forcedToPc.ToLeft = true;
+            this.LenaUni=true;
           }
         }
         if (window.forcedToPc.ToRight && x >= this.x + this.imgWidth/2) {
                 this.updateInteraction("PcBtnB");
+                window.activateCounter=true;
                 this.updateAnimationB();
                 window.forcedToPc.ToRight = false;
-                return;
+                
         }
         if (window.forcedToPc.ToLeft && x <= this.x + this.imgWidth/2) {
           debugger;  
           this.updateInteraction("PcBtnB");
+          window.activateCounter=true;
           this.updateAnimationB();
           window.forcedToPc.ToLeft = false;
-          return;
+          
         }
       }
   }
