@@ -87,7 +87,7 @@ export default class Time {
     text(
       nf(window.globalTime.hour, 2) + " : " + nf(window.globalTime.minute, 2),
       this.x + 12,
-      this.y + 7,
+      this.y + 8,
       100,
       50
     );
