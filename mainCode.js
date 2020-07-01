@@ -21,17 +21,26 @@ import Finale from "./auswertung.js";
 //<------les variablos globalos------>
 let globalSatisfaction = 20;
 let globalExhaustion = 30;
-let globalMoney=0;
+let globalMoney = 0;
 // let globalMoneyDay=globalMoneyMonth/30;
 
 window.globalSatisfaction = globalSatisfaction;
 window.globalExhaustion = globalExhaustion;
 window.globalMoney = globalMoney;
 
-window.moneyBill=[["Minijob",450],["Bafög",400],["Miete",-370],["Versicherung",-103],["Essen",-15],["Studium",-40],["Abos",-40],["Handyvertrag",-15],["Freizeit",-40]];
-window.globalDailyBudget=0;
-window.globalInitialDailyBudget=0;
-
+window.moneyBill = [
+  ["Minijob", 450],
+  ["Bafög", 400],
+  ["Miete", -370],
+  ["Versicherung", -103],
+  ["Essen", -15],
+  ["Studium", -40],
+  ["Abos", -40],
+  ["Handyvertrag", -15],
+  ["Freizeit", -40],
+];
+window.globalDailyBudget = 0;
+window.globalInitialDailyBudget = 0;
 
 let globalTime = {
   day: 1,
@@ -50,9 +59,9 @@ window.activateCounter = true;
 
 window.moveNextToBed = false;
 
-window.forcedToDoor=false;
+window.forcedToDoor = false;
 
-window.forcedToPc={ToRight:false,ToLeft:false};
+window.forcedToPc = { ToRight: false, ToLeft: false };
 
 let globalActivityArray = { day1: [], day2: [], day3: [], day4: [], day5: [] };
 
@@ -61,7 +70,7 @@ window.globalActivityArray = globalActivityArray;
 let activityAnimation = false;
 window.activityAnimation = activityAnimation;
 
-let charakterId = "Chantal"; //Chantal oder Lena
+let charakterId = "Lena"; //Chantal oder Lena
 window.charakterId = charakterId;
 
 let bgeMode = "noBGE"; //noBGE or withBGE
@@ -98,22 +107,33 @@ let walk = [];
 let buttons = [];
 
 let nachrichten = [];
-let windowAussicht=[];
+let windowAussicht = [];
+
+let thinkBubbles = [];
 
 function preload() {
-  // in den ids wird chanti rausgeschmissen damit man für lena nur image-Pfade ändern muss und nicht nochmal alle ids
-  // charakter.id wird ne variable in den img-Pfaden
-
-  // <----Room ---->
+  // <-------------------------------Room ------------------------------->
   let Room = loadImage("img/" + charakterId + "/Objects/background.png");
   Room.id = "Room";
   mainScreens.push(Room);
 
-  let FrontElement = loadImage(
-    "img/" + charakterId + "/Objects/frontElement.png"
-  );
-  FrontElement.id = "FrontElement";
-  frontElements.push(FrontElement);
+  if (charakterId == "Chantal") {
+    let FrontElement = loadImage(
+      "img/" + charakterId + "/Objects/frontElement.png"
+    );
+    FrontElement.id = "FrontElement";
+    frontElements.push(FrontElement);
+  }
+  if (charakterId == "Lena") {
+    let FrontElementA = loadImage("img/Lena/Objects/VorgroundSeatA.png");
+    FrontElementA.id = "FrontElementA";
+    let FrontDeco = loadImage("img/Lena/Objects/deco.png");
+    FrontDeco.id = "FrontDeco";
+    let FrontElementB = loadImage("img/Lena/Objects/VorgroundSeatB.png");
+    FrontElementB.id = "FrontElementB";
+
+    frontElements.push(FrontElementA, FrontElementB, FrontDeco);
+  }
 
   let Fridge = loadImage("img/" + charakterId + "/Objects/fridge.png");
   Fridge.id = "Fridge";
@@ -318,40 +338,22 @@ function preload() {
 
   //<---------------Window-Ausblick----------->
 
-  let day1 = loadImage(
-    "img/globals/window/" + bgeMode + "/day1.png"
-  );
+  let day1 = loadImage("img/globals/window/" + bgeMode + "/day1.png");
   day1.id = "day1";
-  
-  let day2 = loadImage(
-    "img/globals/window/" + bgeMode + "/day2.png"
-  );
+
+  let day2 = loadImage("img/globals/window/" + bgeMode + "/day2.png");
   day2.id = "day2";
-  
-  let day3 = loadImage(
-    "img/globals/window/" + bgeMode + "/day3.png"
-  );
+
+  let day3 = loadImage("img/globals/window/" + bgeMode + "/day3.png");
   day3.id = "day3";
-  
-  let day4 = loadImage(
-    "img/globals/window/" + bgeMode + "/day4.png"
-  );
+
+  let day4 = loadImage("img/globals/window/" + bgeMode + "/day4.png");
   day4.id = "day4";
-  
-  let day5 = loadImage(
-    "img/globals/window/" + bgeMode + "/day5.png"
-  );
+
+  let day5 = loadImage("img/globals/window/" + bgeMode + "/day5.png");
   day5.id = "day5";
-  
-  windowAussicht.push(
-    day1,
-    day2,
-    day3,
-    day4,
-    day5
-  );
 
-
+  windowAussicht.push(day1, day2, day3, day4, day5);
 
   //<-------Activity Animation ----->
 
@@ -1061,70 +1063,146 @@ function preload() {
 
   //<-------------Door Interactions---------------->
 
-  let doorInteractionLowest=[];
-  doorInteractionLowest.id="DoorInteractionLowest";
-  if(charakterId=="Chantal"){
+  let doorInteractionLowest = [];
+  doorInteractionLowest.id = "DoorInteractionLowest";
+  if (charakterId == "Chantal") {
     doorInteractionLowest.push(fridgeInteractionLowest1);
   }
-  if(charakterId=="Lena"){
+  if (charakterId == "Lena") {
     doorInteractionLowest.push(windowInteractionLowest1);
   }
 
-  let doorInteractionLow=[];
-  doorInteractionLow.id="DoorInteractionLow";
-  if(charakterId=="Chantal"){
+  let doorInteractionLow = [];
+  doorInteractionLow.id = "DoorInteractionLow";
+  if (charakterId == "Chantal") {
     doorInteractionLow.push(fridgeInteractionLow1);
   }
-  if(charakterId=="Lena"){
+  if (charakterId == "Lena") {
     doorInteractionLow.push(windowInteractionLow1);
   }
 
-  let doorInteractionMiddle=[];
-  doorInteractionMiddle.id="DoorInteractionMiddle";
-  if(charakterId=="Chantal"){
+  let doorInteractionMiddle = [];
+  doorInteractionMiddle.id = "DoorInteractionMiddle";
+  if (charakterId == "Chantal") {
     doorInteractionMiddle.push(fridgeInteractionMiddle1);
   }
-  if(charakterId=="Lena"){
+  if (charakterId == "Lena") {
     doorInteractionMiddle.push(windowInteractionMiddle1);
   }
 
-  let doorInteractionHigh=[];
-  doorInteractionHigh.id="DoorInteractionHigh";
-  if(charakterId=="Chantal"){
+  let doorInteractionHigh = [];
+  doorInteractionHigh.id = "DoorInteractionHigh";
+  if (charakterId == "Chantal") {
     doorInteractionHigh.push(fridgeInteractionHigh1);
   }
-  if(charakterId=="Lena"){
+  if (charakterId == "Lena") {
     doorInteractionHigh.push(windowInteractionHigh1);
   }
 
-  let doorInteractionVictory=[];
-  doorInteractionVictory.id="DoorInteractionVictory";
-  if(charakterId=="Chantal"){
+  let doorInteractionVictory = [];
+  doorInteractionVictory.id = "DoorInteractionVictory";
+  if (charakterId == "Chantal") {
     doorInteractionVictory.push(fridgeInteractionVictory1);
   }
-  if(charakterId=="Lena"){
+  if (charakterId == "Lena") {
     doorInteractionVictory.push(windowInteractionVictory1);
   }
 
-  doorInteraction.push(doorInteractionLowest,doorInteractionLow,doorInteractionMiddle,doorInteractionHigh,doorInteractionVictory);
+  doorInteraction.push(
+    doorInteractionLowest,
+    doorInteractionLow,
+    doorInteractionMiddle,
+    doorInteractionHigh,
+    doorInteractionVictory
+  );
+
+  //<-------------------Thinkbubbles------------------->
+  //<-------------------globals------------------->
+  let pcBtnBThought = loadImage(
+    "img/" + charakterId + "/Thoughts/globals/pcBtnB.png"
+  );
+  pcBtnBThought.id = "pcBtnBThought";
+
+  let tvBtnAThought = loadImage(
+    "img/" + charakterId + "/Thoughts/globals/tvBtnA.png"
+  );
+  tvBtnAThought.id = "tvBtnAThought";
+
+  let hungerThought = loadImage(
+    "img/" + charakterId + "/Thoughts/globals/hunger.png"
+  );
+  hungerThought.id = "hungerThought";
+
+  let sleepThought = loadImage(
+    "img/" + charakterId + "/Thoughts/globals/sleep.png"
+  );
+  sleepThought.id = "sleepThought";
+
+  let tooMuchThought = loadImage(
+    "img/" + charakterId + "/Thoughts/globals/tooMuch.png"
+  );
+  tooMuchThought.id = "tooMuchThought";
+
+  let victoryBGE = loadImage(
+    "img/" + charakterId + "/Thoughts/BGE/victory.png"
+  );
+  victoryBGE.id = "VictoryBGE";
+
+  if (charakterId == "Lena") {
+    let learnLateThought = loadImage(
+      "img/" + charakterId + "/Thoughts/globals/learnLate.png"
+    );
+    learnLateThought.id = "learnLateThought";
+    thinkBubbles.push(
+      pcBtnBThought,
+      tvBtnAThought,
+      hungerThought,
+      sleepThought,
+      tooMuchThought,
+      learnLateThought,
+      victoryBGE
+    );
+  }
+  if (charakterId == "Chantal") {
+    thinkBubbles.push(
+      pcBtnBThought,
+      tvBtnAThought,
+      hungerThought,
+      sleepThought,
+      tooMuchThought,
+      victoryBGE
+    );
+  }
 }
 window.preload = preload;
 
 let Room = new MainScreen(mainScreens);
 
 let fridge = new Kühlschrank(fridges, buttons, fridgeInteraction);
-let tv = new TV(tvs, buttons, tvBtnAInteraction, tvBtnBInteraction);
-let door = new Door(doors, buttons,doorInteraction);
-let fenster = new Fenster(windows, buttons,windowInteraction,windowAussicht);
-let pc = new PC(pcs, buttons, pcBtnAInteraction, pcBtnBInteraction);
-let bed = new Bett(beds, buttons, bedInteraction);
+let tv = new TV(
+  tvs,
+  buttons,
+  tvBtnAInteraction,
+  tvBtnBInteraction,
+  thinkBubbles
+);
+let door = new Door(doors, buttons, doorInteraction);
+let fenster = new Fenster(windows, buttons, windowInteraction, windowAussicht);
+let pc = new PC(
+  pcs,
+  buttons,
+  pcBtnAInteraction,
+  pcBtnBInteraction,
+  thinkBubbles
+);
+let bed = new Bett(beds, buttons, bedInteraction, frontElements);
 
 let frontElement = new FrontScreen(
   frontElements,
   tvBtnAInteraction,
   tvBtnBInteraction
 );
-let Person = new Charakter(stand, walk, Room.endScreen);
+let Person = new Charakter(stand, walk, Room.endScreen, thinkBubbles);
 
 let clock = new Time(1920 * 0.4 - 120, 5);
 let bon = new Bon();
@@ -1143,51 +1221,51 @@ function draw() {
 
   // console.log(window.globalTime.sleepAnimation);
   // console.log("globalTimeStart: ",window.globalTime.start);
-   
+
   if (!window.globalTime.news) {
     Room.display();
+    fenster.display(Person.charakter.x, Person.charakter.y);
     fridge.display(Person.charakter.x, Person.charakter.y);
+
     tv.display(Person.charakter.x);
-    door.display(Person.charakter.x,Person.charakter.y);
-    fenster.display(Person.charakter.x,Person.charakter.y);
+    door.display(Person.charakter.x, Person.charakter.y);
+
     pc.display(Person.charakter.x);
     bed.display(Person.charakter.x);
 
     if (!window.activityAnimation) {
-      Person.display(bed.x);
+      Person.display(bed.x, fridge.use);
     }
-    
-    if(!fenster.interaction.B){
-    frontElement.display();
+
+    if (!fenster.interaction.B) {
+      frontElement.display(tv.interaction.A, tv.interaction.B);
     }
     bon.display();
     clock.display();
-    
-   
-    Room.move(Person.charakter,pc.x,pc.imgWidth);
+
+    Room.move(Person.charakter, pc.x, pc.imgWidth);
     frontElement.move(Room.screenMoving);
     fridge.move(Room.screenMoving);
     tv.move(Room.screenMoving);
     door.move(Room.screenMoving);
     fenster.move(Room.screenMoving);
     pc.move(Room.screenMoving);
-    bed.move(Room.screenMoving);  
-    
+    bed.move(Room.screenMoving);
   }
-  Person.move(bed.x,door.x,pc.x,pc.imgWidth);
+  Person.move(bed.x, door.x, pc.x, pc.imgWidth);
   news.display();
 }
 window.draw = draw;
 
 function mouseClicked() {
   if (window.globalTime.start) {
-    if(!window.activityAnimation){
-    tv.mouseClicked();
-    fridge.mouseClicked();
-    pc.mouseClicked();
-    bed.mouseClicked();
-    fenster.mouseClicked();
-    door.mouseClicked();
+    if (!window.activityAnimation) {
+      tv.mouseClicked();
+      fridge.mouseClicked();
+      pc.mouseClicked();
+      bed.mouseClicked();
+      fenster.mouseClicked();
+      door.mouseClicked();
     }
     bon.mouseClicked();
   }
@@ -1195,7 +1273,7 @@ function mouseClicked() {
     news.mouseClicked();
   }
   fenster.clickedWindow();
-  
+
   if (globalTime.day == 3) {
     final.auswertung();
   }
