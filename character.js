@@ -1,5 +1,5 @@
 export default class Charakter {
-  constructor(stands, walks, endScreen) {
+  constructor(stands, walks, endScreen,thinkBubbles) {
     this.charakter = { x: (1920 * 0.4) / 2 - 110, y: 290 };
 
     this.stands = stands;
@@ -18,9 +18,12 @@ export default class Charakter {
 
     this.charakterScale = 0.55;
 
+    this.thinkBubbles=thinkBubbles;
+
   }
 
-  display(bedX) {
+  display(bedX,fridgeUse) {
+    this.thinkbubble(fridgeUse);
     // console.log(window.forcedToPc);
     this.update();
     if ( !(keyIsDown(RIGHT_ARROW)&&keyIsDown(LEFT_ARROW))&&keyIsDown(RIGHT_ARROW) && !window.forcedToDoor&&!window.forcedToPc.ToRight&&!window.forcedToPc.ToLeft ||!window.globalTime.start||window.forcedToPc.ToRight) {
@@ -91,6 +94,7 @@ export default class Charakter {
       this.charakter.x=bedX-5;
       window.moveNextToBed=false;
     }
+    
   }
 
   update() {
@@ -158,18 +162,24 @@ export default class Charakter {
     
   }
 
+  thinkbubble(fridgeUse){
+      if(window.globalTime.hour==2){
+        this.thinkBubbleDraw("sleepThought");
+      }
+      if(fridgeUse<2&&window.globalTime.hour>=18){
+        this.thinkBubbleDraw("hungerThought");
+      }
+      if(window.bgeMode=="withBGE"&&window.globalTime.day==5 && window.globalTime.hour==20){
+        this.thinkBubbleDraw("victoryBGE");
+      }
 
-
-  //hier kommen dailyArrays & Parameter;
-  // thinkbubble(){
-  //     if(charakterId["Name"]){
-  //         if(this.day==1){
-
-  //         }
-
-  //     }
-  // }
-
+      
+  }
+  
+  thinkBubbleDraw(thinkBubble){
+    let bubble=this.thinkBubbles.find((x) => x.id === thinkBubble);
+    image(bubble,this.charakter.x+50,this.charakter.y-bubble.height+15,bubble.width*this.charakterScale,bubble.height*this.charakterScale);
+  }
   // voice(){
   //     if(charakterId["Name"]){
 

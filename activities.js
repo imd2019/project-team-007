@@ -50,7 +50,7 @@ export class Kühlschrank extends InteractiveObject {
   }
 
   display(x, y) {
-    // console.log(this.counter);
+    console.log(this.use);
     let fridge = this.fridges.find((x) => x.id === "Fridge");
     this.updateZone(fridge);
     this.updateBtnPosition(20, 0, 45);
@@ -61,6 +61,9 @@ export class Kühlschrank extends InteractiveObject {
     if (this.interaction.A) {
       this.updateAnimationPosition(70, y - this.y - 10);
       this.activityAnimation(this.fridgeInteraction, 90, 0.75);
+    }
+    if(!window.globalTime.start){
+      this.use=0;
     }
   }
 
@@ -86,7 +89,7 @@ export class Kühlschrank extends InteractiveObject {
 }
 
 export class TV extends InteractiveObject {
-  constructor(tvs, Buttons, tvBtnAInteraction, tvBtnBInteraction) {
+  constructor(tvs, Buttons, tvBtnAInteraction, tvBtnBInteraction,thinkBubbles) {
     super();
     this.x = 520;
     this.y = 190;
@@ -101,6 +104,8 @@ export class TV extends InteractiveObject {
     this.tvBtnBInteraction = tvBtnBInteraction;
 
     this.animationSpeed = 0.15;
+
+    this.thinkBubbles=thinkBubbles;
   }
 
   showButtons(btnAId, btnBId) {
@@ -169,13 +174,22 @@ export class TV extends InteractiveObject {
     if (this.hoverTest(x)) {
       this.showButtons("Rtl2", "Filme");
     }
-    if (this.interaction.A) {
+    if (this.interaction.A && window.charakterId=="Chantal") {
       this.updateAnimationPosition(50, 170);
       this.activityAnimation(this.tvBtnAInteraction, 90, 1);
+      this.thinkBubble("tvBtnAThought",this.thinkBubbles,30,-250);
     }
-    if (this.interaction.B) {
+    if(this.interaction.A&& window.charakterId=="Lena"){
+      this.updateAnimationPosition(0, 400);
+      this.activityAnimation(this.tvBtnAInteraction, 90, 1);
+    }
+    if (this.interaction.B && window.charakterId=="Chantal") {
       this.updateAnimationPosition(50, 170);
       this.activityAnimation(this.tvBtnBInteraction, 90, 2);
+    }
+    if(this.interaction.B&& window.charakterId=="Lena"){
+      this.updateAnimationPosition(0, 400);
+      this.activityAnimation(this.tvBtnBInteraction, 90, 1);
     }
   }
 
@@ -514,7 +528,7 @@ export class Fenster extends InteractiveObject {
 }
 
 export class PC extends InteractiveObject {
-  constructor(pcs, Buttons, pcBtnAInteraction, pcBtnBInteraction) {
+  constructor(pcs, Buttons, pcBtnAInteraction, pcBtnBInteraction,thinkBubbles) {
     super();
     this.x = 1055;
     this.y = 185;
@@ -530,6 +544,7 @@ export class PC extends InteractiveObject {
     this.animationScale = 0.5;
 
     this.LenaUni=false;
+    this.thinkBubbles=thinkBubbles;
   }
 
   showButtons(btnAId, btnBId) {
@@ -604,12 +619,23 @@ export class PC extends InteractiveObject {
     if (this.interaction.A) {
       this.activityAnimation(this.pcBtnAInteraction, 90, 2);
     } 
-    else if (this.interaction.B && window.charakterId == "Lena") {
+    else if (this.interaction.B) {
+      if(window.charakterId == "Lena"){
       if(this.LenaUni){
         this.activityAnimation(this.pcBtnBInteraction, 210, 8.25);
       }
       else{
         this.activityAnimation(this.pcBtnBInteraction, 90, 2);
+        if(window.globalTime.hour>20&&window.globalTime.hour<2){
+          this.thinkBubble("learnLateThought",this.thinkBubbles,40,-180);
+        }
+        else{
+        this.thinkBubble("pcBtnBThought",this.thinkBubbles,40,-180);}
+      }
+      }
+      if(window.charakterId=="Chantal"){
+        this.activityAnimation(this.pcBtnAInteraction, 90, 2);
+        this.thinkBubble("pcBtnBThought",this.thinkBubbles,40,-180);
       }
     } 
     else {
@@ -647,7 +673,7 @@ export class PC extends InteractiveObject {
     if (window.charakterId == "Chantal") {
       this.updateInteraction("PcBtnA");
       this.getActivityBundle("Social Media");
-      this.updateAnimationA();
+      this.updateAnimationB();
     }
     if (window.charakterId == "Lena") {
       this.updateInteraction("PcBtnB");

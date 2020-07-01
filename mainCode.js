@@ -36,7 +36,7 @@ window.globalInitialDailyBudget=0;
 let globalTime = {
   day: 1,
   start: true,
-  hour: 8,
+  hour: 14,
   minute: 0,
   Delta: 2500,
   news: false,
@@ -61,7 +61,7 @@ window.globalActivityArray = globalActivityArray;
 let activityAnimation = false;
 window.activityAnimation = activityAnimation;
 
-let charakterId = "Chantal"; //Chantal oder Lena
+let charakterId = "Lena"; //Chantal oder Lena
 window.charakterId = charakterId;
 
 let bgeMode = "noBGE"; //noBGE or withBGE
@@ -100,20 +100,30 @@ let buttons = [];
 let nachrichten = [];
 let windowAussicht=[];
 
-function preload() {
-  // in den ids wird chanti rausgeschmissen damit man für lena nur image-Pfade ändern muss und nicht nochmal alle ids
-  // charakter.id wird ne variable in den img-Pfaden
+let thinkBubbles=[];
 
-  // <----Room ---->
+function preload() {
+  // <-------------------------------Room ------------------------------->
   let Room = loadImage("img/" + charakterId + "/Objects/background.png");
   Room.id = "Room";
   mainScreens.push(Room);
-
+  
+  if(charakterId=="Chantal"){
   let FrontElement = loadImage(
     "img/" + charakterId + "/Objects/frontElement.png"
   );
   FrontElement.id = "FrontElement";
   frontElements.push(FrontElement);
+  }
+  if(charakterId=="Lena"){
+    let FrontElementA = loadImage(
+      "img/Lena/Objects/VorgroundSeatA.png"
+    );
+    FrontElementA.id = "FrontElementA";
+    let FrontElementB= loadImage("img/Lena/Objects/VorgroundSeatB.png");
+    FrontElementB.id="FrontElementB";
+    frontElements.push(FrontElementA,FrontElementB);
+  }
 
   let Fridge = loadImage("img/" + charakterId + "/Objects/fridge.png");
   Fridge.id = "Fridge";
@@ -1107,24 +1117,57 @@ function preload() {
   }
 
   doorInteraction.push(doorInteractionLowest,doorInteractionLow,doorInteractionMiddle,doorInteractionHigh,doorInteractionVictory);
+
+
+  //<-------------------Thinkbubbles------------------->
+  //<-------------------globals------------------->
+  let pcBtnBThought=loadImage("img/"+charakterId+"/Thoughts/globals/pcBtnB.png");
+  pcBtnBThought.id="pcBtnBThought";
+
+  let tvBtnAThought=loadImage("img/"+charakterId+"/Thoughts/globals/tvBtnA.png");
+  tvBtnAThought.id="tvBtnAThought";
+
+  let hungerThought=loadImage("img/"+charakterId+"/Thoughts/globals/hunger.png");
+  hungerThought.id="hungerThought";
+
+  let sleepThought=loadImage("img/"+charakterId+"/Thoughts/globals/sleep.png");
+  sleepThought.id="sleepThought";
+
+  let tooMuchThought=loadImage("img/"+charakterId+"/Thoughts/globals/tooMuch.png");
+  tooMuchThought.id="tooMuchThought";
+  
+  let victoryBGE=loadImage("img/"+charakterId+"/Thoughts/BGE/victory.png");
+  victoryBGE.id="VictoryBGE";
+
+  if(charakterId=="Lena"){
+  let learnLateThought=loadImage("img/"+charakterId+"/Thoughts/globals/learnLate.png");
+  learnLateThought.id="learnLateThought";
+  thinkBubbles.push(pcBtnBThought,tvBtnAThought,hungerThought,sleepThought,tooMuchThought,learnLateThought,victoryBGE);
+  }
+  if(charakterId=="Chantal"){
+    thinkBubbles.push(pcBtnBThought,tvBtnAThought,hungerThought,sleepThought,tooMuchThought,victoryBGE);
+  }
+  
+
 }
 window.preload = preload;
 
 let Room = new MainScreen(mainScreens);
 
 let fridge = new Kühlschrank(fridges, buttons, fridgeInteraction);
-let tv = new TV(tvs, buttons, tvBtnAInteraction, tvBtnBInteraction);
+let tv = new TV(tvs, buttons, tvBtnAInteraction, tvBtnBInteraction,thinkBubbles);
 let door = new Door(doors, buttons,doorInteraction);
 let fenster = new Fenster(windows, buttons,windowInteraction,windowAussicht);
-let pc = new PC(pcs, buttons, pcBtnAInteraction, pcBtnBInteraction);
+let pc = new PC(pcs, buttons, pcBtnAInteraction, pcBtnBInteraction,thinkBubbles);
 let bed = new Bett(beds, buttons, bedInteraction);
 
 let frontElement = new FrontScreen(
   frontElements,
   tvBtnAInteraction,
-  tvBtnBInteraction
+  tvBtnBInteraction,
+  
 );
-let Person = new Charakter(stand, walk, Room.endScreen);
+let Person = new Charakter(stand, walk, Room.endScreen,thinkBubbles);
 
 let clock = new Time(1920 * 0.4 - 120, 5);
 let bon = new Bon();
@@ -1154,11 +1197,11 @@ function draw() {
     bed.display(Person.charakter.x);
 
     if (!window.activityAnimation) {
-      Person.display(bed.x);
+      Person.display(bed.x,fridge.use);
     }
     
     if(!fenster.interaction.B){
-    frontElement.display();
+    frontElement.display(tv.interaction.A,tv.interaction.B);
     }
     bon.display();
     clock.display();

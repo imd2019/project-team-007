@@ -275,6 +275,11 @@ export default class InteractiveObject extends MainScreen {
     }
   }
 
+  thinkBubble(thinkBubble,array,offsetX,offsetY){
+    let bubble=array.find((x) => x.id === thinkBubble);
+    image(bubble,this.interactX+offsetX,this.interactY+offsetY,bubble.width*this.animationScale,bubble.height*this.animationScale);
+  }
+
   mouseClicked() {
     if (
       this.btnA != undefined &&
