@@ -64,6 +64,7 @@ window.charakterId = charakterId;
 let bgeMode = "noBGE"; //noBGE or withBGE
 window.bgeMode = bgeMode;
 
+if(bgeMode=="noBGE"){
 if(charakterId=="Lena"){
 window.moneyBill = [
   ["Minijob", 450],
@@ -87,6 +88,29 @@ if(charakterId=="Chantal"){
     ["Freizeit", -60],
     ["Onlineshopping",-120]
   ];}
+}
+if(bgeMode=="withBGE"){
+  if(charakterId=="Lena"){
+  window.moneyBill = [
+    ["BGE", 1100],
+    ["Miete", -370],
+    ["Essen", -15],
+    ["Studium", -40],
+    ["Abos", -40],
+    ["Handyvertrag", -15],
+    ["Freizeit", -40],
+  ];}
+  if(charakterId=="Chantal"){
+    window.moneyBill = [
+      ["BGE",1100]
+      ["Miete", -370],
+      ["Essen", -10],
+      ["Abos", -40],
+      ["Handyvertrag", -15],
+      ["Freizeit", -60],
+      ["Onlineshopping",-120]
+    ];}
+  }
 window.globalDailyBudget = 0;
 window.globalInitialDailyBudget = 0;
 
