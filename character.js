@@ -1,6 +1,11 @@
 export default class Charakter {
   constructor(stands, walks, endScreen,thinkBubbles) {
+    if(window.charakterId=="Chantal"){
     this.charakter = { x: (1920 * 0.4) / 2 - 110, y: 290 };
+    }
+    if(window.charakterId=="Lena"){
+      this.charakter = { x: (1920 * 0.4) / 2 - 110, y: 280 };
+    }
 
     this.stands = stands;
     this.walks = walks;
@@ -15,8 +20,11 @@ export default class Charakter {
 
     this.speed = 5;
     this.direction = { right: true, left: false };
-
+    
+    
     this.charakterScale = 0.55;
+    
+    
 
     this.thinkBubbles=thinkBubbles;
 
@@ -127,7 +135,7 @@ export default class Charakter {
 
   move(bedX,doorX,pcX,pcWidth) {
    
-    if (this.endScreen.Right && this.charakter.x <= 1920 * 0.4 - 45) {
+    if (this.endScreen.Right && this.charakter.x <= 1920 * 0.4 - 70) {
       if (keyIsDown(RIGHT_ARROW) && !window.activityAnimation && window.globalTime.start && !window.forcedToDoor && !window.forcedToPc.ToLeft && !window.forcedToPc.ToRight) {
         this.charakter.x += this.speed;
       }
@@ -143,7 +151,7 @@ export default class Charakter {
       }
     }
 
-    if (this.endScreen.Left && this.charakter.x >= 0 + 45) {
+    if (this.endScreen.Left && this.charakter.x >= 0 + 70) {
       if (keyIsDown(LEFT_ARROW) && !window.activityAnimation && window.globalTime.start && !window.forcedToDoor && !window.forcedToPc.ToLeft && !window.forcedToPc.ToRight) {
         this.charakter.x -= this.speed;
       }
@@ -169,11 +177,12 @@ export default class Charakter {
       if(fridgeUse<2&&window.globalTime.hour>=18){
         this.thinkBubbleDraw("hungerThought");
       }
-      if(window.bgeMode=="withBGE"&&window.globalTime.day==5 && window.globalTime.hour==20){
+      if(window.bgeMode=="withBGE"&&window.globalTime.day==5 && window.globalTime.hour==20 && window.globalSatisfaction>=76){
         this.thinkBubbleDraw("victoryBGE");
       }
-
-      
+      if(window.bgeMode=="noBGE"&&window.globalTime.day==5 && window.globalTime.hour==20 && window.globalSatisfaction<76){
+        this.thinkBubbleDraw("noBgeVictory");
+      }
   }
   
   thinkBubbleDraw(thinkBubble){

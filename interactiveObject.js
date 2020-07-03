@@ -62,6 +62,8 @@ export default class InteractiveObject extends MainScreen {
 
     this.charakterFadeOut = false;
     this.fade=260;
+
+    this.useCounter={A:0,B:0};
   }
 
   move(screenMoving) {
@@ -278,6 +280,19 @@ export default class InteractiveObject extends MainScreen {
   thinkBubble(thinkBubble,array,offsetX,offsetY){
     let bubble=array.find((x) => x.id === thinkBubble);
     image(bubble,this.interactX+offsetX,this.interactY+offsetY,bubble.width*this.animationScale,bubble.height*this.animationScale);
+  }
+
+  toMuchBubble(array){
+    if(this.useCounter.A>3 && !this.interaction.B){
+      this.thinkBubble("tooMuchThought",array,30,-250);
+    }
+    if(this.useCounter.B>3 && !this.interaction.A){
+      this.thinkBubble("tooMuchThought",array,30,-250);
+    }
+    if(!window.globalTime.start){
+      this.useCounter.A=0;
+      this.useCounter.B=0;
+    }
   }
 
   mouseClicked() {

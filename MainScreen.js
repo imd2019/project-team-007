@@ -9,16 +9,18 @@ export default class MainScreen {
     this.endScreen = { Right: false, Left: false };
 
     this.speed = 5;
+    this.roomWidth;
   }
 
   display() {
-    console.log("positionxRaum", this.x);
     let room = this.rooms.find((x) => x.id === this.roomId);
-    image(room, this.x, this.y, room.width * 0.4, room.height * 0.4);
+    this.roomWidth=room.width * 0.4;
+    image(room, this.x, this.y, this.roomWidth, room.height * 0.4);
+    
   }
 
   checkMoving(charakter) {
-    if (this.x <= -4104 * 0.4 - this.x || charakter.x < (1920 * 0.4) / 2) {
+    if (this.x <= -this.roomWidth - this.x || charakter.x < (1920 * 0.4) / 2) {
       this.endScreen.Right = true;
       this.screenMoving.Right = false;
     } else {

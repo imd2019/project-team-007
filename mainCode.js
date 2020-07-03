@@ -70,7 +70,7 @@ window.globalActivityArray = globalActivityArray;
 let activityAnimation = false;
 window.activityAnimation = activityAnimation;
 
-let charakterId = "Lena"; //Chantal oder Lena
+let charakterId = "Chantal"; //Chantal oder Lena
 window.charakterId = charakterId;
 
 let bgeMode = "noBGE"; //noBGE or withBGE
@@ -1148,6 +1148,12 @@ function preload() {
   );
   victoryBGE.id = "VictoryBGE";
 
+  let noBgeVictory= loadImage("img/"+charakterId+"/Thoughts/noBGE/noVictory.png");
+  noBgeVictory.id="noBgeVictory";
+
+  let bewerbungen=loadImage("img/Chantal/Thoughts/noBGE/noVictory.png");
+  bewerbungen.id="BewerbungThought";
+
   if (charakterId == "Lena") {
     let learnLateThought = loadImage(
       "img/" + charakterId + "/Thoughts/globals/learnLate.png"
@@ -1160,7 +1166,7 @@ function preload() {
       sleepThought,
       tooMuchThought,
       learnLateThought,
-      victoryBGE
+      victoryBGE,noBgeVictory
     );
   }
   if (charakterId == "Chantal") {
@@ -1170,7 +1176,7 @@ function preload() {
       hungerThought,
       sleepThought,
       tooMuchThought,
-      victoryBGE
+      victoryBGE,noBgeVictory,bewerbungen
     );
   }
 }
@@ -1178,7 +1184,7 @@ window.preload = preload;
 
 let Room = new MainScreen(mainScreens);
 
-let fridge = new Kühlschrank(fridges, buttons, fridgeInteraction);
+let fridge = new Kühlschrank(fridges, buttons, fridgeInteraction,thinkBubbles);
 let tv = new TV(
   tvs,
   buttons,
@@ -1210,7 +1216,7 @@ let bon = new Bon();
 let final = new Finale();
 let news = new Nachrichten(nachrichten);
 
-// clock.countTime;
+
 
 function draw() {
   globalSatisfaction = Math.max(0, Math.min(100, globalSatisfaction));
@@ -1224,15 +1230,13 @@ function draw() {
 
   if (!window.globalTime.news) {
     Room.display();
-    fenster.display(Person.charakter.x, Person.charakter.y);
     fridge.display(Person.charakter.x, Person.charakter.y);
-
     tv.display(Person.charakter.x);
     door.display(Person.charakter.x, Person.charakter.y);
 
     pc.display(Person.charakter.x);
     bed.display(Person.charakter.x);
-
+    fenster.display(Person.charakter.x, Person.charakter.y);
     if (!window.activityAnimation) {
       Person.display(bed.x, fridge.use);
     }
@@ -1240,6 +1244,7 @@ function draw() {
     if (!fenster.interaction.B) {
       frontElement.display(tv.interaction.A, tv.interaction.B);
     }
+
     bon.display();
     clock.display();
 
@@ -1252,7 +1257,7 @@ function draw() {
     pc.move(Room.screenMoving);
     bed.move(Room.screenMoving);
   }
-  Person.move(bed.x, door.x, pc.x, pc.imgWidth);
+  Person.move(bed.x,door.x,pc.x,pc.imgWidth);
   news.display();
 }
 window.draw = draw;

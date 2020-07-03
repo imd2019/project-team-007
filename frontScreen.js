@@ -8,7 +8,7 @@ export default class FrontScreen extends InteractiveObject {
       this.y = 310;
     }
     if (window.charakterId == "Lena") {
-      this.x = 900;
+      this.x = 960;
       this.y = 310;
     }
     this.frontRoom = frontRoom;
@@ -23,14 +23,12 @@ export default class FrontScreen extends InteractiveObject {
   }
 
   display(tvInteractionA, tvInteractionB) {
-    console.log(tvInteractionA);
     if (window.charakterId == "Lena") {
       if (tvInteractionA) {
         this.updateInteraction("TvBtnA");
-        this.updateAnimationPosition(90, 20);
+        this.updateAnimationPosition(125, 25);
         this.animationScale = 0.5;
         this.activityAnimation(this.tvBtnAInteraction, 90, 1);
-        console.log(this.counter);
         // this.thinkBubble("tvBtnAThought",this.thinkBubbles,30,-250);
       } else {
         let frontElementA = this.frontRoom.find(
@@ -46,8 +44,9 @@ export default class FrontScreen extends InteractiveObject {
       }
       if (tvInteractionB) {
         this.updateInteraction("TvBtnB");
-        this.updateAnimationPosition(230 + 40, 20);
-        this.animationScale = 0.6;
+        this.updateAnimationPosition(315, 30);
+        this.animationScale = 0.5;
+        console.log(this.interactX);
         this.activityAnimation(this.tvBtnBInteraction, 90, 1);
       } else {
         let frontElementB = this.frontRoom.find(
@@ -57,8 +56,8 @@ export default class FrontScreen extends InteractiveObject {
           frontElementB,
           this.x + 230,
           this.y,
-          frontElementB.width * (this.objectScale + 0.05),
-          frontElementB.height * (this.objectScale + 0.05)
+          frontElementB.width * (this.objectScale + 0.02),
+          frontElementB.height * (this.objectScale + 0.02)
         );
       }
     }
