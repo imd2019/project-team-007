@@ -215,7 +215,7 @@ export default class Bon {
 
   update() {
     if (window.globalTime.day == 1) {
-      if (window.activateCounter) {
+      if (window.activateCounter && window.globalTime.hour==8&&window.globalTime.minute==0) {
         for (let e = 0; e < window.moneyBill.length; e++) {
           window.globalMoney = window.globalMoney + window.moneyBill[e][1];
         }
@@ -236,7 +236,7 @@ export default class Bon {
       window.globalDailyBudget =
         Math.round((window.globalMoney / 30) * 100) / 100; //bcs .toFixed(2) gibt nen String heraus -.-
       window.globalInitialDailyBudget = window.globalDailyBudget;
-      window.moneyBill = [];
+      window.moneyBill = [["Restbudget",window.globalMoney]];
       this.doubles=[];
       this.occurences={};
       this.day++;  

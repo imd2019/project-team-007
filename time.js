@@ -35,11 +35,11 @@ export default class Time {
   // }
 
   countTime() {
-    if (window.globalTime.start) {
+    if (window.globalTime.start && !window.forcedToDoor && !window.forcedToPc.ToRight &&!window.forcedToPc.ToLeft) {
       let now = Date.now();
       let delta = now - this.timeStart;
       if (delta >= window.globalTime.Delta) {
-        // console.log("delta: ", delta);
+        // console.log("delta & expectedDelta: ", delta,window.globalTime.Delta);
         if (window.globalTime.minute == 45) {
           window.globalTime.hour++;
           if (window.globalTime.hour == 2) {
@@ -82,7 +82,6 @@ export default class Time {
       this.timeStart = Date.now();
       this.countTime();
       window.activateCounter = false;
-      
     }
     text(
       nf(window.globalTime.hour, 2) + " : " + nf(window.globalTime.minute, 2),

@@ -18,7 +18,7 @@ export default class Nachrichten {
                 rect(0,0,1920,1080);
                 fill("white");
                 textSize(60);
-                text("made at 2 am, what am I doing with my life...       I just need sum wine and free time",30,30,1920*0.4,1080*0.4);
+                text("The End...",30,30,1920*0.4,1080*0.4);
             }else{
             let news=this.nachrichten.find(x=>x.id==="day"+window.globalTime.day+"_"+this.sheet);
             image(news,this.x,this.y,news.width*0.41,news.height*0.41); 
