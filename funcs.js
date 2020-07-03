@@ -34,14 +34,13 @@ $(document).ready(function(){
     } 
 });
 
-$(window).on("scroll", function () {
-  console.log($(document).scrollTop()); 
+console.log($(document).scrollTop()); 
+$(window).scroll(function () {
   console.log("hello");
   if ($(document).scrollTop() > 50) {
     $("body").addClass("test");
   } 
 });
 
+
   });
-
-
