@@ -22,17 +22,27 @@ monthCalculate(day) {
       this.satisfaction = ceil(
         this.satisfaction * window.globalActivityArray[dayString][i][0]
       );
+      this.exhaustion = ceil(
+        this.exhaustion * window.globalActivityArray[dayString][i][1]
+      );
+      this.money = 
+        this.money + window.globalActivityArray[dayString][i][2]
+      ;
       this.satisfaction=Math.max(0,Math.min(100,this.satisfaction));
+      this.exhaustion=Math.max(0,Math.min(100,this.exhaustion));
       window.globalSatisfaction=this.satisfaction;
+      window.globalExhaustion=this.exhaustion;
+      window.globalMoney=this.money;
     }
   }
 
   auswertung() {
     for (let j =0;j<26;j++) {
       // console.log("das modulo-etwas: ",1+j%2); 
-      this.monthCalculate(1+j%2);
-      console.log(this.satisfaction);
+      this.monthCalculate(4+j%2);
+      
     }
+    console.log(this.satisfaction);
   }
 
 }

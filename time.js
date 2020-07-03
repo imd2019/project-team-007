@@ -83,7 +83,6 @@ export default class Time {
     fill("black");
     textSize(25);
     if (window.activateCounter) {
-      // console.log("activateCounter: ", window.activateCounter);
       this.timeStart = Date.now();
       this.countTime();
       window.activateCounter = false;
@@ -95,11 +94,8 @@ export default class Time {
       100,
       50
     );
-    if (window.globalTime.sleepAnimation && window.globalTime.hour == 2) {
+    if (window.globalTime.sleepAnimation && (window.globalTime.hour == 2 || window.globalTime.hour<2 || window.globalTime.hour>9)) {
       this.dayEnd();
     }
-
-    // console.log(this.hour);
-    // console.log(this.dayStart);
   }
 }

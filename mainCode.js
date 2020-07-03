@@ -28,19 +28,7 @@ window.globalSatisfaction = globalSatisfaction;
 window.globalExhaustion = globalExhaustion;
 window.globalMoney = globalMoney;
 
-window.moneyBill = [
-  ["Minijob", 450],
-  ["Bafög", 400],
-  ["Miete", -370],
-  ["Versicherung", -103],
-  ["Essen", -15],
-  ["Studium", -40],
-  ["Abos", -40],
-  ["Handyvertrag", -15],
-  ["Freizeit", -40],
-];
-window.globalDailyBudget = 0;
-window.globalInitialDailyBudget = 0;
+
 
 let globalTime = {
   day: 1,
@@ -75,6 +63,32 @@ window.charakterId = charakterId;
 
 let bgeMode = "noBGE"; //noBGE or withBGE
 window.bgeMode = bgeMode;
+
+if(charakterId=="Lena"){
+window.moneyBill = [
+  ["Minijob", 450],
+  ["Bafög", 400],
+  ["Miete", -370],
+  ["Versicherung", -103],
+  ["Essen", -15],
+  ["Studium", -40],
+  ["Abos", -40],
+  ["Handyvertrag", -15],
+  ["Freizeit", -40],
+];}
+if(charakterId=="Chantal"){
+  window.moneyBill = [
+    ["Hartz4", 450],
+    ["Wohngeld", 270],
+    ["Miete", -270],
+    ["Essen", -10],
+    ["Abos", -40],
+    ["Handyvertrag", -15],
+    ["Freizeit", -60],
+    ["Onlineshopping",-120]
+  ];}
+window.globalDailyBudget = 0;
+window.globalInitialDailyBudget = 0;
 
 //<--------------->
 
@@ -1219,7 +1233,10 @@ let news = new Nachrichten(nachrichten);
 
 
 function draw() {
-  globalSatisfaction = Math.max(0, Math.min(100, globalSatisfaction));
+  if(bgeMode=="withBGE"){
+  globalSatisfaction = Math.max(0, Math.min(100, globalSatisfaction));}
+  if(bgeMode=="noBGE"){
+    globalSatisfaction = Math.max(0, Math.min(75, globalSatisfaction));}
   globalExhaustion = Math.max(0, Math.min(100, globalExhaustion));
 
   // console.log("day1 :",window.globalActivityArray.day1);
@@ -1237,7 +1254,7 @@ function draw() {
     pc.display(Person.charakter.x);
     bed.display(Person.charakter.x);
     fenster.display(Person.charakter.x, Person.charakter.y);
-    if (!window.activityAnimation) {
+    if (!window.activityAnimation&&!window.globalTime.sleepAnimation) {
       Person.display(bed.x, fridge.use);
     }
 
@@ -1279,7 +1296,7 @@ function mouseClicked() {
   }
   fenster.clickedWindow();
 
-  if (globalTime.day == 3) {
+  if (globalTime.day >5) {
     final.auswertung();
   }
   // console.log("Satisfaction: " + window.globalSatisfaction);

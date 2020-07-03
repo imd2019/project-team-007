@@ -146,11 +146,28 @@ export default class InteractiveObject extends MainScreen {
     this.money = window.globalDailyBudget;
 
     if (window.bgeMode == "withBGE") {
-      this.satisfaction = ceil(this.satisfaction * this.satisfactionRate); // Auslegungssache von Zufriedenheit
+      if(window.globalExhaustion>75){
+        this.satisfaction = ceil(this.satisfaction *(this.satisfactionRate*0.75));
+      }
+      else{
+      this.satisfaction = ceil(this.satisfaction *this.satisfactionRate);
+      } 
       window.globalSatisfaction = this.satisfaction;
+      globalSatisfaction = Math.max(0, Math.min(100, globalSatisfaction));
     }
-
-    //ohne BGE-MOde REchnung ( Tendenz zur Unzufriedenheit)
+    if(window.bgeMode=="noBGE"){
+      if(window.globalExhaustion>75){
+        this.satisfaction = floor(this.satisfaction *(this.satisfactionRate*0.5));
+      }
+      else if(window.globalExhaustion>90){
+        this.satisfaction = floor(this.satisfaction *(this.satisfactionRate*0.2));
+      }
+      else{
+      this.satisfaction = floor( this.satisfaction *this.satisfactionRate);
+      }
+      window.globalSatisfaction = this.satisfaction;
+      globalSatisfaction = Math.max(0, Math.min(75, globalSatisfaction));
+    }
 
     this.exhaustion = ceil(this.exhaustion * this.exhaustionRate); // Auslegungssache von Erschöpfung
     window.globalExhaustion = this.exhaustion;
