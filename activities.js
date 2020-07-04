@@ -584,6 +584,9 @@ export class Fenster extends InteractiveObject {
       if (this.opacity >= 260) {
         this.opacity = 260;
         this.aussichtOn = true;
+        fill("blue");
+        // rectMode(CENTER);
+        rect(200, 100,80,80);//rect unterm text am besten rotatet
         fill("black");
         textAlign(CENTER);
         textSize(28);
@@ -736,10 +739,12 @@ export class PC extends InteractiveObject {
     if(window.charakterId=="Lena"){
       this.updateAnimationPosition(120, 80);
     }
+    if(window.charakterId=="Chantal"){
+      this.updateAnimationPosition(100, 100);
+      }
     if (this.interaction.A) {
       if(window.charakterId=="Chantal"){
-      this.updateAnimationPosition(100, 100);
-      this.thinkBubble("BewerbungThought",this.thinkBubbles,40,-160)
+      this.thinkBubble("BewerbungThought",this.thinkBubbles,40,-160);
       }
       this.activityAnimation(this.pcBtnAInteraction, 90, 2);
       this.toMuchBubble(this.thinkBubbles);
@@ -976,7 +981,7 @@ export class Bett extends InteractiveObject {
   }
 
   display(x) {
-    console.log(this.goSleep);
+    
     if(window.charakterId=="Chantal"){
     this.updateAnimationPosition(-10, -54);
     }

@@ -76,7 +76,6 @@ export default class FrontScreen extends InteractiveObject {
       this.updateInteraction("TvBtnB");
       this.updateAnimationPosition(315, 30);
       this.animationScale = 0.5;
-      console.log(this.interactX);
       this.activityAnimation(this.tvBtnBInteraction, 90, 1);
     } else {
       let frontElementB = this.frontRoom.find(

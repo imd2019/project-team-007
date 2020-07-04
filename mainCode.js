@@ -31,9 +31,9 @@ window.globalMoney = globalMoney;
 
 
 let globalTime = {
-  day: 1,
+  day: 5,
   start: true,
-  hour: 8,
+  hour: 17,
   minute: 0,
   Delta: 2500,
   news: false,
@@ -58,7 +58,7 @@ window.globalActivityArray = globalActivityArray;
 let activityAnimation = false;
 window.activityAnimation = activityAnimation;
 
-let charakterId = "Chantal"; //Chantal oder Lena
+let charakterId = "Lena"; //Chantal oder Lena
 window.charakterId = charakterId;
 
 let bgeMode = "noBGE"; //noBGE or withBGE
@@ -1348,10 +1348,8 @@ function mouseClicked() {
   }
   fenster.clickedWindow();
 
-  if (globalTime.day >5) {
-    final.auswertung();
-  }
-  // console.log("Satisfaction: " + window.globalSatisfaction);
+  
+  console.log("Satisfaction: " + window.globalSatisfaction);
   // console.log("Exhaustion:" + window.globalExhaustion);
   // console.log("Money: " + window.globalMoney);
   // console.log("day 1:", globalActivityArray.day1);
