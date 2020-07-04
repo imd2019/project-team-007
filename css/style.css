@@ -11,12 +11,7 @@
     display: none;
   }
 
-  body,html {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
-
-::-moz-selection { 
+  ::-moz-selection { 
     color:#ffbc08; 
     background:#000; 
     text-shadow: none; 
@@ -28,13 +23,20 @@
     text-shadow: none; 
  }
 
-
-*  {
+ *  {
     margin: 0;
     padding: 0;
     position: relative;
     
 }
+
+  body, html {
+    position: relative;
+    font-family: 'Nunito', sans-serif;
+    height: auto;
+    top: 0;
+    width: 100%;
+  }
 
 h1 {
     font-family: Bakso;
@@ -42,6 +44,11 @@ h1 {
     line-height: 0.6;
     text-align: center;
     margin-bottom: 40px;
+}
+
+a {
+    color: #ffbc08;
+    text-decoration: none;
 }
 
 p {
@@ -67,17 +74,16 @@ h1 > span {
     width: 40vw;
     text-align: center;
     margin: 0 auto;
+    padding-bottom: 5vh;
 }
 
-html, body {
-    position: relative;
-    overflow-x: hidden;
-    font-family: 'Nunito', sans-serif;
-    height: 100%;
-}
-
-body.about {
-    overflow: hidden;
+body.NavClosed .navigation {
+    top: -200px;
+    transition: top 0.5s ease;
+    -webkit-transition: top 0.5s ease;
+    -moz-transition: top 0.5s ease;
+    -ms-transition: top 0.5s ease;
+    -o-transition: top 0.5s ease;
 }
 
 .p5Canvas{
@@ -87,17 +93,20 @@ body.about {
     opacity: 0;
     margin: 50px 25vw 0 25vw;
     display: none;
+    top: 200px;
 }
 
 section {
     opacity: 0;
     display: none;
-    width: 90vw;
-    margin: 200px 5vw 0 5vw;
+    width: 100vw;
+    margin: 200px 0vw 0 vw;
+    min-height: calc(100vh - 200px);
 }
 
 section.information {
-    margin: 300px 5vw 0 5vw;
+    margin: 300px 0vw 0 0vw;
+    min-height: calc(100vh - 300px);
 }
 
 body.home section.home {
@@ -113,7 +122,7 @@ body.home .p5Canvas {
 body.about section.about {
     opacity: 1;
     display: block;
-    margin: 200px 5vw 0 5vw;
+    margin: 200px 0vw 0 0vw;
 }
 
 body.character section.character {
@@ -125,7 +134,7 @@ body.thanks section.thanks {
     opacity: 1;
     display: block;
     text-align: center;
-    margin: 200px 5vw 0 5vw;
+    margin: 200px 0vw 0 0vw;
 }
 
 body.info section.information {
@@ -158,6 +167,12 @@ body.info section.information {
     justify-content: space-between;
     align-items: center;
     top: 0;
+    transition: top 0.5s ease;
+    -webkit-transition: top 0.5s ease;
+    -moz-transition: top 0.5s ease;
+    -ms-transition: top 0.5s ease;
+    -o-transition: top 0.5s ease;
+    left: 0;
 }
 
 .homeNav, 
@@ -294,74 +309,74 @@ body.info section.information {
 }
 
 .team {
-    position: absolute;
-    top: 57vh;
-    left: 13vw;
     background-image: url(../img/Website/Team.png);
     height: 30vh;
     width: 60vw;
+    position: fixed;
+    left: 20vw;
+    margin-top: 80px;
 }
 
 /*********  About **********/
 
 .elli {
-    position: absolute;
-    top: 37vh;
+    position: fixed;
+    top: 54vh;
     left: -10vw;
     background-image: url(../img/Website/Elli.png);
     height: 60vh;
     width: 30vw;
-    transform: rotate(27deg);
-    -webkit-transform: rotate(27deg);
-    -moz-transform: rotate(27deg);
-    -ms-transform: rotate(27deg);
-    -o-transform: rotate(27deg);
+    transform: rotate(46deg);
+    -webkit-transform: rotate(46deg);
+    -moz-transform: rotate(46deg);
+    -ms-transform: rotate(46deg);
+    -o-transform: rotate(46deg);
 }     
 
 .vero {
-    position: absolute;
-    top: -16vh;
-    left: -12vw;
+    position: fixed;
+    top: 11vh;
+    left: -7vw;
     background-image: url(../img/Website/Vero.png);
     height: 60vh;
-    width: 30vw;
-    transform: rotate(55deg);
-    -webkit-transform: rotate(55deg);
-    -moz-transform: rotate(55deg);
-    -ms-transform: rotate(55deg);
-    -o-transform: rotate(55deg);
+    width: 28vw;
+    transform: rotate(65deg);
+    -webkit-transform: rotate(65deg);
+    -moz-transform: rotate(65deg);
+    -ms-transform: rotate(65deg);
+    -o-transform: rotate(65deg);
 }  
 
 .jules {
-    position: absolute;
-    top: -16vh;
+    position: fixed;
+    top: 8vh;
     right: -12vw;
     background-image: url(../img/Website/Jules.png);
     height: 60vh;
     width: 30vw;
-    transform: rotate(-55deg);
-    -webkit-transform: rotate(-55deg);
-    -moz-transform: rotate(-55deg);
-    -ms-transform: rotate(-55deg);
-    -o-transform: rotate(-55deg);
+    transform: rotate(-66deg);
+    -webkit-transform: rotate(-66deg);
+    -moz-transform: rotate(-66deg);
+    -ms-transform: rotate(-66deg);
+    -o-transform: rotate(-66deg);
 }  
 
 .nesrin {
-    position: absolute;
-    top: 36vh;
-    right: -12vw;
+    position: fixed;
+    top: 50vh;
+    right: -8vw;
     background-image: url(../img/Website/Nesrin.png);
     height: 60vh;
     width: 30vw;
-    transform: rotate(-30deg);
-    -webkit-transform: rotate(-30deg);
-    -moz-transform: rotate(-30deg);
-    -ms-transform: rotate(-30deg);
-    -o-transform: rotate(-30deg);
+    transform: rotate(-51deg);
+    -webkit-transform: rotate(-51deg);
+    -moz-transform: rotate(-51deg);
+    -ms-transform: rotate(-51deg);
+    -o-transform: rotate(-51deg);
 }  
 
 /*********  Character **********/
-body.character { overflow-x: hidden;}
+/* body.character {  overflow-x: hidden;} */
 section.character { margin: 300px 5vw 0 5vw;}
 
 .left,
@@ -376,7 +391,7 @@ section.character { margin: 300px 5vw 0 5vw;}
 }
 
 .left .content {
-    margin-left: 0;
+    margin-left: 5vw;
 }
 
 .left .imageContent {
@@ -407,6 +422,7 @@ section.character { margin: 300px 5vw 0 5vw;}
 
 .right .content {
     display: inline-block;
+    margin-right: 10vw;
 }
 
 .dragon {     
@@ -477,8 +493,8 @@ section.information .right .imageContent {
 }
 
 section.information .left .imageContent {
-    width: 46vw;
+    width: 57vw;
     height: 85vh;
-    right: -7vw;
+    right: -20vw;
     top: 17vh;
 }

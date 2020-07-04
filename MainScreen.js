@@ -12,7 +12,7 @@ export default class MainScreen {
   }
 
   display() {
-    console.log("positionxRaum", this.x);
+   // console.log("positionxRaum", this.x);
     let room = this.rooms.find((x) => x.id === this.roomId);
     image(room, this.x, this.y, room.width * 0.4, room.height * 0.4);
   }
