@@ -26,26 +26,28 @@ this.flipflopCount=0;
 }
 
 display(){
-  
-  if(window.globalTime.day==5 && window.globalTime.sleepAnimation){
+ 
+  if(window.globalTime.day==5 &&(window.globalTime.hour<=2 ||window.globalTime.hour>8)&&window.globalTime.sleepAnimation){
     this.auswertung();
+    debugger;
   }
   if(window.globalTime.day>5){
     this.loadingScreen();
     if(this.fazitDisplay){
     this.update();
-    console.log(window.globalSatisfaction);
-    console.log(this.fazitId);
+    // console.log(window.globalSatisfaction);
+    // console.log(this.fazitId);
     // console.log(this.fazits);
-    let fazit=this.fazits.find((x)=>x.id=this.fazitId);
+    let fazit=this.fazits.find((x)=>x.id==this.fazitId);
     push();
     tint(255,this.opacity);
     this.opacity+=10;
     if(this.opacity>=260){
       this.opacity=260;
     }
-    image(fazit,this.x,this.y,fazit.width*0.4,fazit.height*0.4);
     
+    image(fazit,this.x,this.y,fazit.width*0.4,fazit.height*0.4);
+    pop();
     }
   }
 }
@@ -98,21 +100,27 @@ monthCalculate(day) {
     this.exhaustion = window.globalExhaustion;
     this.money = window.globalMoney;
     for (let i in window.globalActivityArray[dayString]) {
-      this.satisfaction = ceil(
+      if(window.bgeMode=="noBGE"){
+      this.satisfaction=Math.max(0,Math.min(75,this.satisfaction));
+      this.satisfaction = floor(
         this.satisfaction * window.globalActivityArray[dayString][i][0]
       );
+      }
+      if(window.bgeMode=="withBGE"){
+        this.satisfaction=Math.max(0,Math.min(75,this.satisfaction));
+        this.satisfaction = ceil(
+          this.satisfaction * window.globalActivityArray[dayString][i][0]
+        );
+      }
+     
       this.exhaustion = ceil(
         this.exhaustion * window.globalActivityArray[dayString][i][1]
       );
       this.money = 
         this.money + window.globalActivityArray[dayString][i][2]
       ;
-      if(window.bgeMode=="noBGE"){
-      this.satisfaction=Math.max(0,Math.min(75,this.satisfaction));
-      }
-      if(window.bgeMode=="withBGE"){
-        this.satisfaction=Math.max(0,Math.min(75,this.satisfaction));
-      }
+      
+      
       this.exhaustion=Math.max(0,Math.min(100,this.exhaustion));
       window.globalSatisfaction=this.satisfaction;
       window.globalExhaustion=this.exhaustion;
@@ -125,9 +133,12 @@ monthCalculate(day) {
     for (let j =0;j<26;j++) {
       // console.log("das modulo-etwas: ",1+j%2); 
       this.monthCalculate(4+j%2);
-      console.log(window.globalSatisfaction);
+      console.log("satisfaction",window.globalSatisfaction);
+      console.log("exhaustion",window.globalExhaustion);
+      
     }
     this.flipflopCount++;
+    console.log(this.flipflopCount);
     }
   }
   

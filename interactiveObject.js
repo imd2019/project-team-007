@@ -64,6 +64,8 @@ export default class InteractiveObject extends MainScreen {
     this.fade=260;
 
     this.useCounter={A:0,B:0};
+
+    this.flipflopCount=0;
   }
 
   move(screenMoving) {
@@ -153,7 +155,7 @@ export default class InteractiveObject extends MainScreen {
       this.satisfaction = ceil(this.satisfaction *this.satisfactionRate);
       } 
       window.globalSatisfaction = this.satisfaction;
-      globalSatisfaction = Math.max(0, Math.min(100, globalSatisfaction));
+      window.globalSatisfaction = Math.max(0, Math.min(100, window.globalSatisfaction));
     }
     if(window.bgeMode=="noBGE"){
       if(window.globalExhaustion>75){
@@ -166,11 +168,12 @@ export default class InteractiveObject extends MainScreen {
       this.satisfaction = floor( this.satisfaction *this.satisfactionRate);
       }
       window.globalSatisfaction = this.satisfaction;
-      globalSatisfaction = Math.max(0, Math.min(75, globalSatisfaction));
+      window.globalSatisfaction = Math.max(0, Math.min(75, window.globalSatisfaction));
     }
 
     this.exhaustion = ceil(this.exhaustion * this.exhaustionRate); // Auslegungssache von Erschöpfung
     window.globalExhaustion = this.exhaustion;
+    window.globalExhaustion=Math.max(0,Math.min(100,window.globalExhaustion));
 
     this.money = this.money + this.moneyRate;
     window.globalDailyBudget = this.money;

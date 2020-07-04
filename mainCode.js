@@ -31,9 +31,9 @@ window.globalMoney = globalMoney;
 
 
 let globalTime = {
-  day: 5,
+  day: 4,
   start: true,
-  hour: 17,
+  hour: 8,
   minute: 0,
   Delta: 2500,
   news: false,
@@ -1285,9 +1285,11 @@ let news = new Nachrichten(nachrichten);
 
 function draw() {
   if(bgeMode=="withBGE"){
-  globalSatisfaction = Math.max(0, Math.min(100, globalSatisfaction));}
+  globalSatisfaction = Math.max(0, Math.min(100, globalSatisfaction));
+  }
   if(bgeMode=="noBGE"){
-    globalSatisfaction = Math.max(0, Math.min(75, globalSatisfaction));}
+    globalSatisfaction = Math.max(0, Math.min(75, globalSatisfaction));
+  }
   globalExhaustion = Math.max(0, Math.min(100, globalExhaustion));
 
   // console.log("day1 :",window.globalActivityArray.day1);
@@ -1350,7 +1352,7 @@ function mouseClicked() {
 
   
   console.log("Satisfaction: " + window.globalSatisfaction);
-  // console.log("Exhaustion:" + window.globalExhaustion);
+  console.log("Exhaustion:" + window.globalExhaustion);
   // console.log("Money: " + window.globalMoney);
   // console.log("day 1:", globalActivityArray.day1);
 }
