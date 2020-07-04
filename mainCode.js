@@ -31,7 +31,7 @@ window.globalMoney = globalMoney;
 
 
 let globalTime = {
-  day: 4,
+  day: 1,
   start: true,
   hour: 8,
   minute: 0,
