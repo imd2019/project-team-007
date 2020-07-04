@@ -13,6 +13,9 @@ export default class MainScreen {
   }
 
   display() {
+
+
+
     let room = this.rooms.find((x) => x.id === this.roomId);
     this.roomWidth=room.width * 0.4;
     image(room, this.x, this.y, this.roomWidth, room.height * 0.4);
