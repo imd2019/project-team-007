@@ -34,12 +34,15 @@ $(document).ready(function(){
     } 
 });
 
-console.log($(document).scrollTop()); 
+
 $(window).scroll(function () {
+  console.log($(document).scrollTop()); 
   console.log("hello");
   if ($(document).scrollTop() > 50) {
-    $("body").addClass("test");
-  } 
+    $("body").addClass("NavClosed");
+  }  else {
+    $("body").removeClass("NavClosed");
+  }
 });
 
 

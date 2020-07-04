@@ -56,7 +56,7 @@ export class Kühlschrank extends InteractiveObject {
   }
 
   display(x, y) {
-    console.log(this.use);
+    //console.log(this.use);
     let fridge = this.fridges.find((x) => x.id === "Fridge");
     this.updateZone(fridge);
     this.updateBtnPosition(20, 0, 45);
@@ -78,7 +78,7 @@ export class Kühlschrank extends InteractiveObject {
       if (this.ration == 0) {
         this.ration = 3;
         this.moneyRate = -15;
-        console.log("u out of food");
+      //  console.log("u out of food");
       } else {
         this.moneyRate = 0;
       }
@@ -90,7 +90,7 @@ export class Kühlschrank extends InteractiveObject {
     this.updateParameter();
     this.getActivityBundle("Essen");
     this.updateAnimationA();
-    console.log("ration & use: ", this.ration, this.use);
+  //  console.log("ration & use: ", this.ration, this.use);
   }
 }
 
@@ -653,7 +653,7 @@ export class PC extends InteractiveObject {
   }
 
   display(x) {
-    console.log(this.LenaUni);
+  //  console.log(this.LenaUni);
     this.update(x);
     let pc = this.pcs.find((x) => x.id === "Tisch");
     this.updateZone(pc);

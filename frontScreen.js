@@ -23,14 +23,14 @@ export default class FrontScreen extends InteractiveObject {
   }
 
   display(tvInteractionA, tvInteractionB) {
-    console.log(tvInteractionA);
+   // console.log(tvInteractionA);
     if (window.charakterId == "Lena") {
       if (tvInteractionA) {
         this.updateInteraction("TvBtnA");
         this.updateAnimationPosition(90, 20);
         this.animationScale = 0.5;
         this.activityAnimation(this.tvBtnAInteraction, 90, 1);
-        console.log(this.counter);
+    //    console.log(this.counter);
         // this.thinkBubble("tvBtnAThought",this.thinkBubbles,30,-250);
       } else {
         let frontElementA = this.frontRoom.find(
