@@ -149,6 +149,8 @@ let windowAussicht = [];
 
 let thinkBubbles = [];
 
+let fazits=[];
+
 function preload() {
   // <-------------------------------Room ------------------------------->
   let Room = loadImage("img/" + charakterId + "/Objects/background.png");
@@ -199,7 +201,8 @@ function preload() {
   Bett.id = "Bett";
   beds.push(Bett);
 
-  // <-----Stand & Walk----->
+
+  // <-------------------Stand & Walk-------------------->
   let lowestStand = loadImage(
     "img/" + charakterId + "/Poses/stand/5_lowest/lowest.png"
   );
@@ -296,19 +299,19 @@ function preload() {
   let PowerNap = loadImage("img/globals/buttons/powerNap.png");
   PowerNap.id = "PowerNap";
 
-  //<-----Chanti Buttons----->
-  let tvBtnA = loadImage("img/Chantal/Buttons/TV_1.png");
-  tvBtnA.id = "Rtl2";
-  let tvBtnB = loadImage("img/Chantal/Buttons/TV_2.png");
-  tvBtnB.id = "Filme";
-  let pcBtnA = loadImage("img/Chantal/Buttons/PC_1.png");
-  pcBtnA.id = "Bewerben";
-  let pcBtnB = loadImage("img/Chantal/Buttons/PC_2.png");
-  pcBtnB.id = "SocialMedia";
-  let doorBtnA = loadImage("img/Chantal/Buttons/Tür_1.png");
-  doorBtnA.id = "Freunde";
-  let doorBtnB = loadImage("img/Chantal/Buttons/Tür_2.png");
-  doorBtnB.id = "Arbeitsamt";
+  //<-------------------- Buttons------------------------>
+  let tvBtnA = loadImage("img/"+charakterId+"/Buttons/TV_1.png");
+  tvBtnA.id = "TvBtnA";
+  let tvBtnB = loadImage("img/"+charakterId+"/Buttons/TV_2.png");
+  tvBtnB.id = "TvBtnB";
+  let pcBtnA = loadImage("img/"+charakterId+"/Buttons/PC_1.png");
+  pcBtnA.id = "PcBtnA";
+  let pcBtnB = loadImage("img/"+charakterId+"/Buttons/PC_2.png");
+  pcBtnB.id = "PcBtnB";
+  let doorBtnA = loadImage("img/"+charakterId+"/Buttons/Tür_1.png");
+  doorBtnA.id = "DoorBtnA";
+  let doorBtnB = loadImage("img/"+charakterId+"/Buttons/Tür_2.png");
+  doorBtnB.id = "DoorBtnB";
   buttons.push(
     tvBtnA,
     tvBtnB,
@@ -374,7 +377,29 @@ function preload() {
     day5_2
   );
 
-  //<---------------Window-Ausblick----------->
+
+//<-------------------Fazit--------------------->
+
+let badestFazit=loadImage("img/"+charakterId+"/fazit/badest.png");
+badestFazit.id="BadestFazit";
+
+let badFazit=loadImage("img/"+charakterId+"/fazit/bad.png");
+badFazit.id="BadFazit";
+
+let mediumFazit=loadImage("img/"+charakterId+"/fazit/medium.png");
+mediumFazit.id="MediumFazit";
+
+let highFazit=loadImage("img/"+charakterId+"/fazit/high.png");
+highFazit.id="HighFazit";
+
+let highestFazit=loadImage("img/"+charakterId+"/fazit/highest.png");
+highestFazit.id="HighestFazit";
+
+fazits.push(badestFazit,badFazit,mediumFazit,highFazit,highestFazit);
+
+
+
+//<---------------Window-Ausblick----------->
 
   let day1 = loadImage("img/globals/window/" + bgeMode + "/day1.png");
   day1.id = "day1";
@@ -394,6 +419,8 @@ function preload() {
   windowAussicht.push(day1, day2, day3, day4, day5);
 
   //<-------Activity Animation ----->
+
+  //<----------ForcedanimationsBanner------------>
 
   //<------Fridge Animation-------->
   let fridgeInteractionLowest1 = loadImage(
@@ -1244,14 +1271,14 @@ let bed = new Bett(beds, buttons, bedInteraction, frontElements);
 let frontElement = new FrontScreen(
   frontElements,
   tvBtnAInteraction,
-  tvBtnBInteraction
+  tvBtnBInteraction,thinkBubbles
 );
 let Person = new Charakter(stand, walk, Room.endScreen, thinkBubbles);
 
 let clock = new Time(1920 * 0.4 - 120, 5);
 let bon = new Bon();
 
-let final = new Finale();
+let final = new Finale(fazits);
 let news = new Nachrichten(nachrichten);
 
 
@@ -1300,6 +1327,7 @@ function draw() {
   }
   Person.move(bed.x,door.x,pc.x,pc.imgWidth);
   news.display();
+  final.display();
 }
 window.draw = draw;
 

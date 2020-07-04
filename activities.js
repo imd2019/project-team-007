@@ -215,12 +215,13 @@ export class TV extends InteractiveObject {
     }
     image(tv, this.x, this.y, this.imgWidth, this.imgHeight);
     if (this.hoverTest(x)) {
-      this.showButtons("Rtl2", "Filme");
+      this.showButtons("TvBtnA", "TvBtnB");
     }
     if (this.interaction.A) {
-      if(window.charakterId="Chantal"){
+      if(window.charakterId=="Chantal"){
       this.updateAnimationPosition(50, 170);
       this.activityAnimation(this.tvBtnAInteraction, 110, 1);
+      this.thinkBubble("tvBtnAThought", this.thinkBubbles, 30, -250);
       }
       if (window.charakterId == "Lena") {
       this.updateAnimationPosition(0, 400);
@@ -229,8 +230,7 @@ export class TV extends InteractiveObject {
       if(this.useCounter.A>3){
         this.toMuchBubble(this.thinkBubbles);
       }
-      else{
-      this.thinkBubble("tvBtnAThought", this.thinkBubbles, 30, -250);}
+      
     }
     if (this.interaction.B) {
       if(window.charakterId=="Chantal"){
@@ -403,7 +403,7 @@ export class Door extends InteractiveObject {
       image(door, this.x, this.y, this.imgWidth, this.imgHeight);
     }
     if (this.hoverTest(x)) {
-      this.showButtons("Freunde", "Arbeitsamt");
+      this.showButtons("DoorBtnA", "DoorBtnB");
     }
     this.update(x);
 
@@ -730,7 +730,7 @@ export class PC extends InteractiveObject {
     }
     image(pc, this.x, this.y, this.imgWidth, this.imgHeight);
     if (this.hoverTest(x)) {
-      this.showButtons("Bewerben", "SocialMedia");
+      this.showButtons("PcBtnA", "PcBtnB");
     }
     
     if(window.charakterId=="Lena"){

@@ -3,7 +3,7 @@
 // könnte von Screens erben
 
 export default class Finale{
-constructor(){
+constructor(fazits){
 this.x=0;
 this.y=0;
 
@@ -11,6 +11,14 @@ this.satisfaction;
 this.exhaustion;
 this.money;
 
+this.fazits=fazits;
+}
+
+display(){
+  if(window.globalTime.day>5){
+    let fazit=this.fazits.find((x)=>x.id="HighestFazit");
+    image(fazit,this.x,this.y,fazit.width*0.4,fazit.height*0.4);
+  }
 }
 
 monthCalculate(day) {
