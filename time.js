@@ -74,11 +74,15 @@ export default class Time {
 
   display() {
     fill("lightgrey");
+    if(window.charakterId=="Lena"){
     rect(this.x, this.y, 100, 36, 10);
+    }
+    if(window.charakterId=="Chantal"){
+      quad(this.x,this.y+4,this.x+100,this.y-4,this.x+110,this.y+30,this.x-2,this.y+40);
+    }
     fill("black");
     textSize(25);
     if (window.activateCounter) {
-      // console.log("activateCounter: ", window.activateCounter);
       this.timeStart = Date.now();
       this.countTime();
       window.activateCounter = false;
@@ -90,11 +94,8 @@ export default class Time {
       100,
       50
     );
-    if (window.globalTime.sleepAnimation && window.globalTime.hour == 2) {
+    if (window.globalTime.sleepAnimation && (window.globalTime.hour == 2 || window.globalTime.hour<2 ||window.globalTime.hour>8)) {
       this.dayEnd();
     }
-
-    // console.log(this.hour);
-    // console.log(this.dayStart);
   }
 }
