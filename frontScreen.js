@@ -24,9 +24,11 @@ export default class FrontScreen extends InteractiveObject {
   }
 
   display(tvInteractionA, tvInteractionB) {
+
     if (window.charakterId === "Lena") {
      this.seatA(tvInteractionA);
      this.seatB(tvInteractionB);
+
     }
     else if (window.charakterId === "Chantal") {
       let frontElement = this.frontRoom.find((x) => x.id === "FrontElement");
