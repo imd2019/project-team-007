@@ -270,7 +270,7 @@ export default class InteractiveObject extends MainScreen {
 
     
     let msDelay = delay / 30;
-    // console.log(msDelay);
+    
 
     if (timeNeeded != 0) {
       window.globalTime.Delta = (msDelay * 1000) / ((timeNeeded * 60) / 15);
@@ -301,7 +301,7 @@ export default class InteractiveObject extends MainScreen {
   }
 
   forcedInteractionsBanner(bannerId,array,bannerDelay){
-    // this.bannerCounter++;
+    // console.log("Forced Animation: ",this.counter);
     let banner=array.find((x)=>x.id==bannerId);
     push();
     tint(255,this.bannerFade);
@@ -314,11 +314,10 @@ export default class InteractiveObject extends MainScreen {
     if(this.counter>=bannerDelay-26){
       this.bannerFade-=10;
     }
-    if(this.counter>=bannerDelay || window.activityAnimation==false){
-      // this.bannerCounter=0;
+    if(this.counter>=bannerDelay){
       this.bannerFade=0;
     }
-    image(banner,0,0,banner.width*0.4,banner.height*0.4);
+    image(banner,0,0,banner.width,banner.height);
     pop();
   }
 

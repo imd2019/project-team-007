@@ -314,6 +314,9 @@ export class Door extends InteractiveObject {
 
     this.doorInteraction = doorInteraction;
     this.forcedInteractions=forcedInteractions;
+    
+    this.ChantalAmt=false;
+    this.ChantalWorkshop=false;
 
     this.LenaWork = false;
     this.LenaUni = false;
@@ -401,7 +404,7 @@ export class Door extends InteractiveObject {
 
   display(x, y) {
     // console.log("Door-FlipFlop: ",this.flipflopCount);
-    // console.log("LenaWork: ",this.LenaWork);
+    console.log("Chantal: ",this.ChantalAmt,this.ChantalWorkshop);
     let door = this.doors.find((x) => x.id === "Tür");
     this.updateZone(door);
     this.updateBtnPosition(-20, 115, 20);
@@ -438,17 +441,35 @@ export class Door extends InteractiveObject {
       this.charakterFadeOut = true;
       this.updateAnimationPosition(100, y - this.y - 20);
       if (window.charakterId == "Chantal") {
+        if (this.ChantalAmt) {
+          this.forcedInteractionsBanner("AmtPflicht",this.forcedInteractions,90);
+          this.activityAnimation(this.doorInteraction, 90, 2);
+          if (this.counter == 0) {
+            this.ChantalAmt = false;
+          }
+        }
+        else if(this.ChantalWorkshop){
+          this.forcedInteractionsBanner("WorkshopPflicht",this.forcedInteractions,90);
+          this.activityAnimation(this.doorInteraction, 90, 2);
+          if (this.counter == 0) {
+            this.ChantalWorkshop = false;
+          }
+        }
+        else{
         this.activityAnimation(this.doorInteraction, 90, 2);
+        }
+
       }
       if (window.charakterId == "Lena") {
         if (this.LenaWork) {
+          this.forcedInteractionsBanner("ArbeitPflicht",this.forcedInteractions,120);
           this.activityAnimation(this.doorInteraction, 120, 3.5);
-          // this.forcedInteractionsBanner("ArbeitPflicht",this.forcedInteractions,120);
           if (this.counter == 0) {
             this.LenaWork = false;
           }
-        } else if (this.LenaUni) {
-          // this.forcedInteractionsBanner("UniPflicht",this.forcedInteractions,210);
+        } 
+        else if (this.LenaUni) {
+          this.forcedInteractionsBanner("UniPflicht",this.forcedInteractions,210);
           this.activityAnimation(this.doorInteraction, 210, 8.25);
           if (this.counter == 0) {
           this.LenaUni = false;
@@ -508,6 +529,7 @@ export class Door extends InteractiveObject {
         !this.interaction.A
       ) {
         window.forcedToDoor = true;
+        this.ChantalAmt=true;
         if(this.flipflopCount<1){
           this.satisfactionRate=0.8;
           this.exhaustionRate=1.3;
@@ -518,6 +540,7 @@ export class Door extends InteractiveObject {
       }
       if (window.globalTime.hour == 12 && !this.interaction.A) {
         window.forcedToDoor = true;
+        this.ChantalWorkshop=true;
         if(this.flipflopCount<1){
           this.satisfactionRate=0.8;
           this.exhaustionRate=1.2;
@@ -735,7 +758,9 @@ export class PC extends InteractiveObject {
     this.forcedInteractions=forcedInteractions;
     
     this.LenaUni = false;
+    this.ChantalAmt=false;
     this.thinkBubbles = thinkBubbles;
+
   }
 
   showButtons(btnAId, btnBId) {
@@ -823,14 +848,25 @@ export class PC extends InteractiveObject {
     if (this.interaction.A) {
       if(window.charakterId=="Chantal"){
       this.thinkBubble("BewerbungThought",this.thinkBubbles,40,-160);
-      }
       this.activityAnimation(this.pcBtnAInteraction, 90, 2);
-      this.toMuchBubble(this.thinkBubbles);
+      this.toMuchBubble(this.thinkBubbles); 
+      if(this.ChantalAmt){
+        this.forcedInteractionsBanner("AmtPflicht",this.forcedInteractions,90);
+      } 
+      if (this.counter == 0) {
+        this.ChantalAmt = false;
+      }
+      }
+      if(window.charakterId=="Lena"){  
+      this.activityAnimation(this.pcBtnAInteraction, 90, 2);
+      this.toMuchBubble(this.thinkBubbles);  
+      }
     } 
     else if (this.interaction.B) {
       if (window.charakterId == "Lena") {
         if (this.LenaUni) {
           this.activityAnimation(this.pcBtnBInteraction, 210, 8.25);
+          this.forcedInteractionsBanner("UniPflicht",this.forcedInteractions,210);
           if (this.counter == 0) {
             this.LenaUni = false;
           }
@@ -847,8 +883,7 @@ export class PC extends InteractiveObject {
       if (window.charakterId == "Chantal") {
         this.activityAnimation(this.pcBtnAInteraction, 90, 2);
         this.thinkBubble("pcBtnBThought", this.thinkBubbles, 40, -180);
-      }
-      
+      }  
     } 
     else {
       let chair = this.pcs.find((x) => x.id === "Stuhl");
@@ -908,6 +943,7 @@ export class PC extends InteractiveObject {
           !this.interaction.A
         ) {
           window.forcedToPc.ToRight = true;
+          this.ChantalAmt=true;
           if(this.flipflopCount<1){
             this.satisfactionRate=0.8;
             this.exhaustionRate=1.3;
@@ -922,6 +958,7 @@ export class PC extends InteractiveObject {
           !this.interaction.A
         ) {
           window.forcedToPc.ToLeft = true;
+          this.ChantalAmt=true;
           if(this.flipflopCount<1){
             this.satisfactionRate=0.8;
             this.exhaustionRate=1.3;
