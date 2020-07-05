@@ -293,7 +293,7 @@ export class TV extends InteractiveObject {
 }
 
 export class Door extends InteractiveObject {
-  constructor(doors, Buttons, doorInteraction) {
+  constructor(doors, Buttons, doorInteraction,forcedInteractions) {
     super();
     if (window.charakterId === "Chantal") {
       this.x = 40;
@@ -313,6 +313,7 @@ export class Door extends InteractiveObject {
     this.btnScale = 0.4;
 
     this.doorInteraction = doorInteraction;
+    this.forcedInteractions=forcedInteractions;
 
     this.LenaWork = false;
     this.LenaUni = false;
@@ -320,7 +321,7 @@ export class Door extends InteractiveObject {
 
   showButtons(btnAId, btnBId) {
     this.btnA = this.Buttons.find((x) => x.id === btnAId);
-    if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA)) {
+    if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA) && window.globalTime.day<4) {
       push();
       angleMode(DEGREES);
       imageMode(CENTER);
@@ -337,7 +338,18 @@ export class Door extends InteractiveObject {
         this.btnA.height * this.btnScale
       );
       pop();
-    } else {
+    } 
+    else if(window.globalTime.day>=4){
+      this.btnA.filter(GRAY);
+      image(
+        this.btnA,
+        this.btnAx,
+        this.btnAy,
+        this.btnA.width * this.btnScale,
+        this.btnA.height * this.btnScale
+      );
+    }
+    else {
       image(
         this.btnA,
         this.btnAx,
@@ -348,7 +360,7 @@ export class Door extends InteractiveObject {
     }
 
     this.btnB = this.Buttons.find((x) => x.id === btnBId);
-    if (this.hitTest(mouseX, mouseY, this.btnBx, this.btnBy, this.btnB)) {
+    if (this.hitTest(mouseX, mouseY, this.btnBx, this.btnBy, this.btnB) && window.globalTime.day<4) {
       push();
       angleMode(DEGREES);
       imageMode(CENTER);
@@ -365,7 +377,18 @@ export class Door extends InteractiveObject {
         this.btnB.height * this.btnScale
       );
       pop();
-    } else {
+    } 
+    else if(window.globalTime.day>=4){
+      this.btnB.filter(GRAY);
+      image(
+        this.btnB,
+        this.btnBx,
+        this.btnBy,
+        this.btnB.width * this.btnScale,
+        this.btnB.height * this.btnScale
+      );     
+    }
+    else {
       image(
         this.btnB,
         this.btnBx,
@@ -420,30 +443,37 @@ export class Door extends InteractiveObject {
       if (window.charakterId == "Lena") {
         if (this.LenaWork) {
           this.activityAnimation(this.doorInteraction, 120, 3.5);
+          // this.forcedInteractionsBanner("ArbeitPflicht",this.forcedInteractions,120);
+          if (this.counter == 0) {
+            this.LenaWork = false;
+          }
         } else if (this.LenaUni) {
+          // this.forcedInteractionsBanner("UniPflicht",this.forcedInteractions,210);
           this.activityAnimation(this.doorInteraction, 210, 8.25);
+          if (this.counter == 0) {
+          this.LenaUni = false;
+          }
         }
         else{
           this.activityAnimation(this.doorInteraction, 90, 2);
         }
       }
     }
-    if (this.counter == 0) {
-      this.LenaUni = false;
-      this.LenaWork = false; 
-    }
+    
   }
 
   clickedA() {
+    if(window.globalTime.day>=4){
+      return;
+    }
     this.updateInteraction("Door");
-    
     if (window.charakterId == "Chantal") {
       this.getActivityBundle("Freunde");
       this.exhaustionRate=0.7;
       this.satisfactionRate=1.3;
     }
     if (window.charakterId == "Lena") {
-      this.getActivityBundle("Fotografieren?");
+      this.getActivityBundle("Freunde");
       this.exhaustionRate=0.6;
       this.satisfactionRate=1.4;
     }
@@ -452,15 +482,19 @@ export class Door extends InteractiveObject {
   }
 
   clickedB() {
+    if(window.globalTime.day>=4){
+      return;
+    }
     this.updateInteraction("Door");
     if (window.charakterId == "Chantal") {
-      this.getActivityBundle("Arbeitsamt");
+      this.getActivityBundle("Streetfood");
       this.exhaustionRate=1.3;
       this.satisfactionRate=0.8;
     }
     if (window.charakterId == "Lena") {
-      this.getActivityBundle("Uni");
-      this.exhaustionRate=1.2;
+      this.getActivityBundle("Tierheim");
+      this.exhaustionRate=0.8;
+      this.satisfactionRate=1.2;
     }
     this.updateParameter();
     this.updateAnimationA();
@@ -616,13 +650,7 @@ export class Fenster extends InteractiveObject {
       if (this.opacity >= 260) {
         this.opacity = 260;
         this.aussichtOn = true;
-        fill("blue");
-        // rectMode(CENTER);
-        rect(200, 100,80,80);//rect unterm text am besten rotatet
-        fill("black");
-        textAlign(CENTER);
-        textSize(28);
-        text("Klicke, um zurückzukommen", (1920 * 0.4) / 2, 50);
+        //rect unterm text am besten rotatet
       }
       if (this.counterOpacity >= this.ausssichtEnd) {
         this.opacity -= 10;
@@ -638,10 +666,23 @@ export class Fenster extends InteractiveObject {
       }
       image(aussicht, 0, 0, aussicht.width * 0.4, aussicht.height * 0.4);
       if (this.aussichtOn) {
+  
+        rectMode(CENTER);
+        noStroke();
+        fill("rgba(200,200,200,0.7)");
+        rect((1920 * 0.4) / 2, 400,220,30);
+        fill("#fbbb13");
+        push();
+        
+        angleMode(DEGREES);
+        translate((1920 * 0.4) / 2, 400)
+        rotate(-3)
+        rect(0, 0,200,10);
+        pop();
         fill("black");
         textAlign(CENTER);
-        textSize(16);
-        text("Klicke, um zurückzukommen", (1920 * 0.4) / 2, 80);
+        textSize(12);
+        text("Klicke, um zurückzukommen", (1920 * 0.4) / 2, 400);
       }
       pop();
     }
@@ -665,7 +706,8 @@ export class PC extends InteractiveObject {
     Buttons,
     pcBtnAInteraction,
     pcBtnBInteraction,
-    thinkBubbles
+    thinkBubbles,
+    forcedInteractions
   ) {
     super();
     if (window.charakterId === "Chantal") {
@@ -689,8 +731,9 @@ export class PC extends InteractiveObject {
 
     this.pcBtnAInteraction = pcBtnAInteraction;
     this.pcBtnBInteraction = pcBtnBInteraction;
-    
 
+    this.forcedInteractions=forcedInteractions;
+    
     this.LenaUni = false;
     this.thinkBubbles = thinkBubbles;
   }

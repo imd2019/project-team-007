@@ -31,7 +31,7 @@ window.globalMoney = globalMoney;
 
 
 let globalTime = {
-  day: 1,
+  day: 2,
   start: true,
   hour: 8,
   minute: 0,
@@ -147,11 +147,18 @@ let buttons = [];
 let nachrichten = [];
 let windowAussicht = [];
 
+let forcedInteractions=[];
+
 let thinkBubbles = [];
 
 let fazits=[];
 
+let LeFont;
+
 function preload() {
+  //<--------------------Font------------------->
+  LeFont=loadFont("fonts/BaksoSapi.otf");
+
   // <-------------------------------Room ------------------------------->
   let Room = loadImage("img/" + charakterId + "/Objects/background.png");
   Room.id = "Room";
@@ -421,6 +428,20 @@ fazits.push(badestFazit,badFazit,mediumFazit,highFazit,highestFazit);
   //<-------Activity Animation ----->
 
   //<----------ForcedanimationsBanner------------>
+  if(charakterId=="Lena"){
+  let forcedUni=loadImage("img/Lena/forcedInteractions/lernen.png");
+  forcedUni.id="UniPflicht";
+  let forcedWork=loadImage("img/Lena/forcedInteractions/arbeit.png");
+  forcedWork.id="ArbeitPflicht";
+  forcedInteractions.push(forcedUni,forcedWork);
+  }
+  if(charakterId=="Chantal"){
+    let forcedAmt=loadImage("img/Chantal/forcedInteractions/amt.png");
+    forcedAmt.id="AmtPflicht";
+    let forcedWorkshop=loadImage("img/Chantal/forcedInteractions/workShop.png");
+    forcedWorkshop.id="WorkshopPflicht";
+    forcedInteractions.push(forcedAmt,forcedWorkshop);
+  }
 
   //<------Fridge Animation-------->
   let fridgeInteractionLowest1 = loadImage(
@@ -1257,14 +1278,14 @@ let tv = new TV(
   tvBtnBInteraction,
   thinkBubbles
 );
-let door = new Door(doors, buttons, doorInteraction);
+let door = new Door(doors, buttons, doorInteraction,forcedInteractions);
 let fenster = new Fenster(windows, buttons, windowInteraction, windowAussicht);
 let pc = new PC(
   pcs,
   buttons,
   pcBtnAInteraction,
   pcBtnBInteraction,
-  thinkBubbles
+  thinkBubbles,forcedInteractions
 );
 let bed = new Bett(beds, buttons, bedInteraction, frontElements);
 
@@ -1302,15 +1323,15 @@ function draw() {
     Room.display();
     fridge.display(Person.charakter.x, Person.charakter.y);
     tv.display(Person.charakter.x);
+    pc.display(Person.charakter.x);
     door.display(Person.charakter.x, Person.charakter.y);
 
-    pc.display(Person.charakter.x);
+    
     bed.display(Person.charakter.x);
     fenster.display(Person.charakter.x, Person.charakter.y);
     if (!window.activityAnimation&&!window.globalTime.sleepAnimation) {
       Person.display(bed.x, fridge.use);
     }
-
     if (!fenster.interaction.B) {
       frontElement.display(tv.interaction.A, tv.interaction.B);
     }
@@ -1330,6 +1351,7 @@ function draw() {
   Person.move(bed.x,door.x,pc.x,pc.imgWidth);
   news.display();
   final.display();
+  textFont(LeFont);
 }
 window.draw = draw;
 

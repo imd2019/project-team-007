@@ -73,11 +73,6 @@ export default class Bon {
   fixedBon() {
     fill("lightgrey");
     rect(this.x, this.y, this.rectWidth, this.rectHeight);
-    // console.log("globalMoney ",window.globalMoney);
-    // console.log("dailyBudget ",window.globalDailyBudget);
-    // console.log("InitialDailyBudget ",window.globalInitialDailyBudget);
-    // console.log(this.day);
-    textFont("Bakso Sapi");
     fill("black");
     this.moneyBundle(this.x + 45, window.globalMoney, "Gesamtbudget", 16);
     if (window.globalDailyBudget < 0) {

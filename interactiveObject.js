@@ -66,6 +66,9 @@ export default class InteractiveObject extends MainScreen {
     this.useCounter={A:0,B:0};
 
     this.flipflopCount=0;
+
+    this.bannerFade=0;
+    this.bannerCounter=0;
   }
 
   move(screenMoving) {
@@ -162,7 +165,7 @@ export default class InteractiveObject extends MainScreen {
         this.satisfaction = floor(this.satisfaction *(this.satisfactionRate*0.5));
       }
       else if(window.globalExhaustion>90){
-        this.satisfaction = floor(this.satisfaction *(this.satisfactionRate*0.2));
+        this.satisfaction = floor(this.satisfaction *(this.satisfactionRate*0.2));//glaube das ist dann schon zu hart
       }
       else{
       this.satisfaction = floor( this.satisfaction *this.satisfactionRate);
@@ -295,6 +298,28 @@ export default class InteractiveObject extends MainScreen {
       window.globalTime.Delta = 2500;
       this.counter = 0;
     }
+  }
+
+  forcedInteractionsBanner(bannerId,array,bannerDelay){
+    // this.bannerCounter++;
+    let banner=array.find((x)=>x.id==bannerId);
+    push();
+    tint(255,this.bannerFade);
+    if(this.counter<=26){
+      this.bannerFade+=10;
+    }
+    if(this.bannerFade>=260){
+      this.bannerFade=260;
+    }
+    if(this.counter>=bannerDelay-26){
+      this.bannerFade-=10;
+    }
+    if(this.counter>=bannerDelay || window.activityAnimation==false){
+      // this.bannerCounter=0;
+      this.bannerFade=0;
+    }
+    image(banner,0,0,banner.width*0.4,banner.height*0.4);
+    pop();
   }
 
   thinkBubble(thinkBubble,array,offsetX,offsetY){

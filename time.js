@@ -39,9 +39,16 @@ export default class Time {
       let now = Date.now();
       let delta = now - this.timeStart;
       if (delta >= window.globalTime.Delta) {
-        // console.log("delta & expectedDelta: ", delta,window.globalTime.Delta);
+        console.log("delta & expectedDelta: ", delta,window.globalTime.Delta);
         if (window.globalTime.minute == 45) {
           window.globalTime.hour++;
+          if(window.bgeMode=="noBGE"){
+          window.globalExhaustion+=5;
+          }
+          if(window.bgeMode=="withBGE"){
+            window.globalExhaustion+=3;
+          }
+
           if (window.globalTime.hour == 2) {
             window.globalTime.start = false;
           }
@@ -89,8 +96,8 @@ export default class Time {
     }
     text(
       nf(window.globalTime.hour, 2) + " : " + nf(window.globalTime.minute, 2),
-      this.x + 12,
-      this.y + 8,
+      this.x + 11,
+      this.y +3,
       100,
       50
     );
