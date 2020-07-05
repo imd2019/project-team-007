@@ -404,7 +404,7 @@ export class Door extends InteractiveObject {
 
   display(x, y) {
     // console.log("Door-FlipFlop: ",this.flipflopCount);
-    console.log("Chantal: ",this.ChantalAmt,this.ChantalWorkshop);
+    // console.log("Chantal: ",this.ChantalAmt,this.ChantalWorkshop);
     let door = this.doors.find((x) => x.id === "Tür");
     this.updateZone(door);
     this.updateBtnPosition(-20, 115, 20);
