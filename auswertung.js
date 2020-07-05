@@ -101,16 +101,28 @@ monthCalculate(day) {
     this.money = window.globalMoney;
     for (let i in window.globalActivityArray[dayString]) {
       if(window.bgeMode=="noBGE"){
-      this.satisfaction=Math.max(0,Math.min(75,this.satisfaction));
-      this.satisfaction = floor(
+      if(window.globalExhaustion>75){
+          this.satisfaction = floor(this.satisfaction *(this.satisfactionRate-0.1));
+        }
+      else if(window.globalExhaustion>90){
+          this.satisfaction = floor(this.satisfaction *(this.satisfactionRate-0.2));
+        }
+      else{this.satisfaction = floor(
         this.satisfaction * window.globalActivityArray[dayString][i][0]
       );
+    }
+      this.satisfaction=Math.max(0,Math.min(75,this.satisfaction));
       }
       if(window.bgeMode=="withBGE"){
-        this.satisfaction=Math.max(0,Math.min(75,this.satisfaction));
+        if(window.globalExhaustion>75){
+          this.satisfaction = ceil(this.satisfaction *(this.satisfactionRate-0.05));
+        }
+        else{
         this.satisfaction = ceil(
           this.satisfaction * window.globalActivityArray[dayString][i][0]
         );
+        }
+        this.satisfaction=Math.max(0,Math.min(75,this.satisfaction));
       }
      
       this.exhaustion = ceil(

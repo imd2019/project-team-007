@@ -152,7 +152,7 @@ export default class InteractiveObject extends MainScreen {
 
     if (window.bgeMode == "withBGE") {
       if(window.globalExhaustion>75){
-        this.satisfaction = ceil(this.satisfaction *(this.satisfactionRate*0.75));
+        this.satisfaction = ceil(this.satisfaction *(this.satisfactionRate-0.05));
       }
       else{
       this.satisfaction = ceil(this.satisfaction *this.satisfactionRate);
@@ -162,10 +162,10 @@ export default class InteractiveObject extends MainScreen {
     }
     if(window.bgeMode=="noBGE"){
       if(window.globalExhaustion>75){
-        this.satisfaction = floor(this.satisfaction *(this.satisfactionRate*0.5));
+        this.satisfaction = floor(this.satisfaction *(this.satisfactionRate-0.1));
       }
       else if(window.globalExhaustion>90){
-        this.satisfaction = floor(this.satisfaction *(this.satisfactionRate*0.2));//glaube das ist dann schon zu hart
+        this.satisfaction = floor(this.satisfaction *(this.satisfactionRate-0.2));
       }
       else{
       this.satisfaction = floor( this.satisfaction *this.satisfactionRate);
