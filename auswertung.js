@@ -29,7 +29,7 @@ display(){
  
   if(window.globalTime.day==5 &&(window.globalTime.hour<=2 ||window.globalTime.hour>8)&&window.globalTime.sleepAnimation){
     this.auswertung();
-    debugger;
+    
   }
   if(window.globalTime.day>5){
     this.loadingScreen();
@@ -101,13 +101,13 @@ monthCalculate(day) {
     this.money = window.globalMoney;
     for (let i in window.globalActivityArray[dayString]) {
       if(window.bgeMode=="noBGE"){
-      if(window.globalExhaustion>75){
-          this.satisfaction = floor(this.satisfaction *(this.satisfactionRate-0.1));
+        if(window.globalExhaustion>75){
+          this.satisfaction = floor(this.satisfaction *(window.globalActivityArray[dayString][i][0]-0.1));
         }
-      else if(window.globalExhaustion>90){
-          this.satisfaction = floor(this.satisfaction *(this.satisfactionRate-0.2));
+        else if(window.globalExhaustion>90){
+          this.satisfaction = floor(this.satisfaction *(window.globalActivityArray[dayString][i][0]-0.2));
         }
-      else{this.satisfaction = floor(
+        else{this.satisfaction = floor(
         this.satisfaction * window.globalActivityArray[dayString][i][0]
       );
     }
@@ -115,7 +115,7 @@ monthCalculate(day) {
       }
       if(window.bgeMode=="withBGE"){
         if(window.globalExhaustion>75){
-          this.satisfaction = ceil(this.satisfaction *(this.satisfactionRate-0.05));
+          this.satisfaction = ceil(this.satisfaction *(window.globalActivityArray[dayString][i][0]-0.05));
         }
         else{
         this.satisfaction = ceil(
