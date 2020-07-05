@@ -19,10 +19,10 @@ import { Bett } from "./activities.js";
 import Finale from "./auswertung.js";
 
 //<------les variablos globalos------>
-let globalSatisfaction = 20;
+let globalSatisfaction = 26;
 let globalExhaustion = 30;
 let globalMoney = 0;
-// let globalMoneyDay=globalMoneyMonth/30;
+
 
 window.globalSatisfaction = globalSatisfaction;
 window.globalExhaustion = globalExhaustion;
@@ -82,7 +82,7 @@ if(charakterId=="Chantal"){
     ["Hartz4", 450],
     ["Wohngeld", 270],
     ["Miete", -270],
-    ["Essen", -10],
+    ["Essen", -15],
     ["Abos", -40],
     ["Handyvertrag", -15],
     ["Freizeit", -60],
@@ -110,11 +110,11 @@ if(bgeMode=="withBGE"){
       ["Freizeit", -60],
       ["Onlineshopping",-120]
     ];}
-  }
+}
 window.globalDailyBudget = 0;
 window.globalInitialDailyBudget = 0;
 
-//<--------------->
+//<----------------------->
 
 let mainScreens = [];
 let frontElements = [];
@@ -1303,7 +1303,6 @@ let final = new Finale(fazits);
 let news = new Nachrichten(nachrichten);
 
 
-
 function draw() {
   if(bgeMode=="withBGE"){
   globalSatisfaction = Math.max(0, Math.min(100, globalSatisfaction));
@@ -1396,8 +1395,8 @@ function mouseClicked() {
   fenster.clickedWindow();
 
   
-  console.log("Satisfaction: " + window.globalSatisfaction);
-  console.log("Exhaustion:" + window.globalExhaustion);
+  // console.log("Satisfaction: " + window.globalSatisfaction);
+  // console.log("Exhaustion:" + window.globalExhaustion);
   // console.log("Money: " + window.globalMoney);
   // console.log("day 1:", globalActivityArray.day1);
 }
