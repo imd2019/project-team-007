@@ -43,10 +43,10 @@ export default class Time {
         if (window.globalTime.minute == 45) {
           window.globalTime.hour++;
           if(window.bgeMode=="noBGE"){
-          window.globalExhaustion+=5;
+          window.globalExhaustion+=4;
           }
           if(window.bgeMode=="withBGE"){
-            window.globalExhaustion+=3;
+            window.globalExhaustion+=2;
           }
 
           if (window.globalTime.hour == 2) {
