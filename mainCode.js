@@ -31,7 +31,7 @@ window.globalMoney = globalMoney;
 
 
 let globalTime = {
-  day: 2,
+  day: 4,
   start: true,
   hour: 8,
   minute: 0,
@@ -58,7 +58,7 @@ window.globalActivityArray = globalActivityArray;
 let activityAnimation = false;
 window.activityAnimation = activityAnimation;
 
-let charakterId = "Lena"; //Chantal oder Lena
+let charakterId = "Chantal"; //Chantal oder Lena
 window.charakterId = charakterId;
 
 let bgeMode = "noBGE"; //noBGE or withBGE
@@ -1323,19 +1323,42 @@ function draw() {
     Room.display();
     fridge.display(Person.charakter.x, Person.charakter.y);
     tv.display(Person.charakter.x);
-    pc.display(Person.charakter.x);
-    door.display(Person.charakter.x, Person.charakter.y);
-
-    
     bed.display(Person.charakter.x);
+    if(charakterId=="Lena"){
+    if(pc.LenaUni){
+      door.display(Person.charakter.x, Person.charakter.y);
     fenster.display(Person.charakter.x, Person.charakter.y);
+    }
+    pc.display(Person.charakter.x);
+    if(!pc.LenaUni){
+    door.display(Person.charakter.x, Person.charakter.y);
+    fenster.display(Person.charakter.x, Person.charakter.y);
+    }
     if (!window.activityAnimation&&!window.globalTime.sleepAnimation) {
       Person.display(bed.x, fridge.use);
     }
-    if (!fenster.interaction.B) {
+    if(!fenster.interaction.B) {
       frontElement.display(tv.interaction.A, tv.interaction.B);
     }
-
+    }
+    if(charakterId=="Chantal"){
+      pc.display(Person.charakter.x);
+      if(door.interaction.A &&(door.ChantalWorkshop||door.ChantalAmt)){
+        fenster.display(Person.charakter.x, Person.charakter.y);
+        frontElement.display(tv.interaction.A, tv.interaction.B);
+        door.display(Person.charakter.x, Person.charakter.y);
+      }
+      else{
+        door.display(Person.charakter.x, Person.charakter.y);
+        fenster.display(Person.charakter.x, Person.charakter.y);
+        if (!window.activityAnimation&&!window.globalTime.sleepAnimation) {
+          Person.display(bed.x, fridge.use);
+        }
+        if(!fenster.interaction.B) {
+          frontElement.display(tv.interaction.A, tv.interaction.B);
+        }
+      }
+    }
     bon.display();
     clock.display();
 
