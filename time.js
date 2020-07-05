@@ -39,7 +39,7 @@ export default class Time {
       let now = Date.now();
       let delta = now - this.timeStart;
       if (delta >= window.globalTime.Delta) {
-        console.log("delta & expectedDelta: ", delta,window.globalTime.Delta);
+        // console.log("delta & expectedDelta: ", delta,window.globalTime.Delta);
         if (window.globalTime.minute == 45) {
           window.globalTime.hour++;
           if(window.bgeMode=="noBGE"){

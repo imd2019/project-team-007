@@ -145,12 +145,14 @@ monthCalculate(day) {
     for (let j =0;j<26;j++) {
       // console.log("das modulo-etwas: ",1+j%2); 
       this.monthCalculate(4+j%2);
-      console.log("satisfaction",window.globalSatisfaction);
-      console.log("exhaustion",window.globalExhaustion);
+      
       
     }
     this.flipflopCount++;
     console.log(this.flipflopCount);
+    console.log("satisfaction",window.globalSatisfaction);
+    console.log("exhaustion",window.globalExhaustion);
+    console.log("money :",window.globalMoney);
     }
   }
   
