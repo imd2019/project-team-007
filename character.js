@@ -174,7 +174,10 @@ export default class Charakter {
       if(window.globalTime.hour==2){
         this.thinkBubbleDraw("sleepThought");
       }
-      if(fridgeUse<2&&window.globalTime.hour>=18){
+      if(fridgeUse<1&&window.globalTime.hour>=17){
+        this.thinkBubbleDraw("hungerThought");
+      }
+      if(fridgeUse<2&&window.globalTime.hour<2){
         this.thinkBubbleDraw("hungerThought");
       }
       if(window.bgeMode=="withBGE"&&window.globalTime.day==5 && window.globalTime.hour==20 && window.globalSatisfaction>=76){

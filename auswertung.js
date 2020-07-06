@@ -13,6 +13,8 @@ this.satisfaction;
 this.exhaustion;
 this.money;
 
+this.steps=7.5;
+
 this.fazits=fazits;
 this.fazitId;
 
@@ -29,15 +31,11 @@ display(){
  
   if(window.globalTime.day==5 &&(window.globalTime.hour<=2 ||window.globalTime.hour>8)&&window.globalTime.sleepAnimation){
     this.auswertung();
-    
   }
   if(window.globalTime.day>5){
     this.loadingScreen();
     if(this.fazitDisplay){
     this.update();
-    // console.log(window.globalSatisfaction);
-    // console.log(this.fazitId);
-    // console.log(this.fazits);
     let fazit=this.fazits.find((x)=>x.id==this.fazitId);
     push();
     tint(255,this.opacity);
@@ -45,7 +43,6 @@ display(){
     if(this.opacity>=260){
       this.opacity=260;
     }
-    
     image(fazit,this.x,this.y,fazit.width*0.4,fazit.height*0.4);
     pop();
     }
@@ -102,38 +99,29 @@ monthCalculate(day) {
     for (let i in window.globalActivityArray[dayString]) {
       if(window.bgeMode=="noBGE"){
         if(window.globalExhaustion>75){
-          this.satisfaction = floor(this.satisfaction *(window.globalActivityArray[dayString][i][0]-0.1));
+          this.satisfaction = this.satisfaction +(this.steps*window.globalActivityArray[dayString][i][0])*0.5;
         }
         else if(window.globalExhaustion>90){
-          this.satisfaction = floor(this.satisfaction *(window.globalActivityArray[dayString][i][0]-0.2));
+          this.satisfaction = this.satisfaction +(this.steps*window.globalActivityArray[dayString][i][0])*0.3;
         }
-        else{this.satisfaction = floor(
-        this.satisfaction * window.globalActivityArray[dayString][i][0]
-      );
-    }
-      this.satisfaction=Math.max(0,Math.min(75,this.satisfaction));
-      }
-      if(window.bgeMode=="withBGE"){
-        if(window.globalExhaustion>75){
-          this.satisfaction = ceil(this.satisfaction *(window.globalActivityArray[dayString][i][0]-0.05));
-        }
-        else{
-        this.satisfaction = ceil(
-          this.satisfaction * window.globalActivityArray[dayString][i][0]
-        );
+        else{this.satisfaction = this.satisfaction +(this.steps* window.globalActivityArray[dayString][i][0]);
         }
         this.satisfaction=Math.max(0,Math.min(75,this.satisfaction));
       }
+      if(window.bgeMode=="withBGE"){
+        if(window.globalExhaustion>75){
+          this.satisfaction = this.satisfaction +(this.steps*window.globalActivityArray[dayString][i][0])*0.75;
+        }
+        else{
+        this.satisfaction = this.satisfaction +(this.steps* window.globalActivityArray[dayString][i][0]);
+        }
+        this.satisfaction=Math.max(0,Math.min(100,this.satisfaction));
+      }
      
-      this.exhaustion = ceil(
-        this.exhaustion * window.globalActivityArray[dayString][i][1]
-      );
-      this.money = 
-        this.money + window.globalActivityArray[dayString][i][2]
-      ;
-      
-      
+      this.exhaustion = this.exhaustion +(this.steps* window.globalActivityArray[dayString][i][1]);
       this.exhaustion=Math.max(0,Math.min(100,this.exhaustion));
+
+      this.money = this.money + window.globalActivityArray[dayString][i][2];
       window.globalSatisfaction=this.satisfaction;
       window.globalExhaustion=this.exhaustion;
       window.globalMoney=this.money;
@@ -145,8 +133,6 @@ monthCalculate(day) {
     for (let j =0;j<26;j++) {
       // console.log("das modulo-etwas: ",1+j%2); 
       this.monthCalculate(4+j%2);
-      
-      
     }
     this.flipflopCount++;
     console.log(this.flipflopCount);
@@ -155,6 +141,5 @@ monthCalculate(day) {
     console.log("money :",window.globalMoney);
     }
   }
-  
 
 }
