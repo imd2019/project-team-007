@@ -3,7 +3,7 @@
 // könnte von Screens erben
 
 export default class Finale{
-constructor(fazits){
+constructor(fazits,calendarAnimation){
 this.x=0;
 this.y=0;
 
@@ -17,6 +17,10 @@ this.steps=7.5;
 
 this.fazits=fazits;
 this.fazitId;
+
+this.calendarAnimation=calendarAnimation;
+this.index=0;
+this.animationSpeed=5;
 
 this.loadingBar=2;
 this.loadingSpeed=1;
@@ -50,12 +54,21 @@ display(){
 }
 
 loadingScreen(){
+  console.log(this.animationSpeed);
+  push();
+  imageMode(CENTER);
+  this.index += this.animationSpeed;
+  this.animationSpeed-=0.032;//-0.035 is best,-0,032 is better
+  let animation = floor(this.index) % this.calendarAnimation.length;
+  image(this.calendarAnimation[animation],(1920*0.4)/2,170,this.calendarAnimation[animation].width*0.6,this.calendarAnimation[animation].height*0.6);
+  pop();
   fill("#fbbb13");
   rect(((1920*0.4)-this.rectWidth)/2,280,this.loadingBar,30,20);
   this.loadingSpeed-=0.006;
   if(this.loadingBar>=this.rectWidth){
     this.loadingBar=400;
     this.fazitDisplay=true;
+    this.animationSpeed=0;
   }
   else{
     this.loadingBar+=5*this.loadingSpeed;

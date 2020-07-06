@@ -24,8 +24,6 @@ export default class Charakter {
     
     this.charakterScale = 0.55;
     
-    
-
     this.thinkBubbles=thinkBubbles;
 
   }

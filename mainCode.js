@@ -33,9 +33,9 @@ window.globalMoney = globalMoney;
 let start = false;
 
 let globalTime = {
-  day: 1,
+  day: 5,
   start: true,
-  hour: 8,
+  hour: 1,
   minute: 0,
   Delta: 2500,
   news: false,
@@ -114,6 +114,8 @@ let bonElements=[];
 
 let LeFont;
 
+let calendarAnimation=[];
+
 
 
 let startscreenpic = loadImage("img/globals/screens/startscreen.png");
@@ -164,6 +166,14 @@ thinkBubbles = [];
 
 fazits=[];
 
+
+  //<----------------calendarAnimation-------------->
+  for(let i=1;i<=30;i++){
+   let FrameNumber="Frame"+i;
+   let calendar={};
+   calendar[FrameNumber]=loadImage("img/globals/calendar/KalenderAnimation"+i+".png");
+   calendarAnimation.push(calendar[FrameNumber]);
+  }
 
   //<-------------------Rechnung----------------->
   let bonBottom=loadImage("img/globals/Rechnung.png");
@@ -1317,7 +1327,7 @@ let Person = new Charakter(stand, walk, Room.endScreen, thinkBubbles);
 let clock = new Time(1920 * 0.4 - 120, 5);
 let bon = new Bon(bonElements);
 
-let final = new Finale(fazits);
+let final = new Finale(fazits,calendarAnimation);
 let news = new Nachrichten(nachrichten);
 
 let infobutton = new Button(322, 292, 123, 35);
@@ -1440,7 +1450,7 @@ function update(){
   clock = new Time(1920 * 0.4 - 120, 5);
   bon = new Bon(bonElements);
   
-  final = new Finale(fazits);
+  final = new Finale(fazits,calendarAnimation);
   news = new Nachrichten(nachrichten);
   
 }
@@ -1451,6 +1461,7 @@ function Tunnelblick(){
 }
 
 function draw() {
+  // console.log(calendarAnimation);
   // console.log("mainCode: ",window.bgeMode);
   // console.log("update ",window.updateParameters);
   if (start === false) {
