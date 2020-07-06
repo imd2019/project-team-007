@@ -1260,6 +1260,8 @@ fazits.push(badestFazit,badFazit,mediumFazit,highFazit,highestFazit);
       "img/" + window.charakterId + "/Thoughts/globals/learnLate.png"
     );
     learnLateThought.id = "learnLateThought";
+    let KündigungThought=loadImage("img/Lena/Thoughts/noBGE/kündigung.png");
+    KündigungThought.id="KündigungThought";
     thinkBubbles.push(
       pcBtnBThought,
       tvBtnAThought,
@@ -1267,7 +1269,8 @@ fazits.push(badestFazit,badFazit,mediumFazit,highFazit,highestFazit);
       sleepThought,
       tooMuchThought,
       learnLateThought,
-      victoryBGE,noBgeVictory
+      victoryBGE,noBgeVictory,
+      KündigungThought
     );
   }
   if (window.charakterId == "Chantal") {

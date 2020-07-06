@@ -186,6 +186,11 @@ export default class Charakter {
       if(window.bgeMode=="noBGE"&&window.globalTime.day==5 && window.globalTime.hour==20 && window.globalSatisfaction<76){
         this.thinkBubbleDraw("noBgeVictory");
       }
+      if(window.charakterId=="Lena" && window.bgeMode=="noBGE"){
+        if(window.globalTime.hour==8 && window.globalTime.day==4){
+          this.thinkBubbleDraw("KündigungThought");
+        }
+      }
   }
   
   thinkBubbleDraw(thinkBubble){
