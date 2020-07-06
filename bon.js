@@ -198,8 +198,6 @@ export default class Bon {
       this.y = this.rectHeightVarBon;
       this.absatzStartFixedBon = this.y + this.rectHeight;
       this.bonShow = true;
-      console.log(window.moneyBill);
-
       return;
     }
 
@@ -220,8 +218,9 @@ export default class Bon {
   }
 
   update() {
+    
     if (window.globalTime.day == 1) {
-      if (window.activateCounter && window.globalTime.hour==8&&window.globalTime.minute==0) {
+      if (window.activateCounter && window.globalTime.hour==8&&window.globalTime.minute==0 ) {
         for (let e = 0; e < window.moneyBill.length; e++) {
           window.globalMoney = window.globalMoney + window.moneyBill[e][1];
         }

@@ -66,7 +66,7 @@ export class Kühlschrank extends InteractiveObject {
   }
 
   display(x, y) {
-    console.log("fridgeA:",this.useCounter.A);
+    // console.log("fridgeA:",this.useCounter.A);
     let fridge = this.fridges.find((x) => x.id === "Fridge");
     this.updateZone(fridge);
     if(window.charakterId=="Chantal"){
@@ -207,8 +207,6 @@ export class TV extends InteractiveObject {
   }
 
   display(x) {
-    console.log("tvA: ",this.useCounter.A);
-    console.log("tvB: ",this.useCounter.B);
 
     let tv = this.tvs.find((x) => x.id === "TV");
     this.updateZone(tv);
@@ -846,8 +844,6 @@ export class PC extends InteractiveObject {
       this.useCounter.B=0;
     }
 
-    console.log("pcA: ",this.useCounter.A);
-    console.log("pcB: ",this.useCounter.B);
 
     this.update(x);
     let pc = this.pcs.find((x) => x.id === "Tisch");
