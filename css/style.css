@@ -56,6 +56,15 @@ p {
     margin: 0 auto;
 }
 
+/* .p5game {
+        width: 54vw;
+    background-color: #ffbc08;
+    height: 36vw;
+    top: 202px;
+    left: 23vw;
+    transform: rotate(-5deg);
+} */
+
 h1 > span {
     font-size: 2.5vw;
 }
@@ -345,7 +354,7 @@ body.info section.information {
     -moz-transform: rotate(65deg);
     -ms-transform: rotate(65deg);
     -o-transform: rotate(65deg);
-}  
+}
 
 .jules {
     position: fixed;
