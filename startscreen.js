@@ -144,6 +144,8 @@ export default class Startscreens extends Button {
       this.infoscreen = false;
       this.choosescreenOff = false;
       this.choosescreenOn=false;
+      this.lena=false;
+      this.chanti=false;
       this.startscreen = true;
       this.back = false;
     }
