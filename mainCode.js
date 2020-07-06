@@ -58,7 +58,7 @@ window.globalActivityArray = globalActivityArray;
 let activityAnimation = false;
 window.activityAnimation = activityAnimation;
 
-let charakterId = "Chantal"; //Chantal oder Lena
+let charakterId = "Lena"; //Chantal oder Lena
 window.charakterId = charakterId;
 
 let bgeMode = "noBGE"; //noBGE or withBGE
@@ -152,10 +152,17 @@ let forcedInteractions=[];
 let thinkBubbles = [];
 
 let fazits=[];
+let bonElements=[];
 
 let LeFont;
 
 function preload() {
+  //<-------------------Rechnung----------------->
+  let bonBottom=loadImage("img/globals/Rechnung.png");
+  bonBottom.id="BonBottom";
+  bonElements.push(bonBottom);
+
+
   //<--------------------Font------------------->
   LeFont=loadFont("fonts/BaksoSapi.otf");
 
@@ -1297,7 +1304,7 @@ let frontElement = new FrontScreen(
 let Person = new Charakter(stand, walk, Room.endScreen, thinkBubbles);
 
 let clock = new Time(1920 * 0.4 - 120, 5);
-let bon = new Bon();
+let bon = new Bon(bonElements);
 
 let final = new Finale(fazits);
 let news = new Nachrichten(nachrichten);
