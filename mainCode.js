@@ -19,28 +19,16 @@ import { Bett } from "./activities.js";
 import Finale from "./auswertung.js";
 
 //<------les variablos globalos------>
-let globalSatisfaction = 20;
+let globalSatisfaction = 26;
 let globalExhaustion = 30;
 let globalMoney = 0;
-// let globalMoneyDay=globalMoneyMonth/30;
+
 
 window.globalSatisfaction = globalSatisfaction;
 window.globalExhaustion = globalExhaustion;
 window.globalMoney = globalMoney;
 
-window.moneyBill = [
-  ["Minijob", 450],
-  ["Bafög", 400],
-  ["Miete", -370],
-  ["Versicherung", -103],
-  ["Essen", -15],
-  ["Studium", -40],
-  ["Abos", -40],
-  ["Handyvertrag", -15],
-  ["Freizeit", -40],
-];
-window.globalDailyBudget = 0;
-window.globalInitialDailyBudget = 0;
+
 
 let globalTime = {
   day: 1,
@@ -70,13 +58,63 @@ window.globalActivityArray = globalActivityArray;
 let activityAnimation = false;
 window.activityAnimation = activityAnimation;
 
-let charakterId = "Lena"; //Chantal oder Lena
+let charakterId = "Chantal"; //Chantal oder Lena
 window.charakterId = charakterId;
 
 let bgeMode = "noBGE"; //noBGE or withBGE
 window.bgeMode = bgeMode;
 
-//<--------------->
+if(bgeMode=="noBGE"){
+if(charakterId=="Lena"){
+window.moneyBill = [
+  ["Minijob", 450],
+  ["Bafög", 400],
+  ["Miete", -370],
+  ["Versicherung", -103],
+  ["Essen", -15],
+  ["Studium", -40],
+  ["Abos", -40],
+  ["Handyvertrag", -15],
+  ["Freizeit", -40],
+];}
+if(charakterId=="Chantal"){
+  window.moneyBill = [
+    ["Hartz4", 450],
+    ["Wohngeld", 270],
+    ["Miete", -270],
+    ["Essen", -15],
+    ["Abos", -40],
+    ["Handyvertrag", -15],
+    ["Freizeit", -60],
+    ["Onlineshopping",-120]
+  ];}
+}
+if(bgeMode=="withBGE"){
+  if(charakterId=="Lena"){
+  window.moneyBill = [
+    ["BGE", 1100],
+    ["Miete", -370],
+    ["Essen", -15],
+    ["Studium", -40],
+    ["Abos", -40],
+    ["Handyvertrag", -15],
+    ["Freizeit", -40],
+  ];}
+  if(charakterId=="Chantal"){
+    window.moneyBill = [
+      ["BGE",1100]
+      ["Miete", -370],
+      ["Essen", -10],
+      ["Abos", -40],
+      ["Handyvertrag", -15],
+      ["Freizeit", -60],
+      ["Onlineshopping",-120]
+    ];}
+}
+window.globalDailyBudget = 0;
+window.globalInitialDailyBudget = 0;
+
+//<----------------------->
 
 let mainScreens = [];
 let frontElements = [];
@@ -109,9 +147,18 @@ let buttons = [];
 let nachrichten = [];
 let windowAussicht = [];
 
+let forcedInteractions=[];
+
 let thinkBubbles = [];
 
+let fazits=[];
+
+let LeFont;
+
 function preload() {
+  //<--------------------Font------------------->
+  LeFont=loadFont("fonts/BaksoSapi.otf");
+
   // <-------------------------------Room ------------------------------->
   let Room = loadImage("img/" + charakterId + "/Objects/background.png");
   Room.id = "Room";
@@ -161,7 +208,8 @@ function preload() {
   Bett.id = "Bett";
   beds.push(Bett);
 
-  // <-----Stand & Walk----->
+
+  // <-------------------Stand & Walk-------------------->
   let lowestStand = loadImage(
     "img/" + charakterId + "/Poses/stand/5_lowest/lowest.png"
   );
@@ -258,19 +306,19 @@ function preload() {
   let PowerNap = loadImage("img/globals/buttons/powerNap.png");
   PowerNap.id = "PowerNap";
 
-  //<-----Chanti Buttons----->
-  let tvBtnA = loadImage("img/Chantal/Buttons/TV_1.png");
-  tvBtnA.id = "Rtl2";
-  let tvBtnB = loadImage("img/Chantal/Buttons/TV_2.png");
-  tvBtnB.id = "Filme";
-  let pcBtnA = loadImage("img/Chantal/Buttons/PC_1.png");
-  pcBtnA.id = "Bewerben";
-  let pcBtnB = loadImage("img/Chantal/Buttons/PC_2.png");
-  pcBtnB.id = "SocialMedia";
-  let doorBtnA = loadImage("img/Chantal/Buttons/Tür_1.png");
-  doorBtnA.id = "Freunde";
-  let doorBtnB = loadImage("img/Chantal/Buttons/Tür_2.png");
-  doorBtnB.id = "Arbeitsamt";
+  //<-------------------- Buttons------------------------>
+  let tvBtnA = loadImage("img/"+charakterId+"/Buttons/TV_1.png");
+  tvBtnA.id = "TvBtnA";
+  let tvBtnB = loadImage("img/"+charakterId+"/Buttons/TV_2.png");
+  tvBtnB.id = "TvBtnB";
+  let pcBtnA = loadImage("img/"+charakterId+"/Buttons/PC_1.png");
+  pcBtnA.id = "PcBtnA";
+  let pcBtnB = loadImage("img/"+charakterId+"/Buttons/PC_2.png");
+  pcBtnB.id = "PcBtnB";
+  let doorBtnA = loadImage("img/"+charakterId+"/Buttons/Tür_1.png");
+  doorBtnA.id = "DoorBtnA";
+  let doorBtnB = loadImage("img/"+charakterId+"/Buttons/Tür_2.png");
+  doorBtnB.id = "DoorBtnB";
   buttons.push(
     tvBtnA,
     tvBtnB,
@@ -336,7 +384,29 @@ function preload() {
     day5_2
   );
 
-  //<---------------Window-Ausblick----------->
+
+//<-------------------Fazit--------------------->
+
+let badestFazit=loadImage("img/"+charakterId+"/fazit/badest.png");
+badestFazit.id="BadestFazit";
+
+let badFazit=loadImage("img/"+charakterId+"/fazit/bad.png");
+badFazit.id="BadFazit";
+
+let mediumFazit=loadImage("img/"+charakterId+"/fazit/medium.png");
+mediumFazit.id="MediumFazit";
+
+let highFazit=loadImage("img/"+charakterId+"/fazit/high.png");
+highFazit.id="HighFazit";
+
+let highestFazit=loadImage("img/"+charakterId+"/fazit/highest.png");
+highestFazit.id="HighestFazit";
+
+fazits.push(badestFazit,badFazit,mediumFazit,highFazit,highestFazit);
+
+
+
+//<---------------Window-Ausblick----------->
 
   let day1 = loadImage("img/globals/window/" + bgeMode + "/day1.png");
   day1.id = "day1";
@@ -356,6 +426,22 @@ function preload() {
   windowAussicht.push(day1, day2, day3, day4, day5);
 
   //<-------Activity Animation ----->
+
+  //<----------ForcedanimationsBanner------------>
+  if(charakterId=="Lena"){
+  let forcedUni=loadImage("img/Lena/forcedInteractions/lernen.png");
+  forcedUni.id="UniPflicht";
+  let forcedWork=loadImage("img/Lena/forcedInteractions/arbeit.png");
+  forcedWork.id="ArbeitPflicht";
+  forcedInteractions.push(forcedUni,forcedWork);
+  }
+  if(charakterId=="Chantal"){
+    let forcedAmt=loadImage("img/Chantal/forcedInteractions/amt.png");
+    forcedAmt.id="AmtPflicht";
+    let forcedWorkshop=loadImage("img/Chantal/forcedInteractions/workShop.png");
+    forcedWorkshop.id="WorkshopPflicht";
+    forcedInteractions.push(forcedAmt,forcedWorkshop);
+  }
 
   //<------Fridge Animation-------->
   let fridgeInteractionLowest1 = loadImage(
@@ -1148,6 +1234,12 @@ function preload() {
   );
   victoryBGE.id = "VictoryBGE";
 
+  let noBgeVictory= loadImage("img/"+charakterId+"/Thoughts/noBGE/noVictory.png");
+  noBgeVictory.id="noBgeVictory";
+
+  let bewerbungen=loadImage("img/Chantal/Thoughts/noBGE/noVictory.png");
+  bewerbungen.id="BewerbungThought";
+
   if (charakterId == "Lena") {
     let learnLateThought = loadImage(
       "img/" + charakterId + "/Thoughts/globals/learnLate.png"
@@ -1160,7 +1252,7 @@ function preload() {
       sleepThought,
       tooMuchThought,
       learnLateThought,
-      victoryBGE
+      victoryBGE,noBgeVictory
     );
   }
   if (charakterId == "Chantal") {
@@ -1170,7 +1262,7 @@ function preload() {
       hungerThought,
       sleepThought,
       tooMuchThought,
-      victoryBGE
+      victoryBGE,noBgeVictory,bewerbungen
     );
   }
 }
@@ -1178,7 +1270,7 @@ window.preload = preload;
 
 let Room = new MainScreen(mainScreens);
 
-let fridge = new Kühlschrank(fridges, buttons, fridgeInteraction);
+let fridge = new Kühlschrank(fridges, buttons, fridgeInteraction,thinkBubbles);
 let tv = new TV(
   tvs,
   buttons,
@@ -1186,34 +1278,38 @@ let tv = new TV(
   tvBtnBInteraction,
   thinkBubbles
 );
-let door = new Door(doors, buttons, doorInteraction);
+let door = new Door(doors, buttons, doorInteraction,forcedInteractions);
 let fenster = new Fenster(windows, buttons, windowInteraction, windowAussicht);
 let pc = new PC(
   pcs,
   buttons,
   pcBtnAInteraction,
   pcBtnBInteraction,
-  thinkBubbles
+  thinkBubbles,forcedInteractions
 );
 let bed = new Bett(beds, buttons, bedInteraction, frontElements);
 
 let frontElement = new FrontScreen(
   frontElements,
   tvBtnAInteraction,
-  tvBtnBInteraction
+  tvBtnBInteraction,thinkBubbles
 );
 let Person = new Charakter(stand, walk, Room.endScreen, thinkBubbles);
 
 let clock = new Time(1920 * 0.4 - 120, 5);
 let bon = new Bon();
 
-let final = new Finale();
+let final = new Finale(fazits);
 let news = new Nachrichten(nachrichten);
 
-// clock.countTime;
 
 function draw() {
+  if(bgeMode=="withBGE"){
   globalSatisfaction = Math.max(0, Math.min(100, globalSatisfaction));
+  }
+  if(bgeMode=="noBGE"){
+    globalSatisfaction = Math.max(0, Math.min(75, globalSatisfaction));
+  }
   globalExhaustion = Math.max(0, Math.min(100, globalExhaustion));
 
   // console.log("day1 :",window.globalActivityArray.day1);
@@ -1224,21 +1320,43 @@ function draw() {
 
   if (!window.globalTime.news) {
     Room.display();
-    fenster.display(Person.charakter.x, Person.charakter.y);
     fridge.display(Person.charakter.x, Person.charakter.y);
-
     tv.display(Person.charakter.x);
-    door.display(Person.charakter.x, Person.charakter.y);
-
-    pc.display(Person.charakter.x);
     bed.display(Person.charakter.x);
-
-    if (!window.activityAnimation) {
+    if(charakterId=="Lena"){
+    if(pc.LenaUni){
+      door.display(Person.charakter.x, Person.charakter.y);
+    fenster.display(Person.charakter.x, Person.charakter.y);
+    }
+    pc.display(Person.charakter.x);
+    if(!pc.LenaUni){
+    door.display(Person.charakter.x, Person.charakter.y);
+    fenster.display(Person.charakter.x, Person.charakter.y);
+    }
+    if (!window.activityAnimation&&!window.globalTime.sleepAnimation) {
       Person.display(bed.x, fridge.use);
     }
-
-    if (!fenster.interaction.B) {
+    if(!fenster.interaction.B) {
       frontElement.display(tv.interaction.A, tv.interaction.B);
+    }
+    }
+    if(charakterId=="Chantal"){
+      pc.display(Person.charakter.x);
+      if(door.interaction.A &&(door.ChantalWorkshop||door.ChantalAmt)){
+        fenster.display(Person.charakter.x, Person.charakter.y);
+        frontElement.display(tv.interaction.A, tv.interaction.B);
+        door.display(Person.charakter.x, Person.charakter.y);
+      }
+      else{
+        door.display(Person.charakter.x, Person.charakter.y);
+        fenster.display(Person.charakter.x, Person.charakter.y);
+        if (!window.activityAnimation&&!window.globalTime.sleepAnimation) {
+          Person.display(bed.x, fridge.use);
+        }
+        if(!fenster.interaction.B) {
+          frontElement.display(tv.interaction.A, tv.interaction.B);
+        }
+      }
     }
     bon.display();
     clock.display();
@@ -1252,8 +1370,10 @@ function draw() {
     pc.move(Room.screenMoving);
     bed.move(Room.screenMoving);
   }
-  Person.move(bed.x, door.x, pc.x, pc.imgWidth);
+  Person.move(bed.x,door.x,pc.x,pc.imgWidth);
   news.display();
+  final.display();
+  textFont(LeFont);
 }
 window.draw = draw;
 
@@ -1274,9 +1394,7 @@ function mouseClicked() {
   }
   fenster.clickedWindow();
 
-  if (globalTime.day == 3) {
-    final.auswertung();
-  }
+  
   // console.log("Satisfaction: " + window.globalSatisfaction);
   // console.log("Exhaustion:" + window.globalExhaustion);
   // console.log("Money: " + window.globalMoney);

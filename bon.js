@@ -73,19 +73,14 @@ export default class Bon {
   fixedBon() {
     fill("lightgrey");
     rect(this.x, this.y, this.rectWidth, this.rectHeight);
-    // console.log("globalMoney ",window.globalMoney);
-    // console.log("dailyBudget ",window.globalDailyBudget);
-    // console.log("InitialDailyBudget ",window.globalInitialDailyBudget);
-    // console.log(this.day);
-    textFont("Bakso Sapi");
     fill("black");
-    this.moneyBundle(this.x + 45, window.globalMoney, "Gesamtbudget", 16);
+    this.moneyBundle(this.x + 45, (window.globalMoney*100)/100, "Gesamtbudget", 16);
     if (window.globalDailyBudget < 0) {
       push();
       fill("darkred");
       this.moneyBundle(
         this.x + this.rectWidth - 50,
-        window.globalDailyBudget,
+        (window.globalDailyBudget*100)/100,
         "Tagesbudget",
         24
       );
@@ -93,7 +88,7 @@ export default class Bon {
     } else {
       this.moneyBundle(
         this.x + this.rectWidth - 50,
-        window.globalDailyBudget,
+        (window.globalDailyBudget*100)/100,
         "Tagesbudget",
         24
       );
@@ -136,7 +131,7 @@ export default class Bon {
       this.absatzStartFixedBon - this.absatz * 3
     );
     text(
-      "÷   " + "30",
+      " / "+(30-window.globalTime.day+1),
       this.startColumnNumbers,
       this.absatzStartFixedBon - this.absatz * 4
     );
@@ -229,12 +224,12 @@ export default class Bon {
       this.yVarBon + this.absatzVarBon * window.moneyBill.length;
 
     if (this.day < window.globalTime.day) {
-      window.globalMoney =
+      window.globalMoney =Math.round((
         window.globalMoney -
         window.globalInitialDailyBudget +
-        window.globalDailyBudget;
+        window.globalDailyBudget)*100)/100;
       window.globalDailyBudget =
-        Math.round((window.globalMoney / 30) * 100) / 100; //bcs .toFixed(2) gibt nen String heraus -.-
+        Math.round((window.globalMoney / (30-window.globalTime.day+1)) * 100) / 100; //bcs .toFixed(2) gibt nen String heraus -.-
       window.globalInitialDailyBudget = window.globalDailyBudget;
       window.moneyBill = [["Restbudget",window.globalMoney]];
       this.doubles=[];
@@ -250,7 +245,6 @@ export default class Bon {
             let markedIndex=indexE;
             this.doubles.push(markedIndex);
             this.getTimes();
-            console.log(indexE);
             window.moneyBill.splice(indexU, 1);
             window.moneyBill[indexE][1] =
               window.moneyBill[indexE][1] + 

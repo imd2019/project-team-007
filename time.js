@@ -42,6 +42,13 @@ export default class Time {
         // console.log("delta & expectedDelta: ", delta,window.globalTime.Delta);
         if (window.globalTime.minute == 45) {
           window.globalTime.hour++;
+          if(window.bgeMode=="noBGE"){
+          window.globalExhaustion+=4;
+          }
+          if(window.bgeMode=="withBGE"){
+            window.globalExhaustion+=2;
+          }
+
           if (window.globalTime.hour == 2) {
             window.globalTime.start = false;
           }
@@ -74,27 +81,28 @@ export default class Time {
 
   display() {
     fill("lightgrey");
+    if(window.charakterId=="Lena"){
     rect(this.x, this.y, 100, 36, 10);
+    }
+    if(window.charakterId=="Chantal"){
+      quad(this.x,this.y+4,this.x+100,this.y-4,this.x+110,this.y+30,this.x-2,this.y+40);
+    }
     fill("black");
     textSize(25);
     if (window.activateCounter) {
-      // console.log("activateCounter: ", window.activateCounter);
       this.timeStart = Date.now();
       this.countTime();
       window.activateCounter = false;
     }
     text(
       nf(window.globalTime.hour, 2) + " : " + nf(window.globalTime.minute, 2),
-      this.x + 12,
-      this.y + 8,
+      this.x + 11,
+      this.y +3,
       100,
       50
     );
-    if (window.globalTime.sleepAnimation && window.globalTime.hour == 2) {
+    if (window.globalTime.sleepAnimation && (window.globalTime.hour == 2 || window.globalTime.hour<2 ||window.globalTime.hour>8)) {
       this.dayEnd();
     }
-
-    // console.log(this.hour);
-    // console.log(this.dayStart);
   }
 }

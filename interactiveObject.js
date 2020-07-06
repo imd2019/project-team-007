@@ -62,6 +62,13 @@ export default class InteractiveObject extends MainScreen {
 
     this.charakterFadeOut = false;
     this.fade=260;
+
+    this.useCounter={A:0,B:0};
+
+    this.flipflopCount=0;
+
+    this.bannerFade=0;
+    this.bannerCounter=0;
   }
 
   move(screenMoving) {
@@ -144,14 +151,32 @@ export default class InteractiveObject extends MainScreen {
     this.money = window.globalDailyBudget;
 
     if (window.bgeMode == "withBGE") {
-      this.satisfaction = ceil(this.satisfaction * this.satisfactionRate); // Auslegungssache von Zufriedenheit
+      if(window.globalExhaustion>75){
+        this.satisfaction = ceil(this.satisfaction *(this.satisfactionRate-0.05));
+      }
+      else{
+      this.satisfaction = ceil(this.satisfaction *this.satisfactionRate);
+      } 
       window.globalSatisfaction = this.satisfaction;
+      window.globalSatisfaction = Math.max(0, Math.min(100, window.globalSatisfaction));
     }
-
-    //ohne BGE-MOde REchnung ( Tendenz zur Unzufriedenheit)
+    if(window.bgeMode=="noBGE"){
+      if(window.globalExhaustion>75){
+        this.satisfaction = floor(this.satisfaction *(this.satisfactionRate-0.1));
+      }
+      else if(window.globalExhaustion>90){
+        this.satisfaction = floor(this.satisfaction *(this.satisfactionRate-0.2));
+      }
+      else{
+      this.satisfaction = floor( this.satisfaction *this.satisfactionRate);
+      }
+      window.globalSatisfaction = this.satisfaction;
+      window.globalSatisfaction = Math.max(0, Math.min(75, window.globalSatisfaction));
+    }
 
     this.exhaustion = ceil(this.exhaustion * this.exhaustionRate); // Auslegungssache von Erschöpfung
     window.globalExhaustion = this.exhaustion;
+    window.globalExhaustion=Math.max(0,Math.min(100,window.globalExhaustion));
 
     this.money = this.money + this.moneyRate;
     window.globalDailyBudget = this.money;
@@ -245,7 +270,7 @@ export default class InteractiveObject extends MainScreen {
 
     
     let msDelay = delay / 30;
-    // console.log(msDelay);
+    
 
     if (timeNeeded != 0) {
       window.globalTime.Delta = (msDelay * 1000) / ((timeNeeded * 60) / 15);
@@ -275,9 +300,39 @@ export default class InteractiveObject extends MainScreen {
     }
   }
 
+  forcedInteractionsBanner(bannerId,array,bannerDelay){
+    // console.log("Forced Animation: ",this.counter);
+    let banner=array.find((x)=>x.id==bannerId);
+    push();
+    tint(255,this.bannerFade);
+    if(this.counter<=26){
+      this.bannerFade+=10;
+    }
+    if(this.bannerFade>=260){
+      this.bannerFade=260;
+    }
+    if(this.counter>=bannerDelay-26){
+      this.bannerFade-=10;
+    }
+    if(this.counter>=bannerDelay){
+      this.bannerFade=0;
+    }
+    image(banner,0,0,banner.width,banner.height);
+    pop();
+  }
+
   thinkBubble(thinkBubble,array,offsetX,offsetY){
     let bubble=array.find((x) => x.id === thinkBubble);
     image(bubble,this.interactX+offsetX,this.interactY+offsetY,bubble.width*this.animationScale,bubble.height*this.animationScale);
+  }
+
+  toMuchBubble(array){
+    if(this.useCounter.A>3 && !this.interaction.B){
+      this.thinkBubble("tooMuchThought",array,30,-250);
+    }
+    if(this.useCounter.B>3 && !this.interaction.A){
+      this.thinkBubble("tooMuchThought",array,30,-250);
+    }
   }
 
   mouseClicked() {
