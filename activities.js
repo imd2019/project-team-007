@@ -66,7 +66,7 @@ export class Kühlschrank extends InteractiveObject {
   }
 
   display(x, y) {
-    console.log("fridgeA:",this.useCounter.A);
+    // console.log("fridgeA:",this.useCounter.A);
     let fridge = this.fridges.find((x) => x.id === "Fridge");
     this.updateZone(fridge);
     if(window.charakterId=="Chantal"){
@@ -207,8 +207,6 @@ export class TV extends InteractiveObject {
   }
 
   display(x) {
-    console.log("tvA: ",this.useCounter.A);
-    console.log("tvB: ",this.useCounter.B);
 
     let tv = this.tvs.find((x) => x.id === "TV");
     this.updateZone(tv);
@@ -304,8 +302,8 @@ export class Door extends InteractiveObject {
     super();
     if (window.charakterId === "Chantal") {
       this.x = 40;
-      this.y = 78;
-      this.objectScale = 0.4;
+      this.y = 86;
+      this.objectScale = 0.39;
     }
     if (window.charakterId === "Lena") {
       this.x = 40;
@@ -713,7 +711,7 @@ export class Fenster extends InteractiveObject {
         noStroke();
         fill("rgba(200,200,200,0.7)");
         rect((1920 * 0.4) / 2, 400,220,30);
-        fill("#fbbb13");
+        fill("#00b7d9");
         push();
         
         angleMode(DEGREES);
@@ -841,9 +839,11 @@ export class PC extends InteractiveObject {
   }
 
   display(x) {
+    if(!window.globalTime.start){
+      this.useCounter.A=0;
+      this.useCounter.B=0;
+    }
 
-    console.log("pcA: ",this.useCounter.A);
-    console.log("pcB: ",this.useCounter.B);
 
     this.update(x);
     let pc = this.pcs.find((x) => x.id === "Tisch");
@@ -925,10 +925,7 @@ export class PC extends InteractiveObject {
         chair.height * (this.objectScale + 0.025)
       );
     }
-    if(!window.globalTime.start){
-      this.useCounter.A=0;
-      this.useCounter.B=0;
-    }
+    
     
   }
 
