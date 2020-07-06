@@ -137,6 +137,7 @@ export default class Startscreens extends Button {
       }
       this.skipbutton.display();
       this.counter++;
+      console.log(this.counter);
     }
 
 
@@ -205,9 +206,12 @@ export default class Startscreens extends Button {
     }
     if (this.skipbutton.hitTest(mouseX, mouseY) && this.newsscreen1) {
       this.newsscreen2 = true;
+      
     }
-    if (this.skipbutton.hitTest(mouseX, mouseY) && this.newsscreen2&&this.counter>=30) {
+    if (this.skipbutton.hitTest(mouseX, mouseY) && this.newsscreen2&&this.counter>=10) {
       this.mainstart = true;
+      this.newsscreen2=false;
+      this.counter=0;
     }
     if(this.chantibutton.hitTest(mouseX,mouseY)&& (this.choosescreenOn || this.choosescreenOff)){
       this.chanti=true;

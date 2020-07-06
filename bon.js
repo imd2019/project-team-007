@@ -29,10 +29,14 @@ export default class Bon {
 
   display() {
     this.update();
+    
     this.fixedBon();
     if (this.bonShow == true) {
+      push();
       this.variableBon();
+      pop();
     }
+    
     if(!window.globalTime.start){
       this.y = -110;
       this.absatzStartFixedBon = this.y + this.rectHeight;
@@ -241,7 +245,12 @@ export default class Bon {
       window.globalDailyBudget =
         Math.round((window.globalMoney / (30-window.globalTime.day+1)) * 100) / 100; //bcs .toFixed(2) gibt nen String heraus -.-
       window.globalInitialDailyBudget = window.globalDailyBudget;
+      if(window.globalTime.day==4 && window.charakterId=="Lena" && window.bgeMode=="noBGE"){
+        window.moneyBill=[["Restbudget",window.globalMoney],["Kündigungspuffer",-500]];
+      }
+      else{
       window.moneyBill = [["Restbudget",window.globalMoney]];
+      }
       this.doubles=[];
       this.occurences={};
       this.day++;  

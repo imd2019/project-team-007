@@ -66,57 +66,7 @@ window.bgeMode ="noBGE";//noBGE or withBGE, noBGE is default Mode
 
 window.updateParameters=false;
 
-
-
-if(window.bgeMode=="noBGE"){
-if(window.charakterId=="Lena"){
-window.moneyBill = [
-  ["Minijob", 450],
-  ["Bafög", 400],
-  ["Miete", -370],
-  ["Versicherung", -103],
-  ["Essen", -15],
-  ["Studium", -40],
-  ["Abos", -40],
-  ["Handyvertrag", -15],
-  ["Freizeit", -40],
-];}
-if(window.charakterId=="Chantal"){
-  window.moneyBill = [
-    ["Hartz4", 450],
-    ["Wohngeld", 270],
-    ["Miete", -270],
-    ["Essen", -15],
-    ["Abos", -40],
-    ["Handyvertrag", -15],
-    ["Freizeit", -60],
-    ["Onlineshopping",-120]
-  ];}
-}
-if(window.bgeMode=="withBGE"){
-  if(window.charakterId=="Lena"){
-  window.moneyBill = [
-    ["BGE", 1100],
-    ["Miete", -370],
-    ["Essen", -15],
-    ["Studium", -40],
-    ["Abos", -40],
-    ["Handyvertrag", -15],
-    ["Freizeit", -40],
-  ];}
-  if(window.charakterId=="Chantal"){
-    window.moneyBill = [
-      ["BGE",1100],
-      ["Miete", -370],
-      ["Essen", -10],
-      ["Abos", -40],
-      ["Handyvertrag", -15],
-      ["Freizeit", -60],
-      ["Onlineshopping",-120]
-    ];
-  }
-}
-
+window.moneyBill=[];
 
 window.globalDailyBudget = 0;
 window.globalInitialDailyBudget = 0;
@@ -1067,7 +1017,7 @@ fazits.push(badestFazit,badFazit,mediumFazit,highFazit,highestFazit);
       "img/" + window.charakterId + "/Poses/interact/3_middle/pc/learn2.png"
     );
     let pcBtnBInteractionMiddle = [];
-    pcBtnBInteractionMiddle.id = "PcBtnAInteractionMiddle";
+    pcBtnBInteractionMiddle.id = "PcBtnBInteractionMiddle";
     pcBtnBInteractionMiddle.push(
       pcBtnBInteractionMiddle1,
       pcBtnBInteractionMiddle2
@@ -1403,47 +1353,50 @@ function moneyBillUpdate(){
   if(window.charakterId=="Lena"){
   window.moneyBill = [
     ["Minijob", 450],
-    ["Bafög", 400],
+    ["Bafög", 550],
+    ["Kindergeld",204],
     ["Miete", -370],
     ["Versicherung", -103],
-    ["Essen", -15],
-    ["Studium", -40],
-    ["Abos", -40],
+    ["Essen", -9],
+    ["Fotografie", -100],
+    ["Bildungsmittel", -40],
     ["Handyvertrag", -15],
     ["Freizeit", -40],
+    ["Abos",-15]
   ];}
   if(window.charakterId=="Chantal"){
     window.moneyBill = [
-      ["Hartz4", 450],
-      ["Wohngeld", 270],
-      ["Miete", -270],
-      ["Essen", -15],
-      ["Abos", -40],
+      ["Hartz4", 424],
+      ["Wohngeld", 410],
+      ["Miete", -410],
+      ["Lifestyle",-20],
+      ["Essen", -12],
       ["Handyvertrag", -15],
-      ["Freizeit", -60],
-      ["Onlineshopping",-120]
+      ["Freizeit", -40],
+      ["Onlineshopping",-122]
     ];}
   }
   if(window.bgeMode=="withBGE"){
     if(window.charakterId=="Lena"){
     window.moneyBill = [
-      ["BGE", 1100],
-      ["Miete", -370],
-      ["Essen", -15],
-      ["Studium", -40],
-      ["Abos", -40],
-      ["Handyvertrag", -15],
-      ["Freizeit", -40],
+    ["BGE",1100],
+    ["Miete", -370],
+    ["Essen", -15],
+    ["Fotografie", -100],
+    ["Bildungsmittel", -40],
+    ["Handyvertrag", -15],
+    ["Freizeit", -50],
+    ["Abos",-15]
     ];}
     if(window.charakterId=="Chantal"){
       window.moneyBill = [
         ["BGE",1100],
-        ["Miete", -370],
-        ["Essen", -10],
-        ["Abos", -40],
+        ["Miete", -430],
+        ["Lifestyle",-40],
+        ["Essen", -15],
         ["Handyvertrag", -15],
         ["Freizeit", -60],
-        ["Onlineshopping",-120]
+        ["Onlineshopping",-122]
       ];
       
     }
@@ -1495,7 +1448,6 @@ function Tunnelblick(){
 }
 
 function draw() {
-  console.log(mouseX,mouseY);
   // console.log("mainCode: ",window.bgeMode);
   // console.log("update ",window.updateParameters);
   if (start === false) {
@@ -1600,5 +1552,8 @@ function mouseClicked() {
   }
   fenster.clickedWindow();
   }
+  console.log("Satisfaction: ",window.globalSatisfaction);
+  console.log("Exhaustion: ",window.globalExhaustion);
+  
 }
 window.mouseClicked = mouseClicked;
