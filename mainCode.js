@@ -60,7 +60,6 @@ window.globalActivityArray = globalActivityArray;
 let activityAnimation = false;
 window.activityAnimation = activityAnimation;
 
-
 window.charakterId = "Lena"; //Chantal oder Lena
 
 window.bgeMode ="noBGE";//noBGE or withBGE, noBGE is default Mode
