@@ -179,7 +179,7 @@ export default class InteractiveObject extends MainScreen {
     window.globalExhaustion=Math.max(0,Math.min(100,window.globalExhaustion));
 
     this.money = this.money + this.moneyRate;
-    window.globalDailyBudget = this.money;
+    window.globalDailyBudget = this.money; // window.globalDailyBudget=window.globalDailyBudget+moneyRate;
   }
 
   getActivityBundle(activityName) {

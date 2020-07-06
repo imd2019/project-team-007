@@ -304,8 +304,8 @@ export class Door extends InteractiveObject {
     super();
     if (window.charakterId === "Chantal") {
       this.x = 40;
-      this.y = 78;
-      this.objectScale = 0.4;
+      this.y = 86;
+      this.objectScale = 0.39;
     }
     if (window.charakterId === "Lena") {
       this.x = 40;
@@ -713,7 +713,7 @@ export class Fenster extends InteractiveObject {
         noStroke();
         fill("rgba(200,200,200,0.7)");
         rect((1920 * 0.4) / 2, 400,220,30);
-        fill("#fbbb13");
+        fill("#00b7d9");
         push();
         
         angleMode(DEGREES);
@@ -841,6 +841,10 @@ export class PC extends InteractiveObject {
   }
 
   display(x) {
+    if(!window.globalTime.start){
+      this.useCounter.A=0;
+      this.useCounter.B=0;
+    }
 
     console.log("pcA: ",this.useCounter.A);
     console.log("pcB: ",this.useCounter.B);
@@ -925,10 +929,7 @@ export class PC extends InteractiveObject {
         chair.height * (this.objectScale + 0.025)
       );
     }
-    if(!window.globalTime.start){
-      this.useCounter.A=0;
-      this.useCounter.B=0;
-    }
+    
     
   }
 

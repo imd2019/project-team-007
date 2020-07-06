@@ -1,5 +1,5 @@
 export default class Bon {
-  constructor() {
+  constructor(bonElements) {
     this.x = 30;
     this.y = -110;
 
@@ -23,6 +23,8 @@ export default class Bon {
     this.day = 1;
     this.doubles=[];
     this.occurences;
+
+    this.bonElements=bonElements;
   }
 
   display() {
@@ -31,14 +33,20 @@ export default class Bon {
     if (this.bonShow == true) {
       this.variableBon();
     }
+    if(!window.globalTime.start){
+      this.y = -110;
+      this.absatzStartFixedBon = this.y + this.rectHeight;
+      this.bonShow = false;
+    }
   }
 
   variableBon() {
     fill("lightgrey");
+    strokeWeight(3);
     rect(this.x, this.yVarBon, this.rectWidth, this.rectHeightVarBon);
     push();
     noStroke();
-    rect(this.x + 1, this.rectHeightVarBon - 3, this.rectWidth - 1.8, 6);
+    rect(this.x + 1.5, this.rectHeightVarBon - 3, this.rectWidth - 3, 6);
     pop();
     fill("black");
     for (let e = 0; e < window.moneyBill.length; e++) {
@@ -72,7 +80,10 @@ export default class Bon {
 
   fixedBon() {
     fill("lightgrey");
+    strokeWeight(3);
     rect(this.x, this.y, this.rectWidth, this.rectHeight);
+    let bonBottom=this.bonElements.find((x)=>x.id=="BonBottom");
+    image(bonBottom,this.x-1.5,this.y+this.rectHeight-55,this.rectWidth+3.1,bonBottom.height*0.43);
     fill("black");
     this.moneyBundle(this.x + 45, (window.globalMoney*100)/100, "Gesamtbudget", 16);
     if (window.globalDailyBudget < 0) {
