@@ -96,13 +96,13 @@ body.NavClosed .navigation {
 }
 
 .p5Canvas{
-    height: auto !important; /* important überschreibt element style, nur im notfall benutzen ;)  */
-    width: 50% !important; /*normally 50% */
-    position: absolute;
+    height: auto !important;
+    width: 50% !important;
+    position: fixed;
     opacity: 0;
-    margin: 20vh 25vw 0 25vw; /*normally margin-right/left:25vw, top:50px*/
+    margin: 0 25vw 0 25vw;
     display: none;
-    top: 200px; /* normally 200px*/
+    top: 20vh;
 }
 
 section {
