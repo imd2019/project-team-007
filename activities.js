@@ -948,7 +948,7 @@ export class PC extends InteractiveObject {
     }
     if (window.charakterId == "Lena") {
       this.exhaustionRate = -1;
-      this.satisfactionRate = 1;
+      this.satisfactionRate = 2;
       this.getActivityBundle("Editen");
     }
     this.updateParameter();

@@ -148,10 +148,10 @@ hittest(x,y){
     for (let i in window.globalActivityArray[dayString]) {
       if(window.bgeMode=="noBGE"){
         if(window.globalExhaustion>75){
-          this.satisfaction = this.satisfaction +(this.steps*window.globalActivityArray[dayString][i][0])-5;
+          this.satisfaction = this.satisfaction +(this.steps*window.globalActivityArray[dayString][i][0])-4;
         }
         else if(window.globalExhaustion>90){
-          this.satisfaction = this.satisfaction +(this.steps*window.globalActivityArray[dayString][i][0])-7.5;
+          this.satisfaction = this.satisfaction +(this.steps*window.globalActivityArray[dayString][i][0])-6;
         }
         else{this.satisfaction = this.satisfaction +(this.steps* window.globalActivityArray[dayString][i][0]);
         }
@@ -159,7 +159,7 @@ hittest(x,y){
       }
       if(window.bgeMode=="withBGE"){
         if(window.globalExhaustion>75){
-          this.satisfaction = this.satisfaction +(this.steps*window.globalActivityArray[dayString][i][0])-4;
+          this.satisfaction = this.satisfaction +(this.steps*window.globalActivityArray[dayString][i][0])-3;
         }
         else{
         this.satisfaction = this.satisfaction +(this.steps* window.globalActivityArray[dayString][i][0]);
@@ -185,26 +185,35 @@ hittest(x,y){
       console.log("satisfaction",window.globalSatisfaction);
       console.log("exhaustion",window.globalExhaustion);
       console.log("money :",window.globalMoney);
+      
     }
-    this.flipflopCount++;
     console.log(this.flipflopCount);
     
     if(window.charakterId=="Chantal"){
     if(window.globalMoney<=-50){
       if(window.globalMoney<=-150){
-      window.globalSatisfaction=-75;
+      window.globalSatisfaction-=75;
       }
       else{
-      window.globalSatisfaction=-20;
+      window.globalSatisfaction-=20;
+      }
+     }
+    }
+
+    if(window.charakterId=="Lena"){
+      if(window.globalMoney<=(-150)){
+        window.globalSatisfaction-=30;
       }
     }
     
-    }
+    
     if(window.globalExhaustion>90 ){
-      if(window.globalSatisfaction>60){
-      window.globalSatisfaction-=30;}
+      if(window.globalSatisfaction>75){
+      window.globalSatisfaction-=36;}
     }
+    this.flipflopCount++;
     }
+    
   }
 
  mouseClicked(){

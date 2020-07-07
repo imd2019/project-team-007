@@ -97,19 +97,19 @@ body.NavClosed .navigation {
 
 .p5Canvas{
     height: auto !important; /* important überschreibt element style, nur im notfall benutzen ;)  */
-    width: 70% !important; /*normally 50% */
+    width: 50% !important; /*normally 50% */
     position: absolute;
     opacity: 0;
-    margin: 0px 15vw 0 15vw; /*normally margin-right/left:25vw, top:50px*/
+    margin: 20vh 25vw 0 25vw; /*normally margin-right/left:25vw, top:50px*/
     display: none;
-    top: 50px; /* normally 200px*/
+    top: 200px; /* normally 200px*/
 }
 
 section {
     opacity: 0;
     display: none;
     width: 100vw;
-    margin: 200px 0vw 0 vw; /*normally 200 px 0vw 0vw*/
+    margin: 200px 0vw 0vw; /*normally 200 px 0vw 0vw*/
     min-height: calc(100vh - 200px);
 }
 

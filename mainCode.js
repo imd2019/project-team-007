@@ -1553,8 +1553,8 @@ window.update=update;
 function Tunnelblick(){
   if(window.globalExhaustion>=90){
     image(overlayExhaustion,0,0,overlayExhaustion.width,overlayExhaustion.height);
-    if(window.globalSatisfaction>50){
-      window.globalSatisfaction=50;
+    if(window.globalSatisfaction>=60){
+      window.globalSatisfaction=60;
     }
   }
 }
