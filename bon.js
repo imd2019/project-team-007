@@ -83,7 +83,6 @@ export default class Bon {
   }
 
   fixedBon() {
-    console.log("gerundetes DailyMoney: ",Math.round(window.globalDailyBudget*100)/100)
     fill("lightgrey");
     strokeWeight(3);
     rect(this.x, this.y, this.rectWidth, this.rectHeight);

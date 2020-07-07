@@ -1670,8 +1670,5 @@ function mouseClicked() {
     final.mouseClicked();
   }
   }
-  console.log("Satisfaction: ",window.globalSatisfaction);
-  console.log("Exhaustion: ",window.globalExhaustion);
-  
 }
 window.mouseClicked = mouseClicked;
