@@ -116,6 +116,8 @@ let LeFont;
 
 let calendarAnimation=[];
 
+let overlayExhaustion;
+
 
 
 let startscreenpic = loadImage("img/globals/screens/startscreen.png");
@@ -168,8 +170,10 @@ forcedInteractions=[];
 thinkBubbles = [];
 
 fazits=[];
-
-
+  
+  //<----------overlayExhaustion----------->
+  overlayExhaustion=loadImage("img/globals/overlayExhaustion.png");
+  
   //<----------------calendarAnimation-------------->
   for(let i=1;i<=30;i++){
    let FrameNumber="Frame"+i;
@@ -1547,7 +1551,9 @@ function update(){
 window.update=update;
 
 function Tunnelblick(){
-  // bei exhaustion > value
+  if(window.globalExhaustion>=90){
+    image(overlayExhaustion,0,0,overlayExhaustion.width,overlayExhaustion.height);
+  }
 }
 
 function draw() {
@@ -1617,6 +1623,7 @@ function draw() {
         }
       }
     }
+    Tunnelblick();
     bon.display();
     clock.display();
 
