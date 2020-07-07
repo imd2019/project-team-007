@@ -44,7 +44,7 @@ export default class InteractiveObject extends MainScreen {
     this.satisfactionRate = 0;
     this.exhaustionRate = 0;
     this.moneyRate = 0;
-    this.steps=7.5;
+    this.steps=5;
 
     this.activityId;
     this.interactX = interactX;
@@ -153,7 +153,7 @@ export default class InteractiveObject extends MainScreen {
 
     if (window.bgeMode == "withBGE") {
       if(window.globalExhaustion>75){
-        this.satisfaction = this.satisfaction+(this.steps *this.satisfactionRate)-3;
+        this.satisfaction = this.satisfaction+(this.steps *this.satisfactionRate)-4;
       }
       else{
       this.satisfaction = this.satisfaction +(this.steps*this.satisfactionRate);

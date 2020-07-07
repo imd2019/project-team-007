@@ -13,7 +13,7 @@ this.satisfaction;
 this.exhaustion;
 this.money;
 
-this.steps=7.5;
+this.steps=5;
 
 this.fazits=fazits;
 this.fazitId;
@@ -42,6 +42,9 @@ display(){
   }
   if(window.globalTime.day>5){
     this.loadingScreen();
+    console.log("FinalSatisfaction",window.globalSatisfaction);
+    console.log("FinalExhaustion",window.globalExhaustion);
+    console.log("FinalMoney :",window.globalMoney);
     if(this.fazitDisplay){
     this.update();
     let fazit=this.fazits.find((x)=>x.id==this.fazitId);
@@ -145,10 +148,10 @@ hittest(x,y){
     for (let i in window.globalActivityArray[dayString]) {
       if(window.bgeMode=="noBGE"){
         if(window.globalExhaustion>75){
-          this.satisfaction = this.satisfaction +(this.steps*window.globalActivityArray[dayString][i][0])*0.5;
+          this.satisfaction = this.satisfaction +(this.steps*window.globalActivityArray[dayString][i][0])-5;
         }
         else if(window.globalExhaustion>90){
-          this.satisfaction = this.satisfaction +(this.steps*window.globalActivityArray[dayString][i][0])*0.3;
+          this.satisfaction = this.satisfaction +(this.steps*window.globalActivityArray[dayString][i][0])-7.5;
         }
         else{this.satisfaction = this.satisfaction +(this.steps* window.globalActivityArray[dayString][i][0]);
         }
@@ -156,7 +159,7 @@ hittest(x,y){
       }
       if(window.bgeMode=="withBGE"){
         if(window.globalExhaustion>75){
-          this.satisfaction = this.satisfaction +(this.steps*window.globalActivityArray[dayString][i][0])*0.75;
+          this.satisfaction = this.satisfaction +(this.steps*window.globalActivityArray[dayString][i][0])-4;
         }
         else{
         this.satisfaction = this.satisfaction +(this.steps* window.globalActivityArray[dayString][i][0]);
@@ -179,19 +182,28 @@ hittest(x,y){
     for (let j =0;j<26;j++) {
       // console.log("das modulo-etwas: ",1+j%2); 
       this.monthCalculate(4+j%2);
+      console.log("satisfaction",window.globalSatisfaction);
+      console.log("exhaustion",window.globalExhaustion);
+      console.log("money :",window.globalMoney);
     }
     this.flipflopCount++;
     console.log(this.flipflopCount);
     
+    if(window.charakterId=="Chantal"){
     if(window.globalMoney<=-50){
-      window.globalSatisfaction=-25;
+      if(window.globalMoney<=-150){
+      window.globalSatisfaction=-75;
+      }
+      else{
+      window.globalSatisfaction=-20;
+      }
     }
-    if(window.globalMoney<=-150){
-      window.globalSatisfaction=-60;
+    
     }
-    console.log("satisfaction",window.globalSatisfaction);
-    console.log("exhaustion",window.globalExhaustion);
-    console.log("money :",window.globalMoney);
+    if(window.globalExhaustion>90 ){
+      if(window.globalSatisfaction>60){
+      window.globalSatisfaction-=30;}
+    }
     }
   }
 

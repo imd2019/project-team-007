@@ -243,16 +243,18 @@ export default class Bon {
         window.globalMoney -
         window.globalInitialDailyBudget +
         window.globalDailyBudget)*100)/100;
+        if(window.globalTime.day==4 && window.charakterId=="Lena" && window.bgeMode=="noBGE"){
+        window.moneyBill=[["Restbudget",window.globalMoney],["Kündigungspuffer",-450]];
+        window.globalMoney-=450;
+        window.globalSatisfaction-=20;
+        }
+        else{
+        window.moneyBill = [["Restbudget",window.globalMoney]];
+        }
       window.globalDailyBudget =
         Math.round((window.globalMoney / (31-window.globalTime.day)) * 100) / 100; //bcs .toFixed(2) gibt nen String heraus -.-
       window.globalInitialDailyBudget = window.globalDailyBudget;
-      if(window.globalTime.day==4 && window.charakterId=="Lena" && window.bgeMode=="noBGE"){
-        window.moneyBill=[["Restbudget",window.globalMoney],["Kündigungspuffer",-450]];
-        window.globalMoney-=450;
-      }
-      else{
-      window.moneyBill = [["Restbudget",window.globalMoney]];
-      }
+      
       this.doubles=[];
       this.occurences={};
       this.day++;  
