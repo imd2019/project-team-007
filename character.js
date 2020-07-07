@@ -24,8 +24,6 @@ export default class Charakter {
     
     this.charakterScale = 0.55;
     
-    
-
     this.thinkBubbles=thinkBubbles;
 
   }
@@ -186,11 +184,17 @@ export default class Charakter {
       if(window.bgeMode=="noBGE"&&window.globalTime.day==5 && window.globalTime.hour==20 && window.globalSatisfaction<76){
         this.thinkBubbleDraw("noBgeVictory");
       }
+      if(window.charakterId=="Lena" && window.bgeMode=="noBGE"){
+        if(window.globalTime.hour==8 && window.globalTime.day==4){
+          this.thinkBubbleDraw("KündigungThought");
+          
+        }
+      }
   }
   
   thinkBubbleDraw(thinkBubble){
     let bubble=this.thinkBubbles.find((x) => x.id === thinkBubble);
-    image(bubble,this.charakter.x+50,this.charakter.y-bubble.height+15,bubble.width*this.charakterScale,bubble.height*this.charakterScale);
+    image(bubble,this.charakter.x+50,this.charakter.y-bubble.height+20,bubble.width*this.charakterScale,bubble.height*this.charakterScale);
   }
   // voice(){
   //     if(charakterId["Name"]){

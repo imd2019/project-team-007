@@ -114,6 +114,8 @@ let bonElements=[];
 
 let LeFont;
 
+let calendarAnimation=[];
+
 
 
 let startscreenpic = loadImage("img/globals/screens/startscreen.png");
@@ -124,6 +126,9 @@ let newsscreenpic = loadImage("img/globals/screens/noBGE/newsscreen-day1-1.png")
 let newsscreenpic2 = loadImage("img/globals/screens/noBGE/newsscreen-day1-2.png");
 let newsscreenBGEpic = loadImage("img/globals/screens/withBGE/newsscreen-day1-1.png");
 let newsscreenBGEpic2 = loadImage("img/globals/screens/withBGE/newsscreen-day1-2.png");
+
+let restartButton=loadImage("img/globals/restartBtn.png");
+
 
 function preload() {
 //<--------fürs update--------------->
@@ -164,6 +169,14 @@ thinkBubbles = [];
 
 fazits=[];
 
+
+  //<----------------calendarAnimation-------------->
+  for(let i=1;i<=30;i++){
+   let FrameNumber="Frame"+i;
+   let calendar={};
+   calendar[FrameNumber]=loadImage("img/globals/calendar/KalenderAnimation"+i+".png");
+   calendarAnimation.push(calendar[FrameNumber]);
+  }
 
   //<-------------------Rechnung----------------->
   let bonBottom=loadImage("img/globals/Rechnung.png");
@@ -1055,6 +1068,93 @@ fazits.push(badestFazit,badFazit,mediumFazit,highFazit,highestFazit);
     );
   }
 
+  if (window.charakterId == "Chantal") {
+    let pcBtnBInteractionLowest1 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/5_lowest/pc/social1.png"
+    );
+    let pcBtnBInteractionLowest2 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/5_lowest/pc/social2.png"
+    );
+    let pcBtnBInteractionLowest3 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/5_lowest/pc/social3.png"
+    );
+    let pcBtnBInteractionLowest = [];
+    pcBtnBInteractionLowest.id = "PcBtnBInteractionLowest";
+    pcBtnBInteractionLowest.push(
+      pcBtnBInteractionLowest1,
+      pcBtnBInteractionLowest2,
+      pcBtnBInteractionLowest3
+    );
+
+    let pcBtnBInteractionLow1 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/4_low/pc/social1.png"
+    );
+    let pcBtnBInteractionLow2 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/4_low/pc/social2.png"
+    );
+    let pcBtnBInteractionLow3 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/4_low/pc/social3.png"
+    );
+    let pcBtnBInteractionLow = [];
+    pcBtnBInteractionLow.id = "PcBtnBInteractionLow";
+    pcBtnBInteractionLow.push(pcBtnBInteractionLow1, pcBtnBInteractionLow2,pcBtnBInteractionLow3);
+
+    let pcBtnBInteractionMiddle1 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/3_middle/pc/social1.png"
+    );
+    let pcBtnBInteractionMiddle2 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/3_middle/pc/social2.png"
+    );
+    let pcBtnBInteractionMiddle3 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/3_middle/pc/social3.png"
+    );
+    let pcBtnBInteractionMiddle = [];
+    pcBtnBInteractionMiddle.id = "PcBtnBInteractionMiddle";
+    pcBtnBInteractionMiddle.push(
+      pcBtnBInteractionMiddle1,
+      pcBtnBInteractionMiddle2,
+      pcBtnBInteractionMiddle3
+    );
+
+    let pcBtnBInteractionHigh1 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/2_high/pc/social1.png"
+    );
+    let pcBtnBInteractionHigh2 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/2_high/pc/social2.png"
+    );
+    let pcBtnBInteractionHigh3 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/2_high/pc/social3.png"
+    );
+    let pcBtnBInteractionHigh = [];
+    pcBtnBInteractionHigh.id = "PcBtnBInteractionHigh";
+    pcBtnBInteractionHigh.push(pcBtnBInteractionHigh1, pcBtnBInteractionHigh2,pcBtnBInteractionHigh3);
+
+    let pcBtnBInteractionVictory1 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/1_victory/pc/social1.png"
+    );
+    let pcBtnBInteractionVictory2 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/1_victory/pc/social2.png"
+    );
+    let pcBtnBInteractionVictory3 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/1_victory/pc/social3.png"
+    );
+    let pcBtnBInteractionVictory = [];
+    pcBtnBInteractionVictory.id = "PcBtnBInteractionVictory";
+    pcBtnBInteractionVictory.push(
+      pcBtnBInteractionVictory1,
+      pcBtnBInteractionVictory2,
+      pcBtnBInteractionVictory3
+    );
+
+    pcBtnBInteraction.push(
+      pcBtnBInteractionLowest,
+      pcBtnBInteractionLow,
+      pcBtnBInteractionMiddle,
+      pcBtnBInteractionHigh,
+      pcBtnBInteractionVictory
+    );
+  }
+
   //<---------Bed Interaction------->
   let bedInteractionVictory1 = loadImage(
     "img/" + window.charakterId + "/Poses/interact/1_victory/bed/sleep1.png"
@@ -1260,6 +1360,8 @@ fazits.push(badestFazit,badFazit,mediumFazit,highFazit,highestFazit);
       "img/" + window.charakterId + "/Thoughts/globals/learnLate.png"
     );
     learnLateThought.id = "learnLateThought";
+    let KündigungThought=loadImage("img/Lena/Thoughts/noBGE/kündigung.png");
+    KündigungThought.id="KündigungThought";
     thinkBubbles.push(
       pcBtnBThought,
       tvBtnAThought,
@@ -1267,7 +1369,8 @@ fazits.push(badestFazit,badFazit,mediumFazit,highFazit,highestFazit);
       sleepThought,
       tooMuchThought,
       learnLateThought,
-      victoryBGE,noBgeVictory
+      victoryBGE,noBgeVictory,
+      KündigungThought
     );
   }
   if (window.charakterId == "Chantal") {
@@ -1314,7 +1417,7 @@ let Person = new Charakter(stand, walk, Room.endScreen, thinkBubbles);
 let clock = new Time(1920 * 0.4 - 120, 5);
 let bon = new Bon(bonElements);
 
-let final = new Finale(fazits);
+let final = new Finale(fazits,calendarAnimation,restartButton);
 let news = new Nachrichten(nachrichten);
 
 let infobutton = new Button(322, 292, 123, 35);
@@ -1437,7 +1540,7 @@ function update(){
   clock = new Time(1920 * 0.4 - 120, 5);
   bon = new Bon(bonElements);
   
-  final = new Finale(fazits);
+  final = new Finale(fazits,calendarAnimation,restartButton);
   news = new Nachrichten(nachrichten);
   
 }
@@ -1448,6 +1551,7 @@ function Tunnelblick(){
 }
 
 function draw() {
+  // console.log(calendarAnimation);
   // console.log("mainCode: ",window.bgeMode);
   // console.log("update ",window.updateParameters);
   if (start === false) {
@@ -1551,6 +1655,9 @@ function mouseClicked() {
     news.mouseClicked();
   }
   fenster.clickedWindow();
+  if(final.fazitDisplay){
+    final.mouseClicked();
+  }
   }
   console.log("Satisfaction: ",window.globalSatisfaction);
   console.log("Exhaustion: ",window.globalExhaustion);
