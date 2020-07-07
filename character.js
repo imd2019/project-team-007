@@ -179,7 +179,7 @@ export default class Charakter {
         this.thinkBubbleDraw("hungerThought");
       }
       if(window.bgeMode=="withBGE"&&window.globalTime.day==5 && window.globalTime.hour==20 && window.globalSatisfaction>=76){
-        this.thinkBubbleDraw("victoryBGE");
+        this.thinkBubbleDraw("VictoryBGE");
       }
       if(window.bgeMode=="noBGE"&&window.globalTime.day==5 && window.globalTime.hour==20 && window.globalSatisfaction<76){
         this.thinkBubbleDraw("noBgeVictory");

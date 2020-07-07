@@ -65,7 +65,7 @@ loadingScreen(){
   push();
   imageMode(CENTER);
   this.index += this.animationSpeed;
-  this.animationSpeed-=0.032;//-0.035 is best,-0,032 is better
+  this.animationSpeed-=0.032;//-0.035 is good,-0,032 is better
   let animation = floor(this.index) % this.calendarAnimation.length;
   image(this.calendarAnimation[animation],(1920*0.4)/2,170,this.calendarAnimation[animation].width*0.6,this.calendarAnimation[animation].height*0.6);
   pop();
