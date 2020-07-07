@@ -14,41 +14,21 @@ export default class Time {
     this.requestId = 0;
   }
 
-  // countTime() {
-  //   if (window.globalTime.start) {
-  //     window.globalTime.sleepAnimation=false;
-  //     this.counter++;
-  //     if (this.counter % (30 * 2.5) == 0) {
-  //       window.globalTime.minute = (window.globalTime.minute + 15) % 60;
-  //     }
-  //     if (this.counter % (30 * 10) == 0) {
-  //       window.globalTime.hour++;
-  //       if (window.globalTime.hour == 24) {
-  //         window.globalTime.hour = 0;
-  //       }
-  //     } else if (window.globalTime.hour == 2) {
-  //       window.globalTime.start = false;
-  //       this.counter=0;
-
-  //     }
-  //   }
-  // }
-
   countTime() {
     if (window.globalTime.start && !window.forcedToDoor && !window.forcedToPc.ToRight &&!window.forcedToPc.ToLeft) {
       let now = Date.now();
       let delta = now - this.timeStart;
       if (delta >= window.globalTime.Delta) {
-        console.log("delta & expectedDelta: ", delta,window.globalTime.Delta);
+        // console.log("delta & expectedDelta: ", delta,window.globalTime.Delta);
         if (window.globalTime.minute == 45) {
           window.globalTime.hour++;
           if(window.bgeMode=="noBGE"){
-          window.globalExhaustion+=4;
+          window.globalExhaustion+=1.5;
           }
           if(window.bgeMode=="withBGE"){
-            window.globalExhaustion+=2;
+            window.globalExhaustion+=0.9;
           }
-
+          window.globalExhaustion = Math.max(0, Math.min(100, window.globalExhaustion));
           if (window.globalTime.hour == 2) {
             window.globalTime.start = false;
           }
@@ -59,7 +39,7 @@ export default class Time {
         window.globalTime.minute = (window.globalTime.minute + 15) % 60;
         this.timeStart = Date.now();
       }
-      this.requestId = window.requestAnimationFrame(this.countTime);
+      this.requestId = window.requestAnimationFrame(this.countTime) || window.webkitRequestAnimationFrame(this.countTime)|| window.mozRequestAnimationFrame(this.countTime);
     }
   }
 

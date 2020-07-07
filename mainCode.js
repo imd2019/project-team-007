@@ -66,57 +66,7 @@ window.bgeMode ="noBGE";//noBGE or withBGE, noBGE is default Mode
 
 window.updateParameters=false;
 
-
-
-if(window.bgeMode=="noBGE"){
-if(window.charakterId=="Lena"){
-window.moneyBill = [
-  ["Minijob", 450],
-  ["Bafög", 400],
-  ["Miete", -370],
-  ["Versicherung", -103],
-  ["Essen", -15],
-  ["Studium", -40],
-  ["Abos", -40],
-  ["Handyvertrag", -15],
-  ["Freizeit", -40],
-];}
-if(window.charakterId=="Chantal"){
-  window.moneyBill = [
-    ["Hartz4", 450],
-    ["Wohngeld", 270],
-    ["Miete", -270],
-    ["Essen", -15],
-    ["Abos", -40],
-    ["Handyvertrag", -15],
-    ["Freizeit", -60],
-    ["Onlineshopping",-120]
-  ];}
-}
-if(window.bgeMode=="withBGE"){
-  if(window.charakterId=="Lena"){
-  window.moneyBill = [
-    ["BGE", 1100],
-    ["Miete", -370],
-    ["Essen", -15],
-    ["Studium", -40],
-    ["Abos", -40],
-    ["Handyvertrag", -15],
-    ["Freizeit", -40],
-  ];}
-  if(window.charakterId=="Chantal"){
-    window.moneyBill = [
-      ["BGE",1100],
-      ["Miete", -370],
-      ["Essen", -10],
-      ["Abos", -40],
-      ["Handyvertrag", -15],
-      ["Freizeit", -60],
-      ["Onlineshopping",-120]
-    ];
-  }
-}
-
+window.moneyBill=[];
 
 window.globalDailyBudget = 0;
 window.globalInitialDailyBudget = 0;
@@ -164,6 +114,10 @@ let bonElements=[];
 
 let LeFont;
 
+let calendarAnimation=[];
+
+let overlayExhaustion;
+
 
 
 let startscreenpic = loadImage("img/globals/screens/startscreen.png");
@@ -174,6 +128,9 @@ let newsscreenpic = loadImage("img/globals/screens/noBGE/newsscreen-day1-1.png")
 let newsscreenpic2 = loadImage("img/globals/screens/noBGE/newsscreen-day1-2.png");
 let newsscreenBGEpic = loadImage("img/globals/screens/withBGE/newsscreen-day1-1.png");
 let newsscreenBGEpic2 = loadImage("img/globals/screens/withBGE/newsscreen-day1-2.png");
+
+let restartButton=loadImage("img/globals/restartBtn.png");
+
 
 function preload() {
 //<--------fürs update--------------->
@@ -213,7 +170,17 @@ forcedInteractions=[];
 thinkBubbles = [];
 
 fazits=[];
-
+  
+  //<----------overlayExhaustion----------->
+  overlayExhaustion=loadImage("img/globals/overlayExhaustion.png");
+  
+  //<----------------calendarAnimation-------------->
+  for(let i=1;i<=30;i++){
+   let FrameNumber="Frame"+i;
+   let calendar={};
+   calendar[FrameNumber]=loadImage("img/globals/calendar/KalenderAnimation"+i+".png");
+   calendarAnimation.push(calendar[FrameNumber]);
+  }
 
   //<-------------------Rechnung----------------->
   let bonBottom=loadImage("img/globals/Rechnung.png");
@@ -1067,7 +1034,7 @@ fazits.push(badestFazit,badFazit,mediumFazit,highFazit,highestFazit);
       "img/" + window.charakterId + "/Poses/interact/3_middle/pc/learn2.png"
     );
     let pcBtnBInteractionMiddle = [];
-    pcBtnBInteractionMiddle.id = "PcBtnAInteractionMiddle";
+    pcBtnBInteractionMiddle.id = "PcBtnBInteractionMiddle";
     pcBtnBInteractionMiddle.push(
       pcBtnBInteractionMiddle1,
       pcBtnBInteractionMiddle2
@@ -1094,6 +1061,93 @@ fazits.push(badestFazit,badFazit,mediumFazit,highFazit,highestFazit);
     pcBtnBInteractionVictory.push(
       pcBtnBInteractionVictory1,
       pcBtnBInteractionVictory2
+    );
+
+    pcBtnBInteraction.push(
+      pcBtnBInteractionLowest,
+      pcBtnBInteractionLow,
+      pcBtnBInteractionMiddle,
+      pcBtnBInteractionHigh,
+      pcBtnBInteractionVictory
+    );
+  }
+
+  if (window.charakterId == "Chantal") {
+    let pcBtnBInteractionLowest1 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/5_lowest/pc/social1.png"
+    );
+    let pcBtnBInteractionLowest2 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/5_lowest/pc/social2.png"
+    );
+    let pcBtnBInteractionLowest3 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/5_lowest/pc/social3.png"
+    );
+    let pcBtnBInteractionLowest = [];
+    pcBtnBInteractionLowest.id = "PcBtnBInteractionLowest";
+    pcBtnBInteractionLowest.push(
+      pcBtnBInteractionLowest1,
+      pcBtnBInteractionLowest2,
+      pcBtnBInteractionLowest3
+    );
+
+    let pcBtnBInteractionLow1 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/4_low/pc/social1.png"
+    );
+    let pcBtnBInteractionLow2 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/4_low/pc/social2.png"
+    );
+    let pcBtnBInteractionLow3 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/4_low/pc/social3.png"
+    );
+    let pcBtnBInteractionLow = [];
+    pcBtnBInteractionLow.id = "PcBtnBInteractionLow";
+    pcBtnBInteractionLow.push(pcBtnBInteractionLow1, pcBtnBInteractionLow2,pcBtnBInteractionLow3);
+
+    let pcBtnBInteractionMiddle1 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/3_middle/pc/social1.png"
+    );
+    let pcBtnBInteractionMiddle2 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/3_middle/pc/social2.png"
+    );
+    let pcBtnBInteractionMiddle3 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/3_middle/pc/social3.png"
+    );
+    let pcBtnBInteractionMiddle = [];
+    pcBtnBInteractionMiddle.id = "PcBtnBInteractionMiddle";
+    pcBtnBInteractionMiddle.push(
+      pcBtnBInteractionMiddle1,
+      pcBtnBInteractionMiddle2,
+      pcBtnBInteractionMiddle3
+    );
+
+    let pcBtnBInteractionHigh1 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/2_high/pc/social1.png"
+    );
+    let pcBtnBInteractionHigh2 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/2_high/pc/social2.png"
+    );
+    let pcBtnBInteractionHigh3 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/2_high/pc/social3.png"
+    );
+    let pcBtnBInteractionHigh = [];
+    pcBtnBInteractionHigh.id = "PcBtnBInteractionHigh";
+    pcBtnBInteractionHigh.push(pcBtnBInteractionHigh1, pcBtnBInteractionHigh2,pcBtnBInteractionHigh3);
+
+    let pcBtnBInteractionVictory1 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/1_victory/pc/social1.png"
+    );
+    let pcBtnBInteractionVictory2 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/1_victory/pc/social2.png"
+    );
+    let pcBtnBInteractionVictory3 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/1_victory/pc/social3.png"
+    );
+    let pcBtnBInteractionVictory = [];
+    pcBtnBInteractionVictory.id = "PcBtnBInteractionVictory";
+    pcBtnBInteractionVictory.push(
+      pcBtnBInteractionVictory1,
+      pcBtnBInteractionVictory2,
+      pcBtnBInteractionVictory3
     );
 
     pcBtnBInteraction.push(
@@ -1310,6 +1364,8 @@ fazits.push(badestFazit,badFazit,mediumFazit,highFazit,highestFazit);
       "img/" + window.charakterId + "/Thoughts/globals/learnLate.png"
     );
     learnLateThought.id = "learnLateThought";
+    let KündigungThought=loadImage("img/Lena/Thoughts/noBGE/kündigung.png");
+    KündigungThought.id="KündigungThought";
     thinkBubbles.push(
       pcBtnBThought,
       tvBtnAThought,
@@ -1317,7 +1373,8 @@ fazits.push(badestFazit,badFazit,mediumFazit,highFazit,highestFazit);
       sleepThought,
       tooMuchThought,
       learnLateThought,
-      victoryBGE,noBgeVictory
+      victoryBGE,noBgeVictory,
+      KündigungThought
     );
   }
   if (window.charakterId == "Chantal") {
@@ -1364,7 +1421,7 @@ let Person = new Charakter(stand, walk, Room.endScreen, thinkBubbles);
 let clock = new Time(1920 * 0.4 - 120, 5);
 let bon = new Bon(bonElements);
 
-let final = new Finale(fazits);
+let final = new Finale(fazits,calendarAnimation,restartButton);
 let news = new Nachrichten(nachrichten);
 
 let infobutton = new Button(322, 292, 123, 35);
@@ -1403,47 +1460,50 @@ function moneyBillUpdate(){
   if(window.charakterId=="Lena"){
   window.moneyBill = [
     ["Minijob", 450],
-    ["Bafög", 400],
+    ["Bafög", 550],
+    ["Kindergeld",204],
     ["Miete", -370],
     ["Versicherung", -103],
-    ["Essen", -15],
-    ["Studium", -40],
-    ["Abos", -40],
+    ["Essen", -9],
+    ["Fotografie", -100],
+    ["Bildungsmittel", -40],
     ["Handyvertrag", -15],
     ["Freizeit", -40],
+    ["Abos",-15]
   ];}
   if(window.charakterId=="Chantal"){
     window.moneyBill = [
-      ["Hartz4", 450],
-      ["Wohngeld", 270],
-      ["Miete", -270],
-      ["Essen", -15],
-      ["Abos", -40],
+      ["Hartz4", 424],
+      ["Wohngeld", 410],
+      ["Miete", -410],
+      ["Lifestyle",-20],
+      ["Essen", -12],
       ["Handyvertrag", -15],
-      ["Freizeit", -60],
-      ["Onlineshopping",-120]
+      ["Freizeit", -40],
+      ["Onlineshopping",-122]
     ];}
   }
   if(window.bgeMode=="withBGE"){
     if(window.charakterId=="Lena"){
     window.moneyBill = [
-      ["BGE", 1100],
-      ["Miete", -370],
-      ["Essen", -15],
-      ["Studium", -40],
-      ["Abos", -40],
-      ["Handyvertrag", -15],
-      ["Freizeit", -40],
+    ["BGE",1100],
+    ["Miete", -370],
+    ["Essen", -15],
+    ["Fotografie", -100],
+    ["Bildungsmittel", -40],
+    ["Handyvertrag", -15],
+    ["Freizeit", -50],
+    ["Abos",-15]
     ];}
     if(window.charakterId=="Chantal"){
       window.moneyBill = [
         ["BGE",1100],
-        ["Miete", -370],
-        ["Essen", -10],
-        ["Abos", -40],
+        ["Miete", -430],
+        ["Lifestyle",-40],
+        ["Essen", -15],
         ["Handyvertrag", -15],
         ["Freizeit", -60],
-        ["Onlineshopping",-120]
+        ["Onlineshopping",-122]
       ];
       
     }
@@ -1484,19 +1544,25 @@ function update(){
   clock = new Time(1920 * 0.4 - 120, 5);
   bon = new Bon(bonElements);
   
-  final = new Finale(fazits);
+  final = new Finale(fazits,calendarAnimation,restartButton);
   news = new Nachrichten(nachrichten);
   
 }
 window.update=update;
 
 function Tunnelblick(){
-  // bei exhaustion > value
+  if(window.globalExhaustion>=90){
+    image(overlayExhaustion,0,0,overlayExhaustion.width,overlayExhaustion.height);
+    if(window.globalSatisfaction>=60){
+      window.globalSatisfaction=60;
+    }
+  }
 }
 
 function draw() {
-  console.log(mouseX,mouseY);
-  // console.log("mainCode: ",window.bgeMode);
+  // console.log("gesamtMoney: ",window.globalMoney);
+  // console.log("initialdailyMoney: ",window.globalInitialDailyBudget)
+  // console.log("Dailymoney: ",window.globalDailyBudget);
   // console.log("update ",window.updateParameters);
   if (start === false) {
     gameStartScreen.display();
@@ -1561,6 +1627,7 @@ function draw() {
         }
       }
     }
+    Tunnelblick();
     bon.display();
     clock.display();
 
@@ -1599,6 +1666,12 @@ function mouseClicked() {
     news.mouseClicked();
   }
   fenster.clickedWindow();
+  if(final.fazitDisplay){
+    final.mouseClicked();
   }
+  }
+  console.log("Satisfaction: ",window.globalSatisfaction);
+  console.log("Exhaustion: ",window.globalExhaustion);
+  
 }
 window.mouseClicked = mouseClicked;

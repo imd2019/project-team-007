@@ -39,11 +39,12 @@ export default class InteractiveObject extends MainScreen {
 
     this.satisfaction;
     this.exhaustion;
-    this.money;
+    // this.money;
 
-    this.satisfactionRate = 1;
-    this.exhaustionRate = 1;
+    this.satisfactionRate = 0;
+    this.exhaustionRate = 0;
     this.moneyRate = 0;
+    this.steps=5;
 
     this.activityId;
     this.interactX = interactX;
@@ -148,38 +149,38 @@ export default class InteractiveObject extends MainScreen {
   updateParameter() {
     this.satisfaction = window.globalSatisfaction;
     this.exhaustion = window.globalExhaustion;
-    this.money = window.globalDailyBudget;
+    // this.money = window.globalDailyBudget;
 
     if (window.bgeMode == "withBGE") {
       if(window.globalExhaustion>75){
-        this.satisfaction = ceil(this.satisfaction *(this.satisfactionRate-0.05));
+        this.satisfaction = this.satisfaction+(this.steps *this.satisfactionRate)-3;
       }
       else{
-      this.satisfaction = ceil(this.satisfaction *this.satisfactionRate);
+      this.satisfaction = this.satisfaction +(this.steps*this.satisfactionRate);
       } 
       window.globalSatisfaction = this.satisfaction;
       window.globalSatisfaction = Math.max(0, Math.min(100, window.globalSatisfaction));
     }
     if(window.bgeMode=="noBGE"){
       if(window.globalExhaustion>75){
-        this.satisfaction = floor(this.satisfaction *(this.satisfactionRate-0.1));
+        this.satisfaction = this.satisfaction +(this.steps*this.satisfactionRate)-4;
       }
       else if(window.globalExhaustion>90){
-        this.satisfaction = floor(this.satisfaction *(this.satisfactionRate-0.2));
+        this.satisfaction = this.satisfaction +(this.steps*this.satisfactionRate)-6;
       }
       else{
-      this.satisfaction = floor( this.satisfaction *this.satisfactionRate);
+      this.satisfaction = this.satisfaction +(this.steps*this.satisfactionRate);
       }
       window.globalSatisfaction = this.satisfaction;
       window.globalSatisfaction = Math.max(0, Math.min(75, window.globalSatisfaction));
     }
 
-    this.exhaustion = ceil(this.exhaustion * this.exhaustionRate); // Auslegungssache von Erschöpfung
+    this.exhaustion = this.exhaustion + this.exhaustionRate; // Auslegungssache von Erschöpfung
     window.globalExhaustion = this.exhaustion;
     window.globalExhaustion=Math.max(0,Math.min(100,window.globalExhaustion));
 
-    this.money = this.money + this.moneyRate;
-    window.globalDailyBudget = this.money; // window.globalDailyBudget=window.globalDailyBudget+moneyRate;
+    // this.money = this.money + this.moneyRate;
+    window.globalDailyBudget = window.globalDailyBudget+this.moneyRate; // window.globalDailyBudget=window.globalDailyBudget+moneyRate;
   }
 
   getActivityBundle(activityName) {
@@ -191,9 +192,8 @@ export default class InteractiveObject extends MainScreen {
       this.moneyRate
     );
 
-    if (this.moneyRate != 0) {
+    if (this.moneyRate !== 0) {
       let billBundle = [activityName, this.moneyRate];
-
       window.moneyBill.push(billBundle);
     }
 

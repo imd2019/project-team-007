@@ -24,12 +24,12 @@ export class Kühlschrank extends InteractiveObject {
 
     this.fridgeInteraction = fridgeInteraction;
     if(window.charakterId=="Chantal"){
-    this.satisfactionRate = 1.2;
-    this.exhaustionRate=0.9
+    this.satisfactionRate = 2;
+    this.exhaustionRate=-4;
     }
     if(window.charakterId=="Lena"){
-      this.satisfactionRate = 1.1;
-      this.exhaustionRate=0.9;
+      this.satisfactionRate = 0;
+      this.exhaustionRate=-4;
     }
 
     this.thinkBubbles=thinkBubbles;
@@ -88,20 +88,36 @@ export class Kühlschrank extends InteractiveObject {
     }
     if (!window.globalTime.start) {
       this.use = 0;
-      // this.ration=0;
+      this.ration=0;
       this.useCounter.A=0;
     }
   }
 
   clickedA() {
     if (this.use >= 3) { 
-      this.satisfactionRate = 0.8;
-      this.exhaustionRate=1.1;
+      this.satisfactionRate = 0;
+      this.exhaustionRate=2;
     }
-    if (this.ration == 0) {
+    if (this.ration === 0) {
         this.ration = 3;
-        this.moneyRate = -15;
-      } else {
+        if(window.charakterId=="Chantal"){
+          if(window.bgeMode=="noBGE"){
+            this.moneyRate = -12;
+          }
+          if(window.bgeMode=="withBGE"){
+            this.moneyRate = -15;
+          }
+        }
+        if(window.charakterId=="Lena"){
+          if(window.bgeMode=="noBGE"){
+            this.moneyRate = -9;
+          }
+          if(window.bgeMode=="withBGE"){
+            this.moneyRate = -15;
+          }
+        }
+      } 
+      else {
         this.moneyRate = 0;
       }
     this.use++;
@@ -241,11 +257,11 @@ export class TV extends InteractiveObject {
     if (this.interaction.B) {
       if(window.charakterId=="Chantal"){
       this.updateAnimationPosition(50, 170);
-      this.activityAnimation(this.tvBtnBInteraction, 90, 2);
+      this.activityAnimation(this.tvBtnBInteraction, 90, 3);
       }
       if (window.charakterId == "Lena") {
       this.updateAnimationPosition(0, 400);
-      this.activityAnimation(this.tvBtnBInteraction, 90, 1);
+      this.activityAnimation(this.tvBtnBInteraction, 90, 2);
       }
       if(this.useCounter.B>3){
         this.toMuchBubble(this.thinkBubbles);
@@ -259,19 +275,18 @@ export class TV extends InteractiveObject {
 
   clickedA() {
     this.updateInteraction("TvBtnA");
-    
     if (window.charakterId == "Chantal") {
-      
-      this.satisfactionRate = 1.2;
+      this.satisfactionRate = 1;
+      this.exhaustionRate=-2;
       if(this.useCounter.A>3){
-        this.satisfactionRate=0.9;
+        this.satisfactionRate=0;
+        this.exhaustionRate=1;
       }
       this.getActivityBundle("RTL 2");
     }
     if (window.charakterId == "Lena") {
-      
-      this.satisfactionRate = 1.2;
-      this.exhaustionRate=0.9;
+      this.satisfactionRate = 0;
+      this.exhaustionRate=-2;
       this.getActivityBundle("Filme");
     }
     this.updateParameter();
@@ -284,12 +299,13 @@ export class TV extends InteractiveObject {
     this.updateParameter();
     if (window.charakterId == "Chantal") {
       this.getActivityBundle("Filme");
-      this.satisfactionRate = 1.05;
+      this.satisfactionRate = 0;
+      this.exhaustionRate=-1;
     }
     if (window.charakterId == "Lena") {
       this.getActivityBundle("Gaming");
-      this.satisfactionRate = 1.2;
-      this.exhaustionRate=0.8;
+      this.satisfactionRate = 1;
+      this.exhaustionRate=-3;
     }
     this.updateParameter();
     this.updateAnimationB();
@@ -461,14 +477,14 @@ export class Door extends InteractiveObject {
           }
         }
         else{
-        this.activityAnimation(this.doorInteraction, 90, 2);
+        this.activityAnimation(this.doorInteraction, 90, 3);
         }
 
       }
       if (window.charakterId == "Lena") {
         if (this.LenaWork) {
           this.forcedInteractionsBanner("ArbeitPflicht",this.forcedInteractions,120);
-          this.activityAnimation(this.doorInteraction, 120, 3.5);
+          this.activityAnimation(this.doorInteraction, 120, 3.75);
           if (this.counter == 0) {
             this.LenaWork = false;
           }
@@ -481,7 +497,7 @@ export class Door extends InteractiveObject {
           }
         }
         else{
-          this.activityAnimation(this.doorInteraction, 90, 2);
+          this.activityAnimation(this.doorInteraction, 90, 4);
         }
       }
     }
@@ -494,16 +510,14 @@ export class Door extends InteractiveObject {
     }
     this.updateInteraction("Door");
     if (window.charakterId == "Chantal") {
-      
-      this.exhaustionRate=0.7;
-      this.satisfactionRate=1.3;
+      this.exhaustionRate=-3;
+      this.satisfactionRate=3;
       this.moneyRate=0;
       this.getActivityBundle("Freunde");
     }
     if (window.charakterId == "Lena") {
-      
-      this.exhaustionRate=0.6;
-      this.satisfactionRate=1.4;
+      this.exhaustionRate=-3;
+      this.satisfactionRate=2;
       this.moneyRate=0;
       this.getActivityBundle("Freunde");
     }
@@ -517,16 +531,14 @@ export class Door extends InteractiveObject {
     }
     this.updateInteraction("Door");
     if (window.charakterId == "Chantal") {
-      
-      this.exhaustionRate=0.8;
-      this.satisfactionRate=1.2;
+      this.exhaustionRate=-4;
+      this.satisfactionRate=3;
       this.moneyRate=-10;
       this.getActivityBundle("Streetfood");
     }
     if (window.charakterId == "Lena") {
-      
-      this.exhaustionRate=0.8;
-      this.satisfactionRate=1.2;
+      this.exhaustionRate=-3;
+      this.satisfactionRate=3;
       this.moneyRate=0;
       this.getActivityBundle("Tierheim");
     }
@@ -539,13 +551,13 @@ export class Door extends InteractiveObject {
       if (
         window.globalTime.hour == 8 &&
         window.globalTime.minute == 30 &&
-        !this.interaction.A
+        !this.interaction.A && window.bgeMode=="noBGE"
       ) {
         window.forcedToDoor = true;
         this.ChantalAmt=true;
         if(this.flipflopCount<1){
-          this.satisfactionRate=0.8;
-          this.exhaustionRate=1.3;
+          this.satisfactionRate=-4;
+          this.exhaustionRate=4;
           this.moneyRate=0;
           this.updateParameter();
           this.getActivityBundle("Arbeitsamt Pflicht");
@@ -556,8 +568,8 @@ export class Door extends InteractiveObject {
         window.forcedToDoor = true;
         this.ChantalWorkshop=true;
         if(this.flipflopCount<1){
-          this.satisfactionRate=0.8;
-          this.exhaustionRate=1.2;
+          this.satisfactionRate=-1.5;
+          this.exhaustionRate=2;
           this.moneyRate=0;
           this.updateParameter();
           this.getActivityBundle("Workshop Pflicht");
@@ -574,20 +586,20 @@ export class Door extends InteractiveObject {
         window.forcedToDoor = true;
         this.LenaUni = true;
         if(this.flipflopCount<1){
-          this.satisfactionRate=1;
-          this.exhaustionRate=1.3;
+          this.satisfactionRate=0;
+          this.exhaustionRate=1;
           this.moneyRate=0;
           this.updateParameter();
           this.getActivityBundle("Uni Pflicht");
         }
         this.flipflopCount++;
       }
-      if (window.globalTime.hour == 22 && !this.interaction.A) {
+      if (window.globalTime.hour == 22 && !this.interaction.A && window.bgeMode=="noBGE") {
         window.forcedToDoor = true;
         this.LenaWork = true;
         if(this.flipflopCount<1){
-          this.satisfactionRate=1;
-          this.exhaustionRate=1.4;
+          this.satisfactionRate=-4;
+          this.exhaustionRate=3;
           this.moneyRate=0;
           this.updateParameter();
           this.getActivityBundle("Arbeit Pflicht");
@@ -844,7 +856,6 @@ export class PC extends InteractiveObject {
       this.useCounter.B=0;
     }
 
-
     this.update(x);
     let pc = this.pcs.find((x) => x.id === "Tisch");
     this.updateZone(pc);
@@ -867,11 +878,10 @@ export class PC extends InteractiveObject {
       }
     if (this.interaction.A) {
       if(window.charakterId=="Chantal"){
-      
-      this.activityAnimation(this.pcBtnAInteraction, 90, 2);
-      if(this.useCounter.A>=3){
+      this.activityAnimation(this.pcBtnAInteraction, 90, 2.25);
+      if(this.useCounter.A<=3){
         this.thinkBubble("BewerbungThought",this.thinkBubbles,40,-160);}
-      if(this.useCounter.A>4){
+      if(this.useCounter.A>3){
       this.toMuchBubble(this.thinkBubbles);
       }   
       if(this.ChantalAmt){
@@ -893,11 +903,10 @@ export class PC extends InteractiveObject {
         if (this.LenaUni) {
           this.activityAnimation(this.pcBtnBInteraction, 210, 8.25);
           this.forcedInteractionsBanner("UniPflicht",this.forcedInteractions,210);
-          if (this.counter == 0) {
-            this.LenaUni = false;
-          }
+          
         } 
         else if(!this.LenaUni){
+          this.activityAnimation(this.pcBtnBInteraction, 90, 2);
           if (window.globalTime.hour > 20 && window.globalTime.hour < 2) {
             this.thinkBubble("learnLateThought", this.thinkBubbles, 40, -180);
           } 
@@ -907,12 +916,15 @@ export class PC extends InteractiveObject {
           else {
             this.thinkBubble("pcBtnBThought", this.thinkBubbles, 40, -180);
           }
-          this.activityAnimation(this.pcBtnBInteraction, 90, 2);
+          
+        }
+        if (this.counter == 0) {
+            this.LenaUni = false;
         }
       }
       if (window.charakterId == "Chantal") {
-        this.activityAnimation(this.pcBtnAInteraction, 90, 2);
-        this.thinkBubble("pcBtnBThought", this.thinkBubbles, 40, -180);
+        this.activityAnimation(this.pcBtnBInteraction, 90, 2);
+        // this.thinkBubble("pcBtnBThought", this.thinkBubbles, 40, -180);
       }  
     } 
     else {
@@ -925,22 +937,18 @@ export class PC extends InteractiveObject {
         chair.height * (this.objectScale + 0.025)
       );
     }
-    
-    
   }
 
   clickedA() {
     this.updateInteraction("PcBtnA");
     if (window.charakterId == "Chantal") {
-      
-      this.exhaustionRate=1.2;
-      this.satisfactionRate=0.8;
+      this.exhaustionRate=4;
+      this.satisfactionRate=-3;
       this.getActivityBundle("Bewerben");
     }
     if (window.charakterId == "Lena") {
-      
-      this.exhaustionRate = 0.9;
-      this.satisfactionRate = 1.2;
+      this.exhaustionRate = -1;
+      this.satisfactionRate = 2;
       this.getActivityBundle("Editen");
     }
     this.updateParameter();
@@ -950,17 +958,20 @@ export class PC extends InteractiveObject {
 
   clickedB() {
     if (window.charakterId == "Chantal") {
-      this.updateInteraction("PcBtnA");
-      
-      this.satisfactionRate = 1.4;
-      this.exhaustionRate=1;
+      this.updateInteraction("PcBtnB");
+      this.satisfactionRate = 2;
+      this.exhaustionRate=-2;
       this.getActivityBundle("Social Media");
     }
     if (window.charakterId == "Lena") {
       this.updateInteraction("PcBtnB");
-      
-      this.exhaustionRate=1.4;
-      this.satisfactionRate=1;
+      if (window.globalTime.hour > 20 && window.globalTime.hour < 2) {
+      this.exhaustionRate=3;
+      }
+      else{
+      this.exhaustionRate=1;
+      }
+      this.satisfactionRate=-2;
       this.getActivityBundle("Lernen");
     }
     this.updateParameter();
@@ -969,8 +980,8 @@ export class PC extends InteractiveObject {
   }
 
   update(x) {
-    if (window.charakterId == "Chantal" && window.globalTime.day >= 4) {
-      if ((window.globalTime.hour == 8) & (window.globalTime.minute == 30)) {
+    if (window.charakterId == "Chantal" && window.globalTime.day >= 4 && window.bgeMode=="noBGE") {
+      if ((window.globalTime.hour == 8) && (window.globalTime.minute == 30)) {
         if (
           x < floor(this.x + this.imgWidth / 2) &&
           !window.forcedToPc.ToLeft &&
@@ -979,8 +990,8 @@ export class PC extends InteractiveObject {
           window.forcedToPc.ToRight = true;
           this.ChantalAmt=true;
           if(this.flipflopCount<1){
-            this.satisfactionRate=0.8;
-            this.exhaustionRate=1.3;
+            this.satisfactionRate=-4;
+            this.exhaustionRate=2;
             this.updateParameter();
             this.getActivityBundle("Arbeitsamt Pflicht");
           }
@@ -994,8 +1005,8 @@ export class PC extends InteractiveObject {
           window.forcedToPc.ToLeft = true;
           this.ChantalAmt=true;
           if(this.flipflopCount<1){
-            this.satisfactionRate=0.8;
-            this.exhaustionRate=1.3;
+            this.satisfactionRate=-4;
+            this.exhaustionRate=2;
             this.updateParameter();
             this.getActivityBundle("Arbeitsamt Pflicht");
           }
@@ -1029,8 +1040,8 @@ export class PC extends InteractiveObject {
           window.forcedToPc.ToRight = true;
           this.LenaUni = true;
           if(this.flipflopCount<1){
-            this.satisfactionRate=1;
-            this.exhaustionRate=1.3;
+            this.satisfactionRate=0;
+            this.exhaustionRate=2;
             this.updateParameter();
             this.getActivityBundle("Uni Pflicht");
           }
@@ -1044,8 +1055,8 @@ export class PC extends InteractiveObject {
           window.forcedToPc.ToLeft = true;
           this.LenaUni = true;
           if(this.flipflopCount<1){
-            this.satisfactionRate=1;
-            this.exhaustionRate=1.3;
+            this.satisfactionRate=0;
+            this.exhaustionRate=2;
             this.updateParameter();
             this.getActivityBundle("Uni Pflicht");
           }
@@ -1101,7 +1112,7 @@ export class Bett extends InteractiveObject {
 
   showButtons(btnAId, btnBId) {
     this.btnA = this.Buttons.find((x) => x.id === btnAId);
-    if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA)) {
+    if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA)&&!(window.charakterId=="Lena" && window.bgeMode=="noBGE"&&(window.globalTime.day==2||window.globalTime.day==3))) {
       push();
       angleMode(DEGREES);
       imageMode(CENTER);
@@ -1118,7 +1129,8 @@ export class Bett extends InteractiveObject {
         this.btnA.height * this.btnScale
       );
       pop();
-    } else {
+    } 
+    else {
       image(
         this.btnA,
         this.btnAx,
@@ -1126,6 +1138,18 @@ export class Bett extends InteractiveObject {
         this.btnA.width * this.btnScale,
         this.btnA.height * this.btnScale
       );
+    }
+    if(window.charakterId=="Lena"&& (window.globalTime.day==2 || window.globalTime.day==3)&&window.bgeMode=="noBGE"){
+      push();
+      this.btnA.filter(GRAY);
+      image(
+        this.btnA,
+        this.btnAx,
+        this.btnAy,
+        this.btnA.width * this.btnScale,
+        this.btnA.height * this.btnScale
+      );
+      pop();
     }
 
     this.btnB = this.Buttons.find((x) => x.id === btnBId);
@@ -1168,10 +1192,10 @@ export class Bett extends InteractiveObject {
       window.globalTime.sleepAnimation = true;
       if(!this.goSleep){
         if(this.flipflopCount<1){
-          this.satisfactionRate=1;
-          this.exhaustionRate=1.4;
+          this.satisfactionRate=0;
+          this.exhaustionRate=-4;
           this.updateParameter();
-          this.getActivityBundle("Schlaf Pflicht");
+          // this.getActivityBundle("Schlaf Pflicht");
         }
         this.flipflopCount++;
       }
@@ -1180,10 +1204,11 @@ export class Bett extends InteractiveObject {
         this.bedInteraction,
         355 / window.darkenScreenRate,
         0
-      ); //counter muss an Zeit zum globalTime.news=true angepasst werden
+      );
+      //counter muss an Zeit zum globalTime.news=true angepasst werden
     } 
     else if (this.interaction.B) {
-      this.activityAnimation(this.bedInteraction, 90, 1);
+      this.activityAnimation(this.bedInteraction, 90, 1.25);
     } 
     else {
       let bett = this.beds.find((x) => x.id === "Bett");
@@ -1207,11 +1232,22 @@ export class Bett extends InteractiveObject {
     if(window.globalTime.start){
       this.goSleep=false;
       this.flipflopCount=0;
+      if(window.globalTime.hour==8 && window.globalTime.minute==0){
+        this.counter=0;
+      }
     }
+    if(!window.globalTime.start){
+      this.useCounter.B=0;
+    }
+
   }
 
   clickedA() {
-    this.exhaustionRate = 0.6;
+    if(window.charakterId=="Lena" && window.bgeMode=="noBGE"&&(window.globalTime.day==2||window.globalTime.day==3)&&window.bgeMode=="noBGE"){
+      return;
+    }
+    this.exhaustionRate = -10;
+    this.satisfactionRate=1;
     window.globalTime.start=false;
     this.updateInteraction("Bed");
     this.updateParameter();
@@ -1220,11 +1256,18 @@ export class Bett extends InteractiveObject {
   }
 
   clickedB() {
-    this.satisfactionRate = 1;
-    this.exhaustionRate = 0.8;
+    if(this.useCounter.B>=3){
+      this.satisfactionRate = -2;
+      this.exhaustionRate = -1;
+    }
+    else{
+    this.satisfactionRate = 0;
+    this.exhaustionRate = -3;
+    }
     this.updateInteraction("Bed");
     this.updateParameter();
     this.getActivityBundle("Power-Nap");
     this.updateAnimationB();
+    this.useCounter.B++;
   }
 }
