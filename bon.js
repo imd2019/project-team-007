@@ -83,27 +83,28 @@ export default class Bon {
   }
 
   fixedBon() {
+    console.log("gerundetes DailyMoney: ",Math.round(window.globalDailyBudget*100)/100)
     fill("lightgrey");
     strokeWeight(3);
     rect(this.x, this.y, this.rectWidth, this.rectHeight);
     let bonBottom=this.bonElements.find((x)=>x.id=="BonBottom");
     image(bonBottom,this.x-1.5,this.y+this.rectHeight-55,this.rectWidth+3.1,bonBottom.height*0.43);
     fill("black");
-    this.moneyBundle(this.x + 45, (window.globalMoney*100)/100, "Gesamtbudget", 16);
-    if (window.globalDailyBudget < 0) {
+    this.moneyBundle(this.x + 45, window.globalMoney, "Gesamtbudget", 16);
+    if (window.globalDailyBudget <= 0) {
       push();
       fill("darkred");
       this.moneyBundle(
         this.x + this.rectWidth - 50,
-        (window.globalDailyBudget*100)/100,
+        Math.round(window.globalDailyBudget*100)/100,
         "Tagesbudget",
-        24
+        24 
       );
       pop();
     } else {
       this.moneyBundle(
         this.x + this.rectWidth - 50,
-        (window.globalDailyBudget*100)/100,
+        Math.round(window.globalDailyBudget*100)/100,
         "Tagesbudget",
         24
       );
@@ -243,10 +244,11 @@ export default class Bon {
         window.globalInitialDailyBudget +
         window.globalDailyBudget)*100)/100;
       window.globalDailyBudget =
-        Math.round((window.globalMoney / (30-window.globalTime.day+1)) * 100) / 100; //bcs .toFixed(2) gibt nen String heraus -.-
+        Math.round((window.globalMoney / (31-window.globalTime.day)) * 100) / 100; //bcs .toFixed(2) gibt nen String heraus -.-
       window.globalInitialDailyBudget = window.globalDailyBudget;
       if(window.globalTime.day==4 && window.charakterId=="Lena" && window.bgeMode=="noBGE"){
-        window.moneyBill=[["Restbudget",window.globalMoney],["Kündigungspuffer",-300]];
+        window.moneyBill=[["Restbudget",window.globalMoney],["Kündigungspuffer",-450]];
+        window.globalMoney-=450;
       }
       else{
       window.moneyBill = [["Restbudget",window.globalMoney]];

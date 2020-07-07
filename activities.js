@@ -98,10 +98,26 @@ export class Kühlschrank extends InteractiveObject {
       this.satisfactionRate = 0;
       this.exhaustionRate=2;
     }
-    if (this.ration == 0) {
+    if (this.ration === 0) {
         this.ration = 3;
-        this.moneyRate = -15;
-      } else {
+        if(window.charakterId=="Chantal"){
+          if(window.bgeMode=="noBGE"){
+            this.moneyRate = -12;
+          }
+          if(window.bgeMode=="withBGE"){
+            this.moneyRate = -15;
+          }
+        }
+        if(window.charakterId=="Lena"){
+          if(window.bgeMode=="noBGE"){
+            this.moneyRate = -9;
+          }
+          if(window.bgeMode=="withBGE"){
+            this.moneyRate = -15;
+          }
+        }
+      } 
+      else {
         this.moneyRate = 0;
       }
     this.use++;
@@ -467,7 +483,7 @@ export class Door extends InteractiveObject {
       if (window.charakterId == "Lena") {
         if (this.LenaWork) {
           this.forcedInteractionsBanner("ArbeitPflicht",this.forcedInteractions,120);
-          this.activityAnimation(this.doorInteraction, 120, 3.5);
+          this.activityAnimation(this.doorInteraction, 120, 3.75);
           if (this.counter == 0) {
             this.LenaWork = false;
           }
@@ -861,7 +877,7 @@ export class PC extends InteractiveObject {
       }
     if (this.interaction.A) {
       if(window.charakterId=="Chantal"){
-      this.activityAnimation(this.pcBtnAInteraction, 90, 2);
+      this.activityAnimation(this.pcBtnAInteraction, 90, 2.25);
       if(this.useCounter.A<=3){
         this.thinkBubble("BewerbungThought",this.thinkBubbles,40,-160);}
       if(this.useCounter.A>3){
@@ -1095,7 +1111,7 @@ export class Bett extends InteractiveObject {
 
   showButtons(btnAId, btnBId) {
     this.btnA = this.Buttons.find((x) => x.id === btnAId);
-    if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA)&&!(window.charakterId=="Lena" && window.bgeMode=="noBGE"&&(window.globalTime.day==2||window.globalTime.day==3)&&window.bgeMode=="noBGE")) {
+    if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA)&&!(window.charakterId=="Lena" && window.bgeMode=="noBGE"&&(window.globalTime.day==2||window.globalTime.day==3))) {
       push();
       angleMode(DEGREES);
       imageMode(CENTER);
@@ -1185,10 +1201,15 @@ export class Bett extends InteractiveObject {
         this.bedInteraction,
         355 / window.darkenScreenRate,
         0
-      ); //counter muss an Zeit zum globalTime.news=true angepasst werden
+      );
+      console.log(this.counter); //counter muss an Zeit zum globalTime.news=true angepasst werden
     } 
     else if (this.interaction.B) {
-      this.activityAnimation(this.bedInteraction, 90, 1.5);
+      this.activityAnimation(this.bedInteraction, 90, 1.25);
+      console.log(this.counter);
+      // if(this.counter>=90){
+      //   this.counter=0;
+      // }
     } 
     else {
       let bett = this.beds.find((x) => x.id === "Bett");
@@ -1212,6 +1233,9 @@ export class Bett extends InteractiveObject {
     if(window.globalTime.start){
       this.goSleep=false;
       this.flipflopCount=0;
+      if(window.globalTime.hour==8 && window.globalTime.minute==0){
+        this.counter=0;
+      }
     }
     if(!window.globalTime.start){
       this.useCounter.B=0;
