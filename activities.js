@@ -586,7 +586,7 @@ export class Door extends InteractiveObject {
         window.forcedToDoor = true;
         this.LenaUni = true;
         if(this.flipflopCount<1){
-          this.satisfactionRate=1;
+          this.satisfactionRate=0;
           this.exhaustionRate=1;
           this.moneyRate=0;
           this.updateParameter();
@@ -598,7 +598,7 @@ export class Door extends InteractiveObject {
         window.forcedToDoor = true;
         this.LenaWork = true;
         if(this.flipflopCount<1){
-          this.satisfactionRate=-2;
+          this.satisfactionRate=-4;
           this.exhaustionRate=3;
           this.moneyRate=0;
           this.updateParameter();
@@ -971,7 +971,7 @@ export class PC extends InteractiveObject {
       else{
       this.exhaustionRate=1;
       }
-      this.satisfactionRate=0;
+      this.satisfactionRate=-2;
       this.getActivityBundle("Lernen");
     }
     this.updateParameter();
@@ -990,7 +990,7 @@ export class PC extends InteractiveObject {
           window.forcedToPc.ToRight = true;
           this.ChantalAmt=true;
           if(this.flipflopCount<1){
-            this.satisfactionRate=-2;
+            this.satisfactionRate=-4;
             this.exhaustionRate=2;
             this.updateParameter();
             this.getActivityBundle("Arbeitsamt Pflicht");
@@ -1005,7 +1005,7 @@ export class PC extends InteractiveObject {
           window.forcedToPc.ToLeft = true;
           this.ChantalAmt=true;
           if(this.flipflopCount<1){
-            this.satisfactionRate=-2;
+            this.satisfactionRate=-4;
             this.exhaustionRate=2;
             this.updateParameter();
             this.getActivityBundle("Arbeitsamt Pflicht");
@@ -1140,6 +1140,7 @@ export class Bett extends InteractiveObject {
       );
     }
     if(window.charakterId=="Lena"&& (window.globalTime.day==2 || window.globalTime.day==3)&&window.bgeMode=="noBGE"){
+      push();
       this.btnA.filter(GRAY);
       image(
         this.btnA,
@@ -1148,6 +1149,7 @@ export class Bett extends InteractiveObject {
         this.btnA.width * this.btnScale,
         this.btnA.height * this.btnScale
       );
+      pop();
     }
 
     this.btnB = this.Buttons.find((x) => x.id === btnBId);
@@ -1244,7 +1246,7 @@ export class Bett extends InteractiveObject {
     if(window.charakterId=="Lena" && window.bgeMode=="noBGE"&&(window.globalTime.day==2||window.globalTime.day==3)&&window.bgeMode=="noBGE"){
       return;
     }
-    this.exhaustionRate = -8;
+    this.exhaustionRate = -10;
     this.satisfactionRate=1;
     window.globalTime.start=false;
     this.updateInteraction("Bed");
@@ -1259,7 +1261,7 @@ export class Bett extends InteractiveObject {
       this.exhaustionRate = -1;
     }
     else{
-    this.satisfactionRate = 1;
+    this.satisfactionRate = 0;
     this.exhaustionRate = -3;
     }
     this.updateInteraction("Bed");

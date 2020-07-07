@@ -192,7 +192,7 @@ hittest(x,y){
     if(window.charakterId=="Chantal"){
     if(window.globalMoney<=-50){
       if(window.globalMoney<=-150){
-      window.globalSatisfaction=-70;
+      window.globalSatisfaction=-75;
       }
       else{
       window.globalSatisfaction=-20;
