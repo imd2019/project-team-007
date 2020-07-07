@@ -33,7 +33,7 @@ window.globalMoney = globalMoney;
 let start = false;
 
 let globalTime = {
-  day: 1,
+  day: 4,
   start: true,
   hour: 8,
   minute: 0,
@@ -1557,8 +1557,9 @@ function Tunnelblick(){
 }
 
 function draw() {
-  // console.log(calendarAnimation);
-  // console.log("mainCode: ",window.bgeMode);
+  // console.log("gesamtMoney: ",window.globalMoney);
+  // console.log("initialdailyMoney: ",window.globalInitialDailyBudget)
+  // console.log("Dailymoney: ",window.globalDailyBudget);
   // console.log("update ",window.updateParameters);
   if (start === false) {
     gameStartScreen.display();
