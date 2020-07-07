@@ -33,7 +33,7 @@ window.globalMoney = globalMoney;
 let start = false;
 
 let globalTime = {
-  day: 4,
+  day: 1,
   start: true,
   hour: 8,
   minute: 0,
@@ -1553,6 +1553,9 @@ window.update=update;
 function Tunnelblick(){
   if(window.globalExhaustion>=90){
     image(overlayExhaustion,0,0,overlayExhaustion.width,overlayExhaustion.height);
+    if(window.globalSatisfaction>50){
+      window.globalSatisfaction=50;
+    }
   }
 }
 

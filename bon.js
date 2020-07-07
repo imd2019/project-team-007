@@ -249,6 +249,7 @@ export default class Bon {
       if(window.globalTime.day==4 && window.charakterId=="Lena" && window.bgeMode=="noBGE"){
         window.moneyBill=[["Restbudget",window.globalMoney],["Kündigungspuffer",-450]];
         window.globalMoney-=450;
+        window.globalSatisfaction-=20;
       }
       else{
       window.moneyBill = [["Restbudget",window.globalMoney]];
