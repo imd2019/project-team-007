@@ -246,7 +246,7 @@ export default class Bon {
         Math.round((window.globalMoney / (30-window.globalTime.day+1)) * 100) / 100; //bcs .toFixed(2) gibt nen String heraus -.-
       window.globalInitialDailyBudget = window.globalDailyBudget;
       if(window.globalTime.day==4 && window.charakterId=="Lena" && window.bgeMode=="noBGE"){
-        window.moneyBill=[["Restbudget",window.globalMoney],["Kündigungspuffer",-500]];
+        window.moneyBill=[["Restbudget",window.globalMoney],["Kündigungspuffer",-300]];
       }
       else{
       window.moneyBill = [["Restbudget",window.globalMoney]];

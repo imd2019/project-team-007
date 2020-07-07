@@ -3,7 +3,7 @@
 // könnte von Screens erben
 
 export default class Finale{
-constructor(fazits,calendarAnimation){
+constructor(fazits,calendarAnimation,restartButton){
 this.x=0;
 this.y=0;
 
@@ -29,10 +29,14 @@ this.fazitDisplay=false;
 this.opacity=0;
 
 this.flipflopCount=0;
+
+this.restartButton=restartButton;
+this.btnX=((1920*0.4)/2)-((this.restartButton.width*0.4)/2);
+this.btnY=(1080*0.4)+80;
+this.btnCounter=0;
 }
 
 display(){
- 
   if(window.globalTime.day==5 &&(window.globalTime.hour<=2 ||window.globalTime.hour>8)&&window.globalTime.sleepAnimation){
     this.auswertung();
   }
@@ -48,6 +52,7 @@ display(){
       this.opacity=260;
     }
     image(fazit,this.x,this.y,fazit.width*0.4,fazit.height*0.4);
+    this.restart();
     pop();
     }
   }
@@ -73,7 +78,6 @@ loadingScreen(){
   else{
     this.loadingBar+=5*this.loadingSpeed;
   }
-  
   noFill();
   stroke("white");
   strokeWeight(5);
@@ -81,7 +85,37 @@ loadingScreen(){
   
 }
 
-update() {
+restart(){
+  push();
+  this.btnCounter++;
+  if(this.btnCounter>=90){
+    this.btnY-=2;
+    
+  }
+  if(this.btnY<=(1080*0.4)-65){
+      this.btnY=(1080*0.4)-65;
+  }
+  
+  image(this.restartButton,this.btnX,this.btnY,this.restartButton.width*0.4,this.restartButton.height*0.4);
+  pop();
+}
+
+hittest(x,y){
+  if (
+    x > this.btnX &&
+    x < this.btnX + this.restartButton.width*0.4 &&
+    y > this.btnY &&
+    y < this.btnY + this.restartButton.height*0.4
+  ) 
+  {
+    return true;
+  } 
+  else {
+    return false;
+  }
+}
+
+ update() {
   if (window.globalSatisfaction <= 25) {
     this.fazitId = "BadestFazit";
   } else if (
@@ -104,7 +138,7 @@ update() {
   }  
 }
 
-monthCalculate(day) {
+ monthCalculate(day) {
     let dayString="day"+day;
     this.satisfaction = window.globalSatisfaction;
     this.exhaustion = window.globalExhaustion;
@@ -141,7 +175,7 @@ monthCalculate(day) {
     }
   }
 
-  auswertung() {
+ auswertung() {
     if(this.flipflopCount<1){
     for (let j =0;j<26;j++) {
       // console.log("das modulo-etwas: ",1+j%2); 
@@ -154,5 +188,12 @@ monthCalculate(day) {
     console.log("money :",window.globalMoney);
     }
   }
-
+ mouseClicked(){
+  if(this.hittest(mouseX,mouseY)){
+    this.clicked();
+  }
+ }
+ clicked(){
+   location.reload();
+ }
 }

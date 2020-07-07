@@ -1095,7 +1095,7 @@ export class Bett extends InteractiveObject {
 
   showButtons(btnAId, btnBId) {
     this.btnA = this.Buttons.find((x) => x.id === btnAId);
-    if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA)) {
+    if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA)&&!(window.charakterId=="Lena" && window.bgeMode=="noBGE"&&(window.globalTime.day==2||window.globalTime.day==3)&&window.bgeMode=="noBGE")) {
       push();
       angleMode(DEGREES);
       imageMode(CENTER);
@@ -1112,7 +1112,18 @@ export class Bett extends InteractiveObject {
         this.btnA.height * this.btnScale
       );
       pop();
-    } else {
+    } 
+    else if(window.charakterId=="Lena"&& (window.globalTime.day==2 || window.globalTime.day==3)&&window.bgeMode=="noBGE"){
+      this.btnA.filter(GRAY);
+      image(
+        this.btnA,
+        this.btnAx,
+        this.btnAy,
+        this.btnA.width * this.btnScale,
+        this.btnA.height * this.btnScale
+      );
+    }
+    else {
       image(
         this.btnA,
         this.btnAx,
@@ -1209,6 +1220,9 @@ export class Bett extends InteractiveObject {
   }
 
   clickedA() {
+    if(window.charakterId=="Lena" && window.bgeMode=="noBGE"&&(window.globalTime.day==2||window.globalTime.day==3)&&window.bgeMode=="noBGE"){
+      return;
+    }
     this.exhaustionRate = -3;
     this.satisfactionRate=1;
     window.globalTime.start=false;

@@ -127,6 +127,9 @@ let newsscreenpic2 = loadImage("img/globals/screens/noBGE/newsscreen-day1-2.png"
 let newsscreenBGEpic = loadImage("img/globals/screens/withBGE/newsscreen-day1-1.png");
 let newsscreenBGEpic2 = loadImage("img/globals/screens/withBGE/newsscreen-day1-2.png");
 
+let restartButton=loadImage("img/globals/restartBtn.png");
+
+
 function preload() {
 //<--------fürs update--------------->
 mainScreens = [];
@@ -1327,7 +1330,7 @@ let Person = new Charakter(stand, walk, Room.endScreen, thinkBubbles);
 let clock = new Time(1920 * 0.4 - 120, 5);
 let bon = new Bon(bonElements);
 
-let final = new Finale(fazits,calendarAnimation);
+let final = new Finale(fazits,calendarAnimation,restartButton);
 let news = new Nachrichten(nachrichten);
 
 let infobutton = new Button(322, 292, 123, 35);
@@ -1450,7 +1453,7 @@ function update(){
   clock = new Time(1920 * 0.4 - 120, 5);
   bon = new Bon(bonElements);
   
-  final = new Finale(fazits,calendarAnimation);
+  final = new Finale(fazits,calendarAnimation,restartButton);
   news = new Nachrichten(nachrichten);
   
 }
@@ -1565,6 +1568,9 @@ function mouseClicked() {
     news.mouseClicked();
   }
   fenster.clickedWindow();
+  if(final.fazitDisplay){
+    final.mouseClicked();
+  }
   }
   console.log("Satisfaction: ",window.globalSatisfaction);
   console.log("Exhaustion: ",window.globalExhaustion);

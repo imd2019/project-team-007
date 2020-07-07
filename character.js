@@ -187,13 +187,14 @@ export default class Charakter {
       if(window.charakterId=="Lena" && window.bgeMode=="noBGE"){
         if(window.globalTime.hour==8 && window.globalTime.day==4){
           this.thinkBubbleDraw("KündigungThought");
+          
         }
       }
   }
   
   thinkBubbleDraw(thinkBubble){
     let bubble=this.thinkBubbles.find((x) => x.id === thinkBubble);
-    image(bubble,this.charakter.x+50,this.charakter.y-bubble.height+15,bubble.width*this.charakterScale,bubble.height*this.charakterScale);
+    image(bubble,this.charakter.x+50,this.charakter.y-bubble.height+20,bubble.width*this.charakterScale,bubble.height*this.charakterScale);
   }
   // voice(){
   //     if(charakterId["Name"]){
