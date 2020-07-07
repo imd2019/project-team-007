@@ -534,7 +534,7 @@ export class Door extends InteractiveObject {
       if (
         window.globalTime.hour == 8 &&
         window.globalTime.minute == 30 &&
-        !this.interaction.A
+        !this.interaction.A && window.bgeMode=="noBGE"
       ) {
         window.forcedToDoor = true;
         this.ChantalAmt=true;
@@ -906,8 +906,8 @@ export class PC extends InteractiveObject {
         }
       }
       if (window.charakterId == "Chantal") {
-        this.activityAnimation(this.pcBtnAInteraction, 90, 2);
-        this.thinkBubble("pcBtnBThought", this.thinkBubbles, 40, -180);
+        this.activityAnimation(this.pcBtnBInteraction, 90, 2);
+        // this.thinkBubble("pcBtnBThought", this.thinkBubbles, 40, -180);
       }  
     } 
     else {
@@ -941,7 +941,7 @@ export class PC extends InteractiveObject {
 
   clickedB() {
     if (window.charakterId == "Chantal") {
-      this.updateInteraction("PcBtnA");
+      this.updateInteraction("PcBtnB");
       this.satisfactionRate = 3;
       this.exhaustionRate=0;
       this.getActivityBundle("Social Media");
@@ -963,7 +963,7 @@ export class PC extends InteractiveObject {
   }
 
   update(x) {
-    if (window.charakterId == "Chantal" && window.globalTime.day >= 4) {
+    if (window.charakterId == "Chantal" && window.globalTime.day >= 4 && window.bgeMode=="noBGE") {
       if ((window.globalTime.hour == 8) && (window.globalTime.minute == 30)) {
         if (
           x < floor(this.x + this.imgWidth / 2) &&

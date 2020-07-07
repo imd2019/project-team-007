@@ -137,7 +137,6 @@ export default class Startscreens extends Button {
       }
       this.skipbutton.display();
       this.counter++;
-      console.log(this.counter);
     }
 
 

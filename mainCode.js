@@ -33,9 +33,9 @@ window.globalMoney = globalMoney;
 let start = false;
 
 let globalTime = {
-  day: 5,
+  day: 1,
   start: true,
-  hour: 1,
+  hour: 8,
   minute: 0,
   Delta: 2500,
   news: false,
@@ -1057,6 +1057,93 @@ fazits.push(badestFazit,badFazit,mediumFazit,highFazit,highestFazit);
     pcBtnBInteractionVictory.push(
       pcBtnBInteractionVictory1,
       pcBtnBInteractionVictory2
+    );
+
+    pcBtnBInteraction.push(
+      pcBtnBInteractionLowest,
+      pcBtnBInteractionLow,
+      pcBtnBInteractionMiddle,
+      pcBtnBInteractionHigh,
+      pcBtnBInteractionVictory
+    );
+  }
+
+  if (window.charakterId == "Chantal") {
+    let pcBtnBInteractionLowest1 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/5_lowest/pc/social1.png"
+    );
+    let pcBtnBInteractionLowest2 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/5_lowest/pc/social2.png"
+    );
+    let pcBtnBInteractionLowest3 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/5_lowest/pc/social3.png"
+    );
+    let pcBtnBInteractionLowest = [];
+    pcBtnBInteractionLowest.id = "PcBtnBInteractionLowest";
+    pcBtnBInteractionLowest.push(
+      pcBtnBInteractionLowest1,
+      pcBtnBInteractionLowest2,
+      pcBtnBInteractionLowest3
+    );
+
+    let pcBtnBInteractionLow1 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/4_low/pc/social1.png"
+    );
+    let pcBtnBInteractionLow2 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/4_low/pc/social2.png"
+    );
+    let pcBtnBInteractionLow3 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/4_low/pc/social3.png"
+    );
+    let pcBtnBInteractionLow = [];
+    pcBtnBInteractionLow.id = "PcBtnBInteractionLow";
+    pcBtnBInteractionLow.push(pcBtnBInteractionLow1, pcBtnBInteractionLow2,pcBtnBInteractionLow3);
+
+    let pcBtnBInteractionMiddle1 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/3_middle/pc/social1.png"
+    );
+    let pcBtnBInteractionMiddle2 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/3_middle/pc/social2.png"
+    );
+    let pcBtnBInteractionMiddle3 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/3_middle/pc/social3.png"
+    );
+    let pcBtnBInteractionMiddle = [];
+    pcBtnBInteractionMiddle.id = "PcBtnBInteractionMiddle";
+    pcBtnBInteractionMiddle.push(
+      pcBtnBInteractionMiddle1,
+      pcBtnBInteractionMiddle2,
+      pcBtnBInteractionMiddle3
+    );
+
+    let pcBtnBInteractionHigh1 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/2_high/pc/social1.png"
+    );
+    let pcBtnBInteractionHigh2 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/2_high/pc/social2.png"
+    );
+    let pcBtnBInteractionHigh3 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/2_high/pc/social3.png"
+    );
+    let pcBtnBInteractionHigh = [];
+    pcBtnBInteractionHigh.id = "PcBtnBInteractionHigh";
+    pcBtnBInteractionHigh.push(pcBtnBInteractionHigh1, pcBtnBInteractionHigh2,pcBtnBInteractionHigh3);
+
+    let pcBtnBInteractionVictory1 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/1_victory/pc/social1.png"
+    );
+    let pcBtnBInteractionVictory2 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/1_victory/pc/social2.png"
+    );
+    let pcBtnBInteractionVictory3 = loadImage(
+      "img/" + window.charakterId + "/Poses/interact/1_victory/pc/social3.png"
+    );
+    let pcBtnBInteractionVictory = [];
+    pcBtnBInteractionVictory.id = "PcBtnBInteractionVictory";
+    pcBtnBInteractionVictory.push(
+      pcBtnBInteractionVictory1,
+      pcBtnBInteractionVictory2,
+      pcBtnBInteractionVictory3
     );
 
     pcBtnBInteraction.push(

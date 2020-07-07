@@ -59,7 +59,6 @@ display(){
 }
 
 loadingScreen(){
-  console.log(this.animationSpeed);
   push();
   imageMode(CENTER);
   this.index += this.animationSpeed;
@@ -183,11 +182,19 @@ hittest(x,y){
     }
     this.flipflopCount++;
     console.log(this.flipflopCount);
+    
+    if(window.globalMoney<=-50){
+      window.globalSatisfaction=-25;
+    }
+    if(window.globalMoney<=-150){
+      window.globalSatisfaction=-60;
+    }
     console.log("satisfaction",window.globalSatisfaction);
     console.log("exhaustion",window.globalExhaustion);
     console.log("money :",window.globalMoney);
     }
   }
+
  mouseClicked(){
   if(this.hittest(mouseX,mouseY)){
     this.clicked();
