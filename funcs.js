@@ -36,8 +36,6 @@ $(document).ready(function(){
 
 
 $(window).scroll(function () {
-  console.log($(document).scrollTop()); 
-  console.log("hello");
   if ($(document).scrollTop() > 50) {
     $("body").addClass("NavClosed");
   }  else {
