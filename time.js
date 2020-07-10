@@ -81,7 +81,7 @@ export default class Time {
       100,
       50
     );
-    if (window.globalTime.sleepAnimation && (window.globalTime.hour == 2 || window.globalTime.hour<2 ||window.globalTime.hour>=8)) {
+    if (window.globalTime.sleepAnimation && (window.globalTime.hour == 2 || window.globalTime.hour<2 ||window.globalTime.hour>8)) {
       this.dayEnd();
     }
   }
