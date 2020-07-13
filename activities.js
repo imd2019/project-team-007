@@ -1111,11 +1111,9 @@ export class Bett extends InteractiveObject {
   }
 
   showButtons(btnAId, btnBId) {
-    this.btnA = this.Buttons.find((x) => x.id === btnAId);
-    
     if ((window.globalTime.hour != 8) && this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA)&&!(window.charakterId=="Lena" && window.bgeMode=="noBGE"&&(window.globalTime.day==2||window.globalTime.day==3))) {
       push();
-      this.btnA.filter(BLUR,0);
+      this.btnA = this.Buttons.find((x) => x.id === btnAId);
       angleMode(DEGREES);
       imageMode(CENTER);
       translate(
@@ -1131,11 +1129,10 @@ export class Bett extends InteractiveObject {
         this.btnA.height * this.btnScale
       );
       pop();
-      console.log("vagina");
     } 
     else if(((window.charakterId=="Lena"&& (window.globalTime.day==2 || window.globalTime.day==3)&&window.bgeMode=="noBGE"))||window.globalTime.hour==8){
       push();
-      this.btnA.filter(GRAY);
+      this.btnA = this.Buttons.find((x) => x.id === "SchlafenInactive");
       image(
         this.btnA,
         this.btnAx,
@@ -1144,11 +1141,9 @@ export class Bett extends InteractiveObject {
         this.btnA.height * this.btnScale
       );
       pop();
-      console.log("penis");
     }
     else {
-      push();
-      this.btnA.filter();
+      this.btnA = this.Buttons.find((x) => x.id === btnAId);
       image(
         this.btnA,
         this.btnAx,
@@ -1156,7 +1151,6 @@ export class Bett extends InteractiveObject {
         this.btnA.width * this.btnScale,
         this.btnA.height * this.btnScale
       );
-      pop();
     }
     
 
