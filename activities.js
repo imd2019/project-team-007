@@ -127,7 +127,7 @@ export class Kühlschrank extends InteractiveObject {
     this.getActivityBundle("Essen");
     this.updateAnimationA();
 
-    console.log("ration & use: ", this.ration, this.use);
+    // console.log("ration & use: ", this.ration, this.use);
     this.useCounter.A++;
   }
 }
@@ -1111,9 +1111,9 @@ export class Bett extends InteractiveObject {
   }
 
   showButtons(btnAId, btnBId) {
+    this.btnA = this.Buttons.find((x) => x.id === btnAId);
     if ((window.globalTime.hour != 8) && this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA)&&!(window.charakterId=="Lena" && window.bgeMode=="noBGE"&&(window.globalTime.day==2||window.globalTime.day==3))) {
       push();
-      this.btnA = this.Buttons.find((x) => x.id === btnAId);
       angleMode(DEGREES);
       imageMode(CENTER);
       translate(
@@ -1143,7 +1143,7 @@ export class Bett extends InteractiveObject {
       pop();
     }
     else {
-      this.btnA = this.Buttons.find((x) => x.id === btnAId);
+      // this.btnA = this.Buttons.find((x) => x.id === btnAId);
       image(
         this.btnA,
         this.btnAx,

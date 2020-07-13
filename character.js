@@ -96,7 +96,7 @@ export default class Charakter {
     if(window.moveNextToBed){ 
       this.direction.right=false;
       this.direction.left=true;
-      console.log(this.direction);
+      // console.log(this.direction);
       this.charakter.x=bedX-5;
       window.moveNextToBed=false;
     }
