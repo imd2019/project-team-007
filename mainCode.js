@@ -335,6 +335,8 @@ fazits=[];
   Window.id = "Fenster";
   let Schlafen = loadImage("img/globals/buttons/sleep.png");
   Schlafen.id = "Schlafen";
+  let SchlafenInactive=loadImage("img/globals/buttons/schlafenInactive.png");
+  SchlafenInactive.id="SchlafenInactive";
   let PowerNap = loadImage("img/globals/buttons/powerNap.png");
   PowerNap.id = "PowerNap";
 
@@ -357,6 +359,7 @@ fazits=[];
     Essen,
     Window,
     Schlafen,
+    SchlafenInactive,
     PowerNap,
     pcBtnA,
     pcBtnB,

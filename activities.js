@@ -1111,9 +1111,9 @@ export class Bett extends InteractiveObject {
   }
 
   showButtons(btnAId, btnBId) {
-    this.btnA = this.Buttons.find((x) => x.id === btnAId);
-    if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA)&&!(window.charakterId=="Lena" && window.bgeMode=="noBGE"&&(window.globalTime.day==2||window.globalTime.day==3))) {
+    if ((window.globalTime.hour != 8) && this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA)&&!(window.charakterId=="Lena" && window.bgeMode=="noBGE"&&(window.globalTime.day==2||window.globalTime.day==3))) {
       push();
+      this.btnA = this.Buttons.find((x) => x.id === btnAId);
       angleMode(DEGREES);
       imageMode(CENTER);
       translate(
@@ -1130,18 +1130,9 @@ export class Bett extends InteractiveObject {
       );
       pop();
     } 
-    else {
-      image(
-        this.btnA,
-        this.btnAx,
-        this.btnAy,
-        this.btnA.width * this.btnScale,
-        this.btnA.height * this.btnScale
-      );
-    }
-    if(window.charakterId=="Lena"&& (window.globalTime.day==2 || window.globalTime.day==3)&&window.bgeMode=="noBGE"){
+    else if(((window.charakterId=="Lena"&& (window.globalTime.day==2 || window.globalTime.day==3)&&window.bgeMode=="noBGE"))||window.globalTime.hour==8){
       push();
-      this.btnA.filter(GRAY);
+      this.btnA = this.Buttons.find((x) => x.id === "SchlafenInactive");
       image(
         this.btnA,
         this.btnAx,
@@ -1151,6 +1142,17 @@ export class Bett extends InteractiveObject {
       );
       pop();
     }
+    else {
+      this.btnA = this.Buttons.find((x) => x.id === btnAId);
+      image(
+        this.btnA,
+        this.btnAx,
+        this.btnAy,
+        this.btnA.width * this.btnScale,
+        this.btnA.height * this.btnScale
+      );
+    }
+    
 
     this.btnB = this.Buttons.find((x) => x.id === btnBId);
     if (this.hitTest(mouseX, mouseY, this.btnBx, this.btnBy, this.btnB)) {
@@ -1243,9 +1245,13 @@ export class Bett extends InteractiveObject {
   }
 
   clickedA() {
+    if(window.globalTime.hour==8){
+      return;
+    }
     if(window.charakterId=="Lena" && window.bgeMode=="noBGE"&&(window.globalTime.day==2||window.globalTime.day==3)&&window.bgeMode=="noBGE"){
       return;
     }
+    
     this.exhaustionRate = -10;
     this.satisfactionRate=1;
     window.globalTime.start=false;
