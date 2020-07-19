@@ -37,13 +37,13 @@ let globalTime = {
   start: true,
   hour: 8,
   minute: 0,
-  Delta: 2500,
+  Delta: 2500,// jede 2,5s 15 min draufrechnen
   news: false,
   sleepAnimation: false,
 };
 window.globalTime = globalTime;
 
-window.darkenScreenRate = 5; //kann noch kein anderer Wert sein, da Probleme mit interaction.A
+window.darkenScreenRate = 5; //nicht variabel, aufgebaut auf miener dummheit, unnötig
 
 window.activateCounter = true;
 
@@ -51,16 +51,16 @@ window.moveNextToBed = false;
 
 window.forcedToDoor = false;
 
-window.forcedToPc = { ToRight: false, ToLeft: false };
+window.forcedToPc = {ToRight: false, ToLeft: false};
 
-let globalActivityArray = { day1: [], day2: [], day3: [], day4: [], day5: [] };
+let globalActivityArray = { day1: [], day2: [], day3: [], day4: [], day5: [] };//{}<- ist Objekt, kein Array
 
 window.globalActivityArray = globalActivityArray;
 
 let activityAnimation = false;
 window.activityAnimation = activityAnimation;
 
-window.charakterId = "Lena"; //Chantal oder Lena
+window.charakterId = "Lena"; //Chantal oder Lena, 
 
 window.bgeMode ="noBGE";//noBGE or withBGE, noBGE is default Mode
 
@@ -128,7 +128,6 @@ let newsscreenpic = loadImage("img/globals/screens/noBGE/newsscreen-day1-1.png")
 let newsscreenpic2 = loadImage("img/globals/screens/noBGE/newsscreen-day1-2.png");
 let newsscreenBGEpic = loadImage("img/globals/screens/withBGE/newsscreen-day1-1.png");
 let newsscreenBGEpic2 = loadImage("img/globals/screens/withBGE/newsscreen-day1-2.png");
-
 let restartButton=loadImage("img/globals/restartBtn.png");
 
 

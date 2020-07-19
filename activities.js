@@ -456,6 +456,7 @@ export class Door extends InteractiveObject {
     if (this.hoverTest(x)) {
       this.showButtons("DoorBtnA", "DoorBtnB");
     }
+
     this.update(x);
 
     if (this.interaction.A) {
@@ -585,7 +586,7 @@ export class Door extends InteractiveObject {
       ) {
         window.forcedToDoor = true;
         this.LenaUni = true;
-        if(this.flipflopCount<1){
+        if(this.flipflopCount<1){// flipFlop Functions, wenn sie in der display stehen, solle über flipflopCount<1 nur einmal in diesen Teil reingelaufen werden
           this.satisfactionRate=0;
           this.exhaustionRate=1;
           this.moneyRate=0;
@@ -1213,7 +1214,7 @@ export class Bett extends InteractiveObject {
       this.activityAnimation(this.bedInteraction, 90, 1.25);
     } 
     else {
-      let bett = this.beds.find((x) => x.id === "Bett");
+      let bett = this.beds.find((x) => x.id === "Bett");// .find nix anderes als: geh mir in diesen array, such mir nach einem x, welche die id ==="Bett" hat
       this.updateZone(bett);
       this.updateBtnPosition(10, 160, 130);
       image(bett, this.x, this.y, this.imgWidth, this.imgHeight);

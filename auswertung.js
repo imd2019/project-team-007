@@ -141,10 +141,11 @@ hittest(x,y){
 }
 
  monthCalculate(day) {
-    let dayString="day"+day;
+    let dayString="day"+day;// string für Name vom tagesarray erstellt
     this.satisfaction = window.globalSatisfaction;
     this.exhaustion = window.globalExhaustion;
     this.money = window.globalMoney;
+    
     for (let i in window.globalActivityArray[dayString]) {
       if(window.bgeMode=="noBGE"){
         if(window.globalExhaustion>75){
@@ -180,7 +181,7 @@ hittest(x,y){
  auswertung() {
     if(this.flipflopCount<1){
     for (let j =0;j<26;j++) {
-      this.monthCalculate(4+j%2);  
+      this.monthCalculate(4+(j%2));// j nimmt nur Werte 0 und 1 an  
     }
     console.log(this.flipflopCount);
     
@@ -201,7 +202,6 @@ hittest(x,y){
       }
     }
     
-    
     if(window.globalExhaustion>90 ){
       if(window.globalSatisfaction>75){
       window.globalSatisfaction-=36;}
@@ -217,6 +217,6 @@ hittest(x,y){
   }
  }
  clicked(){
-   location.reload();
+   location.reload();//Seite wird neu geladen
  }
 }

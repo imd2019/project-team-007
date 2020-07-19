@@ -13,9 +13,6 @@ export default class MainScreen {
   }
 
   display() {
-
-
-
     let room = this.rooms.find((x) => x.id === this.roomId);
     this.roomWidth=room.width * 0.4;
     image(room, this.x, this.y, this.roomWidth, room.height * 0.4);
@@ -39,9 +36,6 @@ export default class MainScreen {
 
   move(charakter, pcX, pcWidth) {
     this.checkMoving(charakter);
-    // console.log("screenmoving: ",this.screenMoving);
-    // console.log("charakter.x ",charakter.x);
-    // console.log("pcX+width/2 ",pcX+pcWidth/2);
     if (
       keyIsDown(LEFT_ARROW) &&
       !window.activityAnimation &&
