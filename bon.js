@@ -13,7 +13,7 @@ export default class Bon {
     this.absatzVarBon = 18;
     this.absatzStartFixedBon = this.y + this.rectHeight;
     this.rectHeightVarBon =
-      this.yVarBon + this.absatzVarBon * window.moneyBill.length;
+    this.yVarBon + this.absatzVarBon * window.moneyBill.length;
 
     this.bonShow = false;
 
@@ -83,7 +83,6 @@ export default class Bon {
   }
 
   fixedBon() {
-    console.log("gerundetes DailyMoney: ",Math.round(window.globalDailyBudget*100)/100)
     fill("lightgrey");
     strokeWeight(3);
     rect(this.x, this.y, this.rectWidth, this.rectHeight);
@@ -222,8 +221,7 @@ export default class Bon {
     }
   }
 
-  update() {
-    
+  update() { 
     if (window.globalTime.day == 1) {
       if (window.activateCounter && window.globalTime.hour==8&&window.globalTime.minute==0 ) {
         for (let e = 0; e < window.moneyBill.length; e++) {

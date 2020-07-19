@@ -127,7 +127,7 @@ export class Kühlschrank extends InteractiveObject {
     this.getActivityBundle("Essen");
     this.updateAnimationA();
 
-    console.log("ration & use: ", this.ration, this.use);
+    // console.log("ration & use: ", this.ration, this.use);
     this.useCounter.A++;
   }
 }
@@ -456,6 +456,7 @@ export class Door extends InteractiveObject {
     if (this.hoverTest(x)) {
       this.showButtons("DoorBtnA", "DoorBtnB");
     }
+
     this.update(x);
 
     if (this.interaction.A) {
@@ -585,7 +586,7 @@ export class Door extends InteractiveObject {
       ) {
         window.forcedToDoor = true;
         this.LenaUni = true;
-        if(this.flipflopCount<1){
+        if(this.flipflopCount<1){// flipFlop Functions, wenn sie in der display stehen, solle über flipflopCount<1 nur einmal in diesen Teil reingelaufen werden
           this.satisfactionRate=0;
           this.exhaustionRate=1;
           this.moneyRate=0;
@@ -1112,7 +1113,7 @@ export class Bett extends InteractiveObject {
 
   showButtons(btnAId, btnBId) {
     this.btnA = this.Buttons.find((x) => x.id === btnAId);
-    if (this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA)&&!(window.charakterId=="Lena" && window.bgeMode=="noBGE"&&(window.globalTime.day==2||window.globalTime.day==3))) {
+    if ((window.globalTime.hour != 8) && this.hitTest(mouseX, mouseY, this.btnAx, this.btnAy, this.btnA)&&!(window.charakterId=="Lena" && window.bgeMode=="noBGE"&&(window.globalTime.day==2||window.globalTime.day==3))) {
       push();
       angleMode(DEGREES);
       imageMode(CENTER);
@@ -1130,18 +1131,9 @@ export class Bett extends InteractiveObject {
       );
       pop();
     } 
-    else {
-      image(
-        this.btnA,
-        this.btnAx,
-        this.btnAy,
-        this.btnA.width * this.btnScale,
-        this.btnA.height * this.btnScale
-      );
-    }
-    if(window.charakterId=="Lena"&& (window.globalTime.day==2 || window.globalTime.day==3)&&window.bgeMode=="noBGE"){
+    else if(((window.charakterId=="Lena"&& (window.globalTime.day==2 || window.globalTime.day==3)&&window.bgeMode=="noBGE"))||window.globalTime.hour==8){
       push();
-      this.btnA.filter(GRAY);
+      this.btnA = this.Buttons.find((x) => x.id === "SchlafenInactive");
       image(
         this.btnA,
         this.btnAx,
@@ -1151,6 +1143,17 @@ export class Bett extends InteractiveObject {
       );
       pop();
     }
+    else {
+      // this.btnA = this.Buttons.find((x) => x.id === btnAId);
+      image(
+        this.btnA,
+        this.btnAx,
+        this.btnAy,
+        this.btnA.width * this.btnScale,
+        this.btnA.height * this.btnScale
+      );
+    }
+    
 
     this.btnB = this.Buttons.find((x) => x.id === btnBId);
     if (this.hitTest(mouseX, mouseY, this.btnBx, this.btnBy, this.btnB)) {
@@ -1211,7 +1214,7 @@ export class Bett extends InteractiveObject {
       this.activityAnimation(this.bedInteraction, 90, 1.25);
     } 
     else {
-      let bett = this.beds.find((x) => x.id === "Bett");
+      let bett = this.beds.find((x) => x.id === "Bett");// .find nix anderes als: geh mir in diesen array, such mir nach einem x, welche die id ==="Bett" hat
       this.updateZone(bett);
       this.updateBtnPosition(10, 160, 130);
       image(bett, this.x, this.y, this.imgWidth, this.imgHeight);
@@ -1243,9 +1246,13 @@ export class Bett extends InteractiveObject {
   }
 
   clickedA() {
+    if(window.globalTime.hour==8){
+      return;
+    }
     if(window.charakterId=="Lena" && window.bgeMode=="noBGE"&&(window.globalTime.day==2||window.globalTime.day==3)&&window.bgeMode=="noBGE"){
       return;
     }
+    
     this.exhaustionRate = -10;
     this.satisfactionRate=1;
     window.globalTime.start=false;

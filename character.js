@@ -67,7 +67,7 @@ export default class Charakter {
       this.direction.left = true;
       push();
       imageMode(CENTER);
-      scale(-1, 1);
+      scale(-1, 1);//spiegeln der Figur
       let walk = this.walks.find((x) => x.id === this.walkId);
       this.index += this.animationSpeed;
       let animation = floor(this.index) % walk.length;
@@ -96,7 +96,7 @@ export default class Charakter {
     if(window.moveNextToBed){ 
       this.direction.right=false;
       this.direction.left=true;
-      console.log(this.direction);
+      // console.log(this.direction);
       this.charakter.x=bedX-5;
       window.moveNextToBed=false;
     }
@@ -132,12 +132,11 @@ export default class Charakter {
   }
 
   move(bedX,doorX,pcX,pcWidth) {
-   
     if (this.endScreen.Right && this.charakter.x <= 1920 * 0.4 - 70) {
       if (keyIsDown(RIGHT_ARROW) && !window.activityAnimation && window.globalTime.start && !window.forcedToDoor && !window.forcedToPc.ToLeft && !window.forcedToPc.ToRight) {
         this.charakter.x += this.speed;
       }
-      if (!window.globalTime.start) {
+      if (!window.globalTime.start) {//Zwangs-Schlafen
         if (this.charakter.x <= bedX) {
           this.charakter.x += this.speed;
         }
@@ -153,7 +152,7 @@ export default class Charakter {
       if (keyIsDown(LEFT_ARROW) && !window.activityAnimation && window.globalTime.start && !window.forcedToDoor && !window.forcedToPc.ToLeft && !window.forcedToPc.ToRight) {
         this.charakter.x -= this.speed;
       }
-      if(window.forcedToDoor){
+      if(window.forcedToDoor){ //Zwangs-Tür
         if(this.charakter.x>=doorX+70){
         this.charakter.x -= this.speed; 
         }

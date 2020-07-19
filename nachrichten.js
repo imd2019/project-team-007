@@ -18,7 +18,7 @@ export default class Nachrichten {
                 rect(0,0,1920,1080);
                 
             }else{
-            let news=this.nachrichten.find(x=>x.id==="day"+window.globalTime.day+"_"+this.sheet);
+            let news=this.nachrichten.find(x=>x.id==="day"+window.globalTime.day+"_"+this.sheet);// mix aus values und Strings, ergeben die Nachrichten-Bild-Id, so kann alles zu einer Zeile Code zusammengefasst werden
             image(news,this.x,this.y,news.width*0.41,news.height*0.41); 
             }
         }  

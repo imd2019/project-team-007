@@ -9,18 +9,17 @@ export default class Time {
 
     this.timeStart = Date.now();
 
-    this.countTime = this.countTime.bind(this);
+    this.countTime = this.countTime.bind(this);//wird mit dem this verknüpft, damit request animation weiß auf was sich das this bei this.countTime bezieht
 
-    this.requestId = 0;
+    this.requestId = 0;// nur für cancelAnimationFrame(this.requestId)
   }
 
   countTime() {
     if (window.globalTime.start && !window.forcedToDoor && !window.forcedToPc.ToRight &&!window.forcedToPc.ToLeft) {
       let now = Date.now();
-      let delta = now - this.timeStart;
+      let delta = now - this.timeStart;// Differenz von verstrichenen Millisekunden berechnet
       if (delta >= window.globalTime.Delta) {
-        // console.log("delta & expectedDelta: ", delta,window.globalTime.Delta);
-        if (window.globalTime.minute == 45) {
+        if (window.globalTime.minute == 45) {//bevor 15 min hochgerechnet werden auf 00, geht der da hoch
           window.globalTime.hour++;
           if(window.bgeMode=="noBGE"){
           window.globalExhaustion+=1.5;
@@ -36,7 +35,7 @@ export default class Time {
             window.globalTime.hour = 0;
           }
         }
-        window.globalTime.minute = (window.globalTime.minute + 15) % 60;
+        window.globalTime.minute = (window.globalTime.minute + 15) % 60;// %==modulo, dh. Division mit Rest
         this.timeStart = Date.now();
       }
       this.requestId = window.requestAnimationFrame(this.countTime) || window.webkitRequestAnimationFrame(this.countTime)|| window.mozRequestAnimationFrame(this.countTime);

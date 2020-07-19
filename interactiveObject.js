@@ -84,7 +84,7 @@ export default class InteractiveObject extends MainScreen {
   updateZone(object) {
     this.imgWidth = object.width * this.objectScale;
     this.imgHeight = object.height * this.objectScale;
-    this.zone = this.x + this.imgWidth;
+    this.zone = this.x + this.imgWidth;//der Bereich wo Buttons aufleuchten sollen beim vorbeilaufen
   }
 
   updateBtnPosition(offsetAx, offsetBx, btnOffset) {
@@ -175,12 +175,11 @@ export default class InteractiveObject extends MainScreen {
       window.globalSatisfaction = Math.max(0, Math.min(75, window.globalSatisfaction));
     }
 
-    this.exhaustion = this.exhaustion + this.exhaustionRate; // Auslegungssache von Erschöpfung
+    this.exhaustion = this.exhaustion + (this.steps*this.exhaustionRate); // Auslegungssache von Erschöpfung
     window.globalExhaustion = this.exhaustion;
     window.globalExhaustion=Math.max(0,Math.min(100,window.globalExhaustion));
 
-    // this.money = this.money + this.moneyRate;
-    window.globalDailyBudget = window.globalDailyBudget+this.moneyRate; // window.globalDailyBudget=window.globalDailyBudget+moneyRate;
+    window.globalDailyBudget = window.globalDailyBudget+this.moneyRate; 
   }
 
   getActivityBundle(activityName) {
@@ -238,7 +237,7 @@ export default class InteractiveObject extends MainScreen {
     imageMode(this.imageMode);
     if (this.charakterFadeOut) {
       push();
-      tint(255,this.fade);
+      tint(255,this.fade);//funktion für alpha-Kanal für Bilder in p5
       if(this.counter<=13){
         this.fade-=20;  
       }
@@ -269,12 +268,13 @@ export default class InteractiveObject extends MainScreen {
     pop();
 
     
-    let msDelay = delay / 30;
+    let msDelay = delay / 30;// von FrameCount-Wert zu Sekunden-Wert
     
 
     if (timeNeeded != 0) {
-      window.globalTime.Delta = (msDelay * 1000) / ((timeNeeded * 60) / 15);
+      window.globalTime.Delta = (msDelay * 1000) / ((timeNeeded * 60) / 15);// msDelay*1000 für Wert in Millisekunden, über timeNeeded(in Stunden angegeben) und Dauer der Animationsanzeigen wird über die Formel automatisch die Beschleunigung der Zeit bei clock berechnet, d.h window.globalTime.Delta wird niedriger
     }
+
     if((!window.globalTime.start&&!window.globalTime.sleepAnimation)||window.forcedToPc.ToLeft||window.forcedToDoor||window.forcedToPc.ToRight){
       this.charakterFadeOut=false;
       this.fade=260;
